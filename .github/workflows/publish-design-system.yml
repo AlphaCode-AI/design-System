@@ -40,5 +40,6 @@ jobs:
       - name: Publish to GitHub Packages
         run: pnpm --filter @alphacode/design-system publish --no-git-checks
         env:
-          # GITHUB_TOKEN은 Actions에서 자동 제공 — 별도 설정 불필요
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
