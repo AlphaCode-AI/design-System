@@ -1,5 +1,5 @@
 {
-  "name": "@alphacode/design-system",
+  "name": "@alphacode-ai/design-system",
   "version": "0.1.0",
   "description": "AlphaCode Design System — Tailwind preset, design tokens, and UI components",
   "type": "module",
@@ -66,7 +66,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/may940527/design-System.git",
+    "url": "https://github.com/AlphaCode-AI/design-System.git",
     "directory": "alphaCode-designSystem"
   }
 }
