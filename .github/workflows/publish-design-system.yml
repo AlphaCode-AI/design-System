@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://npm.pkg.github.com"
-          scope: "@alphacode"
+          scope: "@alphacode-ai"
           cache: "pnpm"
 
       - name: Install dependencies
