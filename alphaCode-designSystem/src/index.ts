@@ -21,6 +21,7 @@ export {
   CardFooter,
   CardFooterUser,
   CardFooterInfo,
+  CardFooterButtons,
 }                                           from "@/components/Card";
 export type { CardProps, CardMenuProps, CardHeaderProps, CardFooterProps, CardFooterUserProps, CardFooterInfoProps } from "@/components/Card";
 

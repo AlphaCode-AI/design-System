@@ -127,7 +127,7 @@ function CheckboxGroup({ title, direction = "vertical", className, children, ...
   return (
     <fieldset className={cn("flex flex-col gap-2", className)} {...props}>
       {title && (
-        <legend className="text-sm font-semibold text-foreground mb-1">{title}</legend>
+        <legend className="text-sm font-semibold text-foreground mb-2">{title}</legend>
       )}
       <div className={cn("flex gap-3", direction === "vertical" ? "flex-col" : "flex-row flex-wrap")}>
         {children}

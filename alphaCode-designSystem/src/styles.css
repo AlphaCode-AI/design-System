@@ -109,6 +109,13 @@ body {
   outline: none;
   box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
 }
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 .break-korean {
   word-break: keep-all;
   overflow-wrap: break-word;

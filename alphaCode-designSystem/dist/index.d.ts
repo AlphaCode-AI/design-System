@@ -110,7 +110,30 @@ declare const Card: React.ForwardRefExoticComponent<CardProps & React.RefAttribu
 interface CardMenuProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 declare const CardMenu: React.ForwardRefExoticComponent<CardMenuProps & React.RefAttributes<HTMLButtonElement>>;
-interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+/** 우측 상단 컨트롤 공통 props */
+type CardHeaderControl = {
+    control?: "none";
+} | {
+    control: "menu";
+    onMenuClick?: () => void;
+} | {
+    control: "checkbox";
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onCheckedChange?: (checked: boolean) => void;
+} | {
+    control: "radio";
+    checked?: boolean;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    name?: string;
+    value?: string;
+} | {
+    control: "switch";
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onCheckedChange?: (checked: boolean) => void;
+};
+type CardHeaderProps = Omit<React.HTMLAttributes<HTMLDivElement>, "title"> & CardHeaderControl & {
     /** 이미지 URL — image 타입 */
     imageSrc?: string;
     imageAlt?: string;
@@ -120,12 +143,19 @@ interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "ti
     title?: React.ReactNode;
     /** 부제목 / 설명 */
     subtitle?: React.ReactNode;
-    /** 우측 뱃지/상태 요소 */
+    /** 우측 뱃지/상태 요소 (control과 별개로 이미지 헤더에서 사용) */
     badge?: React.ReactNode;
-}
+};
 declare const CardHeader: React.ForwardRefExoticComponent<CardHeaderProps & React.RefAttributes<HTMLDivElement>>;
 declare const CardTitle: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
-declare const CardContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+    /**
+     * true이면 children 항목 사이에 <Divider />를 자동으로 삽입합니다.
+     * @default false
+     */
+    divider?: boolean;
+}
+declare const CardContent: React.ForwardRefExoticComponent<CardContentProps & React.RefAttributes<HTMLDivElement>>;
 declare const CardDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
 interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
     /** 구분선 표시 여부 */
@@ -147,6 +177,21 @@ interface CardFooterInfoProps extends React.HTMLAttributes<HTMLDivElement> {
     action?: React.ReactNode;
 }
 declare const CardFooterInfo: React.ForwardRefExoticComponent<CardFooterInfoProps & React.RefAttributes<HTMLDivElement>>;
+interface CardFooterButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** 버튼 배치 방향 */
+    direction?: "horizontal" | "vertical";
+    /** 주요 액션 버튼 텍스트 */
+    primaryLabel?: string;
+    /** 주요 액션 콜백 */
+    onPrimary?: () => void;
+    /** 보조 액션 버튼 텍스트 */
+    secondaryLabel?: string;
+    /** 보조 액션 콜백 */
+    onSecondary?: () => void;
+    /** 구분선 표시 여부 */
+    divider?: boolean;
+}
+declare const CardFooterButtons: React.ForwardRefExoticComponent<CardFooterButtonsProps & React.RefAttributes<HTMLDivElement>>;
 
 declare const dividerVariants: (props?: ({
     orientation?: "horizontal" | "vertical" | null | undefined;
@@ -290,6 +335,8 @@ interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
     errorMessage?: string;
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
+    buttonLabel?: string;
+    onButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 declare const TextInput: React.ForwardRefExoticComponent<TextInputProps & React.RefAttributes<HTMLInputElement>>;
 
@@ -723,4 +770,4 @@ declare const CarouselCounter: React.ForwardRefExoticComponent<React.HTMLAttribu
  */
 declare function cn(...inputs: ClassValue[]): string;
 
-export { Accordion, AccordionContent, AccordionItem, type AccordionItemProps, type AccordionProps, AccordionTrigger, type AccordionTriggerProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BreadcrumbItem, Breadcrumbs, type BreadcrumbsProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardContent, CardDescription, CardFooter, CardFooterInfo, type CardFooterInfoProps, type CardFooterProps, CardFooterUser, type CardFooterUserProps, CardHeader, type CardHeaderProps, CardMenu, type CardMenuProps, type CardProps, CardTitle, Carousel, CarouselContent, type CarouselContentProps, CarouselCounter, CarouselDots, type CarouselDotsProps, CarouselItem, type CarouselNavButtonProps, type CarouselNavStyle, CarouselNext, type CarouselOrientation, CarouselPrevious, type CarouselProps, Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps, DatePicker, type DatePickerMode, type DatePickerProps, type DatePickerSize, type DatePickerState, DateRangePicker, type DateRangePickerProps, Dialog, DialogBody, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, type DialogHeaderProps, type DialogProps, type DialogSize, DialogTitle, DialogTrigger, type DialogTriggerProps, Divider, type DividerProps, Dropdown, type DropdownAlign, DropdownCheckboxItem, type DropdownCheckboxItemProps, DropdownContent, type DropdownContentProps, DropdownItem, type DropdownItemProps, DropdownLabel, type DropdownProps, DropdownRadioGroup, type DropdownRadioGroupProps, DropdownRadioItem, type DropdownRadioItemProps, DropdownSeparator, type DropdownSide, DropdownSubMenu, type DropdownSubMenuProps, DropdownTrigger, type DropdownTriggerProps, FAB, type FABProps, FileInput, type FileInputProps, Pagination, type PaginationProps, type PaginationType, type ProgressCircularSize, ProgressIndicator, type ProgressIndicatorProps, type ProgressLinearSize, type ProgressType, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectOption, type SelectOptionGroup, type SelectProps, type SideNavItem, SideNavigation, type SideNavigationProps, Snackbar, type SnackbarItem, type SnackbarPosition, type SnackbarProps, SnackbarProvider, type SnackbarProviderProps, type SnackbarVariant, Switch, type SwitchProps, TabContent, type TabContentProps, TabList, type TabSize, TabTrigger, type TabTriggerProps, type TabVariant, Tabs, type TabsProps, TextInput, type TextInputProps, Textarea, type TextareaProps, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, Tooltip, type TooltipProps, avatarVariants, badgeVariants, buttonVariants, cn, fabVariants, useSnackbar };
+export { Accordion, AccordionContent, AccordionItem, type AccordionItemProps, type AccordionProps, AccordionTrigger, type AccordionTriggerProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BreadcrumbItem, Breadcrumbs, type BreadcrumbsProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardContent, CardDescription, CardFooter, CardFooterButtons, CardFooterInfo, type CardFooterInfoProps, type CardFooterProps, CardFooterUser, type CardFooterUserProps, CardHeader, type CardHeaderProps, CardMenu, type CardMenuProps, type CardProps, CardTitle, Carousel, CarouselContent, type CarouselContentProps, CarouselCounter, CarouselDots, type CarouselDotsProps, CarouselItem, type CarouselNavButtonProps, type CarouselNavStyle, CarouselNext, type CarouselOrientation, CarouselPrevious, type CarouselProps, Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps, DatePicker, type DatePickerMode, type DatePickerProps, type DatePickerSize, type DatePickerState, DateRangePicker, type DateRangePickerProps, Dialog, DialogBody, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, type DialogHeaderProps, type DialogProps, type DialogSize, DialogTitle, DialogTrigger, type DialogTriggerProps, Divider, type DividerProps, Dropdown, type DropdownAlign, DropdownCheckboxItem, type DropdownCheckboxItemProps, DropdownContent, type DropdownContentProps, DropdownItem, type DropdownItemProps, DropdownLabel, type DropdownProps, DropdownRadioGroup, type DropdownRadioGroupProps, DropdownRadioItem, type DropdownRadioItemProps, DropdownSeparator, type DropdownSide, DropdownSubMenu, type DropdownSubMenuProps, DropdownTrigger, type DropdownTriggerProps, FAB, type FABProps, FileInput, type FileInputProps, Pagination, type PaginationProps, type PaginationType, type ProgressCircularSize, ProgressIndicator, type ProgressIndicatorProps, type ProgressLinearSize, type ProgressType, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectOption, type SelectOptionGroup, type SelectProps, type SideNavItem, SideNavigation, type SideNavigationProps, Snackbar, type SnackbarItem, type SnackbarPosition, type SnackbarProps, SnackbarProvider, type SnackbarProviderProps, type SnackbarVariant, Switch, type SwitchProps, TabContent, type TabContentProps, TabList, type TabSize, TabTrigger, type TabTriggerProps, type TabVariant, Tabs, type TabsProps, TextInput, type TextInputProps, Textarea, type TextareaProps, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, Tooltip, type TooltipProps, avatarVariants, badgeVariants, buttonVariants, cn, fabVariants, useSnackbar };

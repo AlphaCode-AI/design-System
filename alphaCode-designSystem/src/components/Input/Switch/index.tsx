@@ -5,18 +5,18 @@ import { cn } from "@/utils/cn";
 /* ── Track Variants ────────────────────────────────────────── */
 const switchTrackVariants = cva(
   [
-    "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent",
+    "relative inline-flex shrink-0 cursor-pointer",
     "transition-colors duration-200 ease-in-out",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    "border-border border",
     "disabled:cursor-not-allowed disabled:opacity-40",
-    "bg-ac-gray-40",
-    "data-[state=checked]:bg-[--switch-color]",
+    "bg-ac-gray-30 rounded-lg",
+    "data-[state=checked]:bg-white",
   ],
   {
     variants: {
       size: {
-        lg: "h-5 w-9",    // 36x20px
-        md: "h-4 w-[30px]", // 30x16px
+        lg: "h-5 w-9",
+        md: "h-4 w-[30px]",
       },
     },
     defaultVariants: { size: "lg" },
@@ -25,15 +25,18 @@ const switchTrackVariants = cva(
 
 const switchThumbVariants = cva(
   [
-    "pointer-events-none inline-block rounded-full bg-ac-white shadow-xs",
-    "transition-transform duration-200 ease-in-out",
-    "translate-x-0 data-[state=checked]:translate-x-full",
+    "pointer-events-none inline-block rounded-full",
+    "shadow-md translate-y-[-1px] ",
+    "transition-all duration-200 ease-in-out",
+    "translate-x-0",
+    "bg-ac-gray-50",
+    "data-[state=checked]:bg-[--switch-color]",
   ],
   {
     variants: {
       size: {
-        lg: "h-4 w-4",
-        md: "h-3 w-3",
+        lg: "h-5 w-5 data-[state=checked]:translate-x-4",
+        md: "h-4 w-4 data-[state=checked]:translate-x-[14px]",
       },
     },
     defaultVariants: { size: "lg" },
@@ -80,7 +83,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           onClick={handleClick}
           className={cn(switchTrackVariants({ size }), className)}
           style={{
-            ["--switch-color" as string]: activeColor ?? "#FF6300" /* ac-primary-50 */,
+            ["--switch-color" as string]: activeColor ?? "#FF6300",
             ...style,
           }}
           {...props}

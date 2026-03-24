@@ -1,6 +1,12 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { Button } from "@/components/Button";
+import { ButtonGroup } from "@/components/Button/ButtonGroup";
+import { Divider } from "@/components/Divider";
+import { Checkbox } from "@/components/Input/Checkbox";
+import { Radio } from "@/components/Input/Radio";
+import { Switch } from "@/components/Input/Switch";
 
 /* ══════════════════════════════════════════════════════════════
    Card (Root)
@@ -71,20 +77,17 @@ Card.displayName = "Card";
 
 /* ══════════════════════════════════════════════════════════════
    CardMenu — 우측 상단 더보기(⋮) 버튼
+   Button 컴포넌트(variant="icon", size="icon-sm") 사용
 ══════════════════════════════════════════════════════════════ */
 export interface CardMenuProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const CardMenu = React.forwardRef<HTMLButtonElement, CardMenuProps>(
   ({ className, children, ...props }, ref) => (
-    <button
+    <Button
       ref={ref}
-      type="button"
-      className={cn(
-        "absolute top-3 right-3 p-1 rounded-md text-muted-foreground",
-        "hover:bg-ac-gray-20 hover:text-foreground transition-colors duration-normal",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        className
-      )}
+      variant="icon"
+      size="icon-sm"
+      className={cn("absolute top-2 right-2 border-none text-muted-foreground", className)}
       {...props}
     >
       {children ?? (
@@ -94,7 +97,7 @@ const CardMenu = React.forwardRef<HTMLButtonElement, CardMenuProps>(
           <circle cx="8" cy="13" r="1.2" />
         </svg>
       )}
-    </button>
+    </Button>
   )
 );
 CardMenu.displayName = "CardMenu";
@@ -102,33 +105,133 @@ CardMenu.displayName = "CardMenu";
 /* ══════════════════════════════════════════════════════════════
    CardHeader
    headerType: image / avatar / text
+   control: "checkbox" | "radio" | "switch" | "menu" | "none"
 ══════════════════════════════════════════════════════════════ */
-export interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
-  /** 이미지 URL — image 타입 */
-  imageSrc?: string;
-  imageAlt?: string;
-  /** 아바타 요소 — avatar 타입 */
-  avatar?: React.ReactNode;
-  /** 제목 */
-  title?: React.ReactNode;
-  /** 부제목 / 설명 */
-  subtitle?: React.ReactNode;
-  /** 우측 뱃지/상태 요소 */
-  badge?: React.ReactNode;
+
+/** 우측 상단 컨트롤 공통 props */
+export type CardHeaderControl =
+  | { control?: "none" }
+  | { control: "menu";     onMenuClick?: () => void }
+  | { control: "checkbox"; checked?: boolean; defaultChecked?: boolean; onCheckedChange?: (checked: boolean) => void }
+  | { control: "radio";    checked?: boolean; onChange?: React.ChangeEventHandler<HTMLInputElement>; name?: string; value?: string }
+  | { control: "switch";   checked?: boolean; defaultChecked?: boolean; onCheckedChange?: (checked: boolean) => void };
+
+export type CardHeaderProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "title"> &
+  CardHeaderControl & {
+    /** 이미지 URL — image 타입 */
+    imageSrc?: string;
+    imageAlt?: string;
+    /** 아바타 요소 — avatar 타입 */
+    avatar?: React.ReactNode;
+    /** 제목 */
+    title?: React.ReactNode;
+    /** 부제목 / 설명 */
+    subtitle?: React.ReactNode;
+    /** 우측 뱃지/상태 요소 (control과 별개로 이미지 헤더에서 사용) */
+    badge?: React.ReactNode;
+  };
+
+/** control prop에 따라 우측 상단 요소를 렌더링 */
+function CardHeaderControl(props: CardHeaderControl) {
+  if (!props.control || props.control === "none") return null;
+
+  if (props.control === "menu") {
+    return <CardMenu onClick={props.onMenuClick} />;
+  }
+
+  if (props.control === "checkbox") {
+    return (
+      <Checkbox
+        size="lg"
+        checked={props.checked}
+        defaultChecked={props.defaultChecked}
+        onChange={(e) => props.onCheckedChange?.(e.target.checked)}
+        className="mt-0.5"
+      />
+    );
+  }
+
+  if (props.control === "radio") {
+    return (
+      <Radio
+        size="lg"
+        checked={props.checked}
+        onChange={props.onChange}
+        name={props.name}
+        value={props.value}
+        className="mt-0.5"
+      />
+    );
+  }
+
+  if (props.control === "switch") {
+    return (
+      <Switch
+        size="md"
+        checked={props.checked}
+        defaultChecked={props.defaultChecked}
+        onCheckedChange={props.onCheckedChange}
+      />
+    );
+  }
+
+  return null;
+}
+
+// control 관련 prop 키 목록 — DOM에 전달되면 안 되는 것들
+const CONTROL_PROP_KEYS = [
+  "control", "onMenuClick", "onCheckedChange",
+  "onChange", "name", "value", "checked", "defaultChecked",
+  "imageSrc", "imageAlt", "avatar", "title", "subtitle", "badge",
+] as const;
+
+function omitControlProps(props: Record<string, unknown>) {
+  const result: Record<string, unknown> = {};
+  for (const key in props) {
+    if (!(CONTROL_PROP_KEYS as readonly string[]).includes(key)) {
+      result[key] = props[key];
+    }
+  }
+  return result;
 }
 
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
-  ({ className, imageSrc, imageAlt, avatar, title, subtitle, badge, children, ...props }, ref) => {
+  (props, ref) => {
+    const p = props as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+    const {
+      className, imageSrc, imageAlt, avatar,
+      title, subtitle, badge, children, control,
+    } = p;
+
+    const controlProps = {
+      control,
+      onMenuClick:     p.onMenuClick,
+      onCheckedChange: p.onCheckedChange,
+      onChange:        p.onChange,
+      name:            p.name,
+      value:           p.value,
+      checked:         p.checked,
+      defaultChecked:  p.defaultChecked,
+    } as CardHeaderControl;
+
+    // control 관련 + 카드 전용 props를 모두 제거한 순수 HTML attrs
+    const rest = omitControlProps(p);
+
     /* image 타입 */
     if (imageSrc) {
       return (
-        <div ref={ref} className={cn("relative", className)} {...props}>
+        <div ref={ref} className={cn("relative", className)} {...rest}>
           <img
             src={imageSrc}
             alt={imageAlt ?? ""}
             className="w-full aspect-video object-cover"
           />
-          {badge && <div className="absolute top-3 right-3">{badge}</div>}
+          <div className="absolute top-3 right-3 flex items-center gap-1.5">
+            {badge}
+            <CardHeaderControl {...controlProps} />
+          </div>
           {children}
         </div>
       );
@@ -136,7 +239,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
 
     /* avatar / text 타입 */
     return (
-      <div ref={ref} className={cn("flex items-start gap-3 px-4 pt-4 pb-0", className)} {...props}>
+      <div ref={ref} className={cn("flex items-start gap-3 px-4 pt-4 pb-0", className)} {...rest}>
         {avatar && <div className="shrink-0">{avatar}</div>}
         <div className="flex-1 min-w-0">
           {title && (
@@ -146,7 +249,10 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
             <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{subtitle}</p>
           )}
         </div>
-        {badge && <div className="shrink-0">{badge}</div>}
+        {!control && badge && <div className="shrink-0">{badge}</div>}
+        <div className="shrink-0">
+          <CardHeaderControl {...controlProps} />
+        </div>
         {children}
       </div>
     );
@@ -171,17 +277,44 @@ CardTitle.displayName = "CardTitle";
 
 /* ══════════════════════════════════════════════════════════════
    CardContent
+   divider: true일 때 children 사이에 <Divider /> 자동 삽입
 ══════════════════════════════════════════════════════════════ */
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("px-4 py-3 flex-1 flex flex-col gap-2", className)}
-    {...props}
-  />
-));
+export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * true이면 children 항목 사이에 <Divider />를 자동으로 삽입합니다.
+   * @default false
+   */
+  divider?: boolean;
+}
+
+const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
+  ({ className, divider = false, children, ...props }, ref) => {
+    const content = divider
+      ? React.Children.toArray(children).reduce<React.ReactNode[]>(
+          (acc, child, index) => {
+            if (index > 0) acc.push(<Divider key={`divider-${index}`} />);
+            acc.push(child);
+            return acc;
+          },
+          []
+        )
+      : children;
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "px-4 py-3 flex-1 flex flex-col",
+          divider ? "gap-0" : "gap-2",
+          className
+        )}
+        {...props}
+      >
+        {content}
+      </div>
+    );
+  }
+);
 CardContent.displayName = "CardContent";
 
 /* ══════════════════════════════════════════════════════════════
@@ -210,18 +343,20 @@ export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className, divider = true, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "px-4 pb-4 flex items-center gap-2",
-        divider && "pt-3 border-t border-border mt-0",
-        !divider && "pt-0",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </div>
+    <>
+      {divider && <Divider />}
+      <div
+        ref={ref}
+        className={cn(
+          "px-4 pb-4 flex items-center gap-2",
+          divider ? "pt-3" : "pt-0",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    </>
   )
 );
 CardFooter.displayName = "CardFooter";
@@ -271,6 +406,73 @@ const CardFooterInfo = React.forwardRef<HTMLDivElement, CardFooterInfoProps>(
 );
 CardFooterInfo.displayName = "CardFooterInfo";
 
+/* ══════════════════════════════════════════════════════════════
+   CardFooterButtons
+   버튼 푸터 — ButtonGroup + Button 컴포넌트 사용
+   direction: horizontal (기본) / vertical
+══════════════════════════════════════════════════════════════ */
+export interface CardFooterButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** 버튼 배치 방향 */
+  direction?: "horizontal" | "vertical";
+  /** 주요 액션 버튼 텍스트 */
+  primaryLabel?: string;
+  /** 주요 액션 콜백 */
+  onPrimary?: () => void;
+  /** 보조 액션 버튼 텍스트 */
+  secondaryLabel?: string;
+  /** 보조 액션 콜백 */
+  onSecondary?: () => void;
+  /** 구분선 표시 여부 */
+  divider?: boolean;
+}
+
+const CardFooterButtons = React.forwardRef<HTMLDivElement, CardFooterButtonsProps>(
+  (
+    {
+      className,
+      direction = "horizontal",
+      primaryLabel = "확인",
+      onPrimary,
+      secondaryLabel,
+      onSecondary,
+      divider = true,
+      ...props
+    },
+    ref
+  ) => (
+    <>
+      {divider && <Divider />}
+      <div
+        ref={ref}
+        className={cn("px-4 pb-4", divider ? "pt-3" : "pt-0", className)}
+        {...props}
+      >
+        <ButtonGroup direction={direction}>
+          {secondaryLabel && (
+            <Button
+              variant="tertiary"
+              size="sm"
+              fullWidth={direction === "vertical"}
+              onClick={onSecondary}
+            >
+              {secondaryLabel}
+            </Button>
+          )}
+          <Button
+            variant="primary"
+            size="sm"
+            fullWidth={direction === "vertical"}
+            onClick={onPrimary}
+          >
+            {primaryLabel}
+          </Button>
+        </ButtonGroup>
+      </div>
+    </>
+  )
+);
+CardFooterButtons.displayName = "CardFooterButtons";
+
 export {
   Card,
   CardMenu,
@@ -281,4 +483,5 @@ export {
   CardFooter,
   CardFooterUser,
   CardFooterInfo,
+  CardFooterButtons,
 };
