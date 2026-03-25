@@ -35,7 +35,7 @@ const selectVariants = cva(
       state: {
         default:  "border-border",
         complete: "border-border",
-        focus:    "border-ac-primary-50",
+        focus:    "border-ac-gray-80",
         error:    "border-ac-red-50",
         disable:  "border-border",
       },
@@ -128,8 +128,9 @@ function Select({
         {open && (
           <ul
             role="listbox"
-            className="absolute z-dropdown mt-1 w-full rounded-md border border-border bg-background shadow-sm py-1 max-h-60 overflow-auto"
+            className="absolute z-dropdown mt-1 w-full rounded-md border border-border bg-background shadow-sm overflow-hidden"
           >
+          <div className="py-1 max-h-60 overflow-auto">
             {/* 그룹 없는 옵션 */}
             {options.map(opt => (
               <li
@@ -139,15 +140,17 @@ function Select({
                 aria-disabled={opt.disabled}
                 onClick={() => !opt.disabled && handleSelect(opt.value)}
                 className={cn(
-                  "flex items-center justify-between px-3 py-2 text-sm cursor-pointer",
+                  "flex items-center gap-2 px-3 py-2 text-sm cursor-pointer",
                   opt.disabled
                     ? "text-muted-foreground cursor-not-allowed"
                     : "hover:bg-ac-gray-20",
                   currentValue === opt.value && "text-ac-primary-50 font-medium"
                 )}
               >
+                <span className="w-3.5 h-3.5 shrink-0 flex items-center justify-center">
+                  {currentValue === opt.value && <Check className="w-3.5 h-3.5" />}
+                </span>
                 {opt.label}
-                {currentValue === opt.value && <Check className="w-3.5 h-3.5" />}
               </li>
             ))}
 
@@ -166,21 +169,24 @@ function Select({
                         aria-disabled={opt.disabled}
                         onClick={() => !opt.disabled && handleSelect(opt.value)}
                         className={cn(
-                          "flex items-center justify-between px-3 py-2 text-sm cursor-pointer",
+                          "flex items-center gap-2 px-3 py-2 text-sm cursor-pointer",
                           opt.disabled
                             ? "text-muted-foreground cursor-not-allowed"
                             : "hover:bg-ac-gray-20",
                           currentValue === opt.value && "text-ac-primary-50 font-medium"
                         )}
                       >
+                        <span className="w-3.5 h-3.5 shrink-0 flex items-center justify-center">
+                          {currentValue === opt.value && <Check className="w-3.5 h-3.5" />}
+                        </span>
                         {opt.label}
-                        {currentValue === opt.value && <Check className="w-3.5 h-3.5" />}
                       </li>
                     ))}
                   </ul>
                 </li>
               </React.Fragment>
             ))}
+          </div>
           </ul>
         )}
       </div>

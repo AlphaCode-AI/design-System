@@ -8,14 +8,51 @@ import { cn } from "@/utils/cn";
 /* ── Types ─────────────────────────────────────────────────── */
 export type SnackbarVariant  = "default" | "error" | "success" | "info" | "warning";
 export type SnackbarPosition = "top" | "bottom";
+export type SnackbarSize     = "sm" | "md" | "lg";
 
-/* ── Variant 스타일 ─────────────────────────────────────────── */
-const variantClass: Record<SnackbarVariant, string> = {
-  default:  "bg-ac-gray-80 text-ac-white",
-  error:    "bg-ac-red-50 text-ac-white",
-  success:  "bg-ac-blue-50 text-ac-white",
-  info:     "bg-ac-primary-10 text-ac-gray-90 border border-ac-primary-20",
-  warning:  "bg-ac-orange-10 text-ac-gray-90 border border-ac-orange-30",
+/* ── Variant 스타일 (bg / text 분리) ────────────────────────── */
+const variantBgClass: Record<SnackbarVariant, string> = {
+  default: "bg-ac-orange-10",
+  error:   "bg-ac-red-10",
+  success: "bg-ac-green-10",
+  info:    "bg-ac-blue-10",
+  warning: "bg-ac-orange-20",
+};
+
+const variantTextClass: Record<SnackbarVariant, string> = {
+  default: "text-ac-gray-90",
+  error:   "text-ac-gray-90",
+  success: "text-ac-gray-90",
+  info:    "text-ac-gray-90",
+  warning: "text-ac-gray-90",
+};
+
+/* size별 스타일 */
+const sizeContainerClass: Record<SnackbarSize, string> = {
+  sm: "h-8 px-2",
+  md: "h-9 px-2",
+  lg: "h-11 px-3",
+};
+
+const sizeTextClass: Record<SnackbarSize, string> = {
+  sm: "text-xs",
+  md: "text-xs",
+  lg: "text-sm",
+};
+
+const sizeCollapsedClass: Record<SnackbarSize, string> = {
+  sm: "w-8 h-8",
+  md: "w-9 h-9",
+  lg: "w-11 h-11",
+};
+
+/* variant별 기본 아이콘 색상 */
+const variantIconClass: Record<SnackbarVariant, string> = {
+  default: "[&_svg]:text-ac-orange-50",
+  error:   "[&_svg]:text-ac-red-50",
+  success: "[&_svg]:text-ac-green-50",
+  info:    "[&_svg]:text-ac-blue-50",
+  warning: "[&_svg]:text-ac-orange-50",
 };
 
 /* ══════════════════════════════════════════════════════════════
@@ -27,10 +64,15 @@ export interface SnackbarItem {
   variant?: SnackbarVariant;
   /** 좌측 아이콘 또는 아바타 */
   leftItem?: React.ReactNode;
-  /** 우측: close(X) / action(텍스트 버튼) / chevron / check */
+  /** 우측: close / chevron / check / ReactNode (Button 등) */
   rightItem?: "close" | "chevron" | "check" | React.ReactNode;
+  /** 아이콘 색상 override — Tailwind text 클래스. 미지정 시 variant 기본색 적용 */
+  iconColorClass?: string;
+  /** 배경색 override — Tailwind bg 클래스 (예: "bg-ac-blue-10") */
+  bgColorClass?: string;
+  /** 텍스트 색상 override — Tailwind text 클래스 (예: "text-ac-white") */
+  textColorClass?: string;
   onAction?: () => void;
-  actionLabel?: string;
   duration?: number;
 }
 
@@ -75,7 +117,6 @@ export function SnackbarProvider({
     const id = Math.random().toString(36).slice(2);
     setItems(prev => {
       const next = [...prev, { ...item, id }];
-      // maxCount 초과 시 가장 오래된 항목 제거
       return next.length > maxCount ? next.slice(next.length - maxCount) : next;
     });
 
@@ -128,74 +169,49 @@ function SnackbarItem({
   item: SnackbarItem;
   onDismiss: (id: string) => void;
 }) {
-  const { id, message, variant = "default", leftItem, rightItem, onAction, actionLabel } = item;
+  const {
+    id, message, variant = "default",
+    leftItem, rightItem,
+    iconColorClass, bgColorClass, textColorClass,
+    onAction,
+  } = item;
 
   const renderRight = () => {
     if (!rightItem) return null;
-    if (rightItem === "close") {
-      return (
-        <button
-          type="button"
-          onClick={() => onDismiss(id)}
-          aria-label="닫기"
-          className="shrink-0 p-0.5 rounded opacity-70 hover:opacity-100 transition-opacity"
-        >
-          <X className="w-4 h-4" />
-        </button>
-      );
-    }
-    if (rightItem === "chevron") {
-      return (
-        <button
-          type="button"
-          onClick={onAction}
-          aria-label="더보기"
-          className="shrink-0 p-0.5 rounded opacity-70 hover:opacity-100 transition-opacity"
-        >
-          <ChevronRight className="w-4 h-4" />
-        </button>
-      );
-    }
-    if (rightItem === "check") {
-      return <Check className="shrink-0 w-4 h-4 opacity-80" />;
-    }
-    // action 텍스트 버튼
-    if (actionLabel) {
-      return (
-        <button
-          type="button"
-          onClick={onAction}
-          className="shrink-0 text-xs font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity whitespace-nowrap"
-        >
-          {actionLabel}
-        </button>
-      );
-    }
-    // ReactNode
-    return <span className="shrink-0">{rightItem}</span>;
+    if (rightItem === "close") return (
+      <button type="button" onClick={() => onDismiss(id)} aria-label="닫기"
+        className="shrink-0 p-0.5 rounded opacity-70 hover:opacity-100 transition-opacity">
+        <X className="w-4 h-4" />
+      </button>
+    );
+    if (rightItem === "chevron") return (
+      <button type="button" onClick={onAction} aria-label="더보기"
+        className="shrink-0 p-0.5 rounded opacity-70 hover:opacity-100 transition-opacity">
+        <ChevronRight className="w-4 h-4" />
+      </button>
+    );
+    if (rightItem === "check") return <Check className="shrink-0 w-4 h-4 opacity-80" />;
+    // Button 등 임의 ReactNode
+    return <span className="shrink-0 flex items-center">{rightItem}</span>;
   };
 
   return (
     <div
       role="status"
       className={cn(
-        "flex items-center gap-3 w-full",
-        "px-4 py-3 rounded-lg shadow-md",
+        "flex items-center gap-1 w-full",
+        "p-2 rounded-xl",
         "animate-slide-up",
-        variantClass[variant]
+        bgColorClass ?? variantBgClass[variant],
+        textColorClass ?? variantTextClass[variant],
       )}
     >
-      {/* Left item */}
       {leftItem && (
-        <span className="shrink-0 flex items-center justify-center w-5 h-5">
+        <span className={cn("shrink-0 flex items-center justify-center", iconColorClass ?? variantIconClass[variant])}>
           {leftItem}
         </span>
       )}
-
-      {/* Message */}
-      <span className="flex-1 text-sm leading-snug min-w-0">{message}</span>
-
-      {/* Right item */}
+      <span className="flex-1 text-xs font-medium leading-snug min-w-0">{message}</span>
       {renderRight()}
     </div>
   );
@@ -207,20 +223,75 @@ function SnackbarItem({
 export interface SnackbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color"> {
   message: React.ReactNode;
   variant?: SnackbarVariant;
+  /** 좌측 아이콘 또는 아바타 */
   leftItem?: React.ReactNode;
+  /** 우측: close / chevron / check / ReactNode (Button 등) */
   rightItem?: "close" | "chevron" | "check" | React.ReactNode;
+  /** 아이콘 색상 override — Tailwind text 클래스. 미지정 시 variant 기본색 적용 */
+  iconColorClass?: string;
+  /** 배경색 override — Tailwind bg 클래스 (예: "bg-ac-blue-10") */
+  bgColorClass?: string;
+  /** 텍스트 색상 override — Tailwind text 클래스 (예: "text-ac-white") */
+  textColorClass?: string;
+  /** 스낵바 크기 */
+  size?: SnackbarSize;
+  /**
+   * close 버튼 동작 방식
+   * - "dismiss": 스낵바 전체 제거 (기본값)
+   * - "hide-right": 오른쪽 아이템만 제거, 스낵바는 유지
+   */
+  closeMode?: "dismiss" | "hide-right";
   onClose?: () => void;
   onAction?: () => void;
-  actionLabel?: string;
 }
 
 const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
-  ({ className, message, variant = "default", leftItem, rightItem, onClose, onAction, actionLabel, ...props }, ref) => {
+  ({
+    className, message, variant = "default",
+    size = "md",
+    leftItem, rightItem,
+    iconColorClass, bgColorClass, textColorClass,
+    closeMode = "dismiss",
+    onClose, onAction,
+    ...props
+  }, ref) => {
+    const [visible, setVisible] = React.useState(true);
+    const [collapsed, setCollapsed] = React.useState(false);
+
+    const handleClose = () => {
+      if (closeMode === "hide-right") {
+        setCollapsed(true);
+      } else {
+        setVisible(false);
+      }
+      onClose?.();
+    };
+
+    if (!visible) return null;
+
+    if (collapsed) {
+      return (
+        <div
+          role="status"
+          onClick={() => setCollapsed(false)}
+          className={cn(
+            "inline-flex items-center justify-center rounded-full cursor-pointer",
+            "transition-colors hover:opacity-80",
+            sizeCollapsedClass[size],
+            bgColorClass ?? variantBgClass[variant],
+          )}
+        >
+          <span className={cn("flex items-center justify-center", iconColorClass ?? variantIconClass[variant])}>
+            {leftItem}
+          </span>
+        </div>
+      );
+    }
 
     const renderRight = () => {
       if (!rightItem) return null;
       if (rightItem === "close") return (
-        <button type="button" onClick={onClose} aria-label="닫기"
+        <button type="button" onClick={handleClose} aria-label="닫기"
           className="shrink-0 p-0.5 rounded opacity-70 hover:opacity-100 transition-opacity">
           <X className="w-4 h-4" />
         </button>
@@ -232,13 +303,8 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
         </button>
       );
       if (rightItem === "check") return <Check className="shrink-0 w-4 h-4 opacity-80" />;
-      if (actionLabel) return (
-        <button type="button" onClick={onAction}
-          className="shrink-0 text-xs font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity whitespace-nowrap">
-          {actionLabel}
-        </button>
-      );
-      return <span className="shrink-0">{rightItem}</span>;
+      // Button 등 임의 ReactNode
+      return <span className="shrink-0 flex items-center">{rightItem}</span>;
     };
 
     return (
@@ -246,15 +312,21 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
         ref={ref}
         role="status"
         className={cn(
-          "flex items-center gap-3 w-full",
-          "px-4 py-3 rounded-lg shadow-md",
-          variantClass[variant],
-          className
+          "flex items-center gap-1 w-full",
+          "rounded-xl",
+          sizeContainerClass[size],
+          bgColorClass ?? variantBgClass[variant],
+          textColorClass ?? variantTextClass[variant],
+          className,
         )}
         {...props}
       >
-        {leftItem && <span className="shrink-0 flex items-center justify-center w-5 h-5">{leftItem}</span>}
-        <span className="flex-1 text-sm leading-snug min-w-0">{message}</span>
+        {leftItem && (
+          <span className={cn("shrink-0 flex items-center justify-center", iconColorClass ?? variantIconClass[variant])}>
+            {leftItem}
+          </span>
+        )}
+        <span className={cn("flex-1 font-medium leading-snug min-w-0", sizeTextClass[size])}>{message}</span>
         {renderRight()}
       </div>
     );

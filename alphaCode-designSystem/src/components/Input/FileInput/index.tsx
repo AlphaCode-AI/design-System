@@ -112,7 +112,7 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
             type="file"
             multiple={multiple}
             disabled={disabled}
-            className="sr-only"
+            className="hidden"
             onChange={handleChange}
             aria-invalid={isError}
             {...props}

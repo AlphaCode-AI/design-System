@@ -17,7 +17,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const borderClass = isError
       ? "border-ac-red-50 focus:border-ac-red-50"
-      : "border-border focus:border-ac-primary-50";
+      : "border-border focus:border-ac-gray-80";
 
     return (
       <div className="flex flex-col gap-1 w-full">
