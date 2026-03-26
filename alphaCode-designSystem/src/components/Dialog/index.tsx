@@ -194,10 +194,11 @@ export interface DialogHeaderProps
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   showClose?: boolean;
+  divider?: boolean;
 }
 
 const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
-  ({ className, title, subtitle, showClose = true, children, ...props }, ref) => {
+  ({ className, title, subtitle, showClose = true, divider = false, children, ...props }, ref) => {
     const { close } = useDialogContext();
 
     return (
@@ -205,7 +206,8 @@ const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
         ref={ref}
         className={cn(
           "flex items-start justify-between gap-4",
-          "px-6 py-4 border-b border-border shrink-0",
+          "px-6 py-4 shrink-0",
+          divider && "border-b border-border",
           className
         )}
         {...props}
@@ -258,13 +260,18 @@ DialogBody.displayName = "DialogBody";
 /* ══════════════════════════════════════════════════════════════
    DialogFooter — 버튼 그룹, 우측 정렬
 ══════════════════════════════════════════════════════════════ */
-const DialogFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+export interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  divider?: boolean;
+}
+
+const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
+  ({ className, divider = false, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
         "flex items-center justify-end gap-2",
-        "px-6 py-4 border-t border-border shrink-0",
+        "px-6 py-4 shrink-0",
+        divider && "border-t border-border",
         className
       )}
       {...props}
@@ -289,10 +296,26 @@ const DialogDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttri
 DialogDescription.displayName = "DialogDescription";
 
 /* ── DialogClose ────────────────────────────────────────────── */
-function DialogClose({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+export interface DialogCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean;
+}
+
+function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps) {
   const { close } = useDialogContext();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    (onClick as React.MouseEventHandler<HTMLButtonElement>)?.(e);
+    close();
+  };
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children as React.ReactElement<any>, {
+      onClick: handleClick,
+    });
+  }
+
   return (
-    <button type="button" onClick={close} {...props}>
+    <button type="button" onClick={handleClick} {...props}>
       {children}
     </button>
   );

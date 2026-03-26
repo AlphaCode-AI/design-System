@@ -90,6 +90,24 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps
 }
 declare function Badge({ className, variant, size, icon, children, ...props }: BadgeProps): react_jsx_runtime.JSX.Element;
 
+declare const avatarVariants: (props?: ({
+    shape?: "circle" | "square" | null | undefined;
+    size?: "xl" | "lg" | "md" | "sm" | "xs" | "2xl" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface AvatarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">, VariantProps<typeof avatarVariants> {
+    /** 이미지 URL */
+    src?: string;
+    /** 이미지 alt (접근성: 스크린 리더용) */
+    alt?: string;
+    /** 이름 — Text 타입 이니셜 생성 및 접근성에 사용 */
+    name?: string;
+    /** 아이콘 — Icon 타입에 사용 */
+    icon?: React.ReactNode;
+    /** 이미지 로드 실패 시 fallback (기본: 이니셜 또는 아이콘) */
+    fallback?: React.ReactNode;
+}
+declare const Avatar: React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLDivElement>>;
+
 declare const cardVariants: (props?: ({
     variant?: "background" | "line" | "shadow" | null | undefined;
     interactive?: boolean | null | undefined;
@@ -137,7 +155,7 @@ type CardHeaderProps = Omit<React.HTMLAttributes<HTMLDivElement>, "title"> & Car
     /** 이미지 URL — image 타입 */
     imageSrc?: string;
     imageAlt?: string;
-    /** 아바타 요소 — avatar 타입 */
+    /** 아바타 영역 콘텐츠 — Avatar 컴포넌트 또는 커스텀 ReactNode */
     avatar?: React.ReactNode;
     /** 제목 */
     title?: React.ReactNode;
@@ -163,7 +181,7 @@ interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const CardFooter: React.ForwardRefExoticComponent<CardFooterProps & React.RefAttributes<HTMLDivElement>>;
 interface CardFooterUserProps extends React.HTMLAttributes<HTMLDivElement> {
-    avatar?: React.ReactNode;
+    avatar?: Pick<AvatarProps, "src" | "name" | "fallback" | "size" | "shape">;
     name?: string;
     sub?: string;
     action?: React.ReactNode;
@@ -269,24 +287,6 @@ interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
     showHomeIcon?: boolean;
 }
 declare function Breadcrumbs({ className, items, separator, maxItems, showHomeIcon, ...props }: BreadcrumbsProps): react_jsx_runtime.JSX.Element | null;
-
-declare const avatarVariants: (props?: ({
-    shape?: "circle" | "square" | null | undefined;
-    size?: "xl" | "lg" | "md" | "sm" | "xs" | "2xl" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface AvatarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">, VariantProps<typeof avatarVariants> {
-    /** 이미지 URL */
-    src?: string;
-    /** 이미지 alt (접근성: 스크린 리더용) */
-    alt?: string;
-    /** 이름 — Text 타입 이니셜 생성 및 접근성에 사용 */
-    name?: string;
-    /** 아이콘 — Icon 타입에 사용 */
-    icon?: React.ReactNode;
-    /** 이미지 로드 실패 시 fallback (기본: 이니셜 또는 아이콘) */
-    fallback?: React.ReactNode;
-}
-declare const Avatar: React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLDivElement>>;
 
 type DatePickerMode = "single" | "range";
 type DatePickerSize = "sm" | "md" | "lg";
@@ -421,8 +421,10 @@ interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     variant?: "default" | "primary";
     size?: "sm" | "md" | "lg";
     iconOnly?: boolean;
+    /** active 아이템에 적용할 Tailwind 클래스 (variant의 active 색상을 override) */
+    activeClassName?: string;
 }
-declare function ToggleGroup({ value, defaultValue, onValueChange, variant, size, iconOnly, className, children, ...props }: ToggleGroupProps): react_jsx_runtime.JSX.Element;
+declare function ToggleGroup({ value, defaultValue, onValueChange, variant, size, iconOnly, activeClassName, className, children, ...props }: ToggleGroupProps): react_jsx_runtime.JSX.Element;
 interface ToggleGroupItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     value: string;
     icon?: React.ReactNode;
@@ -438,9 +440,12 @@ interface TooltipProps {
     placement?: TooltipPlacement;
     /** 트리거 요소 */
     children: React.ReactNode;
+    /** 툴팁 박스 Tailwind 클래스 override */
     className?: string;
+    /** 화살표 Tailwind border 클래스 override (예: "border-t-ac-blue-90") */
+    arrowClassName?: string;
 }
-declare function Tooltip({ content, placement, children, className }: TooltipProps): react_jsx_runtime.JSX.Element;
+declare function Tooltip({ content, placement, children, className, arrowClassName }: TooltipProps): react_jsx_runtime.JSX.Element;
 
 interface SideNavItem {
     id: string;
@@ -726,13 +731,20 @@ interface DialogHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "
     title?: React.ReactNode;
     subtitle?: React.ReactNode;
     showClose?: boolean;
+    divider?: boolean;
 }
 declare const DialogHeader: React.ForwardRefExoticComponent<DialogHeaderProps & React.RefAttributes<HTMLDivElement>>;
 declare const DialogBody: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-declare const DialogFooter: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+    divider?: boolean;
+}
+declare const DialogFooter: React.ForwardRefExoticComponent<DialogFooterProps & React.RefAttributes<HTMLDivElement>>;
 declare const DialogTitle: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
 declare const DialogDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
-declare function DialogClose({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>): react_jsx_runtime.JSX.Element;
+interface DialogCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    asChild?: boolean;
+}
+declare function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps): react_jsx_runtime.JSX.Element;
 declare namespace DialogClose {
     var displayName: string;
 }
@@ -764,6 +776,7 @@ declare const AccordionContent: React.ForwardRefExoticComponent<React.HTMLAttrib
 
 type CarouselOrientation = "horizontal" | "vertical";
 type CarouselNavStyle = "default" | "line" | "border" | "text";
+type CarouselDotsType = "rounded" | "line" | "border";
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
     /** 슬라이드 방향 */
     orientation?: CarouselOrientation;
@@ -789,6 +802,7 @@ declare const CarouselPrevious: React.ForwardRefExoticComponent<CarouselNavButto
 declare const CarouselNext: React.ForwardRefExoticComponent<CarouselNavButtonProps & React.RefAttributes<HTMLButtonElement>>;
 interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> {
     activeColor?: string;
+    type?: CarouselDotsType;
 }
 declare const CarouselDots: React.ForwardRefExoticComponent<CarouselDotsProps & React.RefAttributes<HTMLDivElement>>;
 declare const CarouselCounter: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;

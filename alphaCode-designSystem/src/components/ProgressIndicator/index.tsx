@@ -14,6 +14,13 @@ const linearHeightMap: Record<ProgressLinearSize, string> = {
   xl: "h-[30px]",
 };
 
+const linearRadiusMap: Record<ProgressLinearSize, string> = {
+  sm: "rounded-sm",
+  md: "rounded",
+  lg: "rounded-md",
+  xl: "rounded-lg",
+};
+
 const circularSizeMap: Record<ProgressCircularSize, number> = {
   xs: 16,
   sm: 30,
@@ -68,6 +75,14 @@ const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProp
   ) => {
     const pct = indeterminate ? 0 : Math.min(100, Math.max(0, (value / max) * 100));
 
+    const resolveColor = (raw: string) =>
+      raw.startsWith("#") || raw.startsWith("rgb") || raw.startsWith("hsl") || raw.startsWith("var(")
+        ? raw
+        : `var(--${raw})`;
+
+    const resolvedColor      = resolveColor(color);
+    const resolvedTrackColor = resolveColor(trackColor);
+
     /* ── 선형 ───────────────────────────────────────────────── */
     if (type === "linear") {
       return (
@@ -89,20 +104,22 @@ const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProp
             aria-valuemax={max}
             aria-label={label}
             className={cn(
-              "w-full rounded-full overflow-hidden",
-              linearHeightMap[linearSize]
+              "w-full overflow-hidden",
+              linearHeightMap[linearSize],
+              linearRadiusMap[linearSize]
             )}
-            style={{ backgroundColor: trackColor }}
+            style={{ backgroundColor: resolvedTrackColor }}
           >
             {/* 진행 바 */}
             <div
               className={cn(
-                "h-full rounded-full transition-all duration-slow",
+                "h-full transition-all duration-slow",
+                linearRadiusMap[linearSize],
                 indeterminate && "animate-[indeterminate_1.5s_ease-in-out_infinite]"
               )}
               style={{
                 width: indeterminate ? "40%" : `${pct}%`,
-                backgroundColor: color,
+                backgroundColor: resolvedColor,
               }}
             />
           </div>
@@ -138,7 +155,7 @@ const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProp
               cy={size / 2}
               r={radius}
               fill="none"
-              stroke={trackColor}
+              stroke={resolvedTrackColor}
               strokeWidth={strokeWidth}
             />
             {/* 진행 */}
@@ -147,7 +164,7 @@ const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProp
               cy={size / 2}
               r={radius}
               fill="none"
-              stroke={color}
+              stroke={resolvedColor}
               strokeWidth={strokeWidth}
               strokeLinecap="round"
               strokeDasharray={circumference}

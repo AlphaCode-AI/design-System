@@ -220,17 +220,16 @@ import { cva as cva3 } from "class-variance-authority";
 import * as React3 from "react";
 import { jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
 var placementStyles = {
-  "top-left": { tooltip: "bottom-full left-0 mb-2", arrow: "top-full left-3 border-t-ac-gray-90" },
-  "top-center": { tooltip: "bottom-full left-1/2 -translate-x-1/2 mb-2", arrow: "top-full left-1/2 -translate-x-1/2 border-t-ac-gray-90" },
-  "top-right": { tooltip: "bottom-full right-0 mb-2", arrow: "top-full right-3 border-t-ac-gray-90" },
-  "bottom-left": { tooltip: "top-full left-0 mt-2", arrow: "bottom-full left-3 border-b-ac-gray-90" },
-  "bottom-center": { tooltip: "top-full left-1/2 -translate-x-1/2 mt-2", arrow: "bottom-full left-1/2 -translate-x-1/2 border-b-ac-gray-90" },
-  "bottom-right": { tooltip: "top-full right-0 mt-2", arrow: "bottom-full right-3 border-b-ac-gray-90" }
+  "top-left": { tooltip: "bottom-full left-0 mb-3", arrow: "top-full left-4 -translate-y-1/2 rotate-45 border-b border-r" },
+  "top-center": { tooltip: "bottom-full left-1/2 -translate-x-1/2 mb-3", arrow: "top-full left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r" },
+  "top-right": { tooltip: "bottom-full right-0 mb-3", arrow: "top-full right-4 -translate-y-1/2 rotate-45 border-b border-r" },
+  "bottom-left": { tooltip: "top-full left-0 mt-3", arrow: "bottom-full left-4 translate-y-1/2 rotate-45 border-t border-l" },
+  "bottom-center": { tooltip: "top-full left-1/2 -translate-x-1/2 mt-3", arrow: "bottom-full left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 border-t border-l" },
+  "bottom-right": { tooltip: "top-full right-0 mt-3", arrow: "bottom-full right-4 translate-y-1/2 rotate-45 border-t border-l" }
 };
-function Tooltip({ content, placement = "top-center", children, className }) {
+function Tooltip({ content, placement = "top-center", children, className, arrowClassName }) {
   const [visible, setVisible] = React3.useState(false);
   const { tooltip, arrow } = placementStyles[placement];
-  const isTop = placement.startsWith("top");
   return /* @__PURE__ */ jsxs2(
     "div",
     {
@@ -247,7 +246,7 @@ function Tooltip({ content, placement = "top-center", children, className }) {
             role: "tooltip",
             className: cn(
               "absolute z-tooltip w-max max-w-xs",
-              "px-3 py-2 rounded-md text-xs text-white bg-ac-gray-90 shadow-md",
+              "px-3 py-2 rounded-md text-xs text-foreground bg-white border border-border shadow-sm",
               tooltip,
               className
             ),
@@ -257,9 +256,9 @@ function Tooltip({ content, placement = "top-center", children, className }) {
                 "span",
                 {
                   className: cn(
-                    "absolute w-0 h-0 border-4 border-transparent",
-                    isTop ? "border-t-ac-gray-90" : "border-b-ac-gray-90",
-                    arrow
+                    "absolute w-2.5 h-2.5 bg-white border-border",
+                    arrow,
+                    arrowClassName
                   )
                 }
               )
@@ -424,8 +423,8 @@ function Badge({ className, variant, size, icon, children, ...props }) {
 }
 
 // src/components/Card/index.tsx
-import * as React8 from "react";
-import { cva as cva9 } from "class-variance-authority";
+import * as React9 from "react";
+import { cva as cva10 } from "class-variance-authority";
 
 // src/components/Divider/index.tsx
 import { cva as cva5 } from "class-variance-authority";
@@ -732,428 +731,12 @@ var Switch = React7.forwardRef(
 );
 Switch.displayName = "Switch";
 
-// src/components/Card/index.tsx
-import { Fragment as Fragment2, jsx as jsx10, jsxs as jsxs8 } from "react/jsx-runtime";
-var cardVariants = cva9(
-  [
-    "relative flex flex-col rounded-lg bg-card text-card-foreground overflow-hidden",
-    "transition-all duration-normal"
-  ],
-  {
-    variants: {
-      variant: {
-        /** 배경색만, 테두리·그림자 없음 */
-        background: "bg-card",
-        /** 테두리 */
-        line: "border border-border",
-        /** 그림자 */
-        shadow: ""
-      },
-      interactive: {
-        true: [
-          "cursor-pointer",
-          "active:border active:border-ac-primary-50"
-        ],
-        false: ""
-      }
-    },
-    defaultVariants: {
-      variant: "line",
-      interactive: false
-    }
-  }
-);
-var shadowSizeMap = {
-  xs: "shadow-xs",
-  sm: "shadow-sm",
-  md: "shadow-md",
-  lg: "shadow-lg",
-  xl: "shadow-xl",
-  "2xl": "shadow-2xl"
-};
-var Card = React8.forwardRef(
-  ({ className, variant, interactive, shadowSize = "md", ...props }, ref) => /* @__PURE__ */ jsx10(
-    "div",
-    {
-      ref,
-      className: cn(
-        cardVariants({ variant, interactive }),
-        variant === "shadow" && shadowSizeMap[shadowSize],
-        className
-      ),
-      ...props
-    }
-  )
-);
-Card.displayName = "Card";
-var CardMenu = React8.forwardRef(
-  ({ className, children, ...props }, ref) => /* @__PURE__ */ jsx10(
-    Button,
-    {
-      ref,
-      variant: "icon",
-      size: "icon-sm",
-      className: cn("absolute top-2 right-2 border-none text-muted-foreground", className),
-      ...props,
-      children: children ?? /* @__PURE__ */ jsxs8("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", "aria-hidden": "true", children: [
-        /* @__PURE__ */ jsx10("circle", { cx: "8", cy: "3", r: "1.2" }),
-        /* @__PURE__ */ jsx10("circle", { cx: "8", cy: "8", r: "1.2" }),
-        /* @__PURE__ */ jsx10("circle", { cx: "8", cy: "13", r: "1.2" })
-      ] })
-    }
-  )
-);
-CardMenu.displayName = "CardMenu";
-function CardHeaderControl(props) {
-  if (!props.control || props.control === "none") return null;
-  if (props.control === "menu") {
-    return /* @__PURE__ */ jsx10(CardMenu, { onClick: props.onMenuClick });
-  }
-  if (props.control === "checkbox") {
-    return /* @__PURE__ */ jsx10(
-      Checkbox,
-      {
-        size: "lg",
-        checked: props.checked,
-        defaultChecked: props.defaultChecked,
-        onChange: (e) => props.onCheckedChange?.(e.target.checked),
-        className: "mt-0.5"
-      }
-    );
-  }
-  if (props.control === "radio") {
-    return /* @__PURE__ */ jsx10(
-      Radio,
-      {
-        size: "lg",
-        checked: props.checked,
-        onChange: props.onChange,
-        name: props.name,
-        value: props.value,
-        className: "mt-0.5"
-      }
-    );
-  }
-  if (props.control === "switch") {
-    return /* @__PURE__ */ jsx10(
-      Switch,
-      {
-        size: "md",
-        checked: props.checked,
-        defaultChecked: props.defaultChecked,
-        onCheckedChange: props.onCheckedChange
-      }
-    );
-  }
-  return null;
-}
-var CONTROL_PROP_KEYS = [
-  "control",
-  "onMenuClick",
-  "onCheckedChange",
-  "onChange",
-  "name",
-  "value",
-  "checked",
-  "defaultChecked",
-  "imageSrc",
-  "imageAlt",
-  "avatar",
-  "title",
-  "subtitle",
-  "badge"
-];
-function omitControlProps(props) {
-  const result = {};
-  for (const key in props) {
-    if (!CONTROL_PROP_KEYS.includes(key)) {
-      result[key] = props[key];
-    }
-  }
-  return result;
-}
-var CardHeader = React8.forwardRef(
-  (props, ref) => {
-    const p = props;
-    const {
-      className,
-      imageSrc,
-      imageAlt,
-      avatar,
-      title,
-      subtitle,
-      badge,
-      children,
-      control
-    } = p;
-    const controlProps = {
-      control,
-      onMenuClick: p.onMenuClick,
-      onCheckedChange: p.onCheckedChange,
-      onChange: p.onChange,
-      name: p.name,
-      value: p.value,
-      checked: p.checked,
-      defaultChecked: p.defaultChecked
-    };
-    const rest = omitControlProps(p);
-    if (imageSrc) {
-      return /* @__PURE__ */ jsxs8("div", { ref, className: cn("relative", className), ...rest, children: [
-        /* @__PURE__ */ jsx10(
-          "img",
-          {
-            src: imageSrc,
-            alt: imageAlt ?? "",
-            className: "w-full aspect-video object-cover"
-          }
-        ),
-        /* @__PURE__ */ jsxs8("div", { className: "absolute top-3 right-3 flex items-center gap-1.5", children: [
-          badge,
-          /* @__PURE__ */ jsx10(CardHeaderControl, { ...controlProps })
-        ] }),
-        children
-      ] });
-    }
-    return /* @__PURE__ */ jsxs8("div", { ref, className: cn("flex items-start gap-3 px-4 pt-4 pb-0", className), ...rest, children: [
-      avatar && /* @__PURE__ */ jsx10("div", { className: "shrink-0", children: avatar }),
-      /* @__PURE__ */ jsxs8("div", { className: "flex-1 min-w-0", children: [
-        title && /* @__PURE__ */ jsx10("p", { className: "text-sm font-semibold text-foreground leading-snug line-clamp-1", children: title }),
-        subtitle && /* @__PURE__ */ jsx10("p", { className: "text-xs text-muted-foreground mt-0.5 line-clamp-1", children: subtitle })
-      ] }),
-      !control && badge && /* @__PURE__ */ jsx10("div", { className: "shrink-0", children: badge }),
-      /* @__PURE__ */ jsx10("div", { className: "shrink-0", children: /* @__PURE__ */ jsx10(CardHeaderControl, { ...controlProps }) }),
-      children
-    ] });
-  }
-);
-CardHeader.displayName = "CardHeader";
-var CardTitle = React8.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx10(
-  "h3",
-  {
-    ref,
-    className: cn("text-base font-semibold text-foreground leading-snug", className),
-    ...props
-  }
-));
-CardTitle.displayName = "CardTitle";
-var CardContent = React8.forwardRef(
-  ({ className, divider = false, children, ...props }, ref) => {
-    const content = divider ? React8.Children.toArray(children).reduce(
-      (acc, child, index) => {
-        if (index > 0) acc.push(/* @__PURE__ */ jsx10(Divider, {}, `divider-${index}`));
-        acc.push(child);
-        return acc;
-      },
-      []
-    ) : children;
-    return /* @__PURE__ */ jsx10(
-      "div",
-      {
-        ref,
-        className: cn(
-          "px-4 py-3 flex-1 flex flex-col",
-          divider ? "gap-0" : "gap-2",
-          className
-        ),
-        ...props,
-        children: content
-      }
-    );
-  }
-);
-CardContent.displayName = "CardContent";
-var CardDescription = React8.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx10(
-  "p",
-  {
-    ref,
-    className: cn("text-sm text-muted-foreground leading-normal", className),
-    ...props
-  }
-));
-CardDescription.displayName = "CardDescription";
-var CardFooter = React8.forwardRef(
-  ({ className, divider = true, children, ...props }, ref) => /* @__PURE__ */ jsxs8(Fragment2, { children: [
-    divider && /* @__PURE__ */ jsx10(Divider, {}),
-    /* @__PURE__ */ jsx10(
-      "div",
-      {
-        ref,
-        className: cn(
-          "px-4 pb-4 flex items-center gap-2",
-          divider ? "pt-3" : "pt-0",
-          className
-        ),
-        ...props,
-        children
-      }
-    )
-  ] })
-);
-CardFooter.displayName = "CardFooter";
-var CardFooterUser = React8.forwardRef(
-  ({ className, avatar, name, sub, action, ...props }, ref) => /* @__PURE__ */ jsxs8("div", { ref, className: cn("flex items-center gap-2 w-full", className), ...props, children: [
-    avatar && /* @__PURE__ */ jsx10("div", { className: "shrink-0", children: avatar }),
-    /* @__PURE__ */ jsxs8("div", { className: "flex-1 min-w-0", children: [
-      name && /* @__PURE__ */ jsx10("p", { className: "text-xs font-medium text-foreground line-clamp-1", children: name }),
-      sub && /* @__PURE__ */ jsx10("p", { className: "text-xs text-muted-foreground line-clamp-1", children: sub })
-    ] }),
-    action && /* @__PURE__ */ jsx10("div", { className: "shrink-0", children: action })
-  ] })
-);
-CardFooterUser.displayName = "CardFooterUser";
-var CardFooterInfo = React8.forwardRef(
-  ({ className, items = [], action, ...props }, ref) => /* @__PURE__ */ jsxs8("div", { ref, className: cn("flex items-center gap-3 w-full text-xs text-muted-foreground", className), ...props, children: [
-    /* @__PURE__ */ jsx10("div", { className: "flex items-center gap-3 flex-1 flex-wrap", children: items.map((item, i) => /* @__PURE__ */ jsxs8("span", { className: "inline-flex items-center gap-1", children: [
-      item.icon && /* @__PURE__ */ jsx10("span", { className: "shrink-0", children: item.icon }),
-      item.label
-    ] }, i)) }),
-    action && /* @__PURE__ */ jsx10("div", { className: "shrink-0", children: action })
-  ] })
-);
-CardFooterInfo.displayName = "CardFooterInfo";
-var CardFooterButtons = React8.forwardRef(
-  ({
-    className,
-    direction = "horizontal",
-    primaryLabel = "\uD655\uC778",
-    onPrimary,
-    secondaryLabel,
-    onSecondary,
-    divider = true,
-    ...props
-  }, ref) => /* @__PURE__ */ jsxs8(Fragment2, { children: [
-    divider && /* @__PURE__ */ jsx10(Divider, {}),
-    /* @__PURE__ */ jsx10(
-      "div",
-      {
-        ref,
-        className: cn("px-4 pb-4", divider ? "pt-3" : "pt-0", className),
-        ...props,
-        children: /* @__PURE__ */ jsxs8(ButtonGroup, { direction, children: [
-          secondaryLabel && /* @__PURE__ */ jsx10(
-            Button,
-            {
-              variant: "tertiary",
-              size: "sm",
-              fullWidth: direction === "vertical",
-              onClick: onSecondary,
-              children: secondaryLabel
-            }
-          ),
-          /* @__PURE__ */ jsx10(
-            Button,
-            {
-              variant: "primary",
-              size: "sm",
-              fullWidth: direction === "vertical",
-              onClick: onPrimary,
-              children: primaryLabel
-            }
-          )
-        ] })
-      }
-    )
-  ] })
-);
-CardFooterButtons.displayName = "CardFooterButtons";
-
-// src/components/Breadcrumbs/index.tsx
-import * as React9 from "react";
-import { jsx as jsx11, jsxs as jsxs9 } from "react/jsx-runtime";
-function Separator({ type }) {
-  return /* @__PURE__ */ jsx11("span", { className: "text-ac-gray-50 select-none mx-1", "aria-hidden": "true", children: type === "slash" ? "/" : ">" });
-}
-function HomeIcon() {
-  return /* @__PURE__ */ jsx11(
-    "svg",
-    {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 16 16",
-      fill: "currentColor",
-      className: "w-3.5 h-3.5 shrink-0",
-      "aria-hidden": "true",
-      children: /* @__PURE__ */ jsx11("path", { d: "M8.543 1.293a.75.75 0 0 0-1.086 0L1.5 7.25V13.5A1.5 1.5 0 0 0 3 15h3.25v-3.75a1.75 1.75 0 0 1 3.5 0V15H13a1.5 1.5 0 0 0 1.5-1.5V7.25L8.543 1.293Z" })
-    }
-  );
-}
-function BreadcrumbLink({
-  item,
-  isFirst,
-  showHomeIcon,
-  separator,
-  isLast,
-  isSingle
-}) {
-  const isClickable = (!isLast || isSingle) && (item.href || item.onClick);
-  const content = /* @__PURE__ */ jsxs9("span", { className: "inline-flex items-center gap-1", children: [
-    isFirst && showHomeIcon && /* @__PURE__ */ jsx11(HomeIcon, {}),
-    item.label
-  ] });
-  return /* @__PURE__ */ jsxs9("li", { className: "inline-flex items-center", children: [
-    isClickable ? /* @__PURE__ */ jsx11(
-      "a",
-      {
-        href: item.href,
-        onClick: item.onClick,
-        className: cn(
-          "inline-flex items-center text-sm transition-colors duration-150",
-          "text-ac-black hover:underline underline-offset-4"
-        ),
-        "aria-label": isFirst && showHomeIcon ? "\uD648\uC73C\uB85C \uC774\uB3D9" : void 0,
-        children: content
-      }
-    ) : /* @__PURE__ */ jsx11(
-      "span",
-      {
-        className: cn(
-          "inline-flex items-center text-sm",
-          isLast && !isSingle ? "font-semibold text-foreground" : "text-ac-gray-50 cursor-default"
-          // 링크 없는 아이템
-        ),
-        "aria-current": isLast && !isSingle ? "page" : void 0,
-        children: content
-      }
-    ),
-    !isLast && /* @__PURE__ */ jsx11(Separator, { type: separator })
-  ] });
-}
-function Breadcrumbs({
-  className,
-  items,
-  separator = "slash",
-  maxItems,
-  showHomeIcon = true,
-  ...props
-}) {
-  if (!items.length) return null;
-  const visibleItems = React9.useMemo(() => {
-    if (!maxItems || items.length <= maxItems) return items;
-    const start = items.slice(0, 1);
-    const end = items.slice(-(maxItems - 2));
-    const ellipsis = { label: "..." };
-    return [...start, ellipsis, ...end];
-  }, [items, maxItems]);
-  const isSingle = visibleItems.length === 1;
-  return /* @__PURE__ */ jsx11("nav", { "aria-label": "breadcrumb", className: cn("w-full", className), ...props, children: /* @__PURE__ */ jsx11("ol", { className: "inline-flex flex-wrap items-center gap-y-1", children: visibleItems.map((item, index) => /* @__PURE__ */ jsx11(
-    BreadcrumbLink,
-    {
-      item,
-      isFirst: index === 0,
-      isLast: index === visibleItems.length - 1,
-      isSingle,
-      showHomeIcon,
-      separator
-    },
-    `${item.label}-${index}`
-  )) }) });
-}
-
 // src/components/Avatar/index.tsx
-import * as React10 from "react";
-import { cva as cva10 } from "class-variance-authority";
+import * as React8 from "react";
+import { cva as cva9 } from "class-variance-authority";
 import { User } from "lucide-react";
-import { jsx as jsx12 } from "react/jsx-runtime";
-var avatarVariants = cva10(
+import { jsx as jsx10 } from "react/jsx-runtime";
+var avatarVariants = cva9(
   "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 text-foreground font-bold select-none",
   {
     variants: {
@@ -1194,7 +777,7 @@ function getInitials(name, maxChars) {
   }
   return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
 }
-var Avatar = React10.forwardRef(
+var Avatar = React8.forwardRef(
   ({
     className,
     shape,
@@ -1206,15 +789,15 @@ var Avatar = React10.forwardRef(
     fallback,
     ...props
   }, ref) => {
-    const [imgError, setImgError] = React10.useState(false);
-    React10.useEffect(() => {
+    const [imgError, setImgError] = React8.useState(false);
+    React8.useEffect(() => {
       setImgError(false);
     }, [src]);
     const maxChars = ["xs", "sm", "md"].includes(size || "md") ? 1 : 2;
     const initials = name ? getInitials(name, maxChars) : "";
     const renderContent = () => {
       if (src && !imgError) {
-        return /* @__PURE__ */ jsx12(
+        return /* @__PURE__ */ jsx10(
           "img",
           {
             src,
@@ -1226,8 +809,8 @@ var Avatar = React10.forwardRef(
       }
       if (fallback) return fallback;
       if (icon) return icon;
-      if (initials) return /* @__PURE__ */ jsx12("span", { "aria-label": name, children: initials });
-      return /* @__PURE__ */ jsx12(
+      if (initials) return /* @__PURE__ */ jsx10("span", { "aria-label": name, children: initials });
+      return /* @__PURE__ */ jsx10(
         User,
         {
           className: "w-1/2 h-1/2 text-ac-gray-50",
@@ -1235,7 +818,7 @@ var Avatar = React10.forwardRef(
         }
       );
     };
-    return /* @__PURE__ */ jsx12(
+    return /* @__PURE__ */ jsx10(
       "div",
       {
         ref,
@@ -1247,6 +830,421 @@ var Avatar = React10.forwardRef(
   }
 );
 Avatar.displayName = "Avatar";
+
+// src/components/Card/index.tsx
+import { Fragment as Fragment2, jsx as jsx11, jsxs as jsxs8 } from "react/jsx-runtime";
+var cardVariants = cva10(
+  [
+    "relative flex flex-col rounded-lg bg-card text-card-foreground overflow-hidden",
+    "transition-all duration-normal"
+  ],
+  {
+    variants: {
+      variant: {
+        /** 배경색만, 테두리·그림자 없음 */
+        background: "bg-card",
+        /** 테두리 */
+        line: "border border-border",
+        /** 그림자 */
+        shadow: ""
+      },
+      interactive: {
+        true: [
+          "cursor-pointer",
+          "hover:shadow-lg hover:-translate-y-0.5",
+          "active:ring-1 active:ring-ac-primary-50"
+        ],
+        false: ""
+      }
+    },
+    defaultVariants: {
+      variant: "line",
+      interactive: false
+    }
+  }
+);
+var shadowSizeMap = {
+  xs: "shadow-xs",
+  sm: "shadow-sm",
+  md: "shadow-md",
+  lg: "shadow-lg",
+  xl: "shadow-xl",
+  "2xl": "shadow-2xl"
+};
+var Card = React9.forwardRef(
+  ({ className, variant, interactive, shadowSize = "md", ...props }, ref) => /* @__PURE__ */ jsx11(
+    "div",
+    {
+      ref,
+      className: cn(
+        cardVariants({ variant, interactive }),
+        variant === "shadow" && shadowSizeMap[shadowSize],
+        className
+      ),
+      ...props
+    }
+  )
+);
+Card.displayName = "Card";
+var CardMenu = React9.forwardRef(
+  ({ className, children, ...props }, ref) => /* @__PURE__ */ jsx11(
+    Button,
+    {
+      ref,
+      variant: "icon",
+      size: "icon-sm",
+      className: cn("absolute top-2 right-2 border-none text-muted-foreground", className),
+      ...props,
+      children: children ?? /* @__PURE__ */ jsxs8("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", "aria-hidden": "true", children: [
+        /* @__PURE__ */ jsx11("circle", { cx: "8", cy: "3", r: "1.2" }),
+        /* @__PURE__ */ jsx11("circle", { cx: "8", cy: "8", r: "1.2" }),
+        /* @__PURE__ */ jsx11("circle", { cx: "8", cy: "13", r: "1.2" })
+      ] })
+    }
+  )
+);
+CardMenu.displayName = "CardMenu";
+function CardHeaderControl(props) {
+  if (!props.control || props.control === "none") return null;
+  if (props.control === "menu") {
+    return /* @__PURE__ */ jsx11(CardMenu, { onClick: props.onMenuClick });
+  }
+  if (props.control === "checkbox") {
+    return /* @__PURE__ */ jsx11("div", { className: "mt-0.5", children: /* @__PURE__ */ jsx11(
+      Checkbox,
+      {
+        size: "lg",
+        checked: props.checked,
+        defaultChecked: props.defaultChecked,
+        onChange: (e) => props.onCheckedChange?.(e.target.checked)
+      }
+    ) });
+  }
+  if (props.control === "radio") {
+    return /* @__PURE__ */ jsx11("div", { className: "mt-0.5", children: /* @__PURE__ */ jsx11(
+      Radio,
+      {
+        size: "lg",
+        checked: props.checked,
+        onChange: props.onChange,
+        name: props.name,
+        value: props.value
+      }
+    ) });
+  }
+  if (props.control === "switch") {
+    return /* @__PURE__ */ jsx11(
+      Switch,
+      {
+        size: "md",
+        checked: props.checked,
+        defaultChecked: props.defaultChecked,
+        onCheckedChange: props.onCheckedChange
+      }
+    );
+  }
+  return null;
+}
+var CONTROL_PROP_KEYS = [
+  "control",
+  "onMenuClick",
+  "onCheckedChange",
+  "onChange",
+  "name",
+  "value",
+  "checked",
+  "defaultChecked",
+  "imageSrc",
+  "imageAlt",
+  "avatar",
+  "title",
+  "subtitle",
+  "badge"
+];
+function omitControlProps(props) {
+  const result = {};
+  for (const key in props) {
+    if (!CONTROL_PROP_KEYS.includes(key)) {
+      result[key] = props[key];
+    }
+  }
+  return result;
+}
+var CardHeader = React9.forwardRef(
+  (props, ref) => {
+    const p = props;
+    const {
+      className,
+      imageSrc,
+      imageAlt,
+      avatar,
+      title,
+      subtitle,
+      badge,
+      children,
+      control
+    } = p;
+    const controlProps = {
+      control,
+      onMenuClick: p.onMenuClick,
+      onCheckedChange: p.onCheckedChange,
+      onChange: p.onChange,
+      name: p.name,
+      value: p.value,
+      checked: p.checked,
+      defaultChecked: p.defaultChecked
+    };
+    const rest = omitControlProps(p);
+    if (imageSrc) {
+      return /* @__PURE__ */ jsxs8("div", { ref, className: cn("relative", className), ...rest, children: [
+        /* @__PURE__ */ jsx11(
+          "img",
+          {
+            src: imageSrc,
+            alt: imageAlt ?? "",
+            className: "w-full aspect-video object-cover"
+          }
+        ),
+        /* @__PURE__ */ jsxs8("div", { className: "absolute top-3 right-3 flex items-center gap-1.5", children: [
+          badge,
+          /* @__PURE__ */ jsx11(CardHeaderControl, { ...controlProps })
+        ] }),
+        children
+      ] });
+    }
+    return /* @__PURE__ */ jsxs8("div", { ref, className: cn("flex items-start gap-3 px-4 pt-4 pb-0", className), ...rest, children: [
+      avatar && /* @__PURE__ */ jsx11("div", { className: "shrink-0", children: avatar }),
+      /* @__PURE__ */ jsxs8("div", { className: "flex-1 min-w-0", children: [
+        title && /* @__PURE__ */ jsx11("p", { className: "text-sm font-semibold text-foreground leading-snug line-clamp-1", children: title }),
+        subtitle && /* @__PURE__ */ jsx11("p", { className: "text-xs text-muted-foreground mt-0.5 line-clamp-1", children: subtitle })
+      ] }),
+      !control && badge && /* @__PURE__ */ jsx11("div", { className: "shrink-0", children: badge }),
+      /* @__PURE__ */ jsx11("div", { className: "shrink-0", children: /* @__PURE__ */ jsx11(CardHeaderControl, { ...controlProps }) }),
+      children
+    ] });
+  }
+);
+CardHeader.displayName = "CardHeader";
+var CardTitle = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx11(
+  "h3",
+  {
+    ref,
+    className: cn("text-base font-semibold text-foreground leading-snug", className),
+    ...props
+  }
+));
+CardTitle.displayName = "CardTitle";
+var CardContent = React9.forwardRef(
+  ({ className, divider = false, children, ...props }, ref) => {
+    const content = divider ? React9.Children.toArray(children).reduce(
+      (acc, child, index) => {
+        if (index > 0) acc.push(/* @__PURE__ */ jsx11(Divider, {}, `divider-${index}`));
+        acc.push(child);
+        return acc;
+      },
+      []
+    ) : children;
+    return /* @__PURE__ */ jsx11(
+      "div",
+      {
+        ref,
+        className: cn(
+          "px-4 py-3 flex-1 flex flex-col",
+          divider ? "gap-0" : "gap-2",
+          className
+        ),
+        ...props,
+        children: content
+      }
+    );
+  }
+);
+CardContent.displayName = "CardContent";
+var CardDescription = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx11(
+  "p",
+  {
+    ref,
+    className: cn("text-sm text-muted-foreground leading-normal", className),
+    ...props
+  }
+));
+CardDescription.displayName = "CardDescription";
+var CardFooter = React9.forwardRef(
+  ({ className, divider = false, children, ...props }, ref) => /* @__PURE__ */ jsxs8(Fragment2, { children: [
+    divider && /* @__PURE__ */ jsx11(Divider, {}),
+    /* @__PURE__ */ jsx11(
+      "div",
+      {
+        ref,
+        className: cn(
+          "px-4 pb-4 flex items-center gap-2",
+          divider ? "pt-3" : "pt-0",
+          className
+        ),
+        ...props,
+        children
+      }
+    )
+  ] })
+);
+CardFooter.displayName = "CardFooter";
+var CardFooterUser = React9.forwardRef(
+  ({ className, avatar, name, sub, action, ...props }, ref) => /* @__PURE__ */ jsxs8("div", { ref, className: cn("flex items-center gap-2 w-full", className), ...props, children: [
+    avatar && /* @__PURE__ */ jsx11(Avatar, { size: "md", ...avatar }),
+    /* @__PURE__ */ jsxs8("div", { className: "flex-1 min-w-0", children: [
+      name && /* @__PURE__ */ jsx11("p", { className: "text-xs font-medium text-foreground line-clamp-1", children: name }),
+      sub && /* @__PURE__ */ jsx11("p", { className: "text-xs text-muted-foreground line-clamp-1", children: sub })
+    ] }),
+    action && /* @__PURE__ */ jsx11("div", { className: "shrink-0", children: action })
+  ] })
+);
+CardFooterUser.displayName = "CardFooterUser";
+var CardFooterInfo = React9.forwardRef(
+  ({ className, items = [], action, ...props }, ref) => /* @__PURE__ */ jsxs8("div", { ref, className: cn("flex items-center gap-3 w-full text-xs text-muted-foreground", className), ...props, children: [
+    /* @__PURE__ */ jsx11("div", { className: "flex items-center gap-3 flex-1 flex-wrap", children: items.map((item, i) => /* @__PURE__ */ jsxs8("span", { className: "inline-flex items-center gap-1", children: [
+      item.icon && /* @__PURE__ */ jsx11("span", { className: "shrink-0", children: item.icon }),
+      item.label
+    ] }, i)) }),
+    action && /* @__PURE__ */ jsx11("div", { className: "shrink-0", children: action })
+  ] })
+);
+CardFooterInfo.displayName = "CardFooterInfo";
+var CardFooterButtons = React9.forwardRef(
+  ({
+    className,
+    direction = "horizontal",
+    primaryLabel = "\uD655\uC778",
+    onPrimary,
+    secondaryLabel,
+    onSecondary,
+    divider = false,
+    ...props
+  }, ref) => /* @__PURE__ */ jsxs8(Fragment2, { children: [
+    divider && /* @__PURE__ */ jsx11(Divider, {}),
+    /* @__PURE__ */ jsx11(
+      "div",
+      {
+        ref,
+        className: cn("px-4 pb-4", divider ? "pt-3" : "pt-0", className),
+        ...props,
+        children: /* @__PURE__ */ jsxs8(ButtonGroup, { direction, children: [
+          secondaryLabel && /* @__PURE__ */ jsx11(
+            Button,
+            {
+              variant: "tertiary",
+              size: "sm",
+              fullWidth: direction === "vertical",
+              onClick: onSecondary,
+              children: secondaryLabel
+            }
+          ),
+          /* @__PURE__ */ jsx11(
+            Button,
+            {
+              variant: "primary",
+              size: "sm",
+              fullWidth: direction === "vertical",
+              onClick: onPrimary,
+              children: primaryLabel
+            }
+          )
+        ] })
+      }
+    )
+  ] })
+);
+CardFooterButtons.displayName = "CardFooterButtons";
+
+// src/components/Breadcrumbs/index.tsx
+import * as React10 from "react";
+import { jsx as jsx12, jsxs as jsxs9 } from "react/jsx-runtime";
+function Separator({ type }) {
+  return /* @__PURE__ */ jsx12("span", { className: "text-ac-gray-50 select-none mx-1", "aria-hidden": "true", children: type === "slash" ? "/" : ">" });
+}
+function HomeIcon() {
+  return /* @__PURE__ */ jsx12(
+    "svg",
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      className: "w-3.5 h-3.5 shrink-0",
+      "aria-hidden": "true",
+      children: /* @__PURE__ */ jsx12("path", { d: "M8.543 1.293a.75.75 0 0 0-1.086 0L1.5 7.25V13.5A1.5 1.5 0 0 0 3 15h3.25v-3.75a1.75 1.75 0 0 1 3.5 0V15H13a1.5 1.5 0 0 0 1.5-1.5V7.25L8.543 1.293Z" })
+    }
+  );
+}
+function BreadcrumbLink({
+  item,
+  isFirst,
+  showHomeIcon,
+  separator,
+  isLast,
+  isSingle
+}) {
+  const isClickable = (!isLast || isSingle) && (item.href || item.onClick);
+  const content = /* @__PURE__ */ jsxs9("span", { className: "inline-flex items-center gap-1", children: [
+    isFirst && showHomeIcon && /* @__PURE__ */ jsx12(HomeIcon, {}),
+    item.label
+  ] });
+  return /* @__PURE__ */ jsxs9("li", { className: "inline-flex items-center", children: [
+    isClickable ? /* @__PURE__ */ jsx12(
+      "a",
+      {
+        href: item.href,
+        onClick: item.onClick,
+        className: cn(
+          "inline-flex items-center text-sm transition-colors duration-150",
+          "text-ac-black hover:underline underline-offset-4"
+        ),
+        "aria-label": isFirst && showHomeIcon ? "\uD648\uC73C\uB85C \uC774\uB3D9" : void 0,
+        children: content
+      }
+    ) : /* @__PURE__ */ jsx12(
+      "span",
+      {
+        className: cn(
+          "inline-flex items-center text-sm",
+          isLast && !isSingle ? "font-semibold text-foreground" : "text-ac-gray-50 cursor-default"
+          // 링크 없는 아이템
+        ),
+        "aria-current": isLast && !isSingle ? "page" : void 0,
+        children: content
+      }
+    ),
+    !isLast && /* @__PURE__ */ jsx12(Separator, { type: separator })
+  ] });
+}
+function Breadcrumbs({
+  className,
+  items,
+  separator = "slash",
+  maxItems,
+  showHomeIcon = true,
+  ...props
+}) {
+  if (!items.length) return null;
+  const visibleItems = React10.useMemo(() => {
+    if (!maxItems || items.length <= maxItems) return items;
+    const start = items.slice(0, 1);
+    const end = items.slice(-(maxItems - 2));
+    const ellipsis = { label: "..." };
+    return [...start, ellipsis, ...end];
+  }, [items, maxItems]);
+  const isSingle = visibleItems.length === 1;
+  return /* @__PURE__ */ jsx12("nav", { "aria-label": "breadcrumb", className: cn("w-full", className), ...props, children: /* @__PURE__ */ jsx12("ol", { className: "inline-flex flex-wrap items-center gap-y-1", children: visibleItems.map((item, index) => /* @__PURE__ */ jsx12(
+    BreadcrumbLink,
+    {
+      item,
+      isFirst: index === 0,
+      isLast: index === visibleItems.length - 1,
+      isSingle,
+      showHomeIcon,
+      separator
+    },
+    `${item.label}-${index}`
+  )) }) });
+}
 
 // src/components/Input/DatePicker/index.tsx
 import * as React11 from "react";
@@ -2319,18 +2317,17 @@ var ToggleGroupContext = React16.createContext({
 });
 var toggleItemVariants = cva14(
   [
-    "inline-flex items-center justify-center gap-1.5 whitespace-nowrap",
-    "font-medium text-sm transition-colors duration-150 select-none cursor-pointer",
+    "flex items-center justify-center gap-1 whitespace-nowrap",
+    "rounded-sm transition-colors duration-150 select-none cursor-pointer",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-    "disabled:pointer-events-none disabled:opacity-40",
-    "first:rounded-l-md last:rounded-r-md"
+    "disabled:pointer-events-none"
   ],
   {
     variants: {
       size: {
-        sm: "h-[30px] px-3 text-xs",
-        md: "h-9 px-4 text-sm",
-        lg: "h-10 px-5 text-sm"
+        sm: "h-[22px] px-2 text-xs leading-none",
+        md: "h-7 px-4 text-sm",
+        lg: "h-8 px-4 text-base"
       },
       iconOnly: {
         true: "",
@@ -2338,9 +2335,9 @@ var toggleItemVariants = cva14(
       }
     },
     compoundVariants: [
-      { iconOnly: true, size: "sm", class: "w-[30px] px-0" },
-      { iconOnly: true, size: "md", class: "w-9 px-0" },
-      { iconOnly: true, size: "lg", class: "w-10 px-0" }
+      { iconOnly: true, size: "sm", class: "w-[22px] px-0" },
+      { iconOnly: true, size: "md", class: "w-7 px-0" },
+      { iconOnly: true, size: "lg", class: "w-8 px-0" }
     ],
     defaultVariants: { size: "md", iconOnly: false }
   }
@@ -2352,6 +2349,7 @@ function ToggleGroup({
   variant = "default",
   size = "md",
   iconOnly = false,
+  activeClassName,
   className,
   children,
   ...props
@@ -2363,12 +2361,13 @@ function ToggleGroup({
     if (!controlled) setInternalValue(val);
     onValueChange?.(val);
   };
-  return /* @__PURE__ */ jsx18(ToggleGroupContext.Provider, { value: { value: currentValue, onValueChange: handleValueChange, variant, size, iconOnly }, children: /* @__PURE__ */ jsx18(
+  return /* @__PURE__ */ jsx18(ToggleGroupContext.Provider, { value: { value: currentValue, onValueChange: handleValueChange, variant, size, iconOnly, activeClassName }, children: /* @__PURE__ */ jsx18(
     "div",
     {
       role: "group",
       className: cn(
-        "inline-flex rounded-md border border-border overflow-hidden divide-x divide-border",
+        "inline-flex w-fit rounded-md p-1 gap-1",
+        variant === "primary" ? "bg-ac-gray-30" : "bg-ac-blue-gray-10",
         className
       ),
       ...props,
@@ -2379,30 +2378,51 @@ function ToggleGroup({
 function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, ...props }) {
   const ctx = React16.useContext(ToggleGroupContext);
   const isActive = ctx.value === value;
-  const activeStyles = isActive ? ctx.variant === "primary" ? "bg-ac-primary-50 text-white" : "bg-ac-gray-90 text-white" : "bg-background text-ac-gray-60 hover:bg-ac-gray-20 hover:text-foreground";
-  return /* @__PURE__ */ jsxs15("div", { className: "relative group", children: [
-    /* @__PURE__ */ jsxs15(
-      "button",
-      {
-        type: "button",
-        role: "radio",
-        "aria-checked": isActive,
-        disabled,
-        onClick: () => ctx.onValueChange(value),
-        className: cn(
-          toggleItemVariants({ size: ctx.size, iconOnly: ctx.iconOnly }),
-          activeStyles,
-          className
-        ),
-        ...props,
-        children: [
-          icon && /* @__PURE__ */ jsx18("span", { className: "shrink-0", children: icon }),
-          !ctx.iconOnly && children
-        ]
-      }
-    ),
-    ctx.iconOnly && tooltip && /* @__PURE__ */ jsx18("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-ac-gray-90 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-tooltip", children: tooltip })
-  ] });
+  const iconSizeClass = {
+    sm: "[&_svg]:w-3 [&_svg]:h-3",
+    md: "[&_svg]:w-4 [&_svg]:h-4",
+    lg: "[&_svg]:w-[18px] [&_svg]:h-[18px]"
+  }[ctx.size];
+  let buttonClass = "";
+  let iconSpanClass = iconSizeClass;
+  if (disabled) {
+    buttonClass = "text-ac-gray-50";
+  } else if (isActive) {
+    if (ctx.activeClassName) {
+      buttonClass = cn("bg-white font-medium", ctx.activeClassName);
+    } else if (ctx.variant === "primary") {
+      buttonClass = "bg-white border border-ac-primary-50 text-ac-primary-50 font-medium";
+    } else {
+      buttonClass = "bg-white text-ac-gray-90 font-medium";
+    }
+  } else {
+    buttonClass = "text-ac-gray-70 font-normal hover:bg-white/60";
+    iconSpanClass = cn(iconSizeClass, "text-ac-gray-50");
+  }
+  const button = /* @__PURE__ */ jsxs15(
+    "button",
+    {
+      type: "button",
+      role: "radio",
+      "aria-checked": isActive,
+      disabled,
+      onClick: () => ctx.onValueChange(value),
+      className: cn(
+        toggleItemVariants({ size: ctx.size, iconOnly: ctx.iconOnly }),
+        buttonClass,
+        className
+      ),
+      ...props,
+      children: [
+        icon && /* @__PURE__ */ jsx18("span", { className: cn("shrink-0", iconSpanClass), children: icon }),
+        !ctx.iconOnly && children
+      ]
+    }
+  );
+  if (ctx.iconOnly && tooltip) {
+    return /* @__PURE__ */ jsx18(Tooltip, { content: tooltip, placement: "top-center", children: button });
+  }
+  return button;
 }
 
 // src/components/SideNavigation/index.tsx
@@ -3091,6 +3111,12 @@ var linearHeightMap = {
   lg: "h-[20px]",
   xl: "h-[30px]"
 };
+var linearRadiusMap = {
+  sm: "rounded-sm",
+  md: "rounded",
+  lg: "rounded-md",
+  xl: "rounded-lg"
+};
 var circularSizeMap = {
   xs: 16,
   sm: 30,
@@ -3116,6 +3142,9 @@ var ProgressIndicator = React21.forwardRef(
     ...props
   }, ref) => {
     const pct = indeterminate ? 0 : Math.min(100, Math.max(0, value / max * 100));
+    const resolveColor = (raw) => raw.startsWith("#") || raw.startsWith("rgb") || raw.startsWith("hsl") || raw.startsWith("var(") ? raw : `var(--${raw})`;
+    const resolvedColor = resolveColor(color);
+    const resolvedTrackColor = resolveColor(trackColor);
     if (type === "linear") {
       return /* @__PURE__ */ jsxs20("div", { ref, className: cn("flex flex-col gap-1.5 w-full", className), ...props, children: [
         (label || showValue) && /* @__PURE__ */ jsxs20("div", { className: "flex items-center justify-between gap-2", children: [
@@ -3134,20 +3163,22 @@ var ProgressIndicator = React21.forwardRef(
             "aria-valuemax": max,
             "aria-label": label,
             className: cn(
-              "w-full rounded-full overflow-hidden",
-              linearHeightMap[linearSize]
+              "w-full overflow-hidden",
+              linearHeightMap[linearSize],
+              linearRadiusMap[linearSize]
             ),
-            style: { backgroundColor: trackColor },
+            style: { backgroundColor: resolvedTrackColor },
             children: /* @__PURE__ */ jsx23(
               "div",
               {
                 className: cn(
-                  "h-full rounded-full transition-all duration-slow",
+                  "h-full transition-all duration-slow",
+                  linearRadiusMap[linearSize],
                   indeterminate && "animate-[indeterminate_1.5s_ease-in-out_infinite]"
                 ),
                 style: {
                   width: indeterminate ? "40%" : `${pct}%`,
-                  backgroundColor: color
+                  backgroundColor: resolvedColor
                 }
               }
             )
@@ -3183,7 +3214,7 @@ var ProgressIndicator = React21.forwardRef(
                   cy: size / 2,
                   r: radius,
                   fill: "none",
-                  stroke: trackColor,
+                  stroke: resolvedTrackColor,
                   strokeWidth
                 }
               ),
@@ -3194,7 +3225,7 @@ var ProgressIndicator = React21.forwardRef(
                   cy: size / 2,
                   r: radius,
                   fill: "none",
-                  stroke: color,
+                  stroke: resolvedColor,
                   strokeWidth,
                   strokeLinecap: "round",
                   strokeDasharray: circumference,
@@ -3682,7 +3713,7 @@ var DialogContent = React23.forwardRef(
 );
 DialogContent.displayName = "DialogContent";
 var DialogHeader = React23.forwardRef(
-  ({ className, title, subtitle, showClose = true, children, ...props }, ref) => {
+  ({ className, title, subtitle, showClose = true, divider = false, children, ...props }, ref) => {
     const { close } = useDialogContext();
     return /* @__PURE__ */ jsxs22(
       "div",
@@ -3690,7 +3721,8 @@ var DialogHeader = React23.forwardRef(
         ref,
         className: cn(
           "flex items-start justify-between gap-4",
-          "px-6 py-4 border-b border-border shrink-0",
+          "px-6 py-4 shrink-0",
+          divider && "border-b border-border",
           className
         ),
         ...props,
@@ -3733,13 +3765,14 @@ var DialogBody = React23.forwardRef(
 );
 DialogBody.displayName = "DialogBody";
 var DialogFooter = React23.forwardRef(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx25(
+  ({ className, divider = false, ...props }, ref) => /* @__PURE__ */ jsx25(
     "div",
     {
       ref,
       className: cn(
         "flex items-center justify-end gap-2",
-        "px-6 py-4 border-t border-border shrink-0",
+        "px-6 py-4 shrink-0",
+        divider && "border-t border-border",
         className
       ),
       ...props
@@ -3755,9 +3788,18 @@ var DialogDescription = React23.forwardRef(
   ({ className, ...props }, ref) => /* @__PURE__ */ jsx25("p", { ref, className: cn("text-sm text-muted-foreground", className), ...props })
 );
 DialogDescription.displayName = "DialogDescription";
-function DialogClose({ children, ...props }) {
+function DialogClose({ children, asChild, onClick, ...props }) {
   const { close } = useDialogContext();
-  return /* @__PURE__ */ jsx25("button", { type: "button", onClick: close, ...props, children });
+  const handleClick = (e) => {
+    onClick?.(e);
+    close();
+  };
+  if (asChild && React23.isValidElement(children)) {
+    return React23.cloneElement(children, {
+      onClick: handleClick
+    });
+  }
+  return /* @__PURE__ */ jsx25("button", { type: "button", onClick: handleClick, ...props, children });
 }
 DialogClose.displayName = "DialogClose";
 
@@ -3993,7 +4035,10 @@ var CarouselContent = React25.forwardRef(
             "aria-roledescription": "slide",
             "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
             className: "shrink-0",
-            style: { width: isHorizontal ? `${100 / itemsPerView}%` : "100%" },
+            style: {
+              width: isHorizontal ? `${100 / itemsPerView}%` : "100%",
+              height: !isHorizontal ? `${100 / itemsPerView}%` : void 0
+            },
             children: item
           },
           i
@@ -4062,34 +4107,88 @@ var CarouselNext = React25.forwardRef(
 );
 CarouselNext.displayName = "CarouselNext";
 var CarouselDots = React25.forwardRef(
-  ({ className, activeColor, ...props }, ref) => {
-    const { current, pageCount, goTo } = useCarousel();
+  ({ className, activeColor, type = "rounded", ...props }, ref) => {
+    const { current, pageCount, goTo, orientation } = useCarousel();
+    const rawColor = activeColor ?? "#FF6300";
+    const color = rawColor.startsWith("#") || rawColor.startsWith("rgb") || rawColor.startsWith("hsl") || rawColor.startsWith("var(") ? rawColor : `var(--${rawColor})`;
+    const isVertical = orientation === "vertical";
     return /* @__PURE__ */ jsx27(
       "div",
       {
         ref,
         role: "tablist",
         "aria-label": "\uC2AC\uB77C\uC774\uB4DC \uC120\uD0DD",
-        className: cn("flex items-center justify-center gap-1.5", className),
+        className: cn(
+          "flex items-center justify-center gap-2",
+          isVertical && "flex-col",
+          className
+        ),
         ...props,
-        children: Array.from({ length: pageCount }).map((_, i) => /* @__PURE__ */ jsx27(
-          "button",
-          {
-            role: "tab",
-            type: "button",
-            "aria-selected": i === current,
-            "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
-            onClick: () => goTo(i),
-            className: "rounded-full transition-all duration-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-            style: {
-              width: i === current ? 8 : 6,
-              height: i === current ? 8 : 6,
-              opacity: i === current ? 1 : 0.4,
-              backgroundColor: i === current ? activeColor ?? "#FF6300" : "#A8A8A8"
-            }
-          },
-          i
-        ))
+        children: Array.from({ length: pageCount }).map((_, i) => {
+          const isActive = i === current;
+          const baseBtn = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-all duration-normal";
+          if (type === "line") {
+            return /* @__PURE__ */ jsx27(
+              "button",
+              {
+                role: "tab",
+                type: "button",
+                "aria-selected": isActive,
+                "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
+                onClick: () => goTo(i),
+                className: baseBtn,
+                style: {
+                  width: 12,
+                  height: 3,
+                  borderRadius: 4,
+                  backgroundColor: isActive ? color : "#D9D9D9"
+                }
+              },
+              i
+            );
+          }
+          if (type === "border") {
+            return isActive ? /* @__PURE__ */ jsx27(
+              "button",
+              {
+                role: "tab",
+                type: "button",
+                "aria-selected": true,
+                "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
+                onClick: () => goTo(i),
+                className: cn("flex items-center justify-center rounded-full", baseBtn),
+                style: { width: 14, height: 14, border: `1px solid ${color}` },
+                children: /* @__PURE__ */ jsx27("span", { style: { width: 6, height: 6, borderRadius: 9999, backgroundColor: color, display: "block" } })
+              },
+              i
+            ) : /* @__PURE__ */ jsx27(
+              "button",
+              {
+                role: "tab",
+                type: "button",
+                "aria-selected": false,
+                "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
+                onClick: () => goTo(i),
+                className: cn("rounded-full", baseBtn),
+                style: { width: 8, height: 8, backgroundColor: "#ECECEC" }
+              },
+              i
+            );
+          }
+          return /* @__PURE__ */ jsx27(
+            "button",
+            {
+              role: "tab",
+              type: "button",
+              "aria-selected": isActive,
+              "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
+              onClick: () => goTo(i),
+              className: cn("rounded-full", baseBtn),
+              style: { width: 8, height: 8, backgroundColor: isActive ? color : "#ECECEC" }
+            },
+            i
+          );
+        })
       }
     );
   }
@@ -4104,12 +4203,12 @@ var CarouselCounter = React25.forwardRef(
         ref,
         "aria-live": "polite",
         "aria-atomic": "true",
-        className: cn("text-xs text-muted-foreground tabular-nums", className),
+        className: cn("text-sm tabular-nums", className),
         ...props,
         children: [
-          current + 1,
-          " / ",
-          pageCount
+          /* @__PURE__ */ jsx27("span", { style: { fontWeight: 700, color: "#000000" }, children: current + 1 }),
+          /* @__PURE__ */ jsx27("span", { style: { color: "#555555" }, children: " / " }),
+          /* @__PURE__ */ jsx27("span", { style: { color: "#555555" }, children: pageCount })
         ]
       }
     );

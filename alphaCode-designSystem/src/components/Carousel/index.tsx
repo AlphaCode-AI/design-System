@@ -7,6 +7,7 @@ import { cn } from "@/utils/cn";
 /* ── Types ─────────────────────────────────────────────────── */
 export type CarouselOrientation = "horizontal" | "vertical";
 export type CarouselNavStyle    = "default" | "line" | "border" | "text";
+export type CarouselDotsType    = "rounded" | "line" | "border";
 
 /* ══════════════════════════════════════════════════════════════
    Context
@@ -158,7 +159,10 @@ const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
               aria-roledescription="slide"
               aria-label={`${i + 1}번째 슬라이드`}
               className="shrink-0"
-              style={{ width: isHorizontal ? `${100 / itemsPerView}%` : "100%" }}
+              style={{
+                width:  isHorizontal ? `${100 / itemsPerView}%` : "100%",
+                height: !isHorizontal ? `${100 / itemsPerView}%` : undefined,
+              }}
             >
               {item}
             </div>
@@ -254,39 +258,96 @@ CarouselNext.displayName = "CarouselNext";
 ══════════════════════════════════════════════════════════════ */
 export interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> {
   activeColor?: string;
+  type?: CarouselDotsType;
 }
 
 const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, activeColor, ...props }, ref) => {
-    const { current, pageCount, goTo } = useCarousel();
+  ({ className, activeColor, type = "rounded", ...props }, ref) => {
+    const { current, pageCount, goTo, orientation } = useCarousel();
+    const rawColor = activeColor ?? "#FF6300";
+    const color = rawColor.startsWith("#") || rawColor.startsWith("rgb") || rawColor.startsWith("hsl") || rawColor.startsWith("var(")
+      ? rawColor
+      : `var(--${rawColor})`;
+    const isVertical = orientation === "vertical";
 
     return (
       <div
         ref={ref}
         role="tablist"
         aria-label="슬라이드 선택"
-        className={cn("flex items-center justify-center gap-1.5", className)}
+        className={cn(
+          "flex items-center justify-center gap-2",
+          isVertical && "flex-col",
+          className
+        )}
         {...props}
       >
-        {Array.from({ length: pageCount }).map((_, i) => (
-          <button
-            key={i}
-            role="tab"
-            type="button"
-            aria-selected={i === current}
-            aria-label={`${i + 1}번째 슬라이드`}
-            onClick={() => goTo(i)}
-            className="rounded-full transition-all duration-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            style={{
-              width:           i === current ? 8  : 6,
-              height:          i === current ? 8  : 6,
-              opacity:         i === current ? 1  : 0.4,
-              backgroundColor: i === current
-                ? (activeColor ?? "#FF6300" /* ac-primary-50 */)
-                : "#A8A8A8"   /* ac-gray-50 */,
-            }}
-          />
-        ))}
+        {Array.from({ length: pageCount }).map((_, i) => {
+          const isActive = i === current;
+          const baseBtn = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-all duration-normal";
+
+          if (type === "line") {
+            return (
+              <button
+                key={i}
+                role="tab"
+                type="button"
+                aria-selected={isActive}
+                aria-label={`${i + 1}번째 슬라이드`}
+                onClick={() => goTo(i)}
+                className={baseBtn}
+                style={{
+                  width: 12,
+                  height: 3,
+                  borderRadius: 4,
+                  backgroundColor: isActive ? color : "#D9D9D9",
+                }}
+              />
+            );
+          }
+
+          if (type === "border") {
+            return isActive ? (
+              <button
+                key={i}
+                role="tab"
+                type="button"
+                aria-selected={true}
+                aria-label={`${i + 1}번째 슬라이드`}
+                onClick={() => goTo(i)}
+                className={cn("flex items-center justify-center rounded-full", baseBtn)}
+                style={{ width: 14, height: 14, border: `1px solid ${color}` }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: 9999, backgroundColor: color, display: "block" }} />
+              </button>
+            ) : (
+              <button
+                key={i}
+                role="tab"
+                type="button"
+                aria-selected={false}
+                aria-label={`${i + 1}번째 슬라이드`}
+                onClick={() => goTo(i)}
+                className={cn("rounded-full", baseBtn)}
+                style={{ width: 8, height: 8, backgroundColor: "#ECECEC" }}
+              />
+            );
+          }
+
+          // rounded (default)
+          return (
+            <button
+              key={i}
+              role="tab"
+              type="button"
+              aria-selected={isActive}
+              aria-label={`${i + 1}번째 슬라이드`}
+              onClick={() => goTo(i)}
+              className={cn("rounded-full", baseBtn)}
+              style={{ width: 8, height: 8, backgroundColor: isActive ? color : "#ECECEC" }}
+            />
+          );
+        })}
       </div>
     );
   }
@@ -304,10 +365,12 @@ const CarouselCounter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
         ref={ref}
         aria-live="polite"
         aria-atomic="true"
-        className={cn("text-xs text-muted-foreground tabular-nums", className)}
+        className={cn("text-sm tabular-nums", className)}
         {...props}
       >
-        {current + 1} / {pageCount}
+        <span style={{ fontWeight: 700, color: "#000000" }}>{current + 1}</span>
+        <span style={{ color: "#555555" }}> / </span>
+        <span style={{ color: "#555555" }}>{pageCount}</span>
       </div>
     );
   }
