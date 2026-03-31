@@ -37,7 +37,7 @@ export default function HomePage() {
             <div className="flex items-center gap-2">
               <h1 className="text-3xl font-bold tracking-tight">
                 VEGA UI - 알파코드 디자인 시스템</h1>
-              <Badge variant="primary" size="lg">version 0.2.0</Badge>
+              <Badge variant="primary" size="lg">version 0.3.0</Badge>
             </div>
           </div>
         </header>
@@ -57,8 +57,12 @@ export default function HomePage() {
               <h3 className="text-lg font-bold text-ac-primary-50">1. Library Installation</h3>
               <p className="text-md text-foreground">GitHub Packages를 통해 알파코드 패키지를 설치합니다.</p>
               <p className="text-md text-foreground">
-                설치 전 <CodeBadge>.npmrc</CodeBadge>에 <CodeBadge>@alphacode-ai:registry=https://npm.pkg.github.com</CodeBadge> 를 추가하세요.
+                설치 전 <CodeBadge>.npmrc</CodeBadge>에 registry와 GitHub PAT(<CodeBadge>NPM_TOKEN</CodeBadge>)를 설정하세요.
               </p>
+              <div className="rounded-lg bg-white p-4 font-mono text-xs border border-ac-gray-40 text-ac-gray-80 shadow-sm leading-relaxed">
+                <p>@alphacode-ai:registry=https://npm.pkg.github.com</p>
+                <p>{"//npm.pkg.github.com/:_authToken=${NPM_TOKEN}"}</p>
+              </div>
               <div className="relative rounded-lg bg-white p-4 font-mono text-sm border border-ac-gray-40 text-ac-gray-80 shadow-sm">
                 <span>{INSTALL_CMD}</span>
                 <button
