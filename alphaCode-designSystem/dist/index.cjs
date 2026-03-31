@@ -11,7 +11,7 @@
 var _chunkYTZJTG25cjs = require('./chunk-YTZJTG25.cjs');
 
 // src/components/Button/index.tsx
-var _react = require('react'); var React = _interopRequireWildcard(_react); var React2 = _interopRequireWildcard(_react); var React4 = _interopRequireWildcard(_react); var React3 = _interopRequireWildcard(_react); var React9 = _interopRequireWildcard(_react); var React5 = _interopRequireWildcard(_react); var React6 = _interopRequireWildcard(_react); var React7 = _interopRequireWildcard(_react); var React8 = _interopRequireWildcard(_react); var React10 = _interopRequireWildcard(_react); var React11 = _interopRequireWildcard(_react); var React12 = _interopRequireWildcard(_react); var React13 = _interopRequireWildcard(_react); var React14 = _interopRequireWildcard(_react); var React15 = _interopRequireWildcard(_react); var React16 = _interopRequireWildcard(_react); var React17 = _interopRequireWildcard(_react); var React18 = _interopRequireWildcard(_react); var React19 = _interopRequireWildcard(_react); var React21 = _interopRequireWildcard(_react); var React20 = _interopRequireWildcard(_react); var React22 = _interopRequireWildcard(_react); var React23 = _interopRequireWildcard(_react); var React24 = _interopRequireWildcard(_react); var React25 = _interopRequireWildcard(_react); var React26 = _interopRequireWildcard(_react); var React27 = _interopRequireWildcard(_react);
+var _react = require('react'); var React = _interopRequireWildcard(_react); var React2 = _interopRequireWildcard(_react); var React4 = _interopRequireWildcard(_react); var React3 = _interopRequireWildcard(_react); var React9 = _interopRequireWildcard(_react); var React5 = _interopRequireWildcard(_react); var React6 = _interopRequireWildcard(_react); var React7 = _interopRequireWildcard(_react); var React8 = _interopRequireWildcard(_react); var React10 = _interopRequireWildcard(_react); var React11 = _interopRequireWildcard(_react); var React12 = _interopRequireWildcard(_react); var React13 = _interopRequireWildcard(_react); var React14 = _interopRequireWildcard(_react); var React15 = _interopRequireWildcard(_react); var React16 = _interopRequireWildcard(_react); var React17 = _interopRequireWildcard(_react); var React18 = _interopRequireWildcard(_react); var React19 = _interopRequireWildcard(_react); var React21 = _interopRequireWildcard(_react); var React20 = _interopRequireWildcard(_react); var React22 = _interopRequireWildcard(_react); var React23 = _interopRequireWildcard(_react); var React24 = _interopRequireWildcard(_react); var React25 = _interopRequireWildcard(_react); var React26 = _interopRequireWildcard(_react); var React27 = _interopRequireWildcard(_react); var React28 = _interopRequireWildcard(_react);
 var _reactslot = require('@radix-ui/react-slot');
 var _classvarianceauthority = require('class-variance-authority');
 
@@ -5039,6 +5039,175 @@ function StepIndicator({
 }
 StepIndicator.displayName = "StepIndicator";
 
+// src/components/Resizable/index.tsx
+
+
+var ResizableContext = React28.createContext(null);
+function useResizable() {
+  const ctx = React28.useContext(ResizableContext);
+  if (!ctx) throw new Error("Must be inside <ResizablePanelGroup>");
+  return ctx;
+}
+function ResizablePanelGroup({
+  orientation = "horizontal",
+  defaultSizes,
+  className,
+  children,
+  ...props
+}) {
+  const containerRef = React28.useRef(null);
+  const panelCount = React28.useMemo(() => {
+    return React28.Children.toArray(children).filter(
+      (child) => React28.isValidElement(child) && child.type === ResizablePanel
+    ).length;
+  }, [children]);
+  const [sizes, setSizes] = React28.useState(
+    () => _nullishCoalesce(defaultSizes, () => ( Array(panelCount).fill(100 / panelCount)))
+  );
+  const sizesRef = React28.useRef(sizes);
+  sizesRef.current = sizes;
+  const dragRef = React28.useRef(null);
+  const onResizeStart = React28.useCallback((handleIndex, clientPos) => {
+    dragRef.current = {
+      handleIndex,
+      startPos: clientPos,
+      startSizes: [...sizesRef.current]
+    };
+  }, []);
+  React28.useEffect(() => {
+    const onPointerMove = (e) => {
+      if (!dragRef.current || !containerRef.current) return;
+      const { handleIndex, startPos, startSizes } = dragRef.current;
+      const containerSize = orientation === "horizontal" ? containerRef.current.offsetWidth : containerRef.current.offsetHeight;
+      const delta = orientation === "horizontal" ? e.clientX : e.clientY;
+      const deltaPercent = (delta - startPos) / containerSize * 100;
+      const total = startSizes[handleIndex] + startSizes[handleIndex + 1];
+      const a = Math.min(total, Math.max(0, startSizes[handleIndex] + deltaPercent));
+      const b = total - a;
+      setSizes((prev) => {
+        const next = [...prev];
+        next[handleIndex] = a;
+        next[handleIndex + 1] = b;
+        return next;
+      });
+    };
+    const onPointerUp = () => {
+      dragRef.current = null;
+    };
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+  }, [orientation]);
+  let panelIdx = 0;
+  let handleIdx = 0;
+  const injected = React28.Children.map(children, (child) => {
+    if (!React28.isValidElement(child)) return child;
+    const el = child;
+    if (el.type === ResizablePanel) return React28.cloneElement(el, { _index: panelIdx++ });
+    if (el.type === ResizableHandle) return React28.cloneElement(el, { _index: handleIdx++ });
+    return child;
+  });
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ResizableContext.Provider, { value: { orientation, sizes, onResizeStart }, children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "div",
+    {
+      ref: containerRef,
+      className: cn(
+        "flex h-full w-full overflow-hidden",
+        orientation === "vertical" && "flex-col",
+        className
+      ),
+      ...props,
+      children: injected
+    }
+  ) });
+}
+ResizablePanelGroup.displayName = "ResizablePanelGroup";
+function ResizablePanel({ className, _index = 0, style, ...props }) {
+  const { orientation, sizes } = useResizable();
+  const size = _nullishCoalesce(sizes[_index], () => ( 50));
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "div",
+    {
+      className: cn("overflow-auto", className),
+      style: {
+        ...orientation === "horizontal" ? { width: `${size}%`, flexShrink: 0 } : { height: `${size}%`, flexShrink: 0 },
+        ...style
+      },
+      ...props
+    }
+  );
+}
+ResizablePanel.displayName = "ResizablePanel";
+function GripDots({ orientation }) {
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "div",
+    {
+      className: cn(
+        "grid gap-[3px]",
+        orientation === "horizontal" ? "grid-cols-2" : "grid-cols-3"
+      ),
+      children: Array.from({ length: 6 }).map((_, i) => /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+        "span",
+        {
+          className: "block h-[2px] w-[2px] rounded-full bg-[#555555] transition-colors group-hover:bg-ac-primary-50 group-active:bg-ac-primary-50"
+        },
+        i
+      ))
+    }
+  );
+}
+function ResizableHandle({
+  variant = "margin",
+  className,
+  _index = 0,
+  ...props
+}) {
+  const { orientation, onResizeStart } = useResizable();
+  const handlePointerDown = (e) => {
+    e.preventDefault();
+    const pos = orientation === "horizontal" ? e.clientX : e.clientY;
+    onResizeStart(_index, pos);
+  };
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "div",
+    {
+      role: "separator",
+      "aria-orientation": orientation,
+      tabIndex: 0,
+      className: cn(
+        "group relative flex shrink-0 select-none touch-none items-center justify-center outline-none",
+        orientation === "horizontal" ? "cursor-col-resize" : "cursor-row-resize",
+        // margin variant: 여백만 제공, 선 없음
+        variant === "margin" && [
+          orientation === "horizontal" ? "w-4" : "h-4 w-full"
+        ],
+        // line variant: 1px 구분선 + 클릭 영역 확장 after
+        variant === "line" && [
+          orientation === "horizontal" ? "w-px bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-2 after:-translate-x-1/2 after:content-['']" : "h-px w-full bg-border after:absolute after:inset-x-0 after:top-1/2 after:h-2 after:-translate-y-1/2 after:content-['']"
+        ],
+        className
+      ),
+      onPointerDown: handlePointerDown,
+      ...props,
+      children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+        "div",
+        {
+          className: cn(
+            "z-10 flex items-center justify-center rounded-[4px] transition-colors",
+            orientation === "horizontal" ? "h-[30px] w-3" : "h-3 w-[30px]",
+            variant === "margin" ? "group-hover:bg-[rgba(255,230,215,1)] group-active:bg-[rgba(255,230,215,1)]" : "bg-white"
+          ),
+          children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, GripDots, { orientation })
+        }
+      )
+    }
+  );
+}
+ResizableHandle.displayName = "ResizableHandle";
+
 // src/index.ts
 
 
@@ -5133,5 +5302,8 @@ StepIndicator.displayName = "StepIndicator";
 
 
 
-exports.Accordion = Accordion; exports.AccordionContent = AccordionContent; exports.AccordionItem = AccordionItem; exports.AccordionTrigger = AccordionTrigger; exports.Avatar = Avatar; exports.Badge = Badge; exports.Breadcrumbs = Breadcrumbs; exports.Button = Button; exports.ButtonGroup = ButtonGroup; exports.Card = Card; exports.CardContent = CardContent; exports.CardDescription = CardDescription; exports.CardFooter = CardFooter; exports.CardFooterButtons = CardFooterButtons; exports.CardFooterInfo = CardFooterInfo; exports.CardFooterUser = CardFooterUser; exports.CardHeader = CardHeader; exports.CardMenu = CardMenu; exports.CardTitle = CardTitle; exports.Carousel = Carousel; exports.CarouselContent = CarouselContent; exports.CarouselCounter = CarouselCounter; exports.CarouselDots = CarouselDots; exports.CarouselItem = CarouselItem; exports.CarouselNext = CarouselNext; exports.CarouselPrevious = CarouselPrevious; exports.Checkbox = Checkbox; exports.CheckboxGroup = CheckboxGroup; exports.DatePicker = DatePicker; exports.DateRangePicker = DateRangePicker; exports.Dialog = Dialog; exports.DialogBody = DialogBody; exports.DialogClose = DialogClose; exports.DialogContent = DialogContent; exports.DialogDescription = DialogDescription; exports.DialogFooter = DialogFooter; exports.DialogHeader = DialogHeader; exports.DialogTitle = DialogTitle; exports.DialogTrigger = DialogTrigger; exports.Divider = Divider; exports.Dropdown = Dropdown; exports.DropdownAvatarHeader = DropdownAvatarHeader; exports.DropdownAvatarItem = DropdownAvatarItem; exports.DropdownCheckboxItem = DropdownCheckboxItem; exports.DropdownContent = DropdownContent; exports.DropdownItem = DropdownItem; exports.DropdownLabel = DropdownLabel; exports.DropdownRadioGroup = DropdownRadioGroup; exports.DropdownRadioItem = DropdownRadioItem; exports.DropdownSeparator = DropdownSeparator; exports.DropdownSubMenu = DropdownSubMenu; exports.DropdownTrigger = DropdownTrigger; exports.FAB = FAB; exports.FileInput = FileInput; exports.Pagination = Pagination; exports.ProgressIndicator = ProgressIndicator; exports.Radio = Radio; exports.RadioGroup = RadioGroup; exports.Select = Select; exports.SideNavigation = SideNavigation; exports.Slider = Slider; exports.Snackbar = Snackbar; exports.SnackbarProvider = SnackbarProvider; exports.StepIndicator = StepIndicator; exports.Switch = Switch; exports.TabContent = TabContent; exports.TabList = TabList; exports.TabTrigger = TabTrigger; exports.Tabs = Tabs; exports.TextInput = TextInput; exports.Textarea = Textarea; exports.Toast = Toast; exports.ToastProvider = ToastProvider; exports.ToggleGroup = ToggleGroup; exports.ToggleGroupItem = ToggleGroupItem; exports.Tooltip = Tooltip; exports.avatarVariants = avatarVariants; exports.badgeVariants = badgeVariants; exports.borderRadius = _chunkYTZJTG25cjs.borderRadius; exports.breakpoints = _chunkYTZJTG25cjs.breakpoints; exports.buttonVariants = buttonVariants; exports.cn = cn; exports.colors = _chunkYTZJTG25cjs.colors; exports.fabVariants = fabVariants; exports.fontSize = _chunkYTZJTG25cjs.fontSize; exports.fontWeight = _chunkYTZJTG25cjs.fontWeight; exports.lineHeight = _chunkYTZJTG25cjs.lineHeight; exports.spacing = _chunkYTZJTG25cjs.spacing; exports.useSnackbar = useSnackbar; exports.useToast = useToast; exports.zIndex = _chunkYTZJTG25cjs.zIndex;
+
+
+
+exports.Accordion = Accordion; exports.AccordionContent = AccordionContent; exports.AccordionItem = AccordionItem; exports.AccordionTrigger = AccordionTrigger; exports.Avatar = Avatar; exports.Badge = Badge; exports.Breadcrumbs = Breadcrumbs; exports.Button = Button; exports.ButtonGroup = ButtonGroup; exports.Card = Card; exports.CardContent = CardContent; exports.CardDescription = CardDescription; exports.CardFooter = CardFooter; exports.CardFooterButtons = CardFooterButtons; exports.CardFooterInfo = CardFooterInfo; exports.CardFooterUser = CardFooterUser; exports.CardHeader = CardHeader; exports.CardMenu = CardMenu; exports.CardTitle = CardTitle; exports.Carousel = Carousel; exports.CarouselContent = CarouselContent; exports.CarouselCounter = CarouselCounter; exports.CarouselDots = CarouselDots; exports.CarouselItem = CarouselItem; exports.CarouselNext = CarouselNext; exports.CarouselPrevious = CarouselPrevious; exports.Checkbox = Checkbox; exports.CheckboxGroup = CheckboxGroup; exports.DatePicker = DatePicker; exports.DateRangePicker = DateRangePicker; exports.Dialog = Dialog; exports.DialogBody = DialogBody; exports.DialogClose = DialogClose; exports.DialogContent = DialogContent; exports.DialogDescription = DialogDescription; exports.DialogFooter = DialogFooter; exports.DialogHeader = DialogHeader; exports.DialogTitle = DialogTitle; exports.DialogTrigger = DialogTrigger; exports.Divider = Divider; exports.Dropdown = Dropdown; exports.DropdownAvatarHeader = DropdownAvatarHeader; exports.DropdownAvatarItem = DropdownAvatarItem; exports.DropdownCheckboxItem = DropdownCheckboxItem; exports.DropdownContent = DropdownContent; exports.DropdownItem = DropdownItem; exports.DropdownLabel = DropdownLabel; exports.DropdownRadioGroup = DropdownRadioGroup; exports.DropdownRadioItem = DropdownRadioItem; exports.DropdownSeparator = DropdownSeparator; exports.DropdownSubMenu = DropdownSubMenu; exports.DropdownTrigger = DropdownTrigger; exports.FAB = FAB; exports.FileInput = FileInput; exports.Pagination = Pagination; exports.ProgressIndicator = ProgressIndicator; exports.Radio = Radio; exports.RadioGroup = RadioGroup; exports.ResizableHandle = ResizableHandle; exports.ResizablePanel = ResizablePanel; exports.ResizablePanelGroup = ResizablePanelGroup; exports.Select = Select; exports.SideNavigation = SideNavigation; exports.Slider = Slider; exports.Snackbar = Snackbar; exports.SnackbarProvider = SnackbarProvider; exports.StepIndicator = StepIndicator; exports.Switch = Switch; exports.TabContent = TabContent; exports.TabList = TabList; exports.TabTrigger = TabTrigger; exports.Tabs = Tabs; exports.TextInput = TextInput; exports.Textarea = Textarea; exports.Toast = Toast; exports.ToastProvider = ToastProvider; exports.ToggleGroup = ToggleGroup; exports.ToggleGroupItem = ToggleGroupItem; exports.Tooltip = Tooltip; exports.avatarVariants = avatarVariants; exports.badgeVariants = badgeVariants; exports.borderRadius = _chunkYTZJTG25cjs.borderRadius; exports.breakpoints = _chunkYTZJTG25cjs.breakpoints; exports.buttonVariants = buttonVariants; exports.cn = cn; exports.colors = _chunkYTZJTG25cjs.colors; exports.fabVariants = fabVariants; exports.fontSize = _chunkYTZJTG25cjs.fontSize; exports.fontWeight = _chunkYTZJTG25cjs.fontWeight; exports.lineHeight = _chunkYTZJTG25cjs.lineHeight; exports.spacing = _chunkYTZJTG25cjs.spacing; exports.useSnackbar = useSnackbar; exports.useToast = useToast; exports.zIndex = _chunkYTZJTG25cjs.zIndex;
 //# sourceMappingURL=index.cjs.map

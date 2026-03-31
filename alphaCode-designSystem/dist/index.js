@@ -5039,6 +5039,175 @@ function StepIndicator({
 }
 StepIndicator.displayName = "StepIndicator";
 
+// src/components/Resizable/index.tsx
+import * as React28 from "react";
+import { jsx as jsx31 } from "react/jsx-runtime";
+var ResizableContext = React28.createContext(null);
+function useResizable() {
+  const ctx = React28.useContext(ResizableContext);
+  if (!ctx) throw new Error("Must be inside <ResizablePanelGroup>");
+  return ctx;
+}
+function ResizablePanelGroup({
+  orientation = "horizontal",
+  defaultSizes,
+  className,
+  children,
+  ...props
+}) {
+  const containerRef = React28.useRef(null);
+  const panelCount = React28.useMemo(() => {
+    return React28.Children.toArray(children).filter(
+      (child) => React28.isValidElement(child) && child.type === ResizablePanel
+    ).length;
+  }, [children]);
+  const [sizes, setSizes] = React28.useState(
+    () => defaultSizes ?? Array(panelCount).fill(100 / panelCount)
+  );
+  const sizesRef = React28.useRef(sizes);
+  sizesRef.current = sizes;
+  const dragRef = React28.useRef(null);
+  const onResizeStart = React28.useCallback((handleIndex, clientPos) => {
+    dragRef.current = {
+      handleIndex,
+      startPos: clientPos,
+      startSizes: [...sizesRef.current]
+    };
+  }, []);
+  React28.useEffect(() => {
+    const onPointerMove = (e) => {
+      if (!dragRef.current || !containerRef.current) return;
+      const { handleIndex, startPos, startSizes } = dragRef.current;
+      const containerSize = orientation === "horizontal" ? containerRef.current.offsetWidth : containerRef.current.offsetHeight;
+      const delta = orientation === "horizontal" ? e.clientX : e.clientY;
+      const deltaPercent = (delta - startPos) / containerSize * 100;
+      const total = startSizes[handleIndex] + startSizes[handleIndex + 1];
+      const a = Math.min(total, Math.max(0, startSizes[handleIndex] + deltaPercent));
+      const b = total - a;
+      setSizes((prev) => {
+        const next = [...prev];
+        next[handleIndex] = a;
+        next[handleIndex + 1] = b;
+        return next;
+      });
+    };
+    const onPointerUp = () => {
+      dragRef.current = null;
+    };
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+  }, [orientation]);
+  let panelIdx = 0;
+  let handleIdx = 0;
+  const injected = React28.Children.map(children, (child) => {
+    if (!React28.isValidElement(child)) return child;
+    const el = child;
+    if (el.type === ResizablePanel) return React28.cloneElement(el, { _index: panelIdx++ });
+    if (el.type === ResizableHandle) return React28.cloneElement(el, { _index: handleIdx++ });
+    return child;
+  });
+  return /* @__PURE__ */ jsx31(ResizableContext.Provider, { value: { orientation, sizes, onResizeStart }, children: /* @__PURE__ */ jsx31(
+    "div",
+    {
+      ref: containerRef,
+      className: cn(
+        "flex h-full w-full overflow-hidden",
+        orientation === "vertical" && "flex-col",
+        className
+      ),
+      ...props,
+      children: injected
+    }
+  ) });
+}
+ResizablePanelGroup.displayName = "ResizablePanelGroup";
+function ResizablePanel({ className, _index = 0, style, ...props }) {
+  const { orientation, sizes } = useResizable();
+  const size = sizes[_index] ?? 50;
+  return /* @__PURE__ */ jsx31(
+    "div",
+    {
+      className: cn("overflow-auto", className),
+      style: {
+        ...orientation === "horizontal" ? { width: `${size}%`, flexShrink: 0 } : { height: `${size}%`, flexShrink: 0 },
+        ...style
+      },
+      ...props
+    }
+  );
+}
+ResizablePanel.displayName = "ResizablePanel";
+function GripDots({ orientation }) {
+  return /* @__PURE__ */ jsx31(
+    "div",
+    {
+      className: cn(
+        "grid gap-[3px]",
+        orientation === "horizontal" ? "grid-cols-2" : "grid-cols-3"
+      ),
+      children: Array.from({ length: 6 }).map((_, i) => /* @__PURE__ */ jsx31(
+        "span",
+        {
+          className: "block h-[2px] w-[2px] rounded-full bg-[#555555] transition-colors group-hover:bg-ac-primary-50 group-active:bg-ac-primary-50"
+        },
+        i
+      ))
+    }
+  );
+}
+function ResizableHandle({
+  variant = "margin",
+  className,
+  _index = 0,
+  ...props
+}) {
+  const { orientation, onResizeStart } = useResizable();
+  const handlePointerDown = (e) => {
+    e.preventDefault();
+    const pos = orientation === "horizontal" ? e.clientX : e.clientY;
+    onResizeStart(_index, pos);
+  };
+  return /* @__PURE__ */ jsx31(
+    "div",
+    {
+      role: "separator",
+      "aria-orientation": orientation,
+      tabIndex: 0,
+      className: cn(
+        "group relative flex shrink-0 select-none touch-none items-center justify-center outline-none",
+        orientation === "horizontal" ? "cursor-col-resize" : "cursor-row-resize",
+        // margin variant: 여백만 제공, 선 없음
+        variant === "margin" && [
+          orientation === "horizontal" ? "w-4" : "h-4 w-full"
+        ],
+        // line variant: 1px 구분선 + 클릭 영역 확장 after
+        variant === "line" && [
+          orientation === "horizontal" ? "w-px bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-2 after:-translate-x-1/2 after:content-['']" : "h-px w-full bg-border after:absolute after:inset-x-0 after:top-1/2 after:h-2 after:-translate-y-1/2 after:content-['']"
+        ],
+        className
+      ),
+      onPointerDown: handlePointerDown,
+      ...props,
+      children: /* @__PURE__ */ jsx31(
+        "div",
+        {
+          className: cn(
+            "z-10 flex items-center justify-center rounded-[4px] transition-colors",
+            orientation === "horizontal" ? "h-[30px] w-3" : "h-3 w-[30px]",
+            variant === "margin" ? "group-hover:bg-[rgba(255,230,215,1)] group-active:bg-[rgba(255,230,215,1)]" : "bg-white"
+          ),
+          children: /* @__PURE__ */ jsx31(GripDots, { orientation })
+        }
+      )
+    }
+  );
+}
+ResizableHandle.displayName = "ResizableHandle";
+
 // src/index.ts
 export * from "lucide-react";
 export {
@@ -5100,6 +5269,9 @@ export {
   ProgressIndicator,
   Radio,
   RadioGroup,
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
   Select,
   SideNavigation,
   Slider,

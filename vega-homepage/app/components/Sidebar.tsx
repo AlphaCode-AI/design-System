@@ -51,6 +51,7 @@ const componentItems: SideNavItem[] = [
     ],
   },
   { id: "pagination",  label: "Pagination",         href: "/components/pagination" },
+  { id: "resizable",   label: "Resizable",          href: "/components/resizable" },
   { id: "progress",       label: "Progress Indicator", href: "/components/progress" },
   { id: "step-indicator", label: "Step Indicator",     href: "/components/step-indicator" },
   { id: "side-navigation", label: "Side Navigation", href: "/components/side-navigation" },

@@ -127,6 +127,10 @@ export type { SliderProps, SliderType } from "@/components/Slider";
 export { StepIndicator } from "@/components/StepIndicator";
 export type { StepIndicatorProps, StepIndicatorType, StepIndicatorStyle, StepIndicatorSize, StepItem } from "@/components/StepIndicator";
 
+// ── Resizable
+export { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/Resizable";
+export type { ResizablePanelGroupProps, ResizableHandleProps, ResizableHandleVariant } from "@/components/Resizable";
+
 // ── Utilities ─────────────────────────────────────────────────
 export { cn }                               from "@/utils/cn";
 
