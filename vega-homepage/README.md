@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vega Homepage
 
-## Getting Started
+AlphaCode Design System 문서 사이트입니다.
 
-First, run the development server:
+> **조직 내부 전용입니다.** `@alphacode-ai/design-system` 패키지가 GitHub Packages (private)에 배포되어 있으므로, AlphaCode-AI 조직 멤버의 GitHub PAT가 있어야 설치할 수 있습니다.
+
+---
+
+## 로컬 실행 방법
+
+### 1. 레포 클론
+
+전체 레포 클론:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/AlphaCode-AI/design-System.git
+cd design-System/vega-homepage
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+또는 vega-homepage 폴더만 sparse checkout:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone --filter=blob:none --sparse https://github.com/AlphaCode-AI/design-System.git
+cd design-System
+git sparse-checkout set vega-homepage
+cd vega-homepage
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. NPM_TOKEN 설정
 
-## Learn More
+`@alphacode-ai/design-system` 패키지 설치에 GitHub PAT가 필요합니다.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+export NPM_TOKEN=your_github_pat
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> PAT 발급: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
+> 필요 스코프: `read:packages`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. 의존성 설치 및 실행
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+브라우저에서 [http://localhost:3000](http://localhost:3000) 접속
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 스크립트
+
+| 명령어 | 설명 |
+|--------|------|
+| `npm run dev` | 개발 서버 실행 |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run start` | 프로덕션 서버 실행 |
+
+---
+
+## 관련 링크
+
+- [`@alphacode-ai/design-system`](../alphaCode-designSystem) — UI 컴포넌트 라이브러리
+- [GitHub Packages](https://github.com/orgs/AlphaCode-AI/packages) — 패키지 레지스트리
