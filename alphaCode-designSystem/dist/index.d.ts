@@ -579,6 +579,52 @@ interface SnackbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "colo
 }
 declare const Snackbar: React.ForwardRefExoticComponent<SnackbarProps & React.RefAttributes<HTMLDivElement>>;
 
+type ToastStyle = "default" | "full" | "uploading" | "uploading-success" | "message";
+type ToastPosition = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
+type ToastStackMode = "list" | "nesting";
+interface ToastItem {
+    id: string;
+    style?: ToastStyle;
+    title: string;
+    description?: string;
+    actionLabel?: string;
+    onAction?: () => void;
+    /** uploading: 진행률 0-100 */
+    progress?: number;
+    /** uploading: 진행률 텍스트 */
+    progressLabel?: string;
+    /** uploading: 소요 시간 텍스트 */
+    timeLabel?: string;
+    /** message: 아바타 이미지 URL */
+    avatarSrc?: string;
+    /** message: 아바타 대체 텍스트 (이니셜 등) */
+    avatarFallback?: string;
+    /** message: 시간 텍스트 */
+    timestamp?: string;
+    /** ms. 0 = 자동 닫힘 없음. 기본 4000 */
+    duration?: number;
+}
+interface ToastProps extends Omit<ToastItem, "id"> {
+    onClose?: () => void;
+    className?: string;
+}
+interface ToastProviderProps {
+    children: React.ReactNode;
+    position?: ToastPosition;
+    maxCount?: number;
+    defaultDuration?: number;
+    /** list: 세로 나열 (기본) | nesting: 카드 스택, 호버 시 펼침 */
+    stackMode?: ToastStackMode;
+}
+interface ToastContextValue {
+    show: (item: Omit<ToastItem, "id">) => string;
+    dismiss: (id: string) => void;
+    dismissAll: () => void;
+}
+declare function useToast(): ToastContextValue;
+declare function ToastProvider({ children, position, maxCount, defaultDuration, stackMode, }: ToastProviderProps): react_jsx_runtime.JSX.Element;
+declare const Toast: React.ForwardRefExoticComponent<ToastProps & React.RefAttributes<HTMLDivElement>>;
+
 type PaginationType = "simple" | "default";
 interface PaginationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
     /** 전체 페이지 수 */
@@ -906,4 +952,4 @@ declare namespace StepIndicator {
  */
 declare function cn(...inputs: ClassValue[]): string;
 
-export { Accordion, AccordionContent, AccordionItem, type AccordionItemProps, type AccordionProps, AccordionTrigger, type AccordionTriggerProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BreadcrumbItem, Breadcrumbs, type BreadcrumbsProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardContent, CardDescription, CardFooter, CardFooterButtons, CardFooterInfo, type CardFooterInfoProps, type CardFooterProps, CardFooterUser, type CardFooterUserProps, CardHeader, type CardHeaderProps, CardMenu, type CardMenuProps, type CardProps, CardTitle, Carousel, CarouselContent, type CarouselContentProps, CarouselCounter, CarouselDots, type CarouselDotsProps, CarouselItem, type CarouselNavButtonProps, type CarouselNavStyle, CarouselNext, type CarouselOrientation, CarouselPrevious, type CarouselProps, Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps, DatePicker, type DatePickerMode, type DatePickerProps, type DatePickerSize, type DatePickerState, DateRangePicker, type DateRangePickerProps, Dialog, DialogBody, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, type DialogHeaderProps, type DialogProps, type DialogSize, DialogTitle, DialogTrigger, type DialogTriggerProps, Divider, type DividerProps, Dropdown, type DropdownAlign, DropdownAvatarHeader, type DropdownAvatarHeaderProps, DropdownAvatarItem, type DropdownAvatarItemProps, DropdownCheckboxItem, type DropdownCheckboxItemProps, DropdownContent, type DropdownContentProps, DropdownItem, type DropdownItemProps, DropdownLabel, type DropdownProps, DropdownRadioGroup, type DropdownRadioGroupProps, DropdownRadioItem, type DropdownRadioItemProps, DropdownSeparator, type DropdownSide, DropdownSubMenu, type DropdownSubMenuProps, DropdownTrigger, type DropdownTriggerProps, FAB, type FABProps, FileInput, type FileInputProps, Pagination, type PaginationProps, type PaginationType, type ProgressCircularSize, ProgressIndicator, type ProgressIndicatorProps, type ProgressLinearSize, type ProgressType, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectOption, type SelectOptionGroup, type SelectProps, type SideNavItem, SideNavigation, type SideNavigationProps, Slider, type SliderProps, type SliderType, Snackbar, type SnackbarItem, type SnackbarPosition, type SnackbarProps, SnackbarProvider, type SnackbarProviderProps, type SnackbarVariant, StepIndicator, type StepIndicatorProps, type StepIndicatorSize, type StepIndicatorStyle, type StepIndicatorType, type StepItem, Switch, type SwitchProps, TabContent, type TabContentProps, TabList, type TabSize, TabTrigger, type TabTriggerProps, type TabVariant, Tabs, type TabsProps, TextInput, type TextInputProps, Textarea, type TextareaProps, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, Tooltip, type TooltipProps, avatarVariants, badgeVariants, buttonVariants, cn, fabVariants, useSnackbar };
+export { Accordion, AccordionContent, AccordionItem, type AccordionItemProps, type AccordionProps, AccordionTrigger, type AccordionTriggerProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BreadcrumbItem, Breadcrumbs, type BreadcrumbsProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardContent, CardDescription, CardFooter, CardFooterButtons, CardFooterInfo, type CardFooterInfoProps, type CardFooterProps, CardFooterUser, type CardFooterUserProps, CardHeader, type CardHeaderProps, CardMenu, type CardMenuProps, type CardProps, CardTitle, Carousel, CarouselContent, type CarouselContentProps, CarouselCounter, CarouselDots, type CarouselDotsProps, CarouselItem, type CarouselNavButtonProps, type CarouselNavStyle, CarouselNext, type CarouselOrientation, CarouselPrevious, type CarouselProps, Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps, DatePicker, type DatePickerMode, type DatePickerProps, type DatePickerSize, type DatePickerState, DateRangePicker, type DateRangePickerProps, Dialog, DialogBody, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, type DialogHeaderProps, type DialogProps, type DialogSize, DialogTitle, DialogTrigger, type DialogTriggerProps, Divider, type DividerProps, Dropdown, type DropdownAlign, DropdownAvatarHeader, type DropdownAvatarHeaderProps, DropdownAvatarItem, type DropdownAvatarItemProps, DropdownCheckboxItem, type DropdownCheckboxItemProps, DropdownContent, type DropdownContentProps, DropdownItem, type DropdownItemProps, DropdownLabel, type DropdownProps, DropdownRadioGroup, type DropdownRadioGroupProps, DropdownRadioItem, type DropdownRadioItemProps, DropdownSeparator, type DropdownSide, DropdownSubMenu, type DropdownSubMenuProps, DropdownTrigger, type DropdownTriggerProps, FAB, type FABProps, FileInput, type FileInputProps, Pagination, type PaginationProps, type PaginationType, type ProgressCircularSize, ProgressIndicator, type ProgressIndicatorProps, type ProgressLinearSize, type ProgressType, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectOption, type SelectOptionGroup, type SelectProps, type SideNavItem, SideNavigation, type SideNavigationProps, Slider, type SliderProps, type SliderType, Snackbar, type SnackbarItem, type SnackbarPosition, type SnackbarProps, SnackbarProvider, type SnackbarProviderProps, type SnackbarVariant, StepIndicator, type StepIndicatorProps, type StepIndicatorSize, type StepIndicatorStyle, type StepIndicatorType, type StepItem, Switch, type SwitchProps, TabContent, type TabContentProps, TabList, type TabSize, TabTrigger, type TabTriggerProps, type TabVariant, Tabs, type TabsProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Toast, type ToastItem, type ToastPosition, type ToastProps, ToastProvider, type ToastProviderProps, type ToastStyle, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, Tooltip, type TooltipProps, avatarVariants, badgeVariants, buttonVariants, cn, fabVariants, useSnackbar, useToast };

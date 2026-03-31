@@ -56,7 +56,8 @@ const componentItems: SideNavItem[] = [
   { id: "side-navigation", label: "Side Navigation", href: "/components/side-navigation" },
   { id: "slider",      label: "Slider",             href: "/components/slider" },
   { id: "snackbar",    label: "Snackbar",           href: "/components/snackbar" },
-  { id: "tab",           label: "Tab",                href: "/components/tab" },
+  { id: "tab",         label: "Tab",                href: "/components/tab" },
+  { id: "toast",       label: "Toast",              href: "/components/toast" },
   { id: "toggle-group", label: "Toggle Group",      href: "/components/toggle-group" },
   { id: "tooltip",     label: "Tooltip",            href: "/components/tooltip" },
 ];
