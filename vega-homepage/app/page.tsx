@@ -23,14 +23,27 @@ export default function HomePage() {
   const [copied, setCopied] = useState(false);
   const [copiedNpmrc, setCopiedNpmrc] = useState(false);
 
+  const copyToClipboard = (text: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    } else {
+      const el = document.createElement("textarea");
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+  };
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(INSTALL_CMD);
+    copyToClipboard(INSTALL_CMD);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleCopyNpmrc = () => {
-    navigator.clipboard.writeText(NPMRC_CONTENT);
+    copyToClipboard(NPMRC_CONTENT);
     setCopiedNpmrc(true);
     setTimeout(() => setCopiedNpmrc(false), 2000);
   };
