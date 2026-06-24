@@ -57,4 +57,4 @@ function ButtonGroup({
   );
 }
 
-export { ButtonGroup };
+export { ButtonGroup, buttonGroupVariants };

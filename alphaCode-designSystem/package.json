@@ -12,14 +12,23 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./tailwind-preset.css": "./dist/tailwind-preset.css",
+    "./tailwind-preset.css": {
+      "style": "./dist/tailwind-preset.css",
+      "default": "./dist/tailwind-preset.css"
+    },
     "./tokens": {
       "types": "./dist/tokens/index.d.ts",
       "import": "./dist/tokens/index.js",
       "require": "./dist/tokens/index.cjs"
     },
-    "./styles.css": "./dist/styles.css",
-    "./styles": "./dist/styles.css"
+    "./styles.css": {
+      "style": "./dist/styles.css",
+      "default": "./dist/styles.css"
+    },
+    "./styles": {
+      "style": "./dist/styles.css",
+      "default": "./dist/styles.css"
+    }
   },
   "files": [
     "dist"

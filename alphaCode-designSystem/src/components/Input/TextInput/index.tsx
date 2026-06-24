@@ -1,6 +1,9 @@
+"use client";
+
 import * as React from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { InputHelperText } from "@/utils/input";
 import { Button } from "@/components/Button";
 
 /* ── Container Variants ────────────────────────────────────── */
@@ -116,14 +119,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             )}
             <div className="flex flex-col gap-1 flex-1">
               {inputEl}
-              {(helperText || errorMessage) && (
-                <p
-                  id={`${inputId}-helper`}
-                  className={cn("text-xs", isError ? "text-ac-red-50" : "text-muted-foreground")}
-                >
-                  {errorMessage || helperText}
-                </p>
-              )}
+              <InputHelperText id={`${inputId}-helper`} helperText={helperText} errorMessage={errorMessage} isError={isError} />
             </div>
           </div>
         ) : (
@@ -146,4 +142,4 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
 TextInput.displayName = "TextInput";
 
-export { TextInput };
+export { TextInput, textInputVariants };

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
@@ -10,8 +12,8 @@ const radioVariants = cva(
     "disabled:cursor-not-allowed disabled:opacity-40",
     "cursor-pointer appearance-none relative",
     "border-ac-gray-40 bg-ac-white",
-    "hover:border-[--radio-color]",
-    "checked:border-[--radio-color]",
+    "hover:border-(--radio-color)",
+    "checked:border-(--radio-color)",
   ],
   {
     variants: {
@@ -37,12 +39,12 @@ export interface RadioProps
    * 체크 시 색상 (기본: ac-primary-50 #FF6300)
    * 어떤 CSS 색상값도 가능 — "#006FFF", "rgb(0,111,255)", "var(--ac-blue-50)"
    */
-  checkedColor?: string;
+  activeColor?: string;
 }
 
 /* ── Radio Item ─────────────────────────────────────────────── */
 const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
-  ({ className, size, label, description, checkedColor, id, style, ...props }, ref) => {
+  ({ className, size, label, description, activeColor, id, style, ...props }, ref) => {
     const inputId = id ?? React.useId();
     const dotSize = size === "md" ? 6 : size === "xl" ? 12 : 8;
 
@@ -55,7 +57,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
             type="radio"
             className={cn("peer", radioVariants({ size }), className)}
             style={{
-              ["--radio-color" as string]: checkedColor ?? "#FF6300",
+              ["--radio-color" as string]: activeColor ?? "#FF6300",
               ...style,
             }}
             {...props}
@@ -65,7 +67,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
             style={{
               width: dotSize,
               height: dotSize,
-              backgroundColor: checkedColor ?? "#FF6300",
+              backgroundColor: activeColor ?? "#FF6300",
             }}
             className="absolute rounded-full pointer-events-none scale-0 peer-checked:scale-100 transition-transform duration-150"
             aria-hidden="true"
@@ -109,4 +111,4 @@ function RadioGroup({ title, direction = "vertical", className, children, ...pro
   );
 }
 
-export { Radio, RadioGroup };
+export { Radio, RadioGroup, radioVariants };

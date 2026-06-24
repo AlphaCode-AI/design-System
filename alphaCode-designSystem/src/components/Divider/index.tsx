@@ -45,4 +45,4 @@ function Divider({ className, orientation, variant, inset, ...props }: DividerPr
   );
 }
 
-export { Divider };
+export { Divider, dividerVariants };

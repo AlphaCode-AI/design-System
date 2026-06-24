@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
@@ -131,4 +133,4 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
 
 FileInput.displayName = "FileInput";
 
-export { FileInput };
+export { FileInput, fileInputVariants };

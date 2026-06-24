@@ -4,6 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { X, ChevronRight, Check } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { IconWrapper } from "@/utils/icon";
 
 /* ── Types ─────────────────────────────────────────────────── */
 export type SnackbarVariant  = "default" | "error" | "success" | "info" | "warning";
@@ -192,7 +193,7 @@ function SnackbarItem({
     );
     if (rightItem === "check") return <Check className="shrink-0 w-4 h-4 opacity-80" />;
     // Button 등 임의 ReactNode
-    return <span className="shrink-0 flex items-center">{rightItem}</span>;
+    return <IconWrapper>{rightItem}</IconWrapper>;
   };
 
   return (
@@ -207,9 +208,9 @@ function SnackbarItem({
       )}
     >
       {leftItem && (
-        <span className={cn("shrink-0 flex items-center justify-center", iconColorClass ?? variantIconClass[variant])}>
+        <IconWrapper className={cn("justify-center", iconColorClass ?? variantIconClass[variant])}>
           {leftItem}
-        </span>
+        </IconWrapper>
       )}
       <span className="flex-1 text-xs font-medium leading-snug min-w-0">{message}</span>
       {renderRight()}
@@ -304,7 +305,7 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
       );
       if (rightItem === "check") return <Check className="shrink-0 w-4 h-4 opacity-80" />;
       // Button 등 임의 ReactNode
-      return <span className="shrink-0 flex items-center">{rightItem}</span>;
+      return <IconWrapper>{rightItem}</IconWrapper>;
     };
 
     return (

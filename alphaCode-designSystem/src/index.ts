@@ -2,7 +2,7 @@
 
 // ── Components ────────────────────────────────────────────────
 export { Button, buttonVariants }           from "@/components/Button";
-export { ButtonGroup }                      from "@/components/Button/ButtonGroup";
+export { ButtonGroup, buttonGroupVariants }  from "@/components/Button/ButtonGroup";
 export { FAB, fabVariants }                 from "@/components/Button/FAB";
 export type { ButtonProps }                 from "@/components/Button";
 export type { ButtonGroupProps }            from "@/components/Button/ButtonGroup";
@@ -22,21 +22,22 @@ export {
   CardFooterUser,
   CardFooterInfo,
   CardFooterButtons,
+  cardVariants,
 }                                           from "@/components/Card";
 export type { CardProps, CardMenuProps, CardHeaderProps, CardFooterProps, CardFooterUserProps, CardFooterInfoProps } from "@/components/Card";
 
 // ── Divider
-export { Divider }                          from "@/components/Divider";
+export { Divider, dividerVariants }         from "@/components/Divider";
 export type { DividerProps }                from "@/components/Divider";
 
 // ── Checkbox
-export { Checkbox }                         from "@/components/Input/Checkbox";
+export { Checkbox, checkboxVariants }       from "@/components/Input/Checkbox";
 export type { CheckboxProps }               from "@/components/Input/Checkbox";
 export { CheckboxGroup }                    from "@/components/Input/Checkbox";
 export type { CheckboxGroupProps }          from "@/components/Input/Checkbox";
 
 // ── Radio
-export { Radio, RadioGroup }                from "@/components/Input/Radio";
+export { Radio, RadioGroup, radioVariants } from "@/components/Input/Radio";
 export type { RadioProps, RadioGroupProps } from "@/components/Input/Radio";
 
 // ── Breadcrumbs
@@ -52,7 +53,7 @@ export { DatePicker, DateRangePicker }      from "@/components/Input/DatePicker"
 export type { DatePickerProps, DateRangePickerProps, DateRange, DatePickerMode, DatePickerSize, DatePickerState } from "@/components/Input/DatePicker";
 
 // ── TextInput
-export { TextInput }                        from "@/components/Input/TextInput";
+export { TextInput, textInputVariants }     from "@/components/Input/TextInput";
 export type { TextInputProps }              from "@/components/Input/TextInput";
 
 // ── Textarea
@@ -64,7 +65,7 @@ export { Select }                           from "@/components/Input/Select";
 export type { SelectProps, SelectOption, SelectOptionGroup } from "@/components/Input/Select";
 
 // ── FileInput
-export { FileInput }                        from "@/components/Input/FileInput";
+export { FileInput, fileInputVariants }     from "@/components/Input/FileInput";
 export type { FileInputProps }              from "@/components/Input/FileInput";
 
 // ── Switch
@@ -133,6 +134,8 @@ export type { ResizablePanelGroupProps, ResizableHandleProps, ResizableHandleVar
 
 // ── Utilities ─────────────────────────────────────────────────
 export { cn }                               from "@/utils/cn";
+export { IconWrapper, cloneIconWithSize }   from "@/utils/icon";
+export { InputHelperText }                  from "@/utils/input";
 
 // ── Tokens (re-export for convenience) ────────────────────────
 export * from "@/tokens";

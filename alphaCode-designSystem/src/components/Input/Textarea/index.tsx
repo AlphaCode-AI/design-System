@@ -1,5 +1,8 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "@/utils/cn";
+import { InputHelperText } from "@/utils/input";
 
 /* ── Props ─────────────────────────────────────────────────── */
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -43,14 +46,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
           {...props}
         />
-        {(helperText || errorMessage) && (
-          <p
-            id={`${inputId}-helper`}
-            className={cn("text-xs", isError ? "text-ac-red-50" : "text-muted-foreground")}
-          >
-            {errorMessage || helperText}
-          </p>
-        )}
+        <InputHelperText id={`${inputId}-helper`} helperText={helperText} errorMessage={errorMessage} isError={isError} />
       </div>
     );
   }

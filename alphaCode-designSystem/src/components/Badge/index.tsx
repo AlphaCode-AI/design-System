@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { IconWrapper } from "@/utils/icon";
 
 /* ── Variants ──────────────────────────────────────────────── */
 const badgeVariants = cva(
@@ -45,11 +46,7 @@ export interface BadgeProps
 function Badge({ className, variant, size, icon, children, ...props }: BadgeProps) {
   return (
     <span className={cn(badgeVariants({ variant, size }), className)} {...props}>
-      {icon && (
-        <span className="shrink-0 flex items-center" aria-hidden="true">
-          {icon}
-        </span>
-      )}
+      {icon && <IconWrapper aria-hidden="true">{icon}</IconWrapper>}
       {children}
     </span>
   );

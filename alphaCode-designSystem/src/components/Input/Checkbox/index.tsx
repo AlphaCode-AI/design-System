@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
@@ -10,9 +12,9 @@ const checkboxVariants = cva(
     "disabled:cursor-not-allowed disabled:opacity-40",
     "cursor-pointer appearance-none relative",
     "border-ac-gray-40 bg-ac-white",
-    "hover:border-[--checkbox-color]",
-    "checked:bg-[--checkbox-color] checked:border-[--checkbox-color]",
-    "indeterminate:bg-[--checkbox-color] indeterminate:border-[--checkbox-color]",
+    "hover:border-(--checkbox-color)",
+    "checked:bg-(--checkbox-color) checked:border-(--checkbox-color)",
+    "indeterminate:bg-(--checkbox-color) indeterminate:border-(--checkbox-color)",
   ],
   {
     variants: {
@@ -39,7 +41,7 @@ export interface CheckboxProps
    * 체크 시 색상 (기본: ac-primary-50 #FF6300)
    * 어떤 CSS 색상값도 가능 — "#006FFF", "rgb(0,111,255)", "var(--ac-blue-50)"
    */
-  checkedColor?: string;
+  activeColor?: string;
 }
 
 /* ── Icons ─────────────────────────────────────────────────── */
@@ -69,7 +71,7 @@ function IndeterminateIcon({ size }: { size: CheckboxProps["size"] }) {
 
 /* ── Component ─────────────────────────────────────────────── */
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, size, label, description, indeterminate = false, checkedColor, id, style, ...props }, ref) => {
+  ({ className, size, label, description, indeterminate = false, activeColor, id, style, ...props }, ref) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
     const resolvedRef = (ref as React.RefObject<HTMLInputElement>) || inputRef;
     const inputId = id ?? React.useId();
@@ -89,7 +91,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             type="checkbox"
             className={cn(checkboxVariants({ size }), className)}
             style={{
-              ["--checkbox-color" as string]: checkedColor ?? "#FF6300" /* ac-primary-50 */,
+              ["--checkbox-color" as string]: activeColor ?? "#FF6300",
               ...style,
             }}
             {...props}
@@ -115,7 +117,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 
 Checkbox.displayName = "Checkbox";
 
-export { Checkbox };
+export { Checkbox, checkboxVariants };
 
 /* ── CheckboxGroup ──────────────────────────────────────────── */
 export interface CheckboxGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {

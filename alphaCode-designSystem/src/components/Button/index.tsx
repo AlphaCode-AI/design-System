@@ -1,7 +1,10 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { IconWrapper, cloneIconWithSize } from "@/utils/icon";
 
 /* ── Variants ──────────────────────────────────────────────── */
 const buttonVariants = cva(
@@ -103,16 +106,6 @@ export interface ButtonProps
   fullWidth?: boolean;
 }
 
-/* ── Helpers ───────────────────────────────────────────────── */
-/** 아이콘 요소에 size className을 주입 */
-function cloneIconWithSize(icon: React.ReactNode, sizeClass: string) {
-  if (!React.isValidElement(icon)) return icon;
-  const el = icon as React.ReactElement<{ className?: string }>;
-  return React.cloneElement(el, {
-    className: cn(el.props.className, sizeClass),
-  });
-}
-
 /* ── Component ─────────────────────────────────────────────── */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -165,15 +158,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 children: (
                   <>
                     {styledLeftIcon && (
-                      <span className="shrink-0 flex items-center" aria-hidden="true">
-                        {styledLeftIcon}
-                      </span>
+                      <IconWrapper aria-hidden="true">{styledLeftIcon}</IconWrapper>
                     )}
                     {(children as React.ReactElement<{ children?: React.ReactNode }>).props.children}
                     {styledRightIcon && (
-                      <span className="shrink-0 flex items-center" aria-hidden="true">
-                        {styledRightIcon}
-                      </span>
+                      <IconWrapper aria-hidden="true">{styledRightIcon}</IconWrapper>
                     )}
                   </>
                 ),
@@ -182,15 +171,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           <>
             {styledLeftIcon && (
-              <span className="shrink-0 flex items-center" aria-hidden="true">
-                {styledLeftIcon}
-              </span>
+              <IconWrapper aria-hidden="true">{styledLeftIcon}</IconWrapper>
             )}
             {styledChildren}
             {styledRightIcon && (
-              <span className="shrink-0 flex items-center" aria-hidden="true">
-                {styledRightIcon}
-              </span>
+              <IconWrapper aria-hidden="true">{styledRightIcon}</IconWrapper>
             )}
           </>
         )}

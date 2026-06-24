@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { IconWrapper, cloneIconWithSize } from "@/utils/icon";
 import { Tooltip } from "@/components/Tooltip";
 
 /* ── FAB Variants ──────────────────────────────────────────── */
@@ -41,14 +42,6 @@ const iconSizeMap: Record<string, string> = {
 
 function getIconSizeClass(size?: string | null) {
   return iconSizeMap[size ?? "lg"] ?? "h-6 w-6";
-}
-
-function cloneIconWithSize(icon: React.ReactNode, sizeClass: string) {
-  if (!React.isValidElement(icon)) return icon;
-  const el = icon as React.ReactElement<{ className?: string }>;
-  return React.cloneElement(el, {
-    className: cn(el.props.className, sizeClass),
-  });
 }
 
 /* ── Props ─────────────────────────────────────────────────── */
@@ -159,9 +152,7 @@ const FAB = React.forwardRef<HTMLButtonElement, FABProps>(
         {...props}
       >
         {labelSpan}
-        <span className="shrink-0 flex items-center" aria-hidden="true">
-          {styledIcon}
-        </span>
+        <IconWrapper aria-hidden="true">{styledIcon}</IconWrapper>
         {isExtended && (
           <span className="whitespace-nowrap">{label}</span>
         )}

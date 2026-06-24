@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
@@ -30,7 +32,7 @@ const switchThumbVariants = cva(
     "transition-all duration-200 ease-in-out",
     "translate-x-0",
     "bg-ac-gray-50",
-    "data-[state=checked]:bg-[--switch-color]",
+    "data-[state=checked]:bg-(--switch-color)",
   ],
   {
     variants: {

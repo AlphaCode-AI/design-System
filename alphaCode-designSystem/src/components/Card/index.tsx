@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
@@ -118,6 +120,23 @@ export type CardHeaderControl =
   | { control: "radio";    checked?: boolean; onChange?: React.ChangeEventHandler<HTMLInputElement>; name?: string; value?: string }
   | { control: "switch";   checked?: boolean; defaultChecked?: boolean; onCheckedChange?: (checked: boolean) => void };
 
+type CardHeaderPropsWide = Omit<React.HTMLAttributes<HTMLDivElement>, "title"> & {
+  imageSrc?: string;
+  imageAlt?: string;
+  avatar?: React.ReactNode;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  badge?: React.ReactNode;
+  control?: "none" | "menu" | "checkbox" | "radio" | "switch";
+  onMenuClick?: () => void;
+  onCheckedChange?: (checked: boolean) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  name?: string;
+  value?: string;
+  checked?: boolean;
+  defaultChecked?: boolean;
+};
+
 export type CardHeaderProps =
   Omit<React.HTMLAttributes<HTMLDivElement>, "title"> &
   CardHeaderControl & {
@@ -183,45 +202,26 @@ function CardHeaderControl(props: CardHeaderControl) {
   return null;
 }
 
-// control 관련 prop 키 목록 — DOM에 전달되면 안 되는 것들
-const CONTROL_PROP_KEYS = [
-  "control", "onMenuClick", "onCheckedChange",
-  "onChange", "name", "value", "checked", "defaultChecked",
-  "imageSrc", "imageAlt", "avatar", "title", "subtitle", "badge",
-] as const;
-
-function omitControlProps(props: Record<string, unknown>) {
-  const result: Record<string, unknown> = {};
-  for (const key in props) {
-    if (!(CONTROL_PROP_KEYS as readonly string[]).includes(key)) {
-      result[key] = props[key];
-    }
-  }
-  return result;
-}
 
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   (props, ref) => {
-    const p = props as any; // eslint-disable-line @typescript-eslint/no-explicit-any
-
     const {
       className, imageSrc, imageAlt, avatar,
       title, subtitle, badge, children, control,
-    } = p;
+      onMenuClick, onCheckedChange, onChange, name, value, checked, defaultChecked,
+      ...rest
+    } = props as CardHeaderPropsWide;
 
     const controlProps = {
       control,
-      onMenuClick:     p.onMenuClick,
-      onCheckedChange: p.onCheckedChange,
-      onChange:        p.onChange,
-      name:            p.name,
-      value:           p.value,
-      checked:         p.checked,
-      defaultChecked:  p.defaultChecked,
+      onMenuClick,
+      onCheckedChange,
+      onChange,
+      name,
+      value,
+      checked,
+      defaultChecked,
     } as CardHeaderControl;
-
-    // control 관련 + 카드 전용 props를 모두 제거한 순수 HTML attrs
-    const rest = omitControlProps(p);
 
     /* image 타입 */
     if (imageSrc) {
@@ -488,4 +488,5 @@ export {
   CardFooterUser,
   CardFooterInfo,
   CardFooterButtons,
+  cardVariants,
 };
