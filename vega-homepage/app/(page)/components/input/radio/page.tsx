@@ -141,9 +141,9 @@ export default function RadioPage() {
                   {/* xl */}
                   <div className="flex flex-col items-center gap-4">
                     <div className="flex gap-3">
-                      <Radio size="xl" />
-                      <Radio size="xl" checked readOnly />
-                      <Radio size="xl" disabled />
+                      <Radio size="xl" name="radio-xl" value="a" />
+                      <Radio size="xl" name="radio-xl" value="b" defaultChecked />
+                      <Radio size="xl" name="radio-xl" value="c" disabled />
                     </div>
                     <span className="text-sm text-foreground">xl (24px)</span>
                   </div>
@@ -151,9 +151,9 @@ export default function RadioPage() {
                   {/* lg */}
                   <div className="flex flex-col items-center gap-4">
                     <div className="flex gap-3">
-                      <Radio size="lg" />
-                      <Radio size="lg" checked readOnly />
-                      <Radio size="lg" disabled />
+                      <Radio size="lg" name="radio-lg" value="a" />
+                      <Radio size="lg" name="radio-lg" value="b" defaultChecked />
+                      <Radio size="lg" name="radio-lg" value="c" disabled />
                     </div>
                     <span className="text-sm text-foreground">lg (18px)</span>
                   </div>
@@ -161,9 +161,9 @@ export default function RadioPage() {
                   {/* md */}
                   <div className="flex flex-col items-center gap-4">
                     <div className="flex gap-3">
-                      <Radio size="md" />
-                      <Radio size="md" checked readOnly />
-                      <Radio size="md" disabled />
+                      <Radio size="md" name="radio-md" value="a" />
+                      <Radio size="md" name="radio-md" value="b" defaultChecked />
+                      <Radio size="md" name="radio-md" value="c" disabled />
                     </div>
                     <span className="text-sm text-foreground">md (12px)</span>
                   </div>
