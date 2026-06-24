@@ -40,8 +40,8 @@ export NPM_TOKEN=your_github_pat
 ### 3. 의존성 설치 및 실행
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 브라우저에서 [http://localhost:3000](http://localhost:3000) 접속
@@ -52,9 +52,9 @@ npm run dev
 
 | 명령어 | 설명 |
 |--------|------|
-| `npm run dev` | 개발 서버 실행 |
-| `npm run build` | 프로덕션 빌드 |
-| `npm run start` | 프로덕션 서버 실행 |
+| `pnpm dev` | 개발 서버 실행 |
+| `pnpm build` | 프로덕션 빌드 |
+| `pnpm start` | 프로덕션 서버 실행 |
 
 ---
 

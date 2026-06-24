@@ -1,7 +1,6 @@
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import * as React from 'react';
 import { VariantProps } from 'class-variance-authority';
-import * as react_jsx_runtime from 'react/jsx-runtime';
 import { DateRange } from 'react-day-picker';
 export { DateRange } from 'react-day-picker';
 import { ClassValue } from 'clsx';
@@ -34,7 +33,7 @@ declare const buttonGroupVariants: (props?: ({
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof buttonGroupVariants> {
     direction?: "horizontal" | "vertical";
 }
-declare function ButtonGroup({ className, direction, children, ...props }: ButtonGroupProps): react_jsx_runtime.JSX.Element;
+declare function ButtonGroup({ className, direction, children, ...props }: ButtonGroupProps): React.JSX.Element;
 
 declare const fabVariants: (props?: ({
     variant?: "primary" | "secondary" | "tertiary" | null | undefined;
@@ -88,7 +87,7 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps
     /** 좌측 아이콘 (선택) */
     icon?: React.ReactNode;
 }
-declare function Badge({ className, variant, size, icon, children, ...props }: BadgeProps): react_jsx_runtime.JSX.Element;
+declare function Badge({ className, variant, size, icon, children, ...props }: BadgeProps): React.JSX.Element;
 
 declare const avatarVariants: (props?: ({
     shape?: "circle" | "square" | null | undefined;
@@ -218,7 +217,7 @@ declare const dividerVariants: (props?: ({
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface DividerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof dividerVariants> {
 }
-declare function Divider({ className, orientation, variant, inset, ...props }: DividerProps): react_jsx_runtime.JSX.Element;
+declare function Divider({ className, orientation, variant, inset, ...props }: DividerProps): React.JSX.Element;
 
 declare const checkboxVariants: (props?: ({
     size?: "xl" | "lg" | "md" | null | undefined;
@@ -239,7 +238,7 @@ interface CheckboxGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {
     title?: string;
     direction?: "vertical" | "horizontal";
 }
-declare function CheckboxGroup({ title, direction, className, children, ...props }: CheckboxGroupProps): react_jsx_runtime.JSX.Element;
+declare function CheckboxGroup({ title, direction, className, children, ...props }: CheckboxGroupProps): React.JSX.Element;
 
 declare const radioVariants: (props?: ({
     size?: "xl" | "lg" | "md" | null | undefined;
@@ -258,7 +257,7 @@ interface RadioGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {
     title?: string;
     direction?: "vertical" | "horizontal";
 }
-declare function RadioGroup({ title, direction, className, children, ...props }: RadioGroupProps): react_jsx_runtime.JSX.Element;
+declare function RadioGroup({ title, direction, className, children, ...props }: RadioGroupProps): React.JSX.Element;
 
 interface BreadcrumbItem {
     /** 표시할 레이블 */
@@ -286,7 +285,7 @@ interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
     /** 홈 아이콘 표시 여부 (기본: true) */
     showHomeIcon?: boolean;
 }
-declare function Breadcrumbs({ className, items, separator, maxItems, showHomeIcon, ...props }: BreadcrumbsProps): react_jsx_runtime.JSX.Element | null;
+declare function Breadcrumbs({ className, items, separator, maxItems, showHomeIcon, ...props }: BreadcrumbsProps): React.JSX.Element | null;
 
 type DatePickerMode = "single" | "range";
 type DatePickerSize = "sm" | "md" | "lg";
@@ -312,7 +311,7 @@ interface DatePickerProps {
     className?: string;
     id?: string;
 }
-declare function DatePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, placeholder, dateFormat, disabled, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DatePickerProps): react_jsx_runtime.JSX.Element;
+declare function DatePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, placeholder, dateFormat, disabled, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DatePickerProps): React.JSX.Element;
 interface DateRangePickerProps {
     value?: DateRange;
     defaultValue?: DateRange;
@@ -335,7 +334,7 @@ interface DateRangePickerProps {
     className?: string;
     id?: string;
 }
-declare function DateRangePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, startPlaceholder, endPlaceholder, dateFormat, disabled, twoMonths, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DateRangePickerProps): react_jsx_runtime.JSX.Element;
+declare function DateRangePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, startPlaceholder, endPlaceholder, dateFormat, disabled, twoMonths, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DateRangePickerProps): React.JSX.Element;
 
 interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
     size?: "sm" | "md" | "lg";
@@ -386,7 +385,7 @@ interface SelectProps extends VariantProps<typeof selectVariants> {
     className?: string;
     id?: string;
 }
-declare function Select({ size, state, options, groups, placeholder, value, defaultValue, onValueChange, disabled, label, helperText, errorMessage, className, id, }: SelectProps): react_jsx_runtime.JSX.Element;
+declare function Select({ size, state, options, groups, placeholder, value, defaultValue, onValueChange, disabled, label, helperText, errorMessage, className, id, }: SelectProps): React.JSX.Element;
 
 declare const fileInputVariants: (props?: ({
     size?: "lg" | "md" | "sm" | null | undefined;
@@ -424,13 +423,13 @@ interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     /** active 아이템에 적용할 Tailwind 클래스 (variant의 active 색상을 override) */
     activeClassName?: string;
 }
-declare function ToggleGroup({ value, defaultValue, onValueChange, variant, size, iconOnly, activeClassName, className, children, ...props }: ToggleGroupProps): react_jsx_runtime.JSX.Element;
+declare function ToggleGroup({ value, defaultValue, onValueChange, variant, size, iconOnly, activeClassName, className, children, ...props }: ToggleGroupProps): React.JSX.Element;
 interface ToggleGroupItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     value: string;
     icon?: React.ReactNode;
     tooltip?: string;
 }
-declare function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, ...props }: ToggleGroupItemProps): react_jsx_runtime.JSX.Element;
+declare function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, ...props }: ToggleGroupItemProps): React.JSX.Element;
 
 type TooltipPlacement = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
 interface TooltipProps {
@@ -445,7 +444,7 @@ interface TooltipProps {
     /** 화살표 Tailwind border 클래스 override (예: "border-t-ac-blue-90") */
     arrowClassName?: string;
 }
-declare function Tooltip({ content, placement, children, className, arrowClassName }: TooltipProps): react_jsx_runtime.JSX.Element;
+declare function Tooltip({ content, placement, children, className, arrowClassName }: TooltipProps): React.JSX.Element;
 
 type ExpandIconType = "chevron" | "plusMinus" | "arrow";
 interface SideNavItem {
@@ -552,7 +551,7 @@ interface SnackbarProviderProps {
     maxCount?: number;
     defaultDuration?: number;
 }
-declare function SnackbarProvider({ children, position, maxCount, defaultDuration, }: SnackbarProviderProps): react_jsx_runtime.JSX.Element;
+declare function SnackbarProvider({ children, position, maxCount, defaultDuration, }: SnackbarProviderProps): React.JSX.Element;
 interface SnackbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color"> {
     message: React.ReactNode;
     variant?: SnackbarVariant;
@@ -622,7 +621,7 @@ interface ToastContextValue {
     dismissAll: () => void;
 }
 declare function useToast(): ToastContextValue;
-declare function ToastProvider({ children, position, maxCount, defaultDuration, stackMode, }: ToastProviderProps): react_jsx_runtime.JSX.Element;
+declare function ToastProvider({ children, position, maxCount, defaultDuration, stackMode, }: ToastProviderProps): React.JSX.Element;
 declare const Toast: React.ForwardRefExoticComponent<ToastProps & React.RefAttributes<HTMLDivElement>>;
 
 type PaginationType = "simple" | "default";
@@ -689,7 +688,7 @@ interface DropdownProps {
     trigger?: "click" | "hover" | "contextmenu";
     children: React.ReactNode;
 }
-declare function Dropdown({ open: controlledOpen, defaultOpen, onOpenChange, side, align, trigger, children, }: DropdownProps): react_jsx_runtime.JSX.Element;
+declare function Dropdown({ open: controlledOpen, defaultOpen, onOpenChange, side, align, trigger, children, }: DropdownProps): React.JSX.Element;
 declare namespace Dropdown {
     var displayName: string;
 }
@@ -697,7 +696,7 @@ interface DropdownTriggerProps extends React.HTMLAttributes<HTMLElement> {
     asChild?: boolean;
     disabled?: boolean;
 }
-declare function DropdownTrigger({ children, asChild, disabled, onClick, ...props }: DropdownTriggerProps): react_jsx_runtime.JSX.Element;
+declare function DropdownTrigger({ children, asChild, disabled, onClick, ...props }: DropdownTriggerProps): React.JSX.Element;
 declare namespace DropdownTrigger {
     var displayName: string;
 }
@@ -735,7 +734,7 @@ interface DropdownRadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;
     onValueChange?: (value: string) => void;
 }
-declare function DropdownRadioGroup({ value: controlledValue, defaultValue, onValueChange, children, ...props }: DropdownRadioGroupProps): react_jsx_runtime.JSX.Element;
+declare function DropdownRadioGroup({ value: controlledValue, defaultValue, onValueChange, children, ...props }: DropdownRadioGroupProps): React.JSX.Element;
 declare namespace DropdownRadioGroup {
     var displayName: string;
 }
@@ -775,7 +774,7 @@ interface DropdownSubMenuProps {
     children: React.ReactNode;
     disabled?: boolean;
 }
-declare function DropdownSubMenu({ id, trigger, children, disabled }: DropdownSubMenuProps): react_jsx_runtime.JSX.Element;
+declare function DropdownSubMenu({ id, trigger, children, disabled }: DropdownSubMenuProps): React.JSX.Element;
 declare namespace DropdownSubMenu {
     var displayName: string;
 }
@@ -794,14 +793,14 @@ interface DialogProps {
     closeOnEsc?: boolean;
     children?: React.ReactNode;
 }
-declare function Dialog({ open: controlledOpen, defaultOpen, onOpenChange, size, closeOnScrim, closeOnEsc, children, }: DialogProps): react_jsx_runtime.JSX.Element;
+declare function Dialog({ open: controlledOpen, defaultOpen, onOpenChange, size, closeOnScrim, closeOnEsc, children, }: DialogProps): React.JSX.Element;
 declare namespace Dialog {
     var displayName: string;
 }
 interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
     asChild?: boolean;
 }
-declare function DialogTrigger({ children, asChild, onClick, ...props }: DialogTriggerProps): react_jsx_runtime.JSX.Element;
+declare function DialogTrigger({ children, asChild, onClick, ...props }: DialogTriggerProps): React.JSX.Element;
 declare namespace DialogTrigger {
     var displayName: string;
 }
@@ -826,7 +825,7 @@ declare const DialogDescription: React.ForwardRefExoticComponent<React.HTMLAttri
 interface DialogCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     asChild?: boolean;
 }
-declare function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps): react_jsx_runtime.JSX.Element;
+declare function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps): React.JSX.Element;
 declare namespace DialogClose {
     var displayName: string;
 }
@@ -908,7 +907,7 @@ interface SliderProps {
     rightIcon?: React.ReactNode;
     className?: string;
 }
-declare function Slider({ type, colorClassName, min, max, step, value: controlledValue, defaultValue, onValueChange, disabled, showMinMax, leftIcon, rightIcon, className, }: SliderProps): react_jsx_runtime.JSX.Element;
+declare function Slider({ type, colorClassName, min, max, step, value: controlledValue, defaultValue, onValueChange, disabled, showMinMax, leftIcon, rightIcon, className, }: SliderProps): React.JSX.Element;
 declare namespace Slider {
     var displayName: string;
 }
@@ -938,7 +937,7 @@ interface StepIndicatorProps {
     colorClassName?: string;
     className?: string;
 }
-declare function StepIndicator({ steps, current, type, style, size, showStepText, colorClassName, className, }: StepIndicatorProps): react_jsx_runtime.JSX.Element;
+declare function StepIndicator({ steps, current, type, style, size, showStepText, colorClassName, className, }: StepIndicatorProps): React.JSX.Element;
 declare namespace StepIndicator {
     var displayName: string;
 }
@@ -952,7 +951,7 @@ interface ResizablePanelGroupProps extends Omit<React.HTMLAttributes<HTMLDivElem
     defaultSizes?: number[];
     children: React.ReactNode;
 }
-declare function ResizablePanelGroup({ orientation, defaultSizes, className, children, ...props }: ResizablePanelGroupProps): react_jsx_runtime.JSX.Element;
+declare function ResizablePanelGroup({ orientation, defaultSizes, className, children, ...props }: ResizablePanelGroupProps): React.JSX.Element;
 declare namespace ResizablePanelGroup {
     var displayName: string;
 }
@@ -960,7 +959,7 @@ interface ResizablePanelProps extends React.HTMLAttributes<HTMLDivElement> {
     /** ResizablePanelGroup이 자동으로 주입합니다 */
     _index?: number;
 }
-declare function ResizablePanel({ className, _index, style, ...props }: ResizablePanelProps): react_jsx_runtime.JSX.Element;
+declare function ResizablePanel({ className, _index, style, ...props }: ResizablePanelProps): React.JSX.Element;
 declare namespace ResizablePanel {
     var displayName: string;
 }
@@ -970,7 +969,7 @@ interface ResizableHandleProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     /** ResizablePanelGroup이 자동으로 주입합니다 */
     _index?: number;
 }
-declare function ResizableHandle({ variant, className, _index, ...props }: ResizableHandleProps): react_jsx_runtime.JSX.Element;
+declare function ResizableHandle({ variant, className, _index, ...props }: ResizableHandleProps): React.JSX.Element;
 declare namespace ResizableHandle {
     var displayName: string;
 }

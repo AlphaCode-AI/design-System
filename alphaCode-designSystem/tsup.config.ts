@@ -3,7 +3,6 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: {
     index: "src/index.ts",
-    "tailwind-preset": "tailwind-preset.ts",
     "tokens/index": "src/tokens/index.ts",
   },
   format: ["esm", "cjs"],
