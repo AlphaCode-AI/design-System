@@ -14,6 +14,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -29,7 +30,7 @@ export default function RadioPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Radio</h1>
@@ -51,13 +52,13 @@ export default function RadioPage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="flex items-att justify-around gap-4">
+              <div className="flex flex-col md:flex-row justify-around gap-4">
                 {/* Single */}
-                <div className="flex flex-col items-center gap-4 bg-ac-gray-20 rounded-lg flex-1 justify-center">
-                  <div className="flex items-center justify-center p-6">
+                <div className="flex flex-col items-center gap-4 bg-ac-gray-20 rounded-lg flex-1 justify-center p-6">
+                  <div className="flex items-center justify-center">
                     <Radio />
                   </div>
-                  <span className="text-sm text-foreground pb-4">Single</span>
+                  <span className="text-sm text-foreground">Single</span>
                 </div>
 
                 {/* Group */}
@@ -176,7 +177,7 @@ export default function RadioPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">사용 관련</h3>
-                <div className="grid grid-cols-2 gap-6 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                   <UsageCard
                     type="Don't"
                     src="/input/radio/usage_dont_1.png"
@@ -188,7 +189,7 @@ export default function RadioPage() {
                     description="Radio의 기본 값을 설정하여 하나의 값에 체크가 되어있게 설정합니다. (Default checked 필수)"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Don't"
                     src="/input/radio/usage_dont_3.png"
@@ -286,14 +287,7 @@ const [val, setVal] = useState("a");
             {/* Radio Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Radio Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["size",         '"md" | "lg" | "xl"', '"lg"',      "라디오 크기 (12 / 18 / 24px)"],
                   ["label",        "string",              "-",         "라벨 텍스트 (선택)"],
                   ["description",  "string",              "-",         "설명 텍스트 (선택)"],
@@ -303,39 +297,16 @@ const [val, setVal] = useState("a");
                   ["name",         "string",              "-",         "input name 속성. 같은 name끼리 단일 선택"],
                   ["value",        "string",              "-",         "input value 속성"],
                   ["onChange",     "(e) => void",         "-",         "상태 변경 핸들러"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* RadioGroup Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">RadioGroup Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["title",     "string",                    "-",          "그룹 제목 (선택)"],
                   ["direction", '"vertical" | "horizontal"', '"vertical"', "라디오 배치 방향"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

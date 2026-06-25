@@ -14,6 +14,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "layout",  label: "배치" },
@@ -25,7 +26,7 @@ export default function ButtonGroupPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -106,7 +107,7 @@ export default function ButtonGroupPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-2">아이콘 사용</h3>
-                <div className="grid grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <UsageCard type="Don't" src="/button/buttonGroup/usage_tab_dont.png" description="탭처럼 사용하지 마세요!" />
                   <UsageCard type="Don't" src="/button/buttonGroup/usage_duli_dont.png" description="Primary 버튼을 그룹내에서 두번 이상 사용하지 않도록 주의합니다." />
                   <UsageCard type="Don't" src="/button/buttonGroup/usage_icon_dont.png" description="아이콘은 전체적으로 사용하거나 사용하지 않습니다." />
@@ -173,24 +174,9 @@ import { Button } from "@alphacode-ai/design-system";`} />
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["direction", '"horizontal" | "vertical"', '"horizontal"', "버튼 배치 방향. vertical 사용 시 모든 버튼의 너비가 부모에 맞게 확장됨"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

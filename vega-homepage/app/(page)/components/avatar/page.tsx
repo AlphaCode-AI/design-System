@@ -19,6 +19,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 /**
  * Table of Contents 데이터
@@ -37,7 +38,7 @@ export default function AvatarPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -61,7 +62,7 @@ export default function AvatarPage() {
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
               <div className="rounded-lg border border-border p-8">
-                <div className="flex items-end justify-center gap-16">
+                <div className="flex flex-col md:flex-row items-center md:items-end justify-center gap-16">
                   {/* Shape */}
                   <div className="flex flex-col items-center gap-4">
                     <p className="text-sm font-semibold text-foreground">Shape</p>
@@ -78,7 +79,7 @@ export default function AvatarPage() {
                   </div>
 
                   {/* Divider */}
-                  <Divider orientation="vertical" className="h-24" />
+                  <Divider orientation="vertical" className="hidden md:block h-24" />
 
                   {/* Type */}
                   <div className="flex flex-col items-center gap-4">
@@ -108,16 +109,16 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
                 사이즈는 xs / sm / md / lg / xl / 2xl 6개의 사이즈를 사용합니다. Default는 md 입니다. 중요도와 시각적 균형에 맞게 사이즈를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
-                <div className="flex flex-col gap-6 items-center">
+              <div className="rounded-lg border border-border p-4 md:p-8">
+                <div className="flex flex-col gap-4 md:gap-6 md:items-center">
                   {(["xs", "sm", "md", "lg", "xl", "2xl"] as const).map((size) => {
                     const px = { xs: 16, sm: 20, md: 24, lg: 32, xl: 48, "2xl": 64 }[size];
                     return (
-                      <div key={size} className="flex items-center gap-6">
-                        <span className="text-sm text-foreground w-24 text-right shrink-0">
+                      <div key={size} className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                        <span className="text-sm text-foreground md:w-24 md:text-right shrink-0">
                           {size} ({px}px)
                         </span>
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-wrap items-center gap-2 md:gap-3">
                           <Avatar size={size} src="/avatar/img_4.jpg" />
                           <Avatar size={size} src="/avatar/img_5.jpg" />
                           <Avatar size={size} shape="square" className="bg-ac-gray-80" icon={<Landmark className="w-1/2 h-1/2 text-ac-white" />} />
@@ -138,8 +139,8 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
               아바타의 아이콘 타입은 사용자를 표현하는 아이콘으로 많이 사용됩니다. 사용자를 표현하는 아이콘으로 사용할 때 사용자를 표현하는 목적과 다른 아이콘의 사용을 지양합니다.<br/> 아이콘은 lucide-react 아이콘을 사용하며, <CodeBadge>lucide-react</CodeBadge>에서 직접 import하지 않고 반드시 <CodeBadge>@alphacode-ai/design-system</CodeBadge>에서 import하여 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
-                <div className="flex items-center justify-center gap-10">
+              <div className="rounded-lg border border-border p-4 md:p-8">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-10">
                   {[
                     { icon: <User className="w-1/2 h-1/2" />, label: "사용자" },
                     { icon: <Landmark className="w-1/2 h-1/2" />, label: "은행" },
@@ -162,8 +163,8 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
                 아바타의 이미지 타입은 사용자가 지정한 이미지 또는 회사의 로고 이미지를 사용합니다. 기계의 이미지 또는 회사 전경 같은 이미지 사용은 지양합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
-                <div className="flex items-center justify-center gap-10">
+              <div className="rounded-lg border border-border p-4 md:p-8">
+                <div className="flex items-center justify-center gap-4 md:gap-10">
                   {[
                     { src: "/avatar/img_symbol.png", label: "심볼" },
                     { src: "/avatar/img_logo.png", label: "로고" },
@@ -185,8 +186,8 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
               아바타의 텍스트 타입은 사용자의 아이디 또는 닉네임의 영문 또는 숫자의 앞글자를 대문자로 변환해 생성합니다. xs-md 사이즈에서는 한글자만 표출하며 그 이후 사이즈에선 두글자를 표출합니다. 한글은 사용하지 않습니다. 색상 값은 아래와 같은 값을 먼저 사용하며 다른 색상 적용도 가능하나 가독성을 고려하여 지정하도록 합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
-                <div className="flex items-center justify-center gap-6 flex-wrap">
+              <div className="rounded-lg border border-border p-4 md:p-8">
+                <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
                   <Avatar size="xs" name="S" />
                   <Avatar size="xs" name="S" className="bg-ac-blue-gray-30" />
                   <Avatar size="sm" name="Q" className="bg-ac-primary-30" />
@@ -203,7 +204,7 @@ export default function AvatarPage() {
             <section id="usage" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <h3 className="text-lg font-semibold text-foreground mb-4">사용 관련</h3>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <UsageCard
                   type="Don't"
                   src="/avatar/usage_dont1.png"
@@ -292,29 +293,14 @@ export default function AvatarPage() {
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["size", '"xs" | "sm" | "md" | "lg" | "xl" | "2xl"', '"md"', "아바타 크기 (16 / 20 / 24 / 32 / 48 / 64px)"],
                   ["shape", '"circle" | "square"', '"circle"', "아바타 모양"],
                   ["src", "string", "-", "이미지 URL (Image 타입)"],
                   ["alt", "string", "-", "이미지 대체 텍스트"],
                   ["name", "string", "-", "이니셜 자동 생성에 사용할 이름 (Text 타입)"],
                   ["icon", "ReactNode", "-", "아이콘 노드 (Icon 타입)"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

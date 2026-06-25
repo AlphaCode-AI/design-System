@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  cn,
   Tabs,
   TabList,
   TabTrigger,
@@ -13,6 +12,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -21,34 +21,13 @@ const toc: TocItem[] = [
   { id: "usage",   label: "사용 가이드" },
 ];
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <React.Fragment key={i}>
-          <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-          <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
-
 
 export default function FileInputPage() {
   const [activeTab, setActiveTab] = useState("docs");
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">File input</h1>
@@ -89,7 +68,7 @@ export default function FileInputPage() {
                 Text upload 상태는 Default / Complete / Error / Disable 4가지로 사용합니다.
               </p>
               <div className="rounded-lg bg-ac-gray-20 p-8">
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="flex flex-col gap-3">
                     <FileInput label="file label" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">Default</span>
@@ -117,16 +96,16 @@ export default function FileInputPage() {
                 사이즈는 높이를 기준으로 sm / md / lg 3가지를 사용합니다.
               </p>
               <div className="rounded-lg border border-border p-8">
-                <div className="flex items-start gap-6">
-                  <div className="flex flex-col gap-3 flex-1">
+                <div className="flex flex-col md:flex-row items-start gap-6">
+                  <div className="flex flex-col items-start gap-3 w-full">
                     <FileInput size="lg" label="file label" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">lg (40px)</span>
                   </div>
-                  <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-col items-start gap-3 w-full">
                     <FileInput size="md" label="file label" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">md (36px)</span>
                   </div>
-                  <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-col items-start gap-3 w-full">
                     <FileInput size="sm" label="file label" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">sm (30px)</span>
                   </div>
@@ -142,7 +121,7 @@ export default function FileInputPage() {
                 <p className="text-sm text-foreground mb-6">
                   2개 이상의 파일을 업로드했을 때는 value에 몇건의 파일을 업로드했는지 표출합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/input/file-input/usage_multiple_do.png"

@@ -13,6 +13,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
 import CodeBadge from "@/app/components/CodeBadge";
+import PropsTable from "@/app/components/PropsTable";
 
 /* ─────────────────────────────────────────
    TOC
@@ -31,7 +32,7 @@ export default function DividerPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* Page title */}
         <div className="mb-8">
@@ -54,7 +55,7 @@ export default function DividerPage() {
             <section id="type">
               <h2 className="text-lg font-semibold text-foreground mb-4">Type</h2>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 {/* Horizontal */}
                 <div className="border border-border rounded-lg p-6 bg-card">
@@ -138,7 +139,7 @@ export default function DividerPage() {
                 그러나 소스에 공백을 사용해 구분할 수 있는 경우에는 구분선 사용을 지양하도록 합니다.
               </p>
 
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <UsageCard
                   type="Do"
                   src="/divider/usage_divider_do.png"
@@ -151,7 +152,7 @@ export default function DividerPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <UsageCard
                   type="Do"
                   src="/divider/usage_content_do.png"
@@ -213,28 +214,11 @@ export default function DividerPage() {
  
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">
-                    {h}
-                  </div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["orientation", '"horizontal" | "vertical"', '"horizontal"', "구분선 방향"],
                   ["variant",     '"solid" | "dashed"',        '"solid"',      "구분선 스타일"],
                   ["inset",       "boolean",                   "false",        "양끝 여백을 두는 inset 스타일"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
  
           </TabContent>

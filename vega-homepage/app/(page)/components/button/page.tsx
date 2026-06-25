@@ -14,6 +14,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -28,7 +29,7 @@ export default function ButtonPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -67,7 +68,7 @@ export default function ButtonPage() {
               <p className="text-sm text-foreground mb-4">버튼은 중요도와 쓰임새에 따라 세부 스타일을 분류하여 사용합니다.</p>
 
               <div className="rounded-lg border border-border p-8 mb-4">
-                <div className="grid grid-cols-5 gap-4">
+                <div className="flex flex-row flex-wrap justify-around items-center gap-4">
                   {[
                     { node: <Button variant="primary" size="md">Primary</Button>, label: "Primary button" },
                     { node: <Button variant="secondary" size="md">Secondary</Button>, label: "Secondary button" },
@@ -98,7 +99,7 @@ export default function ButtonPage() {
                 버튼 사이즈는 높이 기준 5가지로 구분됩니다. 사이즈에 따라 폰트 / 아이콘 / 패딩 값에 대한 차이가 있으므로 유의하여 사용하도록 합니다.
               </p>
               <div className="rounded-lg bg-ac-gray-20 p-10">
-                <div className="flex flex-row items-end justify-center gap-6">
+                <div className="flex flex-col md:flex-row items-center md:items-end justify-center gap-6">
                   {(
                     [
                       { size: "xl", iconSize: "icon-xl", height: "54px" },
@@ -129,7 +130,7 @@ export default function ButtonPage() {
                 상태는 배경 색상 4가지로 구분됩니다. Default / Hover / Disable / Loading 로 구분되며 각 상태에 따라 적절히 사용됩니다.
                 Semantic Color로 버튼을 생성할 경우, 상태에 따른 색상은 Foundation의 Color부분을 참고합니다.
               </p>
-              <div className="rounded-lg border border-border overflow-hidden">
+              <div className="rounded-lg border border-border overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border bg-ac-gray-10">
@@ -187,7 +188,7 @@ export default function ButtonPage() {
                 <p className="text-sm text-foreground mb-4">
                   버튼 내에 아이콘을 사용할 때 우측 외엔 사용을 지양하며, 아이콘의 색상은 2가지 이상 사용하지 않도록 주의합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/button/usage_icon_do.png" />
                   <UsageCard type="Don't" src="/button/usage_icon_dont.png" />
                 </div>
@@ -329,14 +330,7 @@ export default function ButtonPage() {
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["variant", '"primary" | "secondary" | "tertiary" | "link" | "icon"', '"primary"', "버튼 스타일 변형"],
                   ["size", '"xs" | "sm" | "md" | "lg" | "xl" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg" | "icon-xl"', '"md"', "버튼 크기. icon 전용 사이즈는 variant=\"icon\"에서 사용"],
                   ["leftIcon", "ReactNode", "-", "버튼 텍스트 좌측에 표시할 아이콘"],
@@ -346,15 +340,7 @@ export default function ButtonPage() {
                   ["asChild", "boolean", "false", "자식 요소로 렌더링. Next.js Link 등과 조합할 때 사용"],
                   ["colorClassName", "string", "-", "variant의 기본 색상을 override하는 Tailwind 클래스"],
                   ["disabled", "boolean", "false", "버튼 비활성화"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

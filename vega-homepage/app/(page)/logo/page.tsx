@@ -13,10 +13,10 @@ const toc: TocItem[] = [
 export default function LogoPage() {
   return (
     <div className="flex w-full">
-      <div className="lex-1 min-w-0 px-10 py-8">
+      <div className="lex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
         
         {/* ── Header ── */}
-        <header className="mb-12 border-b border-border pb-8 flex justify-between items-end">
+        <header className="mb-12 border-b border-border pb-8 flex flex-col md:flex-row justify-between items-end">
           <div className="flex flex-col gap-3">
             <h1 className="text-2xl font-bold text-foreground">Logo</h1>
             <p className="text-sm text-foreground leading-relaxed">
@@ -43,7 +43,7 @@ export default function LogoPage() {
             대문자 'A'와 '알파'의 형상을 조합하여 만든 심볼과, 'Alpha Code'의 'CODE'를 결합한 디자인으로 구성되어 있습니다.
           </p>
           
-          <div className="grid grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="h-48 rounded-xl bg-ac-gray-20 flex flex-col items-center justify-center relative">
               <img src="/logo/alphacode_logo_primary_horizontal.png" alt="alphacode logo" />
               <span className="text-ac-gray-50 italic text-xs absolute bottom-4 right-6">alphacode.logo.primary.horizontal</span>
@@ -66,7 +66,7 @@ export default function LogoPage() {
           </div>
           
           <p className="text-sm text-foreground mb-4">배경이 로고 색상과 겹칠 때 : 배경 색상이 로고의 yello 또는 orange 색상과 어쩔 수 없이 겹칠때, 가이드를 참고하여 사용해 주세요.</p>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="h-24 rounded-lg bg-[#FFCC38] flex flex-col items-center justify-center relative">
               <img src="/logo/alphacode_logo_black_horizontal.png" alt="alphacode logo" className="w-40"/>  
             </div>

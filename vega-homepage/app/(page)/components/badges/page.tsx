@@ -17,6 +17,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 /**
  * Table of Contents 데이터
@@ -33,7 +34,7 @@ export default function BadgePage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -110,8 +111,8 @@ export default function BadgePage() {
               <p className="text-sm text-foreground mb-4">
                 배지 사이즈는 높이 기준 2가지로 구분됩니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
-                <div className="flex items-end justify-center gap-12">
+              <div className="rounded-lg border border-border p-4 md:p-8">
+                <div className="flex flex-wrap items-end justify-center gap-4 md:gap-12">
                   <div className="flex flex-col items-center gap-2">
                     <Badge variant="primary" size="lg">Size : lg</Badge>
                     <span className="text-sm text-foreground">height : 30px</span>
@@ -142,7 +143,7 @@ export default function BadgePage() {
                 <p className="text-sm text-foreground mb-4">
                   Badge는 설명이 필요한 구성 요소 위 또는 근처에 배치하고 짧고 명확한 레이블을 노출하여 사용자가 빠르게 이해하고 탐색할 수 있도록 사용합니다. 레이블은 어떤 상태를 설명하는 한두 단어를 목표로 합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/badge/usage_label_do.png"
@@ -160,7 +161,7 @@ export default function BadgePage() {
                 <p className="text-sm text-foreground mb-4">
                   배지는 사용자가 빠르게 정보를 훑어 보는 과정을 돕기 위해 사용됩니다. 만약 한 항목에 여러 개의 배지가 사용된다면 지나치게 많은 정보가 강조되어 있어 배지의 사용 효과를 감소시킵니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/badge/usage_use_do.png"
@@ -233,26 +234,11 @@ export default function BadgePage() {
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["variant", '"default" | "primary" | "complete" | "success" | "warning" | "fail"', '"default"', "배지 스타일 변형"],
                   ["size", '"xs" | "sm" | "md" | "lg"', '"md"', "배지 크기 (16 / 20 / 26 / 30px)"],
                   ["icon", "ReactNode", "-", "좌측에 표시할 아이콘 노드"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

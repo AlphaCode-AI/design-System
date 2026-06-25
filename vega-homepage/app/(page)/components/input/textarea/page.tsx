@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  cn,
   Tabs,
   TabList,
   TabTrigger,
@@ -13,6 +12,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -21,33 +21,13 @@ const toc: TocItem[] = [
   { id: "usage",   label: "사용 가이드" },
 ];
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <React.Fragment key={i}>
-          <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-          <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
 
 export default function TextareaPage() {
   const [activeTab, setActiveTab] = useState("docs");
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Textarea</h1>
@@ -88,7 +68,7 @@ export default function TextareaPage() {
                 Focus 상태일 때, border color는 해당 솔루션의 primary color를 사용합니다.
               </p>
               <div className="rounded-lg bg-ac-gray-20 p-8">
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                   <div className="flex flex-col gap-3">
                     <Textarea label="textarea label" placeholder="placeholder" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">Default</span>
@@ -121,8 +101,8 @@ export default function TextareaPage() {
                 Default height는 적용되는 영역에 맞추어 지정합니다. 예를 들면 Textarea에 들어갈 내용을 예상하여 height를 정하거나 주변 input/select의 2.5배 정도로 적용합니다.
               </p>
               <div className="rounded-lg border border-border p-8">
-                <div className="flex items-start gap-8">
-                  <div className="flex flex-col gap-3 flex-1">
+                <div className="flex flex-col md:flex-row items-start gap-8">
+                  <div className="flex flex-col gap-3 w-full">
                     <Textarea
                       label="textarea label"
                       placeholder="placeholder"
@@ -131,7 +111,7 @@ export default function TextareaPage() {
                     />
                     <span className="text-xs text-foreground text-center">min-height : 30px</span>
                   </div>
-                  <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-col gap-3 w-full">
                     <Textarea
                       label="textarea label"
                       placeholder="placeholder"
@@ -149,7 +129,7 @@ export default function TextareaPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">사용 관련</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Don't"
                     src="/input/textarea/usage_short_dont.png"

@@ -49,7 +49,8 @@ function ColorTable({ prefix, colorTokens }: { prefix: string; colorTokens: Reco
   };
 
   return (
-    <div className="rounded-md border border-border overflow-hidden mb-12">
+    <div className="rounded-md border border-border overflow-x-auto mb-12">
+      <div className="min-w-max">
       <div className="grid border-b border-border bg-ac-gray-10" style={gridStyle}>
         <div className={headerClass}>Name</div>
         {entries.map(([key]) => (
@@ -78,6 +79,7 @@ function ColorTable({ prefix, colorTokens }: { prefix: string; colorTokens: Reco
           </div>
         ))}
       </div>
+      </div>
     </div>
   );
 }
@@ -87,7 +89,7 @@ export default function ColorPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
         
         {/* 헤더 섹션 */}
         <header className="mb-8">

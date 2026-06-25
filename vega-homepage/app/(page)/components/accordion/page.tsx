@@ -16,6 +16,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 /**
  * Table of Contents 데이터
@@ -42,7 +43,7 @@ export default function AccordionPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -66,7 +67,7 @@ export default function AccordionPage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* 배경 색상이 있는 경우 */}
                 <div className="rounded-lg border border-border p-6">
                   <Accordion type="single" variant="filled" backgroundColor={bgColor}>
@@ -178,7 +179,7 @@ export default function AccordionPage() {
               <p className="text-sm text-foreground mb-4">
                 아이콘의 확장 상태를 나타내는 아이콘은 항상 일관된 위치에 제공됩니다. 아이콘은 변경 가능하지만 변경된 패널의 열림/닫힘 상태를 정확하게 반영되도록 제공합니다.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Plus/Minus (Default) */}
                 <div className="rounded-lg p-6 bg-ac-gray-20">
                     <Accordion 
@@ -239,7 +240,7 @@ export default function AccordionPage() {
               {/* 패널 내용 */}
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-4">패널 내용</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/accordion/usage-do.png"
@@ -393,14 +394,7 @@ export default function AccordionPage() {
             {/* Accordion Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Accordion Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["type", '"single" | "multiple"', '"single"', "단일/다중 확장 모드 설정"],
                   ["variant", '"default" | "filled"', '"default"', "아코디언 스타일 변형"],
                   ["backgroundColor", "string", "-", "filled variant의 헤더 배경색 (CSS color 값)"],
@@ -408,38 +402,15 @@ export default function AccordionPage() {
                   ["defaultValue", "string | string[]", "-", "초기 열림 상태의 아이템 value"],
                   ["value", "string | string[]", "-", "제어 컴포넌트로 사용 시 현재 열린 아이템 value"],
                   ["onValueChange", "(value: string | string[]) => void", "-", "열림 상태 변경 시 호출되는 콜백"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* AccordionTrigger Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">AccordionTrigger Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["iconType", '"plus" | "chevron"', '"plus"', "트리거 아이콘 스타일 (plus: +/-, chevron: 화살표)"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

@@ -14,6 +14,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -24,33 +25,13 @@ const toc: TocItem[] = [
   { id: "usage",     label: "사용 가이드" },
 ];
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <React.Fragment key={i}>
-          <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50 ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{prop}</div>
-          <div className={`px-3 py-2 font-mono text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{type}</div>
-          <div className={`px-3 py-2 font-mono text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{def}</div>
-          <div className={`px-3 py-2 text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{desc}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
 
 export default function ToggleGroupPage() {
   const [activeTab, setActiveTab] = useState("docs");
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Toggle Group</h1>
@@ -93,7 +74,7 @@ export default function ToggleGroupPage() {
               <p className="text-sm text-foreground mb-6">
                 <CodeBadge>variant</CodeBadge> prop으로 스타일을 지정합니다. <CodeBadge>default</CodeBadge>는 그레이 계열, <CodeBadge>primary</CodeBadge>는 브랜드 컬러를 사용합니다. 텍스트 레이블과 아이콘+레이블 타입을 지원합니다.
               </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-4 items-center bg-ac-gray-20 rounded-lg p-6">
                   <span className="text-xs font-semibold text-muted-foreground">Default / Style: Default</span>
                   <ToggleGroup defaultValue="option1" variant="default">
@@ -135,7 +116,7 @@ export default function ToggleGroupPage() {
               <p className="text-sm text-foreground mb-6">
                 토글 그룹 아이템의 각 상태를 나타냅니다.
               </p>
-              <div className="rounded-lg border border-border p-8 grid grid-cols-2 gap-8 items-start justify-items-center">
+              <div className="rounded-lg border border-border p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-center">
                 {(["default", "primary"] as const).map((variant) => (
                   <div key={variant}>
                     <span className="text-xs font-semibold text-muted-foreground mb-4 block">
@@ -268,33 +249,33 @@ export default function ToggleGroupPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">일관적인 아이콘 사용</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/toggle-group/usage_icon_do.png"
-                    className="h-80"
+                    className="md:h-80"
                     description="아이콘을 사용할때 선택하는 요소를 명확히 지칭하는 아이콘을 사용합니다."
                   />
                   <UsageCard
                     type="Don't"
                     src="/toggle-group/usage_icon_dont.png"
-                    className="h-80"
+                    className="md:h-80"
                     description="상태를 표현하기 위해 아이콘을 유동적으로 변경하지 않습니다. 선택 전/선택 후 아이콘이 동일해야 합니다."
                   />
                 </div>
               </div>
               <div className="mb-10">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/toggle-group/usage_type_do.png"
-                    className="h-80"
+                    className="md:h-80"
                     description="토글 그룹 안에 아이템은 모두 동일한 타입을 사용합니다."
                   />
                   <UsageCard
                     type="Don't"
                     src="/toggle-group/usage_type_dont.png"
-                    className="h-80"
+                    className="md:h-80"
                     description="토글 그룹안에 아이템마다 타입을 따로 사용하지 않습니다."
                   />
                 </div>
@@ -459,7 +440,7 @@ export default function ToggleGroupPage() {
             <section className="space-y-8">
               <div>
                 <h2 className="text-xl font-bold text-foreground mb-4">ToggleGroup Props</h2>
-                <PropsTable rows={[
+              <PropsTable rows={[
                   ["value",           "string",                       "-",         "현재 선택된 값 (controlled)"],
                   ["defaultValue",    "string",                       '""',        "초기 선택값 (uncontrolled)"],
                   ["onValueChange",   "(value: string) => void",      "-",         "선택값 변경 시 호출되는 콜백"],
@@ -472,7 +453,7 @@ export default function ToggleGroupPage() {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-foreground mb-4">ToggleGroupItem Props</h2>
-                <PropsTable rows={[
+              <PropsTable rows={[
                   ["value",    "string",          "-",     "이 아이템의 고유 값 (필수)"],
                   ["icon",     "React.ReactNode", "-",     "아이콘 요소"],
                   ["tooltip",  "string",          "-",     "iconOnly 모드에서 hover 시 표시할 레이블"],

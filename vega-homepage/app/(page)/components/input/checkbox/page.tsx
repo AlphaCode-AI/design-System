@@ -14,6 +14,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",     label: "Type" },
@@ -30,7 +31,7 @@ export default function CheckboxPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Checkbox</h1>
@@ -52,10 +53,10 @@ export default function CheckboxPage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="flex items-att justify-around gap-4">
+              <div className="flex flex-col md:flex-row justify-around gap-4">
                 {/* Single */}
-                <div className="flex flex-col items-center gap-4 bg-ac-gray-20 rounded-lg flex-1 justify-center">
-                  <div className="flex items-center justify-center p-6">
+                <div className="flex flex-col items-center gap-4 bg-ac-gray-20 rounded-lg flex-1 justify-center p-6">
+                  <div className="flex items-center justify-center ">
                     <Checkbox />
                   </div>
                   <span className="text-sm text-foreground">Single</span>
@@ -180,7 +181,7 @@ export default function CheckboxPage() {
 
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">사용 관련</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Don't"
                     src="/input/checkbox/usage_radio_dont.png"
@@ -282,16 +283,7 @@ export default function CheckboxPage() {
             {/* ── Checkbox Props ── */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Checkbox Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">
-                    {h}
-                  </div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["size",          '"md" | "lg" | "xl"', '"lg"',      "체크박스 크기"],
                   ["label",         "string",              "-",         "라벨 텍스트 (선택)"],
                   ["description",   "string",              "-",         "설명 텍스트 (선택)"],
@@ -300,41 +292,16 @@ export default function CheckboxPage() {
                   ["disabled",      "boolean",             "false",     "비활성 상태"],
                   ["checkedColor",  "string",              '"#FF6300"', "체크 시 배경 색상"],
                   ["onChange",      "(e) => void",         "-",         "상태 변경 핸들러"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* ── CheckboxGroup Props ── */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">CheckboxGroup Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">
-                    {h}
-                  </div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["title",     "string",                    "-",          "그룹 제목 (선택)"],
                   ["direction", '"vertical" | "horizontal"', '"vertical"', "체크박스 배치 방향"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

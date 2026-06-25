@@ -18,6 +18,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy",    label: "Anatomy" },
@@ -48,7 +49,7 @@ export default function CarouselPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Carousel</h1>
@@ -100,7 +101,7 @@ export default function CarouselPage() {
                 <CodeBadge>CarouselDots</CodeBadge>와 <CodeBadge>CarouselCounter</CodeBadge> 두 가지 타입을 제공합니다.
               </p>
               <div className="border border-border rounded-lg p-6 bg-card">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                   {/* Rounded */}
                   <div className="flex flex-col gap-3">
@@ -188,7 +189,7 @@ export default function CarouselPage() {
                 {/* Absolute Button */}
                 <div className="border border-border rounded-lg p-6 bg-card flex flex-col gap-4">
                   <p className="text-xs font-semibold text-foreground">Absolute Button</p>
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-3">
                       <p className="text-xs text-muted-foreground">Horizontal</p>
                       <Carousel loop className="w-full">
@@ -232,7 +233,7 @@ export default function CarouselPage() {
                 {/* List with Button */}
                 <div className="border border-border rounded-lg p-6 bg-card flex flex-col gap-4">
                   <p className="text-xs font-semibold text-foreground">List with Button</p>
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-3">
                       <p className="text-xs text-muted-foreground">Horizontal</p>
                       <Carousel loop className="w-full">
@@ -276,7 +277,7 @@ export default function CarouselPage() {
                 {/* Button Only */}
                 <div className="border border-border rounded-lg p-6 bg-card flex flex-col gap-4">
                   <p className="text-xs font-semibold text-foreground">Button Only</p>
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-3">
                       <p className="text-xs text-muted-foreground">Horizontal</p>
                       <Carousel loop className="w-full">
@@ -318,7 +319,7 @@ export default function CarouselPage() {
                 {/* Text */}
                 <div className="border border-border rounded-lg p-6 bg-card flex flex-col gap-4">
                   <p className="text-xs font-semibold text-foreground">Text</p>
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-3">
                       <p className="text-xs text-muted-foreground">Horizontal</p>
                       <Carousel loop className="w-full">
@@ -462,7 +463,7 @@ export default function CarouselPage() {
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-2">사용 예시</h3>
                 <p className="text-sm text-foreground mb-4">캐러셀 관련 컨트롤, 항목 탐색 식별자가 캐러셀 컨테이너와 중첩되지 않도록 합니다.</p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/carousel/usage_do.png" />
                   <UsageCard type="Don't" src="/carousel/usage_dont.png" />
                 </div>
@@ -625,76 +626,31 @@ export default function CarouselPage() {
             {/* Carousel Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Carousel Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["orientation",   '"horizontal" | "vertical"', '"horizontal"', "슬라이드 방향"],
                   ["loop",          "boolean",                    "false",        "무한 루프 여부"],
                   ["itemsPerView",  "number",                     "1",            "한 번에 보이는 항목 수"],
                   ["defaultIndex",  "number",                     "0",            "초기 슬라이드 인덱스"],
                   ["index",         "number",                     "-",            "현재 인덱스 (controlled)"],
                   ["onIndexChange", "(index: number) => void",    "-",            "인덱스 변경 콜백"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* CarouselDots Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">CarouselDots Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["type",        '"rounded" | "line" | "border"', '"rounded"', "인디케이터 스타일"],
                   ["activeColor", "string",                        '"#FF6300"', "활성 인디케이터 색상. hex·rgb 또는 토큰명(예: ac-blue-50) 사용 가능"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* CarouselPrevious / CarouselNext Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">CarouselPrevious / CarouselNext Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["navStyle", '"default" | "line" | "border" | "text"', '"default"', "버튼 스타일"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

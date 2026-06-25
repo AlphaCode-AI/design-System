@@ -13,6 +13,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 /**
  * Table of Contents 데이터
@@ -30,7 +31,7 @@ export default function BreadcrumbsPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -124,7 +125,7 @@ export default function BreadcrumbsPage() {
               <h2 className="text-xl font-bold text-foreground mb-2">State</h2>
               <p className="text-sm text-foreground mb-4">브레드크럼 아이템의 각 상태를 나타냅니다.</p>
               <div className="rounded-lg border border-border p-8">
-                <div className="grid grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   {/* 홈 */}
                   <div className="flex flex-col gap-4">
                     <p className="text-sm font-semibold text-foreground">홈</p>
@@ -186,7 +187,7 @@ export default function BreadcrumbsPage() {
               <p className="text-sm text-foreground mb-4">
                 브레드크럼 아이콘은 항상 일관된 위치에 제공됩니다. 아이콘 변경 가능하나 아래처럼 예시처럼 브레드크럼의 구조를 나타내기에 적절한 아이콘으로 변경합니다.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="rounded-lg border p-6">
                   <Breadcrumbs
                     separator="slash"
@@ -222,7 +223,7 @@ export default function BreadcrumbsPage() {
                 <p className="text-sm text-foreground mb-4">
                   화면 너비가 충분하지 않은 경우 화면 첫번째 경로와 마지막 경로만 표시하여 탐색 경로가 축약되어 있음을 사용자가 인지할 수 있도록 합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/breadcrumb/usage_fit_do.png"
@@ -240,7 +241,7 @@ export default function BreadcrumbsPage() {
                 <p className="text-sm text-foreground mb-4">
                   본문 상단에 명확한 본문 제목이 제공되고 있는 경우, 브레드크럼의 마지막 항목으로 현재 화면의 경로를 생략하고 상위 화면 경로를 제공할 수 있습니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/breadcrumb/usage_current_do.png"
@@ -258,7 +259,7 @@ export default function BreadcrumbsPage() {
                 <p className="text-sm text-foreground mb-4">
                   작업 진행 상황을 보여주기 위해 브레드크럼을 사용하지 않습니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/breadcrumb/usage_path_do.png"
@@ -343,27 +344,12 @@ export default function BreadcrumbsPage() {
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["items", "{ label: string; href?: string }[]", "-", "브레드크럼 경로 배열. 마지막 아이템이 현재 페이지로 표시됨"],
                   ["separator", '"slash" | "chevron"', '"slash"', "경로 구분자 아이콘"],
                   ["maxItems", "number", "-", "최대 표시 아이템 수. 초과 시 중간 경로가 ...으로 축약됨"],
                   ["showHomeIcon", "boolean", "true", "첫번째 항목의 홈 아이콘 표시 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

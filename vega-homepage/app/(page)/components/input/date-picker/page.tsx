@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  cn,
   Tabs,
   TabList,
   TabTrigger,
@@ -14,6 +13,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy",        label: "Anatomy" },
@@ -48,33 +48,13 @@ const HOLIDAYS_2026: Date[] = [
   new Date("2026-12-25"), // 크리스마스
 ];
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <React.Fragment key={i}>
-          <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-          <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
 
 export default function DatePickerPage() {
   const [activeTab, setActiveTab] = useState("docs");
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Date Picker</h1>
@@ -161,7 +141,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기본</h3>
                   <div className="rounded-lg bg-ac-gray-20 p-8">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="flex flex-col gap-3">
                         <DatePicker
                           label="날짜 선택"
@@ -209,7 +189,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기간 선택</h3>
                   <div className="rounded-lg bg-ac-gray-20 p-8">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="flex flex-col gap-3">
                         <DateRangePicker
                           twoMonths
@@ -262,7 +242,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기본</h3>
                   <div className="rounded-lg border border-border p-8">
-                    <div className="flex items-start gap-6">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker size="lg" label="날짜 선택" placeholder="날짜를 선택해주세요" helperText="현재일 기준 180일 이내 선택 가능합니다." dateFormat="yyyy-MM-dd" />
                         <span className="text-xs text-foreground text-center">lg (40px)</span>
@@ -282,7 +262,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기간 선택</h3>
                   <div className="rounded-lg border border-border p-8">
-                    <div className="flex items-start gap-6">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DateRangePicker size="lg" label="날짜 선택" helperText="최대 선택 가능 기간은 180일입니다." />
                         <span className="text-xs text-foreground text-center">lg (40px)</span>
@@ -311,7 +291,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">offsetMonths (현재 기준 ±2개월)</h3>
                   <div className="rounded-lg border border-border p-8">
-                    <div className="flex items-start gap-6">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
                           label="날짜 선택"
@@ -334,7 +314,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">minDate / maxDate (직접 지정)</h3>
                   <div className="rounded-lg border border-border p-8">
-                    <div className="flex items-start gap-6">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
                           label="날짜 선택"
@@ -359,7 +339,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">disabledDates (특정 날짜 선택 불가)</h3>
                   <div className="rounded-lg border border-border p-8">
-                    <div className="flex items-start gap-6">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
                           label="날짜 선택"
@@ -382,7 +362,7 @@ export default function DatePickerPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">weekendColor (주말 색상)</h3>
                   <div className="rounded-lg border border-border p-8">
-                    <div className="flex items-start gap-6">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
                           label="날짜 선택"
@@ -413,7 +393,7 @@ export default function DatePickerPage() {
                 <p className="text-sm text-foreground mb-6">
                 일자 달력에서 주말을 표시하고 싶은 경우 Sementic color의 red-60 / blue-60 색상을 활용하여 표시합니다. 그 외에 다른 색상은 사용하지 않습니다. 휴일과 주말 색상이 겹칠 경우 휴일의 underline 스타일만 적용합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/input/date-picker/usage_holiday_do.png"

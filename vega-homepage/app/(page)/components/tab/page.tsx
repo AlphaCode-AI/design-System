@@ -10,6 +10,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -26,7 +27,7 @@ export default function TabPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Tab</h1>
@@ -105,7 +106,7 @@ export default function TabPage() {
                 탭 아이템의 각 상태를 나타냅니다.
               </p>
               <div className="border border-border rounded-lg p-8 bg-card flex justify-center">
-                <div className="flex gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
                   {[
                     { label: "Unselect", active: "" },
                     { label: "Select",   active: "갤럭시 탭" },
@@ -178,7 +179,7 @@ export default function TabPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-2">탭 사용</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Don't" src="/tab/usage_nested_dont.png" description="탭은 콘텐츠를 숨겨둔 상태에서 사용자가 콘텐츠의 표시 여부를 선택해야 하기 때문에 사용자의 인지적 부담을 더욱 증가시킬 수 있어 여러 개의 탭을 중첩하는 것은 바람직하지 않습니다." />
                   <UsageCard type="Don't" src="/tab/usage_label_dont.png" description="탭 레이블에 너무 긴 텍스트를 사용하지 않습니다." />
                 </div>
@@ -262,76 +263,31 @@ export default function TabPage() {
             {/* Tabs Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Tabs Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["value",          "string",                    "-",           "활성 탭 값 (controlled)"],
                   ["defaultValue",   "string",                    '""',          "초기 활성 탭 값 (uncontrolled)"],
                   ["onValueChange",  "(value: string) => void",   "-",           "탭 변경 콜백"],
                   ["variant",        '"fill" | "full"',           '"fill"',      "탭 너비 유형"],
                   ["size",           '"sm" | "md" | "lg"',        '"md"',        "탭 사이즈"],
                   ["activeColor",    "string",                    '"ac-primary-50"', "활성 탭 색상 (토큰명 또는 hex/rgb)"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* TabTrigger Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">TabTrigger Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["value",    "string",  "-",     "탭 고유 값"],
                   ["disabled", "boolean", "false", "비활성화 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* TabContent Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">TabContent Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["value", "string", "-", "대응하는 TabTrigger의 value"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

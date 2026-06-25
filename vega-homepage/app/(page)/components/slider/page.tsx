@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Slider,
   Tabs,
@@ -13,6 +13,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",  label: "Type" },
@@ -27,7 +28,7 @@ export default function SliderPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Slider</h1>
@@ -55,7 +56,7 @@ export default function SliderPage() {
               </p>
               <div className="bg-card flex flex-col gap-4">
                 {/* default + input */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
                     <p className="text-xs font-medium text-foreground">Default</p>
                     <Slider type="default" showMinMax defaultValue={40} />
@@ -67,7 +68,7 @@ export default function SliderPage() {
                 </div>
 
                 {/* with-icon + range */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
                     <p className="text-xs font-medium text-foreground">With Icon</p>
                     <Slider
@@ -107,7 +108,7 @@ export default function SliderPage() {
                   { label: "bg-ac-orange-50",  colorClassName: "bg-ac-orange-50" },
                   { label: "bg-ac-purple-50",  colorClassName: "bg-ac-purple-50" },
                 ].map(({ label, colorClassName }) => (
-                  <div key={label} className="flex items-center gap-4">
+                  <div key={label} className="flex flex-col md:flex-row items-center gap-4">
                     <span className="text-xs font-mono text-muted-foreground w-36 shrink-0">{label}</span>
                     <Slider colorClassName={colorClassName} defaultValue={50} />
                   </div>
@@ -121,12 +122,12 @@ export default function SliderPage() {
               <p className="text-sm text-foreground mb-4">
                 슬라이더는 <CodeBadge>default</CodeBadge>, <CodeBadge>active</CodeBadge>(드래그 중), <CodeBadge>disabled</CodeBadge> 상태를 지원합니다.
               </p>
-              <div className="border border-border rounded-lg p-8 bg-card flex flex-row gap-8">
+              <div className="border border-border rounded-lg p-8 bg-card flex flex-col md:flex-row gap-8">
 
                 {/* default */}
                 <div className="flex flex-col gap-2 flex-1 items-center">
                   <p className="text-xs font-medium text-foreground">Default</p>
-                  <div className="w-[400px]">
+                  <div className="w-full md:w-[400px]">
                     <Slider defaultValue={50} />
                   </div>
                 </div>
@@ -134,7 +135,7 @@ export default function SliderPage() {
                 {/* disabled */}
                 <div className="flex flex-col gap-2 flex-1 items-center">
                   <p className="text-xs font-medium text-foreground">Disabled</p>
-                  <div className="w-[400px]">
+                  <div className="w-full md:w-[400px]">
                     <Slider defaultValue={50} disabled />
                   </div>
                 </div>
@@ -212,14 +213,7 @@ const [range, setRange] = useState<[number, number]>([20, 70]);
             {/* Props 테이블 */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Slider Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["type",          '"default" | "input" | "with-icon" | "range" | "range-input"', '"default"', "슬라이더 타입"],
                   ["colorClassName", "string (Tailwind 클래스)",                                    '"bg-ac-primary-50"', "슬라이더 색상. Tailwind 배경색 클래스 전달"],
                   ["min",           "number",                    "0",          "최솟값"],
@@ -232,15 +226,7 @@ const [range, setRange] = useState<[number, number]>([20, 70]);
                   ["showMinMax",    "boolean",                   "false",      "min/max 레이블 표시 (default, range 타입)"],
                   ["leftIcon",      "ReactNode",                 "—",          "좌측 아이콘 (with-icon 타입)"],
                   ["rightIcon",     "ReactNode",                 "—",          "우측 아이콘 (with-icon 타입)"],
-                ].map(([prop, type, def, desc]) => (
-                  <React.Fragment key={prop}>
-                    <div className="px-3 py-2 border-b border-border font-mono text-xs text-ac-primary-60">{prop}</div>
-                    <div className="px-3 py-2 border-b border-border font-mono text-xs text-muted-foreground">{type}</div>
-                    <div className="px-3 py-2 border-b border-border font-mono text-xs">{def}</div>
-                    <div className="px-3 py-2 border-b border-border text-xs text-foreground">{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

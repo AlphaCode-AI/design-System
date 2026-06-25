@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Tabs,
   TabList,
@@ -18,6 +18,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -27,26 +28,6 @@ const toc: TocItem[] = [
   { id: "usage",     label: "사용 가이드" },
 ];
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <React.Fragment key={i}>
-          <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50 ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{prop}</div>
-          <div className={`px-3 py-2 font-mono text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{type}</div>
-          <div className={`px-3 py-2 font-mono text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{def}</div>
-          <div className={`px-3 py-2 text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{desc}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
 
 /* ── 토스트 동작 시연용 내부 컴포넌트 ── */
 const TOAST_ITEMS: { label: string; variant: SnackbarVariant; message: string; leftItem?: React.JSX.Element }[] = [
@@ -85,7 +66,7 @@ export default function SnackbarPage() {
   return (
     <SnackbarProvider position="bottom">
       <div className="flex w-full">
-        <div className="flex-1 min-w-0 px-10 py-8">
+        <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-foreground">Snackbar</h1>
@@ -124,7 +105,7 @@ export default function SnackbarPage() {
                   컨테이너는 보여지는 정보에 따라 색상을 변경하여 사용할 수 있습니다.
                 </p>
                 <div className="rounded-lg border border-border p-8 flex flex-col items-center">
-                  <div className="w-[480px] flex gap-4 flex-col">
+                  <div className="w-full md:w-[480px] flex gap-4 flex-col">
                     <div className="flex flex-col gap-1">
                       <span className="text-xs text-muted-foreground mb-1">Default</span>
                       <Snackbar variant="default" message="시스템 업데이트가 완료되어 정상적으로 서비스 이용 가능합니다." />
@@ -155,18 +136,18 @@ export default function SnackbarPage() {
                 <p className="text-sm text-foreground mb-6">
                   <CodeBadge>size</CodeBadge> prop으로 스낵바의 크기를 조절합니다. 기본값은 <CodeBadge>md</CodeBadge>입니다.
                 </p>
-                <div className="rounded-lg border border-border p-8 flex flex-row gap-4 items-end justify-center">
-                  <div className="flex flex-col gap-1">
+                <div className="rounded-lg border border-border p-8 flex flex-col md:flex-row gap-4 items-start md:items-end justify-center">
+                  <div className="flex flex-col gap-1 w-full">
                     <span className="text-xs text-muted-foreground mb-2">sm</span>
-                    <Snackbar size="sm" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
+                    <Snackbar className="w-full" size="sm" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 w-full">
                     <span className="text-xs text-muted-foreground mb-2">md (기본)</span>
-                    <Snackbar size="md" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
+                    <Snackbar className="w-full" size="md" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 w-full">
                     <span className="text-xs text-muted-foreground mb-2">lg</span>
-                    <Snackbar size="lg" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
+                    <Snackbar className="w-full" size="lg" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
                   </div>
                 </div>
               </section>
@@ -177,7 +158,7 @@ export default function SnackbarPage() {
                 <p className="text-sm text-foreground mb-6">
                   왼쪽 아이템은 아이콘, 아바타 등을 사용할 수 있으며, 오른쪽 아이템은 아이콘 또는 버튼으로 사용합니다.
                 </p>
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-foreground mb-4">Left item</h3>
                     <div className="rounded-lg border border-border p-8 flex flex-col gap-4">
@@ -236,7 +217,7 @@ export default function SnackbarPage() {
                     <CodeBadge>rightItem=&quot;close&quot;</CodeBadge>일 때 <CodeBadge>closeMode</CodeBadge>로 닫기 동작을 지정합니다.
                   </p>
                   <div className="rounded-lg border border-border p-8 flex flex-col items-center">
-                    <div className="flex w-[480px] items-start flex-col gap-4 justify-center">
+                    <div className="flex w-full md:w-[480px] items-start flex-col gap-4 justify-center">
                       <div className="flex flex-col gap-1 w-full">
                         <span className="text-xs text-muted-foreground mb-2">dismiss — 스낵바 전체 사라짐 (기본값)</span>
                         <Snackbar
@@ -274,25 +255,25 @@ export default function SnackbarPage() {
                     <UsageCard
                       type="Don't"
                       src="/snackbar/usage_2_dont.png"
-                      className="h-80"
+                      className="h-44 md:h-80"
                     />
                   </div>
                 </div>
-                <div className="mb-10">
+                <div className="mb-4">
                   <h3 className="text-lg font-semibold text-foreground mb-2">위치 선정</h3>
                   <p className="text-sm text-foreground mb-4">
                   스낵바의 위치가 중요한 정보를 가리지 않도록 주의합니다.
                   </p>
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <UsageCard
                       type="Do"
                       src="/snackbar/usage_location_do.png"
-                      className="h-80"
+                      className="h-44 md:h-60"
                     />
                     <UsageCard
                       type="Don't"
                       src="/snackbar/usage_location_dont.png"
-                      className="h-80"
+                      className="h-44 md:h-60"
                     />
                   </div>
                 </div>
@@ -414,6 +395,7 @@ export default function RootLayout({ children }) {
 
 // 2. 어디서든 useSnackbar로 호출
 import { useSnackbar } from "@alphacode-ai/design-system";
+import PropsTable from "@/app/components/PropsTable";
 
 function MyComponent() {
   const { show, dismiss, dismissAll } = useSnackbar();
@@ -481,7 +463,7 @@ show({
               <section className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-foreground mb-4">Snackbar Props</h2>
-                  <PropsTable rows={[
+              <PropsTable rows={[
                     ["message",     "React.ReactNode",                                    "-",         "표시할 메시지 (필수)"],
                     ["variant",     '"default" | "error" | "success" | "info" | "warning"', '"default"', "스낵바 색상 타입"],
                     ["size",        '"sm" | "md" | "lg"',                                 '"md"',      "스낵바 크기"],
@@ -497,7 +479,7 @@ show({
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-foreground mb-4">SnackbarProvider Props</h2>
-                  <PropsTable rows={[
+              <PropsTable rows={[
                     ["position",        '"top" | "bottom"', '"bottom"', "스낵바 표시 위치"],
                     ["maxCount",        "number",           "3",        "동시에 표시할 최대 스낵바 수"],
                     ["defaultDuration", "number",           "4000",     "자동 닫힘 시간 (ms), 0이면 자동 닫힘 없음"],
@@ -505,7 +487,7 @@ show({
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-foreground mb-4">useSnackbar — show() 옵션</h2>
-                  <PropsTable rows={[
+              <PropsTable rows={[
                     ["message",     "React.ReactNode",                                    "-",         "표시할 메시지"],
                     ["variant",     '"default" | "error" | "success" | "info" | "warning"', '"default"', "스낵바 색상 타입"],
                     ["leftItem",       "React.ReactNode",                                    "-",         "좌측 아이콘, 아바타 등"],

@@ -13,6 +13,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -27,7 +28,7 @@ export default function SwitchPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Switch</h1>
@@ -94,7 +95,7 @@ export default function SwitchPage() {
                 사이즈는 md / lg 2가지를 사용합니다.
               </p>
               <div className="rounded-lg border border-border p-8">
-                <div className="flex items-center justify-around">
+                <div className="flex flex-col md:flex-row items-center justify-around gap-4">
                   {/* lg */}
                   <div className="flex flex-col items-center gap-4">
                     <div className="flex gap-4">
@@ -123,7 +124,7 @@ export default function SwitchPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">사용 관련</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Don't"
                     src="/input/switch/usage_toggle_dont.png"
@@ -204,14 +205,7 @@ const [on, setOn] = useState(false);
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["size",            '"md" | "lg"',           '"lg"',      "스위치 크기 (30×16 / 36×20px)"],
                   ["checked",         "boolean",               "-",         "On/Off 상태 (controlled)"],
                   ["defaultChecked",  "boolean",               "false",     "초기 On/Off 상태 (uncontrolled)"],
@@ -219,15 +213,7 @@ const [on, setOn] = useState(false);
                   ["activeColor",     "string",                '"#FF6300"', "활성(On) 상태의 Track 색상"],
                   ["label",           "string",                "-",         "우측에 표시할 라벨 텍스트"],
                   ["disabled",        "boolean",               "false",     "비활성 상태"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

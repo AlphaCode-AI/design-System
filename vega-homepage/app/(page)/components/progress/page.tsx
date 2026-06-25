@@ -11,6 +11,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -24,7 +25,7 @@ export default function ProgressPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Progress Indicator</h1>
@@ -51,7 +52,7 @@ export default function ProgressPage() {
               <p className="text-sm text-foreground mb-4">
                 선형(Linear)과 원형(Circular) 두 가지 타입을 제공합니다.
               </p>
-              <div className="border border-border rounded-lg p-8 bg-card flex items-center justify-center gap-16">
+              <div className="border border-border rounded-lg p-8 bg-card flex flex-col md:flex-row items-center justify-center gap-16">
 
                 {/* Linear */}
                 <div className="flex flex-col items-center gap-5">
@@ -115,7 +116,7 @@ export default function ProgressPage() {
               <p className="text-sm text-foreground mb-4">
                 선형 사이즈는 sm / md / lg / xl 4가지를 사용하고 원형 사이즈는 xs / sm / md / lg / xl 5가지를 사용합니다.
               </p>
-              <div className="border border-border rounded-lg p-8 bg-card flex items-center justify-center gap-16">
+              <div className="border border-border rounded-lg p-8 bg-card flex flex-col md:flex-row items-center justify-center gap-16">
 
                 {/* Linear */}
                 <div className="flex flex-col items-center gap-5">
@@ -133,7 +134,7 @@ export default function ProgressPage() {
                 {/* Circular */}
                 <div className="flex flex-col items-center gap-5">
                   <p className="text-xs font-medium text-foreground">원형 (Circular)</p>
-                  <div className="flex items-end gap-6">
+                  <div className="flex flex-col md:flex-row items-center md:items-end gap-6">
                     {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
                       <div key={size} className="flex flex-col items-center gap-2">
                         <ProgressIndicator type="circular" value={60} circularSize={size} />
@@ -155,19 +156,19 @@ export default function ProgressPage() {
                 <p className="text-sm text-foreground mb-4">
                   라벨과 함께 적용 시 다음과 같이 배치합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/progress/usage_label_linear_do.png" />
                   <UsageCard type="Do" src="/progress/usage_label_circular_do.png" />
                 </div>
               </div>
 
-              <div className="mb-10">
+              <div className="mb-4">
                 <h3 className="text-lg font-semibold text-foreground mb-2">선형 Full Width 적용</h3>
                 <p className="text-sm text-foreground mb-4">
                   전체 화면에 선형 타입을 full width로 적용할 때 다음과 같이 사용합니다.
                 </p>
                 <div className="grid grid-cols-1 gap-6">
-                  <UsageCard type="Do" src="/progress/usage_fullwidth_do.png" className="h-80" />
+                  <UsageCard type="Do" src="/progress/usage_fullwidth_do.png" className="h-48 md:h-80" />
                 </div>
               </div>
             </section>
@@ -240,14 +241,7 @@ export default function ProgressPage() {
             {/* ProgressIndicator Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">ProgressIndicator Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["type",          '"linear" | "circular"',                              '"linear"',  "선형 또는 원형 타입"],
                   ["value",         "number",                                              "0",         "현재 진행값 (0 ~ max)"],
                   ["max",           "number",                                              "100",       "최대값"],
@@ -258,15 +252,7 @@ export default function ProgressPage() {
                   ["label",         "string",                                              "-",         "라벨 텍스트"],
                   ["showValue",     "boolean",                                             "false",     "퍼센트 값 표시 여부"],
                   ["indeterminate", "boolean",                                             "false",     "진행률 미확정 로딩 상태"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

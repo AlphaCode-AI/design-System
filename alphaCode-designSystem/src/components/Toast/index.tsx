@@ -245,7 +245,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(({
       ref={ref}
       role="status"
       className={cn(
-        "relative bg-white rounded-lg p-4 w-[410px] border border-border",
+        "relative bg-white rounded-lg p-4 w-[calc(100vw-2rem)] sm:w-[410px] border border-border",
         "[box-shadow:0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]",
         className
       )}

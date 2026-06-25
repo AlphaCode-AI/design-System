@@ -15,6 +15,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 /* ── 상수 / 타입 ──────────────────────────────────────────────── */
 
@@ -86,26 +87,6 @@ const TYPE_ITEMS: Array<{ label: string; desc: string; showArgs: ShowArgs }> = [
 
 /* ── 공통 컴포넌트 ─────────────────────────────────────────────── */
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <div key={prop} className="contents">
-          <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50 ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{prop}</div>
-          <div className={`px-3 py-2 font-mono text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{type}</div>
-          <div className={`px-3 py-2 font-mono text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{def}</div>
-          <div className={`px-3 py-2 text-xs text-foreground ${i < arr.length - 1 ? "border-b border-border" : ""}`}>{desc}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 /* ── 섹션 컴포넌트 ─────────────────────────────────────────────── */
 
@@ -157,7 +138,7 @@ function StackDemoInner() {
 function TypeSection() {
   const { show } = useToast();
   return (
-    <div className="rounded-lg bg-ac-gray-20 p-8 grid grid-cols-3 gap-6">
+    <div className="rounded-lg bg-ac-gray-20 p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
       {TYPE_ITEMS.map((item) => (
         <div key={item.label} className="flex flex-col items-center justify-between gap-2">
           <span className="text-sm text-foreground font-medium">{item.label}</span>
@@ -208,7 +189,7 @@ export default function ToastPage() {
   return (
     <ToastProvider position="bottom-right">
       <div className="flex w-full">
-        <div className="flex-1 min-w-0 px-10 py-8">
+        <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-foreground">Toast</h1>
@@ -258,6 +239,7 @@ export default function ToastPage() {
                 <p className="text-sm text-foreground mb-6">
                   <CodeBadge>ToastProvider</CodeBadge>의 <CodeBadge>position</CodeBadge> prop으로 토스트가 표시될 화면 위치를 지정합니다.
                   화면 가장자리로부터 <CodeBadge>16px</CodeBadge> 간격을 유지합니다.
+                  모바일 사이즈에서는 토스트 너비가 화면 너비에 맞춰 자동으로 조정됩니다.
                 </p>
                 <div className="rounded-lg border border-border p-6">
                   <p className="text-xs text-muted-foreground mb-3">위치를 클릭하면 해당 위치에 토스트가 표시됩니다.</p>
@@ -276,7 +258,7 @@ export default function ToastPage() {
                   여러 토스트가 동시에 표시될 때 <CodeBadge>stackMode</CodeBadge>로 표시 방식을 선택합니다.<br/>
                   최대 <CodeBadge>maxCount</CodeBadge>개(기본 5개)까지 표시되며, 초과 시 가장 오래된 토스트부터 사라집니다.
                 </p>
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                   <div className="rounded-lg border border-border p-6 flex flex-col gap-3 flex-1 items-center">
                     <span className="text-sm font-semibold text-foreground">List</span>
                     <p className="text-xs text-foreground">토스트를 세로로 나열합니다. (기본값)</p>
@@ -298,9 +280,9 @@ export default function ToastPage() {
                   <p className="text-sm text-foreground mb-4">
                     여러 개의 토스트가 리스트 타입으로 표출될 때 토스트의 너비를 통일해야 합니다.
                   </p>
-                  <div className="grid grid-cols-2 gap-6">
-                    <UsageCard type="Do"    src="/toast/usage_list_do.png"   className="h-64" />
-                    <UsageCard type="Don't" src="/toast/usage_list_dont.png" className="h-64" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <UsageCard type="Do"    src="/toast/usage_list_do.png"   className="md:h-64" />
+                    <UsageCard type="Don't" src="/toast/usage_list_dont.png" className="md:h-64" />
                   </div>
                 </div>
               </section>
@@ -384,6 +366,7 @@ export default function RootLayout({ children }) {
 
 // 2. 어디서든 useToast로 호출
 import { useToast } from "@alphacode-ai/design-system";
+import PropsTable from "@/app/components/PropsTable";
 
 function MyComponent() {
   const { show, dismiss, dismissAll } = useToast();

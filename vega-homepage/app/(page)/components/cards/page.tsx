@@ -34,6 +34,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 /* ─────────────────────────────────────────
    TOC
@@ -84,7 +85,7 @@ export default function CardPage() {
   return (
     <div className="flex w-full">
       {/* ── Main content ── */}
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* Page title */}
         <div className="mb-8">
@@ -119,7 +120,7 @@ export default function CardPage() {
               <p className="text-sm text-foreground mb-4">
                 <CodeBadge>interactive</CodeBadge> prop을 추가하면 hover / active 인터랙션이 활성화됩니다. 이 prop이 없으면 hover 및 active 효과가 나타나지 않습니다.
               </p>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 {(["background", "line", "shadow"] as const).map((v) => (
                   <div key={v} className="flex flex-col items-center gap-3 p-8 bg-ac-gray-20 rounded-lg">
                     <p className="text-xs text-muted-foreground font-mono">{v}</p>
@@ -153,7 +154,7 @@ export default function CardPage() {
                 Header / Content / Footer 각 영역과 control, divider 등의 prop을 조합해 다양한 카드 유형을 구성할 수 있습니다.
               </p>
               <div className="border border-border rounded-lg p-6 bg-card">
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-col-1 md:grid-cols-3 gap-6">
 
                   {/* 1. 이미지 + info 푸터 */}
                   <div className="flex flex-col gap-2">
@@ -387,7 +388,7 @@ export default function CardPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-2">사용 예시</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/card/usage_do_1.png" />
                   <UsageCard type="Do" src="/card/usage_do_2.png" />
                   <UsageCard type="Do" src="/card/usage_do_3.png" />
@@ -526,39 +527,17 @@ export default function CardPage() {
             {/* Card Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Card Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["variant",     '"background" | "line" | "shadow"',         '"line"', "카드 스타일"],
                   ["interactive", "boolean",                                    "false",  "호버·클릭 인터랙션"],
                   ["shadowSize",  '"xs" | "sm" | "md" | "lg" | "xl" | "2xl"', '"md"',   'variant="shadow"일 때 그림자 크기'],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* CardHeader Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">CardHeader Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["imageSrc",        "string",                                               "-",      "이미지 URL (이미지 타입)"],
                   ["avatar",          "ReactNode",                                            "-",      "아바타 요소 (아바타 타입)"],
                   ["title",           "ReactNode",                                            "-",      "제목"],
@@ -567,66 +546,28 @@ export default function CardPage() {
                   ["control",         '"none" | "menu" | "checkbox" | "radio" | "switch"',   '"none"', "우측 상단 컨트롤 타입"],
                   ["onMenuClick",     "() => void",                                           "-",      'control="menu"일 때 클릭 콜백'],
                   ["onCheckedChange", "(checked: boolean) => void",                           "-",      'control="checkbox" | "switch"일 때'],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* CardContent Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">CardContent Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["divider", "boolean", "false", "children 사이에 Divider 자동 삽입"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* CardFooterButtons Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">CardFooterButtons Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["direction",      '"horizontal" | "vertical"', '"horizontal"', "버튼 배치 방향"],
                   ["primaryLabel",   "string",                    '"확인"',        "주요 액션 버튼 텍스트"],
                   ["secondaryLabel", "string",                    "-",            "보조 액션 버튼 텍스트"],
                   ["onPrimary",      "() => void",                "-",            "주요 액션 콜백"],
                   ["onSecondary",    "() => void",                "-",            "보조 액션 콜백"],
                   ["divider",        "boolean",                   "false",        "상단 구분선 표시 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  cn,
   Tabs,
   TabList,
   TabTrigger,
@@ -15,6 +14,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",          label: "Type" },
@@ -25,33 +25,13 @@ const toc: TocItem[] = [
   { id: "usage",         label: "사용 가이드" },
 ];
 
-function PropsTable({ rows }: { rows: string[][] }) {
-  return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-      className="border border-border rounded-lg overflow-hidden text-sm"
-    >
-      {["Prop", "Type", "Default", "Description"].map((h) => (
-        <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-      ))}
-      {rows.map(([prop, type, def, desc], i, arr) => (
-        <React.Fragment key={i}>
-          <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-          <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-          <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
 
 export default function TextInputPage() {
   const [activeTab, setActiveTab] = useState("docs");
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Text input</h1>
@@ -72,7 +52,7 @@ export default function TextInputPage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="flex items-stretch justify-around gap-8">
+              <div className="flex flex-col md:flex-row items-stretch justify-around gap-4">
                 <div className="flex flex-col items-center gap-4 flex-1 p-8 bg-ac-gray-20 rounded-lg">
                   <TextInput
                     label="input label"
@@ -125,7 +105,7 @@ export default function TextInputPage() {
                 Text input 상태는 Default / Complete / Focus / Error / Disable 5가지로 사용합니다.
               </p>
               <div className="rounded-lg bg-ac-gray-20 p-8">
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                   <div className="flex flex-col gap-3">
                     <TextInput placeholder="placeholder" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">Default</span>
@@ -157,16 +137,16 @@ export default function TextInputPage() {
                 사이즈는 높이를 기준으로 sm / md / lg 3가지를 사용합니다.
               </p>
               <div className="rounded-lg border border-border p-8">
-                <div className="flex items-start gap-6">
-                  <div className="flex flex-col gap-3 flex-1">
+                <div className="flex flex-col md:flex-row items-start gap-6">
+                  <div className="flex flex-col gap-3 w-full">
                     <TextInput size="lg" placeholder="placeholder" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">lg (40px)</span>
                   </div>
-                  <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-col gap-3 w-full">
                     <TextInput size="md" placeholder="placeholder" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">md (36px)</span>
                   </div>
-                  <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-col gap-3 w-full">
                     <TextInput size="sm" placeholder="placeholder" helperText="helper text here" />
                     <span className="text-xs text-foreground text-center">sm (30px)</span>
                   </div>
@@ -181,8 +161,8 @@ export default function TextInputPage() {
                 Prefix와 Suffix에는 텍스트와 버튼을 사용할 수 있습니다. 입력하는 내용과 컨텍스트에 따라 올바른 맥락으로 사용해야 합니다.
               </p>
               <div className="rounded-lg border border-border p-8">
-                <div className="flex items-start gap-6">
-                  <div className="flex flex-col gap-3 flex-1">
+                <div className="flex flex-col md:flex-row items-start gap-6">
+                  <div className="flex flex-col gap-3 w-full">
                     <TextInput
                       label="주소"
                       placeholder="회사 주소"
@@ -190,7 +170,7 @@ export default function TextInputPage() {
                       suffix={<Search size={16} />}
                     />
                   </div>
-                  <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-col gap-3 w-full">
                     <TextInput
                       label="환전 금액"
                       placeholder="환전하실 금액을 입력해주세요."
@@ -207,7 +187,7 @@ export default function TextInputPage() {
               <h2 className="text-xl font-bold text-foreground mb-6">사용 가이드</h2>
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">사용 관련</h3>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Don't"
                     src="/input/text-input/usage_use_dont_1.png"
@@ -223,7 +203,7 @@ export default function TextInputPage() {
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-4">오류 메세지</h3>
                 <p className="text-sm text-foreground mb-4">input의 오류 메세지를 팝업으로 표출하지 않습니다. helper text 영역에 표출합니다.</p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/input/text-input/usage_error_do.png"

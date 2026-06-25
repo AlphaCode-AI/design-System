@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Tabs,
   TabList,
@@ -17,6 +17,7 @@ import type { SideNavItem } from "@alphacode-ai/design-system";
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -127,7 +128,7 @@ export default function SideNavigationPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Side Navigation</h1>
@@ -312,7 +313,7 @@ export default function SideNavigationPage() {
                 <p className="text-sm text-foreground mb-4">
                   사용자의 탐색을 방해하지 않도록 수직으로 나란히 배치된 링크 간 수준을 들여쓰기, 배경 구분 등의 방식을 활용하여 명확하게 구분해야 합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/side-navigation/usage_depth_do.png" />
                   <UsageCard type="Don't" src="/side-navigation/usage_depth_dont.png" />
                 </div>
@@ -323,7 +324,7 @@ export default function SideNavigationPage() {
                 <p className="text-sm text-foreground mb-4">
                   사이드 메뉴 영역의 너비는 제한되어 있기 때문에 3개 이상의 수준을 한 번에 표시할 경우 인지와 탐색이 어려워질 수 있으므로 정해진 계층 구조까지만 사용합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/side-navigation/usage_3depth_do.png" />
                   <UsageCard type="Don't" src="/side-navigation/usage_3depth_dont.png" />
                 </div>
@@ -487,14 +488,7 @@ const items: SideNavItem[] = [
             {/* SideNavigation Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">SideNavigation Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["items",           "SideNavItem[]",                   "-",                    "메뉴 아이템 목록"],
                   ["title",           "string",                          "-",                    "메뉴 섹션 제목"],
                   ["activeId",        "string",                          "-",                    "활성 아이템 ID (controlled)"],
@@ -504,43 +498,20 @@ const items: SideNavItem[] = [
                   ["activeClassName", "string",                          '"text-ac-primary-50"', "활성 상태 Tailwind 클래스"],
                   ["expandIcon",      '"chevron" | "plusMinus" | "arrow"', '"chevron"',           "열림/닫힘 토글 아이콘 타입"],
                   ["renderLink",      "(item, children, className) => ReactNode", "-",           "커스텀 링크 렌더러 (Next.js Link 등)"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* SideNavItem Type */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">SideNavItem</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Property", "Type", "Required", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["id",       "string",          "✓", "고유 식별자"],
                   ["label",    "string",          "✓", "표시 텍스트"],
                   ["href",     "string",          "-", "링크 URL (renderLink와 함께 사용)"],
                   ["icon",     "ReactNode",       "-", "아이템 아이콘"],
                   ["children", "SideNavItem[]",   "-", "하위 메뉴 아이템"],
                   ["divider",  "boolean",         "-", "아이템 위 구분선 표시"],
-                ].map(([prop, type, req, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground text-center${i < arr.length - 1 ? " border-b border-border" : ""}`}>{req}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

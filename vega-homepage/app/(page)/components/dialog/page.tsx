@@ -23,6 +23,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -37,7 +38,7 @@ export default function DialogPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Dialog</h1>
@@ -304,7 +305,7 @@ export default function DialogPage() {
                 <p className="text-sm text-foreground mb-4">
                   Header에 타이틀을 필수로 사용해야 합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" variant="fill" src="/dialog/usage_title_do.png" />
                   <UsageCard type="Don't" variant="fill" src="/dialog/usage_title_dont.png" />
                 </div>
@@ -315,7 +316,7 @@ export default function DialogPage() {
                 <p className="text-sm text-foreground mb-4">
                   Footer에 3개의 버튼이 필요할 때 한 쪽에 몰아 넣지 말고 적절히 분배하여 사용합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" variant="fill" src="/dialog/usage_footer_do.png" />
                   <UsageCard type="Don't" variant="fill" src="/dialog/usage_footer_dont.png" />
                 </div>
@@ -476,79 +477,34 @@ export default function DialogPage() {
             {/* Dialog Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Dialog Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["size",          '"sm" | "md" | "lg"',      '"sm"',  "다이얼로그 너비 (500 / 800 / 1000px)"],
                   ["open",          "boolean",                  "-",     "열림 상태 (controlled)"],
                   ["defaultOpen",   "boolean",                  "false", "초기 열림 상태 (uncontrolled)"],
                   ["onOpenChange",  "(open: boolean) => void",  "-",     "열림 상태 변경 콜백"],
                   ["closeOnScrim",  "boolean",                  "true",  "스크림 클릭 시 닫기 여부"],
                   ["closeOnEsc",    "boolean",                  "true",  "ESC 키로 닫기 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* DialogHeader Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">DialogHeader Props</h2>
 
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["title",      "ReactNode", "-",     "헤더 제목"],
                   ["subtitle",   "ReactNode", "-",     "헤더 서브 제목 (선택)"],
                   ["showClose",  "boolean",   "true",  "닫기 버튼 표시 여부"],
                   ["divider",    "boolean",   "false", "헤더 하단 구분선 표시 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* DialogFooter Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">DialogFooter Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["divider", "boolean", "false", "푸터 상단 구분선 표시 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

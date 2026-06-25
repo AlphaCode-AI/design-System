@@ -16,6 +16,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -44,7 +45,7 @@ export default function FABPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
         <div className="mb-8">
@@ -96,7 +97,7 @@ export default function FABPage() {
               <h2 className="text-xl font-bold text-foreground mb-2">Component</h2>
               <p className="text-sm text-foreground mb-4">버튼은 중요도와 쓰임새에 따라 세부 스타일을 분류하여 사용합니다.</p>
               <div className="rounded-lg border border-border p-8">
-                <div className="grid grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   {/* FAB */}
                   <div>
                     <p className="text-xs font-medium text-ac-gray-60 mb-6">FAB</p>
@@ -115,7 +116,7 @@ export default function FABPage() {
                   {/* Extended FAB */}
                   <div>
                     <p className="text-xs font-medium text-ac-gray-60 mb-6">Extended FAB</p>
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="flex flex-wrap justify-around gap-6">
                       {(["primary", "secondary", "tertiary"] as const).map((variant) => (
                         <div key={variant} className="flex flex-col items-center gap-3">
                           <FAB variant={variant} size="lg" label="ADD"><Plus /></FAB>
@@ -135,12 +136,12 @@ export default function FABPage() {
                 FAB 사이즈는 높이 기준 md / lg 2가지로 구분됩니다.
               </p>
               <div className="rounded-lg border border-border p-8">
-                <div className="grid grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   {/* FAB */}
                   <div className="space-y-6">
                     <p className="text-xs font-medium text-ac-gray-60">FAB</p>
                     {(["lg", "md"] as const).map((size) => (
-                      <div key={size} className="flex items-center gap-6">
+                      <div key={size} className="flex flex-col md:flex-row items-start md:items-center gap-6">
                         <span className="text-xs text-ac-gray-60 w-32 shrink-0">
                           {size} (height : {size === "lg" ? "48px" : "40px"})
                         </span>
@@ -156,11 +157,11 @@ export default function FABPage() {
                   <div className="space-y-6">
                     <p className="text-xs font-medium text-ac-gray-60">Extended FAB</p>
                     {(["lg", "md"] as const).map((size) => (
-                      <div key={size} className="flex items-center gap-6">
+                      <div key={size} className="flex flex-col md:flex-row items-start md:items-center gap-6">
                         <span className="text-xs text-ac-gray-60 w-32 shrink-0">
                           {size} (height : {size === "lg" ? "48px" : "40px"})
                         </span>
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-3">
                           {(["primary", "secondary", "tertiary"] as const).map((v) => (
                             <FAB key={v} variant={v} size={size} label="ADD"><Plus /></FAB>
                           ))}
@@ -217,8 +218,8 @@ export default function FABPage() {
                 상태는 배경 색상 2가지로 구분됩니다. Default / Hover 로 구분되며 각 상태에 따라 적절히 사용됩니다.
                 Semantic Color로 버튼을 생성할 경우, 상태에 따른 색상은 Foundation의 Color부분을 참고합니다.
               </p>
-              <div className="rounded-lg border border-border overflow-hidden">
-                <table className="w-full text-sm">
+              <div className="rounded-lg border border-border overflow-x-auto">
+                <table className="w-full text-sm min-w-[800px]">
                   <thead>
                     <tr className="border-b border-border bg-ac-gray-10">
                       <th className="text-left px-5 py-3 font-medium text-ac-gray-60 w-24">color</th>
@@ -283,15 +284,15 @@ export default function FABPage() {
                 </div>
               </div>
               <p className="text-sm text-foreground mb-3">ExpandFAB</p>
-              <div className="rounded-lg bg-ac-gray-20 mb-6" style={{ height: 100 }}>
-                <div className="relative w-full h-full">
-                  <div className="absolute bottom-6 left-6">
+              <div className="rounded-lg bg-ac-gray-20 mb-6 h-auto md:h-[100px]">
+                <div className="flex flex-col items-center gap-4 py-4 md:py-0 md:relative md:w-full md:h-full">
+                  <div className="md:absolute md:bottom-6 md:left-6">
                     <FAB variant="secondary" size="lg" label="Share"><Share2 /></FAB>
                   </div>
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+                  <div className="md:absolute md:bottom-6 md:left-1/2 md:-translate-x-1/2">
                     <FAB variant="primary" size="lg" label="Like"><Heart /></FAB>
                   </div>
-                  <div className="absolute bottom-6 right-6">
+                  <div className="md:absolute md:bottom-6 md:right-6">
                     <FAB variant="tertiary" size="lg" label="Send"><Send /></FAB>
                   </div>
                 </div>
@@ -331,7 +332,7 @@ export default function FABPage() {
 
               {/* Extended FAB 효과 사용 */}
               <div className="mb-10">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard type="Do" src="/button/fab/usage_hover_do.png" description="FAB에 마우스 오버를 하면 Extended FAB 표출하여 사용 가능합니다." />
                   <UsageCard type="Don't" src="/button/fab/usage_icon_dont.png" description="FAB에 다음과 같은 기능을 사용하는데 유의하여 사용합니다. 해당 기능은 다른 컴포넌트를 이용하여 표출하도록 합니다." />
                 </div>
@@ -420,14 +421,7 @@ export default function FABPage() {
             {/* Props */}
             <section>
               <h2 className="text-xl font-bold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable rows={[
                   ["variant", '"primary" | "secondary" | "tertiary"', '"primary"', "FAB 스타일 변형"],
                   ["size", '"sm" | "md" | "lg"', '"lg"', "FAB 크기"],
                   ["label", "string", "-", "Extended FAB 텍스트 레이블. 지정 시 Extended FAB으로 렌더링됨"],
@@ -437,15 +431,7 @@ export default function FABPage() {
                   ["fixed", "boolean", "false", "화면 우하단 고정 여부"],
                   ["position", "string", '"bottom-6 right-6"', "fixed 사용 시 커스텀 위치 클래스"],
                   ["colorClassName", "string", "-", "variant 기본 색상을 override하는 Tailwind 클래스"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-ac-primary-50", i < arr.length - 1 && "border-b border-border")}>{prop}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{type}</div>
-                    <div className={cn("px-3 py-2 font-mono text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{def}</div>
-                    <div className={cn("px-3 py-2 text-xs text-foreground", i < arr.length - 1 && "border-b border-border")}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
           </TabContent>
         </Tabs>

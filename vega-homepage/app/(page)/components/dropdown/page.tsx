@@ -36,6 +36,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",       label: "Type" },
@@ -68,7 +69,7 @@ export default function DropdownPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Dropdown</h1>
@@ -225,7 +226,7 @@ export default function DropdownPage() {
               <p className="text-sm text-foreground mb-4">
                 트리거는 버튼, 아이콘, 텍스트 또는 마우스 우클릭이 될 수 있으며, 클릭과 호버 두 가지 방식으로 열 수 있습니다.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Click */}
                 <div className="border border-border rounded-lg p-6 bg-card">
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-4">Click</p>
@@ -541,133 +542,58 @@ export default function DropdownPage() {
             {/* Dropdown Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Dropdown Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["open",          "boolean",                   "-",          "열림 여부 (controlled)"],
                   ["defaultOpen",   "boolean",                   "false",      "초기 열림 여부 (uncontrolled)"],
                   ["onOpenChange",  "(open: boolean) => void",   "-",          "열림 상태 변경 콜백"],
                   ["side",          '"top"|"bottom"|"left"|"right"', '"bottom"', "드롭다운 표출 방향"],
                   ["align",         '"start"|"center"|"end"',    '"start"',    "드롭다운 정렬 위치"],
                   ["trigger",       '"click" | "hover"',         '"click"',    "드롭다운 열림 방식"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* DropdownItem Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">DropdownItem Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["icon",      "ReactNode",  "-",     "좌측 아이콘"],
                   ["shortcut",  "string",     "-",     "우측 단축키 힌트"],
                   ["external",  "boolean",    "false", "외부 링크 아이콘 표시"],
                   ["small",     "boolean",    "false", "작은 사이즈"],
                   ["disabled",  "boolean",    "false", "비활성화 여부"],
                   ["onSelect",  "() => void", "-",     "아이템 선택 콜백"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* DropdownCheckboxItem Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">DropdownCheckboxItem Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["checked",          "boolean",                   "-",     "체크 여부 (controlled)"],
                   ["defaultChecked",   "boolean",                   "false", "초기 체크 여부"],
                   ["onCheckedChange",  "(checked: boolean) => void","-",     "체크 변경 콜백"],
                   ["disabled",         "boolean",                   "false", "비활성화 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* DropdownRadioGroup / DropdownRadioItem Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">DropdownRadioGroup Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["value",          "string",                   "-",  "선택된 값 (controlled)"],
                   ["defaultValue",   "string",                   '""', "초기 선택 값"],
                   ["onValueChange",  "(value: string) => void",  "-",  "선택 변경 콜백"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
             {/* DropdownSubMenu Props */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">DropdownSubMenu Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["id",       "string",    "-",     "서브메뉴 고유 식별자"],
                   ["trigger",  "ReactNode", "-",     "서브메뉴 트리거 레이블"],
                   ["disabled", "boolean",   "false", "비활성화 여부"],
-                ].map(([prop, type, def, desc], i, arr) => (
-                  <React.Fragment key={i}>
-                    <div className={`px-3 py-2 font-mono text-xs text-ac-primary-50${i < arr.length - 1 ? " border-b border-border" : ""}`}>{prop}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{type}</div>
-                    <div className={`px-3 py-2 font-mono text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{def}</div>
-                    <div className={`px-3 py-2 text-xs text-foreground${i < arr.length - 1 ? " border-b border-border" : ""}`}>{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>

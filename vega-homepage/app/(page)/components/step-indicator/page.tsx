@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   StepIndicator,
   Tabs,
@@ -12,6 +12,7 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PropsTable from "@/app/components/PropsTable";
 
 const toc: TocItem[] = [
   { id: "type",     label: "Type" },
@@ -50,7 +51,7 @@ export default function StepIndicatorPage() {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 min-w-0 px-10 py-8">
+      <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Step Indicator</h1>
           <p className="text-sm text-foreground leading-relaxed">
@@ -75,7 +76,7 @@ export default function StepIndicatorPage() {
               <p className="text-sm text-foreground mb-4">
                 <CodeBadge>type</CodeBadge> prop으로 가로(<CodeBadge>horizontal</CodeBadge>)/세로(<CodeBadge>vertical</CodeBadge>) 방향을 선택합니다. <CodeBadge>steps</CodeBadge> 배열에 <CodeBadge>title</CodeBadge>이 있으면 아이콘 아래에 텍스트가 표시되고, <CodeBadge>showStepText</CodeBadge>로 단계 텍스트를 추가로 표시합니다.
               </p>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
                   <p className="text-xs font-medium text-foreground mb-2">type : Horizontal / style : Default / showStepText</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="horizontal" showStepText />
@@ -89,7 +90,7 @@ export default function StepIndicatorPage() {
                   <StepIndicator steps={STEPS_SIMPLE} current={1} style="simple" />
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
                   <p className="text-xs font-medium text-foreground mb-2">type : Vertical / style : Default / showStepText</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="vertical" showStepText />
@@ -153,14 +154,14 @@ export default function StepIndicatorPage() {
                 사용자의 인지적 부담을 줄이기 위해 단계의 수는 최소 3개에서 최대 7개로 제한할 것을 권장합니다.<br/>
                 프로세스를 단계로 구분할 때 불필요한 단계나 사용자의 행동이 포함되지 않았는지 반복적으로 점검하고 논리적, 효율성 측면에서 문제가 없는 과업은 가능한 한 하나의 단계에서 처리될 수 있도록 해야 합니다.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
                   <p className="text-xs font-medium text-foreground mb-2">min : 3 step</p>
-                  <StepIndicator steps={STEPS_DEFAULT} current={1} showStepText />
+                  <StepIndicator steps={STEPS_DEFAULT} current={1} type="vertical" showStepText />
                 </div>
                 <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
                   <p className="text-xs font-medium text-foreground mb-2">max : 7 step</p>
-                  <StepIndicator steps={STEPS_7} current={3} showStepText />
+                  <StepIndicator steps={STEPS_7} current={3} type="vertical" showStepText />
                 </div>
               </div>
             </section>
@@ -180,7 +181,7 @@ export default function StepIndicatorPage() {
                   { label: "text-ac-orange-50",  colorClassName: "text-ac-orange-50" },
                   { label: "text-ac-purple-50",  colorClassName: "text-ac-purple-50" },
                 ].map(({ label, colorClassName }) => (
-                  <div key={label} className="flex items-center gap-6">
+                  <div key={label} className="flex flex-col md:flex-row items-center gap-6">
                     <span className="text-xs font-mono text-muted-foreground w-36 shrink-0">{label}</span>
                     <StepIndicator steps={STEPS_SIMPLE} current={2} style="simple" colorClassName={colorClassName} />
                   </div>
@@ -197,7 +198,7 @@ export default function StepIndicatorPage() {
                   레이블은 해당 단계/프로세스에서 사용자가 수행해야 하는 작업의 특성을 명확하게 보여줄 수 있는 내용으로 제공해야 합니다.<br/>
                   레이블로만 설명을 제공하기 어려운 경우, 보조 텍스트를 인접 영역에 제공할 수 있으나, 레이블 자체는 텍스트가 잘리거나 줄 바꿈이 발생하지 않도록 짧은 단어, 문구로 구성해야 합니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/step-indicator/usage_level_do.png"
@@ -213,7 +214,7 @@ export default function StepIndicatorPage() {
                 <p className="text-sm text-foreground mb-4">
                   사용자가 단계의 개요를 파악할 수 있는 명확한 단계로 사용해야합니다. 단계의 개요를 파악할 수 없는 경우에는 단계 표시기를 사용하지 않습니다.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <UsageCard
                     type="Do"
                     src="/step-indicator/usage_step_do.png"
@@ -310,14 +311,7 @@ const steps = [
             {/* Props 테이블 */}
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Props</h2>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr 1fr 2fr" }}
-                className="border border-border rounded-lg overflow-hidden text-sm"
-              >
-                {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <div key={h} className="px-3 py-2 bg-ac-gray-10 font-semibold text-foreground border-b border-border">{h}</div>
-                ))}
-                {[
+              <PropsTable cols="1.2fr 1.8fr 1fr 2fr" rows={[
                   ["steps",          "StepItem[]",                                     "—",                    "단계 배열. title, stepText 포함 가능"],
                   ["current",        "number",                                          "—",                    "현재 진행 중인 단계 인덱스 (0-based)"],
                   ["type",           '"horizontal" | "vertical"',                       '"horizontal"',         "방향"],
@@ -325,15 +319,7 @@ const steps = [
                   ["size",           '"sm" | "md" | "lg"',                              '"md"',                 "아이콘 및 텍스트 크기"],
                   ["showStepText",   "boolean",                                         "false",                "단계 텍스트 표시 여부. stepText 미지정 시 '1단계', '2단계'… 자동 표시"],
                   ["colorClassName", "string (Tailwind text- 클래스)",                 '"text-ac-primary-50"', "활성/완료 색상"],
-                ].map(([prop, type, def, desc]) => (
-                  <React.Fragment key={prop}>
-                    <div className="px-3 py-2 border-b border-border font-mono text-xs text-ac-primary-60">{prop}</div>
-                    <div className="px-3 py-2 border-b border-border font-mono text-xs text-muted-foreground">{type}</div>
-                    <div className="px-3 py-2 border-b border-border font-mono text-xs">{def}</div>
-                    <div className="px-3 py-2 border-b border-border text-xs text-foreground">{desc}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+                ]} />
             </section>
 
           </TabContent>
