@@ -108,10 +108,10 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
   return (
     <aside className={cn(
-      "w-[250px] shrink-0 border-r border-border flex flex-col",
-      "fixed inset-y-0 left-0 z-modal transition-transform duration-200 bg-background",
-      "md:relative md:top-auto md:bottom-auto md:left-auto md:translate-x-0 md:z-auto",
-      isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+      "w-[250px] shrink-0 border-r border-border flex flex-col bg-background",
+      "fixed inset-y-0 left-0 z-modal transition-transform duration-200",
+      "md:static md:inset-auto md:z-auto md:translate-x-0",
+      isOpen ? "translate-x-0" : "-translate-x-full"
     )}>
       {/* 모바일 닫기 버튼 */}
       <div className="md:hidden flex items-center justify-between px-4 h-12 border-b border-border shrink-0">
