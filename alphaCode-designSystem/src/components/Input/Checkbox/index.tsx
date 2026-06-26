@@ -10,8 +10,8 @@ const checkboxVariants = cva(
     "shrink-0 rounded-xs border transition-colors duration-normal",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:opacity-40",
-    "cursor-pointer appearance-none relative",
-    "border-ac-gray-40 bg-ac-white",
+    "peer cursor-pointer appearance-none relative",
+    "border-ac-gray-40 bg-background",
     "hover:border-(--checkbox-color)",
     "checked:bg-(--checkbox-color) checked:border-(--checkbox-color)",
     "indeterminate:bg-(--checkbox-color) indeterminate:border-(--checkbox-color)",
@@ -49,7 +49,7 @@ function CheckIcon({ size }: { size: CheckboxProps["size"] }) {
   const dim = size === "md" ? 8 : size === "xl" ? 16 : 12;
   return (
     <svg width={dim} height={dim} viewBox="0 0 12 12" fill="none"
-      className="absolute inset-0 m-auto pointer-events-none text-white"
+      className="absolute inset-0 m-auto pointer-events-none text-white opacity-0 peer-checked:opacity-100"
       aria-hidden="true"
     >
       <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -61,7 +61,7 @@ function IndeterminateIcon({ size }: { size: CheckboxProps["size"] }) {
   const dim = size === "md" ? 8 : size === "xl" ? 16 : 12;
   return (
     <svg width={dim} height={dim} viewBox="0 0 12 12" fill="none"
-      className="absolute inset-0 m-auto pointer-events-none text-white"
+      className="absolute inset-0 m-auto pointer-events-none text-white opacity-0 peer-[:indeterminate]:opacity-100"
       aria-hidden="true"
     >
       <path d="M2 6h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

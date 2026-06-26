@@ -30,15 +30,15 @@ const toc: TocItem[] = [
 
 export default function AccordionPage() {
   const [activeTab, setActiveTab] = useState("docs");
-  const [bgColor, setBgColor] = useState("#FBFBFB");
+  const [bgColor, setBgColor] = useState<string | undefined>(undefined);
 
   const colorPalette = [
-    { label: "ac-gray-10",    value: "#FBFBFB" },
-    { label: "ac-gray-20",    value: "#F7F7F7" },
-    { label: "ac-primary-10", value: "#FFE7D8" },
-    { label: "ac-blue-10",    value: "#E5F1FF" },
-    { label: "ac-green-10",   value: "#E5F9EC" },
-    { label: "ac-purple-10",  value: "#F8F7FF" },
+    { label: "ac-gray-10",    value: "var(--ac-gray-10)" },
+    { label: "ac-gray-20",    value: "var(--ac-gray-20)" },
+    { label: "ac-primary-10", value: "var(--ac-primary-10)" },
+    { label: "ac-blue-10",    value: "var(--ac-blue-10)" },
+    { label: "ac-green-10",   value: "var(--ac-green-10)" },
+    { label: "ac-purple-10",  value: "var(--ac-purple-10)" },
   ];
 
   return (
@@ -95,8 +95,8 @@ export default function AccordionPage() {
                           className="w-5 h-5 rounded-full border-2 transition-all"
                           style={{
                             backgroundColor: color.value,
-                            borderColor: bgColor === color.value ? "#FF6300" : "#D9D9D9",
-                            transform: bgColor === color.value ? "scale(1.2)" : "scale(1)",
+                            borderColor: (bgColor === color.value || (bgColor === undefined && color.label === "ac-gray-10")) ? "var(--primary)" : "var(--border)",
+                            transform: (bgColor === color.value || (bgColor === undefined && color.label === "ac-gray-10")) ? "scale(1.2)" : "scale(1)",
                           }}
                         />
                       ))}
@@ -128,7 +128,7 @@ export default function AccordionPage() {
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="flex items-center flex-col justify-center bg-ac-gray-20 rounded-lg p-6">
+                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 닫힘</p>
                   <img
                     src="/accordion/anatomy-closed.png"
@@ -136,7 +136,7 @@ export default function AccordionPage() {
                     className="w-[340px]"
                   />
                 </div>
-                <div className="flex items-center flex-col justify-center bg-ac-gray-20 rounded-lg p-6 gap-4">
+                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6 gap-4">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 닫힘(last)</p>
                   <img
                     src="/accordion/anatomy-closed-last.png"
@@ -144,7 +144,7 @@ export default function AccordionPage() {
                     className="w-[340px]"
                   />
                 </div>
-                <div className="flex items-center flex-col justify-center bg-ac-gray-20 rounded-lg p-6 gap-4">
+                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6 gap-4">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 열림</p>
                   <img
                     src="/accordion/anatomy-open.png"
@@ -152,7 +152,7 @@ export default function AccordionPage() {
                     className="w-[340px]"
                   />
                 </div>
-                <div className="flex items-center flex-col justify-center bg-ac-gray-20 rounded-lg p-6 gap-4">
+                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6 gap-4">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 열림(last)</p>
                   <img
                     src="/accordion/anatomy-open-last.png"
@@ -182,13 +182,11 @@ export default function AccordionPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Plus/Minus (Default) */}
                 <div className="rounded-lg p-6 bg-ac-gray-20">
-                    <Accordion 
-                        type="multiple" 
-                        variant="filled" 
-                        backgroundColor="#FFFFFF" 
-                        defaultValue={["item-2"]} 
+                    <Accordion
+                        type="multiple"
+                        variant="filled"
+                        defaultValue={["item-2"]}
                         className="rounded-md border border-border"
-                        contentClassName="bg-ac-white"
                     >
                         <AccordionItem value="item-1">
                         <AccordionTrigger iconType="plus">source-page-1</AccordionTrigger>
@@ -207,13 +205,11 @@ export default function AccordionPage() {
                 </div>
                 {/* Chevron */}
                 <div className="rounded-lg p-6 bg-ac-gray-20">
-                    <Accordion 
-                        type="multiple" 
-                        variant="filled" 
-                        backgroundColor="#FFFFFF" 
-                        defaultValue={["item-2"]} 
+                    <Accordion
+                        type="multiple"
+                        variant="filled"
+                        defaultValue={["item-2"]}
                         className="rounded-md border border-border"
-                        contentClassName="bg-ac-white"
                     >
                     <AccordionItem value="item-1">
                       <AccordionTrigger iconType="chevron">source-page-1</AccordionTrigger>

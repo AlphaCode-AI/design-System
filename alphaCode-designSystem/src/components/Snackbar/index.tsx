@@ -17,7 +17,7 @@ const variantBgClass: Record<SnackbarVariant, string> = {
   error:   "bg-ac-red-10",
   success: "bg-ac-green-10",
   info:    "bg-ac-blue-10",
-  warning: "bg-ac-orange-20",
+  warning: "bg-ac-orange-20 dark:bg-[#4A2200]",
 };
 
 const variantTextClass: Record<SnackbarVariant, string> = {

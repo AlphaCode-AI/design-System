@@ -3,6 +3,12 @@
 
 @source "../node_modules/@alphacode-ai/design-system/dist/**";
 
+/* anatomy 섹션 — 라이트 이미지 전용, 다크 모드에서도 배경·텍스트 고정 */
+.dark .anatomy-bg,
+.dark .anatomy-bg * {
+  color: #1a1a1a !important;
+}
+
 /* named z-index — Turbopack이 @theme/@utility 미지원으로 plain CSS로 직접 정의 */
 .z-hide     { z-index: -1; }
 .z-base     { z-index: 0; }

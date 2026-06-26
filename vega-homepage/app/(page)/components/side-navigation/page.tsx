@@ -242,7 +242,7 @@ export default function SideNavigationPage() {
               <p className="text-sm text-foreground mb-4">
                 사이드 메뉴의 각 구성 요소입니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-ac-gray-20">
+              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
                 <img src="/side-navigation/side_anatomy.png" alt="side navigation anatomy" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">

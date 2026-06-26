@@ -101,7 +101,7 @@ export default function DialogPage() {
                 다이얼로그는 Header, Body, Footer 영역으로 구성됩니다. Footer는 선택 사항으로,
                 단순 내용 전달 모달에는 상단 닫기 버튼만 사용합니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-ac-gray-20">
+              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
                 <img src="/dialog/dialog_anatomy.png" alt="dialog anatomy img" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">

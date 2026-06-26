@@ -1,12 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge, Github, Figma, Menu, X } from "@alphacode-ai/design-system";
+import { Sun, Moon } from "lucide-react";
 import Sidebar from "@/app/components/Sidebar";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") as "light" | "dark" | null;
+    const initial = saved ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    setTheme(initial);
+    document.documentElement.classList.toggle("dark", initial === "dark");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    document.documentElement.classList.toggle("dark", next === "dark");
+    localStorage.setItem("theme", next);
+  };
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans text-foreground overflow-hidden">
@@ -26,6 +42,13 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
         </div>
 
         <div className="flex gap-2">
+          <button
+            onClick={toggleTheme}
+            className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-ac-gray-10 transition-colors text-foreground"
+            aria-label="테마 변경"
+          >
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
           <a
             href="https://www.figma.com/design/rRs5AH6WcwpVj95rYNZ3Mi/AlphaCode_DS_homepage?node-id=100-3696&t=ycnVmaZiomaJ6tkZ-1"
             target="_blank"

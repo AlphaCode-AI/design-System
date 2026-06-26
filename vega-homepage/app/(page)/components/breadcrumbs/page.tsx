@@ -103,7 +103,7 @@ export default function BreadcrumbsPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-ac-gray-20 p-8 flex justify-center">
+              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex justify-center">
                 <img src="/breadcrumb/breadcrumb_anatomy.png" alt="Breadcrumb anatomy" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
@@ -188,7 +188,7 @@ export default function BreadcrumbsPage() {
                 브레드크럼 아이콘은 항상 일관된 위치에 제공됩니다. 아이콘 변경 가능하나 아래처럼 예시처럼 브레드크럼의 구조를 나타내기에 적절한 아이콘으로 변경합니다.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-lg border p-6">
+                <div className="rounded-lg border border-border p-6">
                   <Breadcrumbs
                     separator="slash"
                     items={[

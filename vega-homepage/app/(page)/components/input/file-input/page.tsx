@@ -48,7 +48,7 @@ export default function FileInputPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-ac-gray-20 p-8 flex items-center justify-center min-h-[160px]">
+              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
                 <img src="/input/file-input/file_anatomy.png" alt="file input anatomy" className="max-w-full" />
               </div>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">

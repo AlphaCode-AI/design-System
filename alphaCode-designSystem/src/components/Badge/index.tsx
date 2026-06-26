@@ -17,7 +17,7 @@ const badgeVariants = cva(
         warning:  "bg-ac-orange-10 text-ac-orange-60 border-ac-orange-40",
         fail:     "bg-ac-red-10 text-ac-red-60 border-ac-red-40",
         // ── 기타 메타 배지 ──────────────────────────────────
-        primary:  "bg-ac-white text-ac-primary-50 border-ac-primary-40",
+        primary:  "bg-background text-ac-primary-50 border-ac-primary-40",
         default:  "bg-ac-gray-30 text-ac-gray-80 border-ac-gray-70",
       },
       size: {

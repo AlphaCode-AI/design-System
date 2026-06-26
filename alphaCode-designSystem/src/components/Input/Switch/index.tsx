@@ -12,7 +12,7 @@ const switchTrackVariants = cva(
     "border-border border",
     "disabled:cursor-not-allowed disabled:opacity-40",
     "bg-ac-gray-30 rounded-lg",
-    "data-[state=checked]:bg-white",
+    "data-[state=checked]:bg-white dark:data-[state=checked]:bg-ac-gray-50",
   ],
   {
     variants: {

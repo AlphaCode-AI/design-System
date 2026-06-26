@@ -28,7 +28,7 @@ const toc: TocItem[] = [
 
 function DemoPanel({ children, className }: { children?: React.ReactNode; className?: string }) {
   return (
-    <div className={`flex h-full w-full items-center justify-center bg-white text-sm text-ac-gray-60 ${className ?? ""}`}>
+    <div className={`flex h-full w-full items-center justify-center bg-background text-sm text-ac-gray-60 ${className ?? ""}`}>
       {children}
     </div>
   );

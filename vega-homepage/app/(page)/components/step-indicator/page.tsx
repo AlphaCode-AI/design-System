@@ -109,7 +109,7 @@ export default function StepIndicatorPage() {
             {/* ── Anatomy ── */}
             <section id="anatomy">
               <h2 className="text-lg font-semibold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-ac-gray-20 p-8 flex items-center justify-center">
+              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center">
                 <img src="/step-indicator/step_anatomy.png" alt="step indicator anatomy" className="max-w-full" />
               </div>
               <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">

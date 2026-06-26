@@ -101,7 +101,7 @@ export default function ProgressPage() {
               <p className="text-sm text-foreground mb-4">
                 Progress Indicator는 현재 진행률과 전체 작업량으로 구성됩니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-ac-gray-20">
+              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
                 <img src="/progress/progress_anatomy.png" alt="progress indicator anatomy" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">

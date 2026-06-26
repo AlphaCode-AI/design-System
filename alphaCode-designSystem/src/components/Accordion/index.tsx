@@ -148,14 +148,14 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
             "flex flex-1 items-center justify-between py-4 px-4 font-medium",
             "transition-colors duration-slow",
             variant === "filled"
-              ? "hover:brightness-95"
+              ? [!backgroundColor && "bg-ac-gray-10", "hover:brightness-95"]
               : "hover:bg-ac-gray-10",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
             className
           )}
           style={
-            variant === "filled"
-              ? { backgroundColor: backgroundColor ?? "#FBFBFB" }
+            variant === "filled" && backgroundColor
+              ? { backgroundColor }
               : undefined
           }
           {...props}
@@ -192,7 +192,9 @@ const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
 
     const { isOpen } = itemContext;
     const backgroundColor =
-      rootContext?.variant === "filled" ? rootContext.backgroundColor ?? "#FBFBFB" : undefined;
+      rootContext?.variant === "filled" && rootContext.backgroundColor
+        ? rootContext.backgroundColor
+        : undefined;
     const contentClassName = rootContext?.contentClassName;
 
     return (
@@ -208,6 +210,7 @@ const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
             className={cn(
               "flex flex-col px-6 py-4 text-sm text-muted-foreground leading-relaxed",
               "[&>*]:py-2 [&>*]:border-b [&>*]:border-ac-gray-30 [&>*:last-child]:border-b-0",
+              rootContext?.variant === "filled" && !rootContext.backgroundColor && "bg-ac-gray-10",
               contentClassName,
               className
             )}

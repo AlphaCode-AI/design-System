@@ -137,7 +137,7 @@ export default function CardPage() {
                 카드는 Header, Content, Footer 세 영역으로 구성되며, 세 영역 모두 선택 사항입니다.
                 필요한 영역만 골라 자유롭게 조합해 활용할 수 있습니다. 다양한 조합 예시는 아래 <a href="#variants" className="text-ac-primary-50 underline underline-offset-2">Variants</a> 섹션을 참고하세요.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-ac-gray-20">
+              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
                 <img src="/card/card_anatomy.png" alt="card anatomy img" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">

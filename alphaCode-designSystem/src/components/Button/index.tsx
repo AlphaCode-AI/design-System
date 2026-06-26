@@ -20,7 +20,7 @@ const buttonVariants = cva(
         primary:
           "bg-ac-primary-50 text-ac-white rounded-md hover:bg-ac-primary-60 active:bg-ac-primary-70",
         secondary:
-          "bg-ac-gray-90 text-ac-white rounded-md hover:bg-ac-gray-80 active:bg-ac-gray-70",
+          "bg-ac-gray-90 text-ac-white dark:text-[#060606] rounded-md hover:bg-ac-gray-80 active:bg-ac-gray-70",
         tertiary:
           "bg-ac-gray-20 text-foreground rounded-md hover:bg-ac-gray-30 active:bg-ac-gray-40",
         link:

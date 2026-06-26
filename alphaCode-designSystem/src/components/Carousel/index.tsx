@@ -196,9 +196,9 @@ const navBase = [
 ].join(" ");
 
 const navStyles: Record<CarouselNavStyle, string> = {
-  default: "w-8 h-8 rounded-full bg-ac-white shadow-sm hover:bg-ac-gray-20",
-  line:    "w-8 h-8 rounded-full bg-ac-white border border-ac-gray-30 hover:bg-ac-gray-20",
-  border:  "w-8 h-8 rounded-full bg-ac-white border border-ac-gray-40 shadow-xs hover:bg-ac-gray-20",
+  default: "w-8 h-8 rounded-full bg-ac-white dark:bg-ac-gray-30 shadow-sm hover:bg-ac-gray-20",
+  line:    "w-8 h-8 rounded-full bg-ac-white dark:bg-ac-gray-30 border border-ac-gray-30 hover:bg-ac-gray-20",
+  border:  "w-8 h-8 rounded-full bg-ac-white dark:bg-ac-gray-30 border border-ac-gray-40 shadow-xs hover:bg-ac-gray-20",
   text:    "px-2 text-sm text-ac-gray-60 hover:text-foreground",
 };
 
@@ -300,7 +300,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
                   width: 12,
                   height: 3,
                   borderRadius: 4,
-                  backgroundColor: isActive ? color : "#D9D9D9",
+                  backgroundColor: isActive ? color : "var(--ac-gray-40)",
                 }}
               />
             );
@@ -329,7 +329,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
                 aria-label={`${i + 1}번째 슬라이드`}
                 onClick={() => goTo(i)}
                 className={cn("rounded-full", baseBtn)}
-                style={{ width: 8, height: 8, backgroundColor: "#ECECEC" }}
+                style={{ width: 8, height: 8, backgroundColor: "var(--ac-gray-30)" }}
               />
             );
           }
@@ -344,7 +344,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
               aria-label={`${i + 1}번째 슬라이드`}
               onClick={() => goTo(i)}
               className={cn("rounded-full", baseBtn)}
-              style={{ width: 8, height: 8, backgroundColor: isActive ? color : "#ECECEC" }}
+              style={{ width: 8, height: 8, backgroundColor: isActive ? color : "var(--ac-gray-30)" }}
             />
           );
         })}
@@ -368,9 +368,9 @@ const CarouselCounter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
         className={cn("text-sm tabular-nums", className)}
         {...props}
       >
-        <span style={{ fontWeight: 700, color: "#000000" }}>{current + 1}</span>
-        <span style={{ color: "#555555" }}> / </span>
-        <span style={{ color: "#555555" }}>{pageCount}</span>
+        <span className="font-bold text-foreground">{current + 1}</span>
+        <span className="text-muted-foreground"> / </span>
+        <span className="text-muted-foreground">{pageCount}</span>
       </div>
     );
   }

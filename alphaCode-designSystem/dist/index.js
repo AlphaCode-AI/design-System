@@ -53,7 +53,7 @@ var buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-ac-primary-50 text-ac-white rounded-md hover:bg-ac-primary-60 active:bg-ac-primary-70",
-        secondary: "bg-ac-gray-90 text-ac-white rounded-md hover:bg-ac-gray-80 active:bg-ac-gray-70",
+        secondary: "bg-ac-gray-90 text-ac-white dark:text-[#060606] rounded-md hover:bg-ac-gray-80 active:bg-ac-gray-70",
         tertiary: "bg-ac-gray-20 text-foreground rounded-md hover:bg-ac-gray-30 active:bg-ac-gray-40",
         link: "bg-transparent text-foreground rounded-md hover:text-ac-primary-50 underline-offset-4 hover:underline",
         icon: "bg-transparent text-foreground rounded-md border border-border hover:bg-ac-gray-20 active:bg-ac-gray-30"
@@ -257,7 +257,7 @@ function Tooltip({ content, placement = "top-center", children, className, arrow
             role: "tooltip",
             className: cn(
               "absolute z-tooltip w-max max-w-xs",
-              "px-3 py-2 rounded-md text-xs text-foreground bg-white border border-border shadow-sm",
+              "px-3 py-2 rounded-md text-xs text-foreground bg-card border border-border shadow-sm",
               tooltip,
               className
             ),
@@ -267,7 +267,7 @@ function Tooltip({ content, placement = "top-center", children, className, arrow
                 "span",
                 {
                   className: cn(
-                    "absolute w-2.5 h-2.5 bg-white border-border",
+                    "absolute w-2.5 h-2.5 bg-card border-border",
                     arrow,
                     arrowClassName
                   )
@@ -295,7 +295,7 @@ var fabVariants = cva3(
     variants: {
       variant: {
         primary: "bg-ac-primary-50 text-ac-white hover:bg-ac-primary-60 active:bg-ac-primary-70",
-        secondary: "bg-ac-gray-90 text-ac-white hover:bg-ac-gray-80 active:bg-ac-gray-70",
+        secondary: "bg-ac-gray-90 text-ac-white dark:text-[#060606] hover:bg-ac-gray-80 active:bg-ac-gray-70",
         tertiary: "bg-ac-gray-20 text-foreground border border-border hover:bg-ac-gray-30 active:bg-ac-gray-40"
       },
       size: {
@@ -403,7 +403,7 @@ var badgeVariants = cva4(
         warning: "bg-ac-orange-10 text-ac-orange-60 border-ac-orange-40",
         fail: "bg-ac-red-10 text-ac-red-60 border-ac-red-40",
         // ── 기타 메타 배지 ──────────────────────────────────
-        primary: "bg-ac-white text-ac-primary-50 border-ac-primary-40",
+        primary: "bg-background text-ac-primary-50 border-ac-primary-40",
         default: "bg-ac-gray-30 text-ac-gray-80 border-ac-gray-70"
       },
       size: {
@@ -481,8 +481,8 @@ var checkboxVariants = cva6(
     "shrink-0 rounded-xs border transition-colors duration-normal",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:opacity-40",
-    "cursor-pointer appearance-none relative",
-    "border-ac-gray-40 bg-ac-white",
+    "peer cursor-pointer appearance-none relative",
+    "border-ac-gray-40 bg-background",
     "hover:border-(--checkbox-color)",
     "checked:bg-(--checkbox-color) checked:border-(--checkbox-color)",
     "indeterminate:bg-(--checkbox-color) indeterminate:border-(--checkbox-color)"
@@ -509,7 +509,7 @@ function CheckIcon({ size }) {
       height: dim,
       viewBox: "0 0 12 12",
       fill: "none",
-      className: "absolute inset-0 m-auto pointer-events-none text-white",
+      className: "absolute inset-0 m-auto pointer-events-none text-white opacity-0 peer-checked:opacity-100",
       "aria-hidden": "true",
       children: /* @__PURE__ */ jsx8("path", { d: "M2 6l3 3 5-5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
     }
@@ -524,7 +524,7 @@ function IndeterminateIcon({ size }) {
       height: dim,
       viewBox: "0 0 12 12",
       fill: "none",
-      className: "absolute inset-0 m-auto pointer-events-none text-white",
+      className: "absolute inset-0 m-auto pointer-events-none text-white opacity-0 peer-[:indeterminate]:opacity-100",
       "aria-hidden": "true",
       children: /* @__PURE__ */ jsx8("path", { d: "M2 6h8", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
     }
@@ -583,7 +583,7 @@ var radioVariants = cva7(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:opacity-40",
     "cursor-pointer appearance-none relative",
-    "border-ac-gray-40 bg-ac-white",
+    "border-ac-gray-40 bg-background",
     "hover:border-(--radio-color)",
     "checked:border-(--radio-color)"
   ],
@@ -659,7 +659,7 @@ var switchTrackVariants = cva8(
     "border-border border",
     "disabled:cursor-not-allowed disabled:opacity-40",
     "bg-ac-gray-30 rounded-lg",
-    "data-[state=checked]:bg-white"
+    "data-[state=checked]:bg-white dark:data-[state=checked]:bg-ac-gray-50"
   ],
   {
     variants: {
@@ -1180,7 +1180,7 @@ function BreadcrumbLink({
         onClick: item.onClick,
         className: cn(
           "inline-flex items-center text-sm transition-colors duration-150",
-          "text-ac-black hover:underline underline-offset-4"
+          "text-foreground hover:underline underline-offset-4"
         ),
         "aria-label": isFirst && showHomeIcon ? "\uD648\uC73C\uB85C \uC774\uB3D9" : void 0,
         children: content
@@ -2347,7 +2347,7 @@ function ToggleGroup({
       role: "group",
       className: cn(
         "inline-flex w-fit rounded-md p-1 gap-1",
-        variant === "primary" ? "bg-ac-gray-30" : "bg-ac-blue-gray-10",
+        variant === "primary" ? "bg-ac-gray-30" : "bg-ac-blue-gray-10 dark:bg-[#171e21]",
         className
       ),
       ...props,
@@ -2369,14 +2369,14 @@ function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, 
     buttonClass = "text-ac-gray-50";
   } else if (isActive) {
     if (ctx.activeClassName) {
-      buttonClass = cn("bg-white font-medium", ctx.activeClassName);
+      buttonClass = cn("bg-background font-medium", ctx.activeClassName);
     } else if (ctx.variant === "primary") {
-      buttonClass = "bg-white border border-ac-primary-50 text-ac-primary-50 font-medium";
+      buttonClass = "bg-background border border-ac-primary-50 text-ac-primary-50 font-medium";
     } else {
-      buttonClass = "bg-white text-ac-gray-90 font-medium";
+      buttonClass = "bg-background text-ac-gray-90 font-medium";
     }
   } else {
-    buttonClass = "text-ac-gray-70 font-normal hover:bg-white/60";
+    buttonClass = "text-ac-gray-70 font-normal hover:bg-background/60";
     iconSpanClass = cn(iconSizeClass, "text-ac-gray-50");
   }
   const button = /* @__PURE__ */ jsxs15(
@@ -2688,7 +2688,7 @@ var variantBgClass = {
   error: "bg-ac-red-10",
   success: "bg-ac-green-10",
   info: "bg-ac-blue-10",
-  warning: "bg-ac-orange-20"
+  warning: "bg-ac-orange-20 dark:bg-[#4A2200]"
 };
 var variantTextClass = {
   default: "text-ac-gray-90",
@@ -2961,8 +2961,7 @@ var ProgressIndicator = React21.forwardRef(
     circularSize = "md",
     color = "#FF6300",
     /* ac-primary-50 */
-    trackColor = "#ECECEC",
-    /* ac-gray-30 */
+    trackColor = "var(--ac-gray-30)",
     label,
     showValue = false,
     indeterminate = false,
@@ -3224,7 +3223,7 @@ var Toast = React22.forwardRef(({
       ref,
       role: "status",
       className: cn(
-        "relative bg-white rounded-lg p-4 w-[calc(100vw-2rem)] sm:w-[410px] border border-border",
+        "relative bg-card rounded-lg p-4 w-[calc(100vw-2rem)] sm:w-[410px] border border-border",
         "[box-shadow:0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]",
         className
       ),
@@ -3287,7 +3286,7 @@ var Toast = React22.forwardRef(({
             type: "button",
             onClick: onClose,
             "aria-label": "\uB2EB\uAE30",
-            className: "absolute -top-1 -left-1 w-5 h-5 rounded-full bg-white border border-border flex items-center justify-center hover:bg-ac-gray-30 transition-colors",
+            className: "absolute -top-1 -left-1 w-5 h-5 rounded-full bg-card border border-border flex items-center justify-center hover:bg-ac-gray-30 transition-colors",
             children: /* @__PURE__ */ jsx25(X3, { className: "w-3 h-3 text-ac-gray-50" })
           }
         )
@@ -4225,11 +4224,11 @@ var AccordionTrigger = React26.forwardRef(
         className: cn(
           "flex flex-1 items-center justify-between py-4 px-4 font-medium",
           "transition-colors duration-slow",
-          variant === "filled" ? "hover:brightness-95" : "hover:bg-ac-gray-10",
+          variant === "filled" ? [!backgroundColor && "bg-ac-gray-10", "hover:brightness-95"] : "hover:bg-ac-gray-10",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
           className
         ),
-        style: variant === "filled" ? { backgroundColor: backgroundColor ?? "#FBFBFB" } : void 0,
+        style: variant === "filled" && backgroundColor ? { backgroundColor } : void 0,
         ...props,
         children: [
           /* @__PURE__ */ jsx29("span", { className: "text-left text-sm font-medium text-foreground", children }),
@@ -4254,7 +4253,7 @@ var AccordionContent = React26.forwardRef(
     const rootContext = React26.useContext(AccordionContext);
     if (!itemContext) throw new Error("AccordionContent must be used within an AccordionItem");
     const { isOpen } = itemContext;
-    const backgroundColor = rootContext?.variant === "filled" ? rootContext.backgroundColor ?? "#FBFBFB" : void 0;
+    const backgroundColor = rootContext?.variant === "filled" && rootContext.backgroundColor ? rootContext.backgroundColor : void 0;
     const contentClassName = rootContext?.contentClassName;
     return /* @__PURE__ */ jsx29(
       "div",
@@ -4270,6 +4269,7 @@ var AccordionContent = React26.forwardRef(
             className: cn(
               "flex flex-col px-6 py-4 text-sm text-muted-foreground leading-relaxed",
               "[&>*]:py-2 [&>*]:border-b [&>*]:border-ac-gray-30 [&>*:last-child]:border-b-0",
+              rootContext?.variant === "filled" && !rootContext.backgroundColor && "bg-ac-gray-10",
               contentClassName,
               className
             ),
@@ -4405,9 +4405,9 @@ var navBase = [
   "disabled:pointer-events-none disabled:opacity-30"
 ].join(" ");
 var navStyles = {
-  default: "w-8 h-8 rounded-full bg-ac-white shadow-sm hover:bg-ac-gray-20",
-  line: "w-8 h-8 rounded-full bg-ac-white border border-ac-gray-30 hover:bg-ac-gray-20",
-  border: "w-8 h-8 rounded-full bg-ac-white border border-ac-gray-40 shadow-xs hover:bg-ac-gray-20",
+  default: "w-8 h-8 rounded-full bg-ac-white dark:bg-ac-gray-30 shadow-sm hover:bg-ac-gray-20",
+  line: "w-8 h-8 rounded-full bg-ac-white dark:bg-ac-gray-30 border border-ac-gray-30 hover:bg-ac-gray-20",
+  border: "w-8 h-8 rounded-full bg-ac-white dark:bg-ac-gray-30 border border-ac-gray-40 shadow-xs hover:bg-ac-gray-20",
   text: "px-2 text-sm text-ac-gray-60 hover:text-foreground"
 };
 var CarouselPrevious = React27.forwardRef(
@@ -4487,7 +4487,7 @@ var CarouselDots = React27.forwardRef(
                   width: 12,
                   height: 3,
                   borderRadius: 4,
-                  backgroundColor: isActive ? color : "#D9D9D9"
+                  backgroundColor: isActive ? color : "var(--ac-gray-40)"
                 }
               },
               i
@@ -4516,7 +4516,7 @@ var CarouselDots = React27.forwardRef(
                 "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
                 onClick: () => goTo(i),
                 className: cn("rounded-full", baseBtn),
-                style: { width: 8, height: 8, backgroundColor: "#ECECEC" }
+                style: { width: 8, height: 8, backgroundColor: "var(--ac-gray-30)" }
               },
               i
             );
@@ -4530,7 +4530,7 @@ var CarouselDots = React27.forwardRef(
               "aria-label": `${i + 1}\uBC88\uC9F8 \uC2AC\uB77C\uC774\uB4DC`,
               onClick: () => goTo(i),
               className: cn("rounded-full", baseBtn),
-              style: { width: 8, height: 8, backgroundColor: isActive ? color : "#ECECEC" }
+              style: { width: 8, height: 8, backgroundColor: isActive ? color : "var(--ac-gray-30)" }
             },
             i
           );
@@ -4552,9 +4552,9 @@ var CarouselCounter = React27.forwardRef(
         className: cn("text-sm tabular-nums", className),
         ...props,
         children: [
-          /* @__PURE__ */ jsx30("span", { style: { fontWeight: 700, color: "#000000" }, children: current + 1 }),
-          /* @__PURE__ */ jsx30("span", { style: { color: "#555555" }, children: " / " }),
-          /* @__PURE__ */ jsx30("span", { style: { color: "#555555" }, children: pageCount })
+          /* @__PURE__ */ jsx30("span", { className: "font-bold text-foreground", children: current + 1 }),
+          /* @__PURE__ */ jsx30("span", { className: "text-muted-foreground", children: " / " }),
+          /* @__PURE__ */ jsx30("span", { className: "text-muted-foreground", children: pageCount })
         ]
       }
     );
@@ -5132,7 +5132,7 @@ function GripDots({ orientation }) {
       children: Array.from({ length: 6 }).map((_, i) => /* @__PURE__ */ jsx33(
         "span",
         {
-          className: "block h-[2px] w-[2px] rounded-full bg-[#555555] transition-colors group-hover:bg-ac-primary-50 group-active:bg-ac-primary-50"
+          className: "block h-[2px] w-[2px] rounded-full bg-muted-foreground transition-colors group-hover:bg-ac-primary-50 group-active:bg-ac-primary-50"
         },
         i
       ))
@@ -5178,7 +5178,7 @@ function ResizableHandle({
           className: cn(
             "z-10 flex items-center justify-center rounded-[4px] transition-colors",
             orientation === "horizontal" ? "h-[30px] w-3" : "h-3 w-[30px]",
-            variant === "margin" ? "group-hover:bg-[rgba(255,230,215,1)] group-active:bg-[rgba(255,230,215,1)]" : "bg-white"
+            variant === "margin" ? "group-hover:bg-ac-primary-10 group-active:bg-ac-primary-10" : "bg-background"
           ),
           children: /* @__PURE__ */ jsx33(GripDots, { orientation })
         }

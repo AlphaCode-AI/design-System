@@ -169,7 +169,7 @@ function GripDots({ orientation }: { orientation: ResizableOrientation }) {
       {Array.from({ length: 6 }).map((_, i) => (
         <span
           key={i}
-          className="block h-[2px] w-[2px] rounded-full bg-[#555555] transition-colors group-hover:bg-ac-primary-50 group-active:bg-ac-primary-50"
+          className="block h-[2px] w-[2px] rounded-full bg-muted-foreground transition-colors group-hover:bg-ac-primary-50 group-active:bg-ac-primary-50"
         />
       ))}
     </div>
@@ -229,8 +229,8 @@ function ResizableHandle({
           "z-10 flex items-center justify-center rounded-[4px] transition-colors",
           orientation === "horizontal" ? "h-[30px] w-3" : "h-3 w-[30px]",
           variant === "margin"
-            ? "group-hover:bg-[rgba(255,230,215,1)] group-active:bg-[rgba(255,230,215,1)]"
-            : "bg-white"
+            ? "group-hover:bg-ac-primary-10 group-active:bg-ac-primary-10"
+            : "bg-background"
         )}
       >
         <GripDots orientation={orientation} />

@@ -67,7 +67,7 @@ export default function FABPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg  bg-ac-gray-20 p-12">
+              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-12">
                 <div className="grid grid-cols-2 gap-12">
                   {/* FAB */}
                   <div className="flex flex-col items-center">

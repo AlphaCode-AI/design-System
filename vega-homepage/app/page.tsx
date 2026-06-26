@@ -81,7 +81,7 @@ export default function HomePage() {
               <p className="text-sm md:text-md text-foreground">
                 설치 전 <CodeBadge>.npmrc</CodeBadge>에 registry와 GitHub PAT(<CodeBadge>NPM_TOKEN</CodeBadge>)를 설정하세요.
               </p>
-              <div className="relative rounded-lg bg-white p-4 font-mono text-xs border border-ac-gray-40 text-ac-gray-80 shadow-sm leading-relaxed overflow-x-auto">
+              <div className="relative rounded-lg bg-card p-4 font-mono text-xs border border-ac-gray-40 text-ac-gray-80 shadow-sm leading-relaxed overflow-x-auto">
                 <p>@alphacode-ai:registry=https://npm.pkg.github.com</p>
                 <p>{"//npm.pkg.github.com/:_authToken=${NPM_TOKEN}"}</p>
                 <button
@@ -92,7 +92,7 @@ export default function HomePage() {
                   {copiedNpmrc ? <Check className="w-4 h-4 text-ac-green-50" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
-              <div className="relative rounded-lg bg-white p-4 font-mono text-sm border border-ac-gray-40 text-ac-gray-80 shadow-sm overflow-x-auto">
+              <div className="relative rounded-lg bg-card p-4 font-mono text-sm border border-ac-gray-40 text-ac-gray-80 shadow-sm overflow-x-auto">
                 <span>{INSTALL_CMD}</span>
                 <button
                   onClick={handleCopy}
@@ -125,7 +125,7 @@ export default function HomePage() {
         <section className="grid grid-cols-1 gap-4 md:gap-8 md:grid-cols-3 pb-8 md:pb-12 mt-6 md:mt-8">
           
           <Link href="/logo">
-            <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-white">
+            <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-card">
               <div className="flex flex-col gap-4 md:gap-6">
                 <div className="text-ac-primary-50"><Shapes size={28} strokeWidth={1.5} className="md:w-8 md:h-8" /></div>
                 <div>
@@ -143,7 +143,7 @@ export default function HomePage() {
           </Link>
 
           <Link href="/foundation/breakpoints">
-            <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-white">
+            <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-card">
               <div className="flex flex-col gap-4 md:gap-6">
                 <div className="text-ac-primary-50"><LayoutTemplate size={28} strokeWidth={1.5} className="md:w-8 md:h-8" /></div>
                 <div>
@@ -161,7 +161,7 @@ export default function HomePage() {
           </Link>
 
           <Link href="/components">
-            <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-white">
+            <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-card">
               <div className="flex flex-col gap-4 md:gap-6">
                 <div className="text-ac-primary-50"><Component size={28} strokeWidth={1.5} className="md:w-8 md:h-8" /></div>
                 <div>

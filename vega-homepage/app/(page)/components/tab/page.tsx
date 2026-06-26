@@ -88,7 +88,7 @@ export default function TabPage() {
               <p className="text-sm text-foreground mb-4">
                 탭의 각 구성 요소입니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-ac-gray-20">
+              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
                 <img src="/tab/tab_anatomy.png" alt="tab anatomy" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">

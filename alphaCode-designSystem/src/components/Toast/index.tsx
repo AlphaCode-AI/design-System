@@ -245,7 +245,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(({
       ref={ref}
       role="status"
       className={cn(
-        "relative bg-white rounded-lg p-4 w-[calc(100vw-2rem)] sm:w-[410px] border border-border",
+        "relative bg-card rounded-lg p-4 w-[calc(100vw-2rem)] sm:w-[410px] border border-border",
         "[box-shadow:0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]",
         className
       )}
@@ -335,7 +335,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(({
           type="button"
           onClick={onClose}
           aria-label="닫기"
-          className="absolute -top-1 -left-1 w-5 h-5 rounded-full bg-white border border-border flex items-center justify-center hover:bg-ac-gray-30 transition-colors"
+          className="absolute -top-1 -left-1 w-5 h-5 rounded-full bg-card border border-border flex items-center justify-center hover:bg-ac-gray-30 transition-colors"
         >
           <X className="w-3 h-3 text-ac-gray-50" />
         </button>

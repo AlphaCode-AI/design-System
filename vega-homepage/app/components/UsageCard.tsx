@@ -25,7 +25,7 @@ export function UsageCard({ type, src, description, className, variant = "fit" }
         className={cn(
           "relative w-full overflow-hidden border-b-2 flex items-center justify-center",
           "aspect-[8/3]",
-          isDo ? "border-ac-blue-30 bg-ac-blue-10" : "border-ac-red-30 bg-ac-red-10"
+          isDo ? "border-ac-blue-30 bg-ac-blue-20" : "border-ac-red-30 bg-ac-red-20"
         )}
       >
         {src ? (

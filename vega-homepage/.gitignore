@@ -6,6 +6,7 @@ out/
 node_modules/
 
 # env
+.npmrc
 .env
 .env.local
 .env.development.local

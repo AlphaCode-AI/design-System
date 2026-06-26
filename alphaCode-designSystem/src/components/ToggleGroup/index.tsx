@@ -92,7 +92,7 @@ function ToggleGroup({
         role="group"
         className={cn(
           "inline-flex w-fit rounded-md p-1 gap-1",
-          variant === "primary" ? "bg-ac-gray-30" : "bg-ac-blue-gray-10",
+          variant === "primary" ? "bg-ac-gray-30" : "bg-ac-blue-gray-10 dark:bg-[#171e21]",
           className
         )}
         {...props}
@@ -127,14 +127,14 @@ function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, 
     buttonClass = "text-ac-gray-50";
   } else if (isActive) {
     if (ctx.activeClassName) {
-      buttonClass = cn("bg-white font-medium", ctx.activeClassName);
+      buttonClass = cn("bg-background font-medium", ctx.activeClassName);
     } else if (ctx.variant === "primary") {
-      buttonClass = "bg-white border border-ac-primary-50 text-ac-primary-50 font-medium";
+      buttonClass = "bg-background border border-ac-primary-50 text-ac-primary-50 font-medium";
     } else {
-      buttonClass = "bg-white text-ac-gray-90 font-medium";
+      buttonClass = "bg-background text-ac-gray-90 font-medium";
     }
   } else {
-    buttonClass = "text-ac-gray-70 font-normal hover:bg-white/60";
+    buttonClass = "text-ac-gray-70 font-normal hover:bg-background/60";
     iconSpanClass = cn(iconSizeClass, "text-ac-gray-50");
   }
 

@@ -51,7 +51,7 @@ function Tooltip({ content, placement = "top-center", children, className, arrow
           role="tooltip"
           className={cn(
             "absolute z-tooltip w-max max-w-xs",
-            "px-3 py-2 rounded-md text-xs text-foreground bg-white border border-border shadow-sm",
+            "px-3 py-2 rounded-md text-xs text-foreground bg-card border border-border shadow-sm",
             tooltip,
             className
           )}
@@ -60,7 +60,7 @@ function Tooltip({ content, placement = "top-center", children, className, arrow
           {/* Arrow — 회전된 사각형으로 border 표현 */}
           <span
             className={cn(
-              "absolute w-2.5 h-2.5 bg-white border-border",
+              "absolute w-2.5 h-2.5 bg-card border-border",
               arrow,
               arrowClassName
             )}

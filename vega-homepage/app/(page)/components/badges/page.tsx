@@ -93,7 +93,7 @@ export default function BadgePage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8">
                 <div className="flex items-center justify-center">
                   <img src="/badge/badge_anatomy.png" alt="badge anatomy" />
                 </div>

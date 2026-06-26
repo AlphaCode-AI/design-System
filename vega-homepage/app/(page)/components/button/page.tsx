@@ -52,7 +52,7 @@ export default function ButtonPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg p-12 flex items-center justify-center gap-24 bg-ac-gray-20">
+              <div className="rounded-lg p-12 flex items-center justify-center gap-24 bg-[#F7F7F7] anatomy-bg">
                 <img src="/button/button_anatomy.png" alt="button anatomy img" />
               </div>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">

@@ -19,7 +19,7 @@ const fabVariants = cva(
     variants: {
       variant: {
         primary:   "bg-ac-primary-50 text-ac-white hover:bg-ac-primary-60 active:bg-ac-primary-70",
-        secondary: "bg-ac-gray-90 text-ac-white hover:bg-ac-gray-80 active:bg-ac-gray-70",
+        secondary: "bg-ac-gray-90 text-ac-white dark:text-[#060606] hover:bg-ac-gray-80 active:bg-ac-gray-70",
         tertiary:  "bg-ac-gray-20 text-foreground border border-border hover:bg-ac-gray-30 active:bg-ac-gray-40",
       },
       size: {

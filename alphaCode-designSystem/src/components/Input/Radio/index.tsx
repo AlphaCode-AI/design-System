@@ -11,7 +11,7 @@ const radioVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:opacity-40",
     "cursor-pointer appearance-none relative",
-    "border-ac-gray-40 bg-ac-white",
+    "border-ac-gray-40 bg-background",
     "hover:border-(--radio-color)",
     "checked:border-(--radio-color)",
   ],

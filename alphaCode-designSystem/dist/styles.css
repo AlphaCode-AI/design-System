@@ -56,6 +56,18 @@
   --card-foreground:    hsl(0 0% 2%);       /* ac-black */
   --popover:            hsl(0 0% 100%);
   --popover-foreground: hsl(0 0% 2%);
+
+  /* [Gray Palette] — dark mode 지원을 위해 CSS 변수로 관리 */
+  --ac-gray-10: #FBFBFB;
+  --ac-gray-20: #F7F7F7;
+  --ac-gray-30: #ECECEC;
+  --ac-gray-40: #D9D9D9;
+  --ac-gray-50: #A8A8A8;
+  --ac-gray-60: #828282;
+  --ac-gray-70: #5F5F5F;
+  --ac-gray-80: #555555;
+  --ac-gray-90: #060606;
+
 }
 
 /* ── Dark Mode ───────────────────────────────────────────── */
@@ -65,9 +77,32 @@
 
   --primary:            hsl(21 100% 56%);   /* ac-primary-40 기반 */
   --primary-foreground: hsl(0 0% 100%);
+  --primary-hover:      hsl(21 100% 62%);
+  --primary-active:     hsl(21 100% 50%);
 
   --secondary:          hsl(0 0% 13%);
   --secondary-foreground: hsl(0 0% 80%);
+
+  --muted:              hsl(0 0% 15%);
+  --muted-foreground:   hsl(0 0% 60%);
+
+  --accent:             hsl(0 0% 15%);
+  --accent-foreground:  hsl(0 0% 95%);
+
+  --destructive:        hsl(0 90% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  --success:            hsl(145 70% 45%);
+  --success-foreground: hsl(0 0% 100%);
+
+  --warning:            hsl(28 100% 58%);
+  --warning-foreground: hsl(0 0% 100%);
+
+  --info:               hsl(218 100% 62%);
+  --info-foreground:    hsl(0 0% 100%);
+
+  --pending:            hsl(271 90% 68%);
+  --pending-foreground: hsl(0 0% 100%);
 
   --border:             hsl(0 0% 20%);
   --input:              hsl(0 0% 20%);
@@ -77,6 +112,25 @@
   --card-foreground:    hsl(0 0% 95%);
   --popover:            hsl(0 0% 8%);
   --popover-foreground: hsl(0 0% 95%);
+
+  /* Gray Palette — light 값의 반전 (배경용 어둡게, 텍스트용 밝게) */
+  --ac-gray-10: #1C1C1C;
+  --ac-gray-20: #242424;
+  --ac-gray-30: #2E2E2E;
+  --ac-gray-40: #3D3D3D;
+  --ac-gray-50: #737373;
+  --ac-gray-60: #909090;
+  --ac-gray-70: #B0B0B0;
+  --ac-gray-80: #C4C4C4;
+  --ac-gray-90: #E5E5E5;
+
+  /* Color Palette -10 dark override */
+  --color-ac-primary-10: #3D1803;
+  --color-ac-green-10:   #031A0C;
+  --color-ac-blue-10:    #12253d;
+  --color-ac-red-10:     #431411;
+  --color-ac-orange-10:  #331800;
+  --color-ac-purple-10:  #190039;
 }
 
 /* ── Base resets ─────────────────────────────────────────── */

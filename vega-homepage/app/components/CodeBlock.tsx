@@ -68,7 +68,7 @@ export default function CodeBlock({ code, children, className }: CodeBlockProps)
   return (
     <div
       className={cn(
-        "rounded-lg border border-ac-gray-80 bg-ac-gray-90 px-5 py-4 font-mono text-sm leading-relaxed overflow-x-auto",
+        "rounded-lg border border-[#333] bg-[#1e1e1e] px-5 py-4 font-mono text-sm leading-relaxed overflow-x-auto",
         className
       )}
     >
@@ -96,7 +96,7 @@ export default function CodeBlock({ code, children, className }: CodeBlockProps)
         })}
       </pre>
       ) : (
-        <pre className="text-ac-gray-20">{children}</pre>
+        <pre className="text-[#abb2bf]">{children}</pre>
       )}
     </div>
   );

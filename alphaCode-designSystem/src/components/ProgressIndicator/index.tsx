@@ -65,7 +65,7 @@ const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProp
       linearSize = "md",
       circularSize = "md",
       color = "#FF6300",     /* ac-primary-50 */
-      trackColor = "#ECECEC", /* ac-gray-30 */
+      trackColor = "var(--ac-gray-30)",
       label,
       showValue = false,
       indeterminate = false,

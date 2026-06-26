@@ -90,7 +90,7 @@ function BreadcrumbLink({
           onClick={item.onClick}
           className={cn(
             "inline-flex items-center text-sm transition-colors duration-150",
-            "text-ac-black hover:underline underline-offset-4",
+            "text-foreground hover:underline underline-offset-4",
           )}
           aria-label={isFirst && showHomeIcon ? "홈으로 이동" : undefined}
         >
