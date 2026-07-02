@@ -160,7 +160,7 @@ export default function HomePage() {
             </Card>
           </Link>
 
-          <Link href="/components">
+          <Link href="/components/accordion">
             <Card variant="line" shadowSize="xl" interactive className="group flex flex-col justify-between p-5 md:p-8 h-full hover:shadow-xl bg-card">
               <div className="flex flex-col gap-4 md:gap-6">
                 <div className="text-ac-primary-50"><Component size={28} strokeWidth={1.5} className="md:w-8 md:h-8" /></div>

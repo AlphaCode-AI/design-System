@@ -278,9 +278,14 @@ const [val, setVal] = useState("a");
                 <h3 className="text-lg font-semibold text-foreground mb-2">5. 색상 커스터마이징</h3>
                 <p className="text-sm text-foreground mb-4">
                   <CodeBadge>checkedColor</CodeBadge> prop으로 선택 색상을 변경합니다.
+                  다크모드 자동 대응이 필요한 경우 CSS 변수(<CodeBadge>var(--ac-xxx-xx)</CodeBadge>) 형식을 사용하세요.
                 </p>
-                <CodeBlock code={`<Radio checkedColor="#006FFF" label="Blue" checked />
-<Radio checkedColor="var(--ac-green-50)" label="Green" checked />`} />
+                <CodeBlock code={`{/* hex — 라이트/다크 고정 색상 */}
+<Radio checkedColor="#006FFF" label="Blue" checked />
+
+{/* CSS 변수 — 다크모드 자동 대응 */}
+<Radio checkedColor="var(--ac-blue-50)" label="Blue (다크 자동)" checked />
+<Radio checkedColor="var(--ac-green-50)" label="Green (다크 자동)" checked />`} />
               </div>
             </section>
 
@@ -293,7 +298,7 @@ const [val, setVal] = useState("a");
                   ["description",  "string",              "-",         "설명 텍스트 (선택)"],
                   ["checked",      "boolean",             "-",         "선택 상태 (controlled)"],
                   ["disabled",     "boolean",             "false",     "비활성 상태"],
-                  ["checkedColor", "string",              '"#FF6300"', "선택 시 색상"],
+                  ["checkedColor", "string",              '"#FF6300"', "선택 시 색상. 다크모드 자동 대응 시 var(--ac-xxx) CSS 변수 사용 권장"],
                   ["name",         "string",              "-",         "input name 속성. 같은 name끼리 단일 선택"],
                   ["value",        "string",              "-",         "input value 속성"],
                   ["onChange",     "(e) => void",         "-",         "상태 변경 핸들러"],

@@ -274,9 +274,14 @@ export default function CheckboxPage() {
                 <h3 className="text-lg font-semibold text-foreground mb-2">5. 색상 커스터마이징</h3>
                 <p className="text-sm text-foreground mb-4">
                   <CodeBadge>checkedColor</CodeBadge> prop으로 체크 색상을 변경합니다.
+                  다크모드 자동 대응이 필요한 경우 CSS 변수(<CodeBadge>var(--ac-xxx-xx)</CodeBadge>) 형식을 사용하세요.
                 </p>
-                <CodeBlock code={`<Checkbox checkedColor="#006FFF" label="Blue" checked />
-<Checkbox checkedColor="var(--ac-green-50)" label="Green" checked />`} />
+                <CodeBlock code={`{/* hex — 라이트/다크 고정 색상 */}
+<Checkbox checkedColor="#006FFF" label="Blue" checked />
+
+{/* CSS 변수 — 다크모드 자동 대응 */}
+<Checkbox checkedColor="var(--ac-blue-50)" label="Blue (다크 자동)" checked />
+<Checkbox checkedColor="var(--ac-green-50)" label="Green (다크 자동)" checked />`} />
               </div>
             </section>
 
@@ -290,7 +295,7 @@ export default function CheckboxPage() {
                   ["checked",       "boolean",             "-",         "체크 상태 (controlled)"],
                   ["indeterminate", "boolean",             "false",     "Indeterminate 상태"],
                   ["disabled",      "boolean",             "false",     "비활성 상태"],
-                  ["checkedColor",  "string",              '"#FF6300"', "체크 시 배경 색상"],
+                  ["checkedColor",  "string",              '"#FF6300"', "체크 시 배경 색상. 다크모드 자동 대응 시 var(--ac-xxx) CSS 변수 사용 권장"],
                   ["onChange",      "(e) => void",         "-",         "상태 변경 핸들러"],
                 ]} />
             </section>

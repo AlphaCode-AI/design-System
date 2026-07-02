@@ -10,6 +10,7 @@ import {
 } from "@alphacode-ai/design-system";
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
+import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
 
@@ -228,13 +229,18 @@ export default function ProgressPage() {
 
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">Color</h2>
-              <CodeBlock code={`{/* hex 코드 */}
+              <p className="text-sm text-foreground mb-4">
+                <CodeBadge>color</CodeBadge>와 <CodeBadge>trackColor</CodeBadge>는 hex, 토큰명, CSS 변수 세 가지 방식으로 지정할 수 있습니다.
+                다크모드 자동 대응이 필요한 경우 CSS 변수(<CodeBadge>var(--ac-xxx)</CodeBadge>) 방식을 권장합니다.
+                기본 <CodeBadge>trackColor</CodeBadge>는 내부적으로 <CodeBadge>var(--ac-gray-30)</CodeBadge>를 사용하여 다크모드에서 자동으로 어두운 트랙 색상이 적용됩니다.
+              </p>
+              <CodeBlock code={`{/* hex 코드 — 라이트/다크 고정 */}
 <ProgressIndicator type="linear" value={60} color="#3B82F6" />
 
 {/* 디자인 토큰 (ac-xxx-xx 형식으로 입력하면 var(--ac-xxx-xx)로 자동 변환) */}
 <ProgressIndicator type="linear" value={60} color="ac-blue-50" trackColor="ac-blue-10" />
 
-{/* CSS 변수 직접 입력 */}
+{/* CSS 변수 — 다크모드 자동 대응 */}
 <ProgressIndicator type="circular" value={60} color="var(--ac-green-50)" trackColor="var(--ac-green-10)" />`} />
             </section>
 
@@ -248,7 +254,7 @@ export default function ProgressPage() {
                   ["linearSize",    '"sm" | "md" | "lg" | "xl"',                          '"md"',      "선형 높이 사이즈"],
                   ["circularSize",  '"xs" | "sm" | "md" | "lg" | "xl"',                   '"md"',      "원형 직경 사이즈"],
                   ["color",         "string",                                              '"#FF6300"', "진행 색상 (hex, rgb, CSS 변수)"],
-                  ["trackColor",    "string",                                              '"#ECECEC"', "트랙 배경 색상"],
+                  ["trackColor",    "string",                                              '"var(--ac-gray-30)"', "트랙 배경 색상. 기본값은 CSS 변수로 다크모드 자동 대응. hex 고정 시 다크모드 미대응"],
                   ["label",         "string",                                              "-",         "라벨 텍스트"],
                   ["showValue",     "boolean",                                             "false",     "퍼센트 값 표시 여부"],
                   ["indeterminate", "boolean",                                             "false",     "진행률 미확정 로딩 상태"],

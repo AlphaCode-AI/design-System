@@ -10,6 +10,7 @@ import {
 } from "@alphacode-ai/design-system";
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
+import CodeBadge from "@/app/components/CodeBadge";
 
 const toc: TocItem[] = [
   { id: "primary-color", label: "Primary Color" },
@@ -166,6 +167,29 @@ export default function ColorPage() {
 
           {/* ── Code 탭 ── */}
           <TabContent value="code" className="pt-10 space-y-12">
+
+            {/* 토큰 사용 방식 */}
+            <div>
+              <h2 className="text-xl font-bold text-foreground mb-2">토큰 사용 방식</h2>
+              <p className="text-sm text-foreground mb-6">
+                모든 컬러 토큰은 <CodeBadge>--ac-*</CodeBadge> CSS 변수로 정의되어 있으며,
+                <CodeBadge>Tailwind 클래스</CodeBadge>와 <CodeBadge>var(--ac-*)</CodeBadge> 두 가지 방식으로 동일하게 사용할 수 있습니다.
+              </p>
+              <CodeBlock code={`{/* Tailwind 클래스 방식 — className에 사용 */}
+<div className="bg-ac-blue-50 text-ac-white">파란 배경</div>
+
+{/* CSS 변수 방식 — 인라인 스타일, 컴포넌트 props에 사용 */}
+<div style={{ backgroundColor: "var(--ac-blue-50)", color: "var(--ac-white)" }}>파란 배경</div>
+
+{/* 컴포넌트 props */}
+<ProgressIndicator type="linear" value={60} color="var(--ac-primary-50)" />`} />
+              <p className="text-sm text-foreground mt-4">
+                두 방식 모두 동일한 값을 참조합니다.
+                <CodeBadge>bg-ac-blue-50</CodeBadge>은 내부적으로 <CodeBadge>background-color: var(--color-ac-blue-50)</CodeBadge>를 생성하고,
+                이는 다시 <CodeBadge>var(--ac-blue-50)</CodeBadge>로 연결됩니다.
+              </p>
+            </div>
+
             <h2 className="text-xl font-bold text-foreground mb-6">Usage Examples</h2>
             <div className="space-y-8">
               <div>
@@ -186,6 +210,108 @@ export default function ColorPage() {
                 <CodeBlock code={`<button className="bg-ac-primary-50 hover:bg-ac-primary-60 active:bg-ac-primary-70 text-ac-white">
   확인 버튼
 </button>`} />
+              </div>
+            </div>
+
+            {/* 다크모드 토큰 사용법 */}
+            <div>
+              <h2 className="text-xl font-bold text-foreground mb-2">다크모드 토큰 사용법</h2>
+              <p className="text-sm text-foreground mb-8">
+                디자인 시스템의 색상 토큰은 CSS 변수 기반으로 정의되어 있습니다.
+                Tailwind 클래스와 <CodeBadge>var()</CodeBadge> 두 가지 방식으로 사용할 수 있으며,
+                두 방식 모두 다크모드 전환 시 토큰값이 자동으로 반영됩니다.
+              </p>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-sm font-bold mb-2">1. Tailwind 클래스 방식</h3>
+                  <p className="text-sm text-foreground mb-3">
+                    <CodeBadge>bg-ac-*</CodeBadge>, <CodeBadge>text-ac-*</CodeBadge> 등 Tailwind 유틸리티 클래스를 사용합니다.
+                    내부적으로 CSS 변수를 참조하므로 다크모드에서 자동으로 전환됩니다.
+                  </p>
+                  <CodeBlock code={`{/* Gray 계열: 라이트/다크 모두 자동 전환 */}
+<div className="bg-ac-gray-10 text-ac-gray-90">
+  배경과 텍스트가 다크모드에서 자동 전환됩니다.
+</div>
+
+{/* Color -10 계열: 다크모드에서 어두운 배경으로 전환 */}
+<div className="bg-ac-primary-10">
+  primary-10은 다크모드에서 자동으로 어두운 배경색으로 바뀝니다.
+</div>`} />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-bold mb-2">2. CSS var() 방식</h3>
+                  <p className="text-sm text-foreground mb-3">
+                    인라인 스타일이나 컴포넌트 props에 색상 값을 직접 전달할 때 사용합니다.
+                    다크모드 지원이 필요한 토큰은 <CodeBadge>var(--ac-gray-*)</CodeBadge>, <CodeBadge>var(--ac-primary-10)</CodeBadge> 등 <CodeBadge>--ac-*</CodeBadge> 형식을 사용합니다.
+                  </p>
+                  <CodeBlock code={`{/* Gray 계열 CSS 변수 */}
+<div style={{ backgroundColor: "var(--ac-gray-20)", color: "var(--ac-gray-90)" }}>
+  다크모드에서 자동 전환
+</div>
+
+{/* 컬러 -10 토큰 CSS 변수 */}
+<div style={{ backgroundColor: "var(--ac-primary-10)" }}>
+  다크모드에서 자동으로 어두운 배경
+</div>
+
+{/* 컴포넌트 props에 전달 */}
+<ProgressIndicator
+  type="linear"
+  value={60}
+  color="var(--ac-primary-50)"
+  trackColor="var(--ac-gray-30)"
+/>`} />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-bold mb-2">3. Hex 고정 vs CSS 변수 비교</h3>
+                  <p className="text-sm text-foreground mb-3">
+                    Hex 코드는 라이트/다크 모드에 관계없이 고정 색상으로 렌더링됩니다.
+                    다크모드 대응이 필요한 경우 반드시 CSS 변수 또는 Tailwind 토큰을 사용하세요.
+                  </p>
+                  <CodeBlock code={`{/* Hex 고정 — 다크모드 미대응 */}
+<div style={{ backgroundColor: "#ECECEC" }}>
+  라이트/다크 모드 모두 동일한 밝은 회색으로 표시됨
+</div>
+
+{/* CSS 변수 — 다크모드 자동 대응 */}
+<div style={{ backgroundColor: "var(--ac-gray-30)" }}>
+  다크모드에서는 어두운 회색으로 자동 전환됨
+</div>
+
+{/* Tailwind dark: 접두사 — 직접 지정 */}
+<div className="bg-[#ECECEC] dark:bg-[#3D3D3D]">
+  dark: 접두사로 다크모드 색상을 명시적으로 지정
+</div>`} />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-bold mb-2">다크모드 지원 토큰 목록</h3>
+                  <p className="text-sm text-foreground mb-3">
+                    아래 토큰들은 다크모드에서 자동으로 색상이 전환됩니다.
+                  </p>
+                  <div className="border border-border rounded-lg overflow-hidden text-sm">
+                    <div className="grid grid-cols-3 bg-ac-gray-10 border-b border-border">
+                      <div className="px-4 py-2 font-semibold text-foreground">토큰 계열</div>
+                      <div className="px-4 py-2 font-semibold text-foreground">CSS 변수 형식</div>
+                      <div className="px-4 py-2 font-semibold text-foreground">다크모드 지원</div>
+                    </div>
+                    {[
+                      ["Gray Scale", "var(--ac-gray-*)", "전체 스케일 자동 전환"],
+                      ["Color -10", "var(--ac-primary-10) 등", "다크모드에서 어두운 배경으로 전환"],
+                      ["Semantic Color (20~90)", "var(--ac-primary-50) 등", "고정값 (라이트/다크 동일)"],
+                      ["Blue-gray Scale", "var(--ac-blue-gray-*)", "고정값 (다크 오버라이드 없음)"],
+                    ].map(([scale, format, support], i) => (
+                      <div key={i} className="grid grid-cols-3 border-b border-border last:border-b-0">
+                        <div className="px-4 py-2 text-foreground">{scale}</div>
+                        <div className="px-4 py-2 font-mono text-xs text-foreground">{format}</div>
+                        <div className="px-4 py-2 text-foreground">{support}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </TabContent>

@@ -407,13 +407,16 @@ export default function FABPage() {
                 <h3 className="text-lg font-semibold text-foreground mb-2">5. 색상 변경</h3>
                 <p className="text-sm text-foreground mb-4">
                   <CodeBadge>colorClassName</CodeBadge> prop으로 variant 기본 색상을 override할 수 있습니다.
+                  CSS 변수 기반 토큰(<CodeBadge>bg-ac-xxx</CodeBadge>)을 사용하면 다크모드에서 자동으로 대응됩니다.
                 </p>
-                <CodeBlock code={`<FAB colorClassName="bg-blue-500 text-white hover:bg-blue-600">
-  <Plus />
+                <CodeBlock code={`{/* 디자인 시스템 토큰 — 다크모드 자동 대응 */}
+<FAB colorClassName="bg-ac-green-50 text-ac-white hover:bg-ac-green-60" label="저장">
+  <Heart />
 </FAB>
 
-<FAB colorClassName="bg-ac-success-50 text-white hover:bg-ac-success-60" label="저장">
-  <Heart />
+{/* 다크모드 별도 대응이 필요한 경우 dark: 프리픽스 조합 */}
+<FAB colorClassName="bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800">
+  <Plus />
 </FAB>`} />
               </div>
             </section>
@@ -430,7 +433,7 @@ export default function FABPage() {
                   ["tooltipPlacement", '"top" | "bottom" | "left" | "right"', '"top"', "툴팁 표시 위치"],
                   ["fixed", "boolean", "false", "화면 우하단 고정 여부"],
                   ["position", "string", '"bottom-6 right-6"', "fixed 사용 시 커스텀 위치 클래스"],
-                  ["colorClassName", "string", "-", "variant 기본 색상을 override하는 Tailwind 클래스"],
+                  ["colorClassName", "string", "-", "variant 기본 색상을 override하는 Tailwind 클래스. 다크모드 대응 시 dark: 프리픽스 또는 CSS 변수 기반 토큰 사용 권장"],
                 ]} />
             </section>
           </TabContent>

@@ -68,6 +68,48 @@
   --ac-gray-80: #555555;
   --ac-gray-90: #060606;
 
+  /* [Color Palette] — dark mode 지원 (-10) */
+  --ac-primary-10: #FFE7D8;
+  --ac-green-10:   #E5F9EC;
+  --ac-blue-10:    #E5F1FF;
+  --ac-red-10:     #FFE5E5;
+  --ac-orange-10:  #FFF2E7;
+  --ac-purple-10:  #F8F7FF;
+
+  /* [Color Palette] — 고정 팔레트 (20~90) */
+  --ac-primary-20: #FFC7A4;  --ac-primary-30: #FFB180;  --ac-primary-40: #FF8F48;
+  --ac-primary-50: #FF6300;  --ac-primary-60: #E05700;  --ac-primary-70: #C74D00;
+  --ac-primary-80: #903D07;  --ac-primary-90: #652C06;
+
+  --ac-green-20: #BBF7D0;  --ac-green-30: #86EFAC;  --ac-green-40: #4ADE80;
+  --ac-green-50: #00C344;  --ac-green-60: #00A63A;  --ac-green-70: #047857;
+  --ac-green-80: #14532D;  --ac-green-90: #052E16;
+
+  --ac-blue-20: #BDDBFF;  --ac-blue-30: #8CBDFF;  --ac-blue-40: #4193FF;
+  --ac-blue-50: #006FFF;  --ac-blue-60: #005DD8;  --ac-blue-70: #004BAE;
+  --ac-blue-80: #00357B;  --ac-blue-90: #0A2C58;
+
+  --ac-red-20: #FFBFBF;  --ac-red-30: #FF8585;  --ac-red-40: #FF5454;
+  --ac-red-50: #FE0000;  --ac-red-60: #DA120D;  --ac-red-70: #BF0A03;
+  --ac-red-80: #8B0800;  --ac-red-90: #6A0700;
+
+  --ac-orange-20: #FFEDD5;  --ac-orange-30: #FFC37E;  --ac-orange-40: #FF9D52;
+  --ac-orange-50: #FF7A0C;  --ac-orange-60: #EA580C;  --ac-orange-70: #C2410C;
+  --ac-orange-80: #9A3412;  --ac-orange-90: #562800;
+
+  --ac-purple-20: #E9E4FF;  --ac-purple-30: #D5C7FF;  --ac-purple-40: #B190FF;
+  --ac-purple-50: #8E2AFF;  --ac-purple-60: #6B16CA;  --ac-purple-70: #550AA9;
+  --ac-purple-80: #400387;  --ac-purple-90: #2C0066;
+
+  /* [Blue-gray Palette] */
+  --ac-blue-gray-10: #ECEFF1;  --ac-blue-gray-20: #CFD8DC;  --ac-blue-gray-30: #B0BEC5;
+  --ac-blue-gray-40: #90A4AE;  --ac-blue-gray-50: #607D8B;  --ac-blue-gray-60: #546E7A;
+  --ac-blue-gray-70: #455A64;  --ac-blue-gray-80: #37474F;  --ac-blue-gray-90: #263238;
+
+  /* [Black / White] */
+  --ac-black: #000000;
+  --ac-white: #FFFFFF;
+
 }
 
 /* ── Dark Mode ───────────────────────────────────────────── */
@@ -125,12 +167,12 @@
   --ac-gray-90: #E5E5E5;
 
   /* Color Palette -10 dark override */
-  --color-ac-primary-10: #3D1803;
-  --color-ac-green-10:   #031A0C;
-  --color-ac-blue-10:    #12253d;
-  --color-ac-red-10:     #431411;
-  --color-ac-orange-10:  #331800;
-  --color-ac-purple-10:  #190039;
+  --ac-primary-10: #3D1803;
+  --ac-green-10:   #031A0C;
+  --ac-blue-10:    #12253d;
+  --ac-red-10:     #431411;
+  --ac-orange-10:  #331800;
+  --ac-purple-10:  #190039;
 }
 
 /* ── Base resets ─────────────────────────────────────────── */

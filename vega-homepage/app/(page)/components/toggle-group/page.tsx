@@ -401,7 +401,8 @@ export default function ToggleGroupPage() {
                 <p className="text-sm text-foreground mb-4">
                   <CodeBadge>activeClassName</CodeBadge>으로 active 아이템의 border·텍스트·아이콘 색상을 지정합니다.
                   컨테이너 배경은 <CodeBadge>className</CodeBadge>으로 override합니다.
-                  <CodeBadge>bg-white</CodeBadge>와 <CodeBadge>font-medium</CodeBadge>은 자동 적용됩니다.
+                  <CodeBadge>bg-background</CodeBadge>와 <CodeBadge>font-medium</CodeBadge>은 자동 적용됩니다.
+                  다크모드 대응이 필요한 경우 <CodeBadge>dark:</CodeBadge> 프리픽스를 함께 사용하세요. <CodeBadge>bg-ac-xxx-10</CodeBadge> 토큰은 다크모드에서 자동으로 어두운 배경색이 적용됩니다.
                 </p>
                 <CodeBlock code={`// Blue
 <ToggleGroup

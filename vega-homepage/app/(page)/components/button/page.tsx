@@ -296,24 +296,25 @@ export default function ButtonPage() {
                 <h3 className="text-lg font-semibold text-foreground mb-2">6. 색상 변경</h3>
                 <p className="text-sm text-foreground mb-4">
                   <CodeBadge>colorClassName</CodeBadge> prop으로 variant의 기본 색상을 override할 수 있습니다. 배경·텍스트·보더·hover 등 원하는 Tailwind 클래스를 자유롭게 조합하세요.
+                  다크모드 대응이 필요한 경우 <CodeBadge>dark:</CodeBadge> 프리픽스를 함께 사용하거나, CSS 변수 기반 토큰(<CodeBadge>bg-ac-xxx</CodeBadge>)을 사용하면 자동으로 대응됩니다.
                 </p>
-                <CodeBlock code={`// 기본 primary 색상 변경
-<Button colorClassName="bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700">
-  파란색 버튼
-</Button>
-
-// 디자인 시스템 토큰으로 변경
-<Button colorClassName="bg-ac-success-50 text-white hover:bg-ac-success-60">
+                <CodeBlock code={`// 디자인 시스템 토큰 — 다크모드 자동 대응
+<Button colorClassName="bg-ac-green-50 text-ac-white hover:bg-ac-green-60">
   성공
 </Button>
 
-<Button colorClassName="bg-ac-error-50 text-white hover:bg-ac-error-60">
+<Button colorClassName="bg-ac-red-50 text-ac-white hover:bg-ac-red-60">
   오류
 </Button>
 
 // secondary variant 색상 변경
 <Button variant="secondary" colorClassName="bg-ac-primary-50 hover:bg-ac-primary-60">
   커스텀 secondary
+</Button>
+
+// 다크모드 별도 대응이 필요한 경우 dark: 프리픽스 조합
+<Button colorClassName="bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800">
+  파란색 버튼 (다크모드 대응)
 </Button>`} />
               </div>
 
@@ -338,7 +339,7 @@ export default function ButtonPage() {
                   ["loading", "boolean", "false", "로딩 상태 표시. true이면 스피너가 표시되고 버튼이 비활성화됨"],
                   ["fullWidth", "boolean", "false", "부모 너비에 맞게 버튼을 확장"],
                   ["asChild", "boolean", "false", "자식 요소로 렌더링. Next.js Link 등과 조합할 때 사용"],
-                  ["colorClassName", "string", "-", "variant의 기본 색상을 override하는 Tailwind 클래스"],
+                  ["colorClassName", "string", "-", "variant의 기본 색상을 override하는 Tailwind 클래스. 다크모드 대응 시 dark: 프리픽스 또는 CSS 변수 기반 토큰 사용 권장"],
                   ["disabled", "boolean", "false", "버튼 비활성화"],
                 ]} />
             </section>

@@ -613,13 +613,17 @@ export default function CarouselPage() {
 
             <section>
               <h2 className="text-lg font-semibold text-foreground mb-4">CarouselDots Color</h2>
+              <p className="text-sm text-foreground mb-4">
+                <CodeBadge>activeColor</CodeBadge>는 hex, 토큰명, CSS 변수 세 가지 방식으로 지정할 수 있습니다.
+                다크모드 자동 대응이 필요한 경우 <CodeBadge>var(--ac-xxx)</CodeBadge> CSS 변수 방식을 권장합니다.
+              </p>
               <CodeBlock code={`{/* 디자인 토큰명으로 지정 */}
 <CarouselDots activeColor="ac-blue-50" />
 
-{/* hex 코드로 지정 */}
+{/* hex 코드 — 라이트/다크 고정 */}
 <CarouselDots activeColor="#3B82F6" />
 
-{/* CSS 변수로 직접 지정 */}
+{/* CSS 변수 — 다크모드 자동 대응 */}
 <CarouselDots activeColor="var(--ac-blue-50)" />`} />
             </section>
 
@@ -641,7 +645,7 @@ export default function CarouselPage() {
               <h2 className="text-lg font-semibold text-foreground mb-4">CarouselDots Props</h2>
               <PropsTable rows={[
                   ["type",        '"rounded" | "line" | "border"', '"rounded"', "인디케이터 스타일"],
-                  ["activeColor", "string",                        '"#FF6300"', "활성 인디케이터 색상. hex·rgb 또는 토큰명(예: ac-blue-50) 사용 가능"],
+                  ["activeColor", "string",                        '"#FF6300"', "활성 인디케이터 색상. hex·토큰명(ac-blue-50)·CSS 변수(var(--ac-blue-50)) 지원. 다크모드 대응 시 CSS 변수 권장"],
                 ]} />
             </section>
 

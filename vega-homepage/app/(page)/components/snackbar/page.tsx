@@ -352,8 +352,9 @@ export default function SnackbarPage() {
                   <h3 className="text-lg font-semibold text-foreground mb-2">3. 색상 커스터마이징</h3>
                   <p className="text-sm text-foreground mb-4">
                     <CodeBadge>bgColorClass</CodeBadge>, <CodeBadge>textColorClass</CodeBadge>, <CodeBadge>iconColorClass</CodeBadge>로 각각 배경·텍스트·아이콘 색상을 override합니다.
+                    다크모드 대응이 필요한 경우 <CodeBadge>dark:</CodeBadge> 프리픽스를 함께 사용하세요. 기본 <CodeBadge>variant</CodeBadge> 색상은 다크모드에서 자동으로 대응됩니다.
                   </p>
-                  <CodeBlock code={`// 배경색 변경
+                  <CodeBlock code={`// 배경색 변경 (ac-xxx-10 토큰은 다크모드 자동 대응)
 <Snackbar message="커스텀 배경색" bgColorClass="bg-ac-purple-10" />
 
 // 텍스트 색상 변경

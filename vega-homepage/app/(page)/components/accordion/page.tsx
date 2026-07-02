@@ -343,10 +343,11 @@ export default function AccordionPage() {
 </Accordion>
  
 // filled variant + 배경색 + rounded
+// CSS 변수를 사용하면 다크모드에서 자동으로 어두운 색상이 적용됩니다
 <Accordion
   className="rounded-lg overflow-hidden"
   variant="filled"
-  backgroundColor="#E5F1FF"
+  backgroundColor="var(--ac-blue-10)"
   type="single"
 >
   <AccordionItem value="item-1">
@@ -393,7 +394,7 @@ export default function AccordionPage() {
               <PropsTable rows={[
                   ["type", '"single" | "multiple"', '"single"', "단일/다중 확장 모드 설정"],
                   ["variant", '"default" | "filled"', '"default"', "아코디언 스타일 변형"],
-                  ["backgroundColor", "string", "-", "filled variant의 헤더 배경색 (CSS color 값)"],
+                  ["backgroundColor", "string", "-", "filled variant의 헤더 배경색. 다크모드 자동 대응 시 var(--ac-xxx-10) CSS 변수 사용 권장. hex 고정 시 다크모드 미대응"],
                   ["contentClassName", "string", "-", "모든 콘텐츠 패널에 일괄 적용할 클래스명"],
                   ["defaultValue", "string | string[]", "-", "초기 열림 상태의 아이템 value"],
                   ["value", "string | string[]", "-", "제어 컴포넌트로 사용 시 현재 열린 아이템 value"],
