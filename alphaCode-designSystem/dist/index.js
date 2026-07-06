@@ -741,7 +741,7 @@ import { cva as cva9 } from "class-variance-authority";
 import { User } from "lucide-react";
 import { jsx as jsx11 } from "react/jsx-runtime";
 var avatarVariants = cva9(
-  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 text-foreground font-bold select-none",
+  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 font-bold select-none",
   {
     variants: {
       shape: {

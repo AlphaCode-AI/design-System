@@ -741,7 +741,7 @@ Switch.displayName = "Switch";
 var _lucidereact = require('lucide-react'); _createStarExport(_lucidereact);
 
 var avatarVariants = _classvarianceauthority.cva.call(void 0, 
-  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 text-foreground font-bold select-none",
+  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 font-bold select-none",
   {
     variants: {
       shape: {

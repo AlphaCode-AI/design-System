@@ -1,9 +1,2 @@
-import path from "path";
-
-const nextConfig = {
-  transpilePackages: ["@alphacode-ai/design-system"],
-  turbopack: {
-    root: path.resolve(import.meta.dirname, ".."),
-  },
-};
+const nextConfig = {};
 export default nextConfig;

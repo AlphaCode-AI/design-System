@@ -185,8 +185,7 @@ export default function ColorPage() {
 <ProgressIndicator type="linear" value={60} color="var(--ac-primary-50)" />`} />
               <p className="text-sm text-foreground mt-4">
                 두 방식 모두 동일한 값을 참조합니다.
-                <CodeBadge>bg-ac-blue-50</CodeBadge>은 내부적으로 <CodeBadge>background-color: var(--color-ac-blue-50)</CodeBadge>를 생성하고,
-                이는 다시 <CodeBadge>var(--ac-blue-50)</CodeBadge>로 연결됩니다.
+                <CodeBadge>bg-ac-blue-50</CodeBadge>은 내부적으로 <CodeBadge>background-color: var(--ac-blue-50)</CodeBadge>를 직접 생성합니다.
               </p>
             </div>
 

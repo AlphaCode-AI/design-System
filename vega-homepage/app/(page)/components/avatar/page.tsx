@@ -94,7 +94,7 @@ export default function AvatarPage() {
                         <span className="text-xs text-muted-foreground">Icon</span>
                       </div>
                       <div className="flex flex-col items-center gap-2">
-                        <Avatar size="xl" name="MJ" className="bg-ac-orange-40 text-white" />
+                        <Avatar size="xl" name="MJ" className="bg-ac-orange-40 text-ac-white" />
                         <span className="text-xs text-muted-foreground">Text</span>
                       </div>
                     </div>
@@ -123,8 +123,8 @@ export default function AvatarPage() {
                           <Avatar size={size} src="/avatar/img_5.jpg" />
                           <Avatar size={size} shape="square" className="bg-ac-gray-80" icon={<Landmark className="w-1/2 h-1/2 text-ac-white" />} />
                           <Avatar size={size} className="bg-ac-gray-80" icon={<Landmark className="w-1/2 h-1/2 text-ac-white" />} />
-                          <Avatar size={size} name="K" className="bg-ac-blue-40 text-white" />
-                          <Avatar size={size} name="HC" className="bg-ac-green-40 text-white" />
+                          <Avatar size={size} name="K" className="bg-ac-blue-40 text-ac-white" />
+                          <Avatar size={size} name="HC" className="bg-ac-green-40 text-ac-white" />
                         </div>
                       </div>
                     );
@@ -188,14 +188,14 @@ export default function AvatarPage() {
               </p>
               <div className="rounded-lg border border-border p-4 md:p-8">
                 <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
-                  <Avatar size="xs" name="S" />
-                  <Avatar size="xs" name="S" className="bg-ac-blue-gray-30" />
-                  <Avatar size="sm" name="Q" className="bg-ac-primary-30" />
-                  <Avatar size="sm" name="Q" className="bg-ac-purple-30" />
-                  <Avatar size="md" name="O" className="bg-ac-green-30" />
-                  <Avatar size="lg" name="P1" className="bg-ac-blue-30" />
-                  <Avatar size="xl" name="34" className="bg-ac-red-30" />
-                  <Avatar size="2xl" name="WD" className="bg-ac-orange-50 text-white" />
+                  <Avatar size="xs" name="S" className="text-foreground" />
+                  <Avatar size="xs" name="S" className="bg-ac-blue-gray-30 dark:bg-ac-blue-gray-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="sm" name="Q" className="bg-ac-primary-30 dark:bg-ac-primary-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="sm" name="Q" className="bg-ac-purple-30 dark:bg-ac-purple-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="md" name="O" className="bg-ac-green-30 dark:bg-ac-green-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="lg" name="P1" className="bg-ac-blue-30 dark:bg-ac-blue-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="xl" name="34" className="bg-ac-red-30 dark:bg-ac-red-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="2xl" name="WD" className="bg-ac-orange-50 text-ac-white" />
                 </div>
               </div>
             </section>
@@ -281,12 +281,17 @@ export default function AvatarPage() {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">4. 배경색 지정</h3>
                 <p className="text-sm text-foreground mb-4">
-                  <CodeBadge>className</CodeBadge>으로 배경색을 지정합니다. 텍스트 가독성을 위해 <CodeBadge>text-white</CodeBadge>를 함께 사용합니다.
+                  <CodeBadge>className</CodeBadge>으로 배경색과 텍스트 색상을 함께 지정합니다. 다크모드를 고려해 <CodeBadge>text-ac-white</CodeBadge>를 사용하고, 밝은 배경에는 <CodeBadge>dark:</CodeBadge> 접두사로 어두운 배경 색상을 추가합니다.
                 </p>
-                <CodeBlock code={`<Avatar name="KS" className="bg-ac-blue-50 text-white" />
-<Avatar name="HC" className="bg-ac-green-50 text-white" />
-<Avatar name="WD" className="bg-ac-orange-40 text-white" />
-<Avatar icon={<User className="w-1/2 h-1/2 text-white" />} className="bg-ac-gray-80" />`} />
+                <CodeBlock code={`// 포화도 높은 배경 (-50 계열) — text-ac-white
+<Avatar name="KS" className="bg-ac-blue-50 text-ac-white" />
+<Avatar name="HC" className="bg-ac-green-50 text-ac-white" />
+
+// 밝은 배경 (-30 계열) — 다크모드 배경 교체 필요
+<Avatar name="WD" className="bg-ac-orange-30 dark:bg-ac-orange-70 text-ac-gray-90 dark:text-ac-white" />
+
+// 아이콘 타입
+<Avatar icon={<User className="w-1/2 h-1/2 text-ac-white" />} className="bg-ac-gray-80" />`} />
               </div>
             </section>
 

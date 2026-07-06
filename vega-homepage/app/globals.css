@@ -1,7 +1,7 @@
 @import "@alphacode-ai/design-system/styles.css";
 @import "@alphacode-ai/design-system/tailwind-preset.css";
 
-@source "../node_modules/@alphacode-ai/design-system/dist/**";
+@source "../node_modules/@alphacode-ai/design-system/dist/*.{js,cjs}";
 
 /* anatomy 섹션 — 라이트 이미지 전용, 다크 모드에서도 배경·텍스트 고정 */
 .dark .anatomy-bg,
