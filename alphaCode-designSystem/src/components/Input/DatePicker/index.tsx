@@ -55,14 +55,14 @@ function getDayPickerClassNames(mode: "single" | "range" = "single") {
     return {
       ...BASE_DAY_CLASSNAMES,
       selected:     "",
-      range_start:  "[&>button]:!bg-ac-black [&>button]:!text-white [&>button]:!font-bold",
-      range_end:    "[&>button]:!bg-ac-black [&>button]:!text-white [&>button]:!font-bold",
-      range_middle: "[&>button]:!bg-ac-gray-20 [&>button]:!rounded-none [&>button]:!text-ac-black",
+      range_start:  "[&>button]:!bg-ac-black dark:[&>button]:!bg-ac-white [&>button]:!text-white dark:[&>button]:!text-ac-black [&>button]:!font-bold",
+      range_end:    "[&>button]:!bg-ac-black dark:[&>button]:!bg-ac-white [&>button]:!text-white dark:[&>button]:!text-ac-black [&>button]:!font-bold",
+      range_middle: "[&>button]:!bg-ac-gray-20 [&>button]:!rounded-none [&>button]:!text-ac-black dark:[&>button]:!text-foreground",
     };
   }
   return {
     ...BASE_DAY_CLASSNAMES,
-    selected:     "[&>button]:!bg-ac-black [&>button]:!text-white [&>button]:!font-bold",
+    selected:     "[&>button]:!bg-ac-black dark:[&>button]:!bg-ac-white [&>button]:!text-white dark:[&>button]:!text-ac-black [&>button]:!font-bold",
     range_start:  "",
     range_end:    "",
     range_middle: "",

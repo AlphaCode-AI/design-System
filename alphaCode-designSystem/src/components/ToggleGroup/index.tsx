@@ -129,7 +129,7 @@ function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, 
     if (ctx.activeClassName) {
       buttonClass = cn("bg-background font-medium", ctx.activeClassName);
     } else if (ctx.variant === "primary") {
-      buttonClass = "bg-background border border-ac-primary-50 text-ac-primary-50 font-medium";
+      buttonClass = "bg-ac-primary-50 text-white font-medium";
     } else {
       buttonClass = "bg-background text-ac-gray-90 font-medium";
     }

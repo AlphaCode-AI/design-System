@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Tabs,
   TabList,
@@ -26,31 +26,25 @@ const toc: TocItem[] = [
 const COMPLETE_DATE = new Date("2024-12-31");
 const COMPLETE_RANGE = { from: new Date("2024-12-31"), to: new Date("2025-01-05") };
 
-// 2026년 대한민국 공휴일 (공공데이터 API 또는 라이브러리로 대체 가능)
-const HOLIDAYS_2026: Date[] = [
-  new Date("2026-01-01"), // 신정
-  new Date("2026-02-16"), // 설날 연휴
-  new Date("2026-02-17"), // 설날
-  new Date("2026-02-18"), // 설날 연휴
-  new Date("2026-03-01"), // 삼일절
-  new Date("2026-03-02"), // 삼일절 대체공휴일
-  new Date("2026-05-05"), // 어린이날
-  new Date("2026-05-24"), // 부처님오신날
-  new Date("2026-05-25"), // 부처님오신날 대체공휴일
-  new Date("2026-06-06"), // 현충일
-  new Date("2026-08-15"), // 광복절
-  new Date("2026-09-23"), // 추석 연휴
-  new Date("2026-09-24"), // 추석
-  new Date("2026-09-25"), // 추석 연휴
-  new Date("2026-10-03"), // 개천절
-  new Date("2026-10-05"), // 개천절 대체공휴일
-  new Date("2026-10-09"), // 한글날
-  new Date("2026-12-25"), // 크리스마스
-];
 
 
 export default function DatePickerPage() {
   const [activeTab, setActiveTab] = useState("docs");
+  const [holidays, setHolidays] = useState<Date[]>([]);
+  const [holidayYear, setHolidayYear] = useState(2026);
+
+  useEffect(() => {
+    const year = new Date().getFullYear();
+    fetch(`/api/holidays?year=${year}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data.dates) && data.dates.length > 0) {
+          setHolidays(data.dates.map((d: string) => new Date(d)));
+          setHolidayYear(year);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="flex w-full">
@@ -345,15 +339,15 @@ export default function DatePickerPage() {
                           label="날짜 선택"
                           placeholder="날짜를 선택해주세요"
                           dateFormat="yyyy-MM-dd"
-                          disabledDates={HOLIDAYS_2026}
-                          helperText="2026년 공휴일은 선택할 수 없습니다."
+                          disabledDates={holidays}
+                          helperText={`${holidayYear}년 공휴일은 선택할 수 없습니다.`}
                         />
                       </div>
                       <div className="flex flex-col gap-3 flex-1">
                         <DateRangePicker
                           label="날짜 선택"
-                          disabledDates={HOLIDAYS_2026}
-                          helperText="2026년 공휴일은 선택할 수 없습니다."
+                          disabledDates={holidays}
+                          helperText={`${holidayYear}년 공휴일은 선택할 수 없습니다.`}
                         />
                       </div>
                     </div>
@@ -499,19 +493,58 @@ export default function DatePickerPage() {
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-2">5. 특정 날짜 선택 불가</h3>
                 <p className="text-sm text-foreground mb-4">
-                  <CodeBadge>disabledDates</CodeBadge>에 <CodeBadge>Date[]</CodeBadge>를 전달하면 해당 날짜들을 선택 불가 처리합니다. 공공데이터 API나 <CodeBadge>holidays-kr</CodeBadge> 같은 라이브러리로 공휴일 목록을 가져와 전달하면 됩니다.
+                  <CodeBadge>disabledDates</CodeBadge>에 <CodeBadge>Date[]</CodeBadge>를 전달하면 해당 날짜들을 선택 불가 처리합니다.
+                  대체공휴일을 포함한 공휴일 목록은 <strong>공공데이터포털 한국천문연구원_특일 정보 API</strong>를 사용하면 매년 자동으로 반영됩니다.
                 </p>
-                <CodeBlock code={`// 공휴일 등 특정 날짜 선택 불가
-const holidays = [
-  new Date("2025-01-01"), // 신정
-  new Date("2025-03-01"), // 삼일절
-  // ... 공공데이터 API 또는 라이브러리로 대체 가능
+                <CodeBlock code={`// app/api/holidays/route.ts — 서버에서 공공데이터포털 API 호출
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest) {
+  const year = new URL(req.url).searchParams.get("year") ?? String(new Date().getFullYear());
+  const apiKey = process.env.HOLIDAY_API_KEY; // .env.local에 저장
+  const dates: string[] = [];
+
+  for (let month = 1; month <= 12; month++) {
+    const qs = \`ServiceKey=\${apiKey}&solYear=\${year}&solMonth=\${String(month).padStart(2, "0")}&numOfRows=50\`;
+    const url = \`https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?\${qs}\`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) continue;
+
+    const xml = await res.text();
+    const items = xml.match(/<item>([\\s\\S]*?)<\\/item>/g) ?? [];
+    for (const item of items) {
+      const isHoliday = item.match(/<isHoliday>(.*?)<\\/isHoliday>/)?.[1];
+      const locdate = item.match(/<locdate>(\\d+)<\\/locdate>/)?.[1];
+      if (isHoliday === "Y" && locdate)
+        dates.push(\`\${locdate.slice(0,4)}-\${locdate.slice(4,6)}-\${locdate.slice(6,8)}\`);
+    }
+  }
+  return NextResponse.json({ dates });
+}`} />
+                <p className="text-sm text-foreground mt-4 mb-4">
+                  클라이언트에서 API 라우트를 호출해 <CodeBadge>disabledDates</CodeBadge>에 전달합니다. API 응답 실패 시 정적 fallback 데이터로 동작합니다.
+                </p>
+                <CodeBlock code={`// 공휴일 API 연동 예시
+const FALLBACK_HOLIDAYS = [
+  new Date("2026-01-01"), // 신정
+  // ...
 ];
 
-// 단일 날짜 선택
-<DatePicker disabledDates={holidays} />
+const [holidays, setHolidays] = useState<Date[]>(FALLBACK_HOLIDAYS);
 
-// 기간 선택
+useEffect(() => {
+  const year = new Date().getFullYear();
+  fetch(\`/api/holidays?year=\${year}\`)
+    .then((r) => r.json())
+    .then((data) => {
+      if (Array.isArray(data.dates) && data.dates.length > 0)
+        setHolidays(data.dates.map((d: string) => new Date(d)));
+    })
+    .catch(() => {}); // 실패 시 fallback 유지
+}, []);
+
+// 대체공휴일 포함 공휴일이 자동으로 비활성화됨
+<DatePicker disabledDates={holidays} />
 <DateRangePicker disabledDates={holidays} />`} />
               </div>
 

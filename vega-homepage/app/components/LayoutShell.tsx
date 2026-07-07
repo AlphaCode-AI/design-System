@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Badge, Menu, Sun, Moon } from "@alphacode-ai/design-system";
+import { Badge, Menu, Sun, Moon, ToggleGroup, ToggleGroupItem } from "@alphacode-ai/design-system";
 import Sidebar from "@/app/components/Sidebar";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
@@ -40,19 +40,21 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
           <Badge variant="primary" size="sm">v0.3.0</Badge>
         </div>
 
-        <div className="flex gap-2">
-          <button
-            onClick={toggleTheme}
-            className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-ac-gray-10 transition-colors text-foreground"
-            aria-label="테마 변경"
+        <div className="flex gap-1">
+          <ToggleGroup
+            value={theme}
+            variant="primary"
+            onValueChange={(v) => v && toggleTheme()}
+            iconOnly
           >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+            <ToggleGroupItem value="light" icon={<Moon />} aria-label="라이트 모드" />
+            <ToggleGroupItem value="dark" icon={<Sun />} aria-label="다크 모드" />
+          </ToggleGroup>
           <a
             href="https://www.figma.com/design/rRs5AH6WcwpVj95rYNZ3Mi/AlphaCode_DS_homepage?node-id=100-3696&t=ycnVmaZiomaJ6tkZ-1"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-background transition-opacity hover:opacity-80"
+            className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background transition-opacity hover:opacity-80 ml-2"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
@@ -66,7 +68,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
             href="https://github.com/AlphaCode-AI/design-System"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-background transition-opacity hover:opacity-80"
+            className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background transition-opacity hover:opacity-80"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>

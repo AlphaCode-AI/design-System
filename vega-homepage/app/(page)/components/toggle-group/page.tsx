@@ -94,17 +94,17 @@ export default function ToggleGroupPage() {
                 <div className="flex flex-col gap-4 items-center bg-ac-gray-20 rounded-lg p-6">
                   <span className="text-xs font-semibold text-muted-foreground">Icon + Label / Style: Default</span>
                   <ToggleGroup defaultValue="bold" variant="default">
-                    <ToggleGroupItem value="bold" icon={<Bold className="w-4 h-4" />}>Bold</ToggleGroupItem>
-                    <ToggleGroupItem value="italic" icon={<Italic className="w-4 h-4" />}>Italic</ToggleGroupItem>
-                    <ToggleGroupItem value="underline" icon={<Underline className="w-4 h-4" />}>Underline</ToggleGroupItem>
+                    <ToggleGroupItem value="bold" icon={<Bold />}>Bold</ToggleGroupItem>
+                    <ToggleGroupItem value="italic" icon={<Italic />}>Italic</ToggleGroupItem>
+                    <ToggleGroupItem value="underline" icon={<Underline />}>Underline</ToggleGroupItem>
                   </ToggleGroup>
                 </div>
                 <div className="flex flex-col gap-4 items-center bg-ac-gray-20 rounded-lg p-6">
                   <span className="text-xs font-semibold text-muted-foreground">Icon + Label / Style: Primary</span>
                   <ToggleGroup defaultValue="bold" variant="primary">
-                    <ToggleGroupItem value="bold" icon={<Bold className="w-4 h-4" />}>Bold</ToggleGroupItem>
-                    <ToggleGroupItem value="italic" icon={<Italic className="w-4 h-4" />}>Italic</ToggleGroupItem>
-                    <ToggleGroupItem value="underline" icon={<Underline className="w-4 h-4" />}>Underline</ToggleGroupItem>
+                    <ToggleGroupItem value="bold" icon={<Bold />}>Bold</ToggleGroupItem>
+                    <ToggleGroupItem value="italic" icon={<Italic />}>Italic</ToggleGroupItem>
+                    <ToggleGroupItem value="underline" icon={<Underline />}>Underline</ToggleGroupItem>
                   </ToggleGroup>
                 </div>
               </div>
@@ -154,19 +154,19 @@ export default function ToggleGroupPage() {
                           <div className="flex flex-col gap-2 items-start">
                             <span className="text-xs text-muted-foreground">Default</span>
                             <ToggleGroup value="" variant={variant} iconOnly>
-                              <ToggleGroupItem value="x" icon={<Bold className="w-4 h-4" />} tooltip="Bold" />
+                              <ToggleGroupItem value="x" icon={<Bold />} tooltip="Bold" />
                             </ToggleGroup>
                           </div>
                           <div className="flex flex-col gap-2 items-start">
                             <span className="text-xs text-muted-foreground">Active</span>
                             <ToggleGroup value="active" variant={variant} iconOnly>
-                              <ToggleGroupItem value="active" icon={<Bold className="w-4 h-4" />} tooltip="Bold" />
+                              <ToggleGroupItem value="active" icon={<Bold />} tooltip="Bold" />
                             </ToggleGroup>
                           </div>
                           <div className="flex flex-col gap-2 items-start">
                             <span className="text-xs text-muted-foreground">Disabled</span>
                             <ToggleGroup value="" variant={variant} iconOnly>
-                              <ToggleGroupItem value="x" icon={<Bold className="w-4 h-4" />} tooltip="Bold" disabled />
+                              <ToggleGroupItem value="x" icon={<Bold />} tooltip="Bold" disabled />
                             </ToggleGroup>
                           </div>
                         </div>
@@ -199,16 +199,16 @@ export default function ToggleGroupPage() {
                         <ToggleGroupItem value="option3">Option 3</ToggleGroupItem>
                       </ToggleGroup>
                       <ToggleGroup defaultValue="left" variant="default" size={size} iconOnly>
-                        <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                        <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                        <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                        <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                        <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                        <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                        <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                        <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                       </ToggleGroup>
                       <ToggleGroup defaultValue="left" variant="primary" size={size} iconOnly>
-                        <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                        <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                        <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                        <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                        <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                        <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                        <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                        <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                       </ToggleGroup>
                     </div>
                   </div>
@@ -226,19 +226,19 @@ export default function ToggleGroupPage() {
                 <div className="flex flex-col gap-2 items-center">
                   <span className="text-xs text-muted-foreground">Style: Default</span>
                   <ToggleGroup defaultValue="left" iconOnly variant="default">
-                    <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                    <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                    <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                    <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                    <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                    <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                    <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                    <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                   </ToggleGroup>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
                   <span className="text-xs text-muted-foreground">Style: Primary</span>
                   <ToggleGroup defaultValue="left" iconOnly variant="primary">
-                    <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                    <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                    <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                    <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                    <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                    <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                    <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                    <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                   </ToggleGroup>
                 </div>
               </div>
@@ -350,9 +350,9 @@ export default function ToggleGroupPage() {
                 <CodeBlock code={`import { ToggleGroup, ToggleGroupItem, Bold, Italic, Underline } from "@alphacode-ai/design-system";
 
 <ToggleGroup defaultValue="bold">
-  <ToggleGroupItem value="bold" icon={<Bold className="w-4 h-4" />}>Bold</ToggleGroupItem>
-  <ToggleGroupItem value="italic" icon={<Italic className="w-4 h-4" />}>Italic</ToggleGroupItem>
-  <ToggleGroupItem value="underline" icon={<Underline className="w-4 h-4" />}>Underline</ToggleGroupItem>
+  <ToggleGroupItem value="bold" icon={<Bold />}>Bold</ToggleGroupItem>
+  <ToggleGroupItem value="italic" icon={<Italic />}>Italic</ToggleGroupItem>
+  <ToggleGroupItem value="underline" icon={<Underline />}>Underline</ToggleGroupItem>
 </ToggleGroup>`} />
               </div>
 
