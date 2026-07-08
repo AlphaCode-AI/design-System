@@ -15,6 +15,8 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /* ── 상수 ─────────────────────────────────────────────────────── */
 
@@ -54,12 +56,7 @@ export default function ResizablePage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Resizable</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            크기 조절(resizable)은 콘텐츠를 감싸고 있는 컨테이너의 크기를 조절할 수 있는 기능입니다.
-          </p>
-        </div>
+        <PageHeader title="Resizable" description="크기 조절(resizable)은 콘텐츠를 감싸고 있는 컨테이너의 크기를 조절할 수 있는 기능입니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -86,23 +83,23 @@ export default function ResizablePage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <p className="text-xs text-muted-foreground mb-2">가로형 (Horizontal) — cursor: col-resize</p>
-                      <div className="rounded-lg bg-ac-gray-20 p-4 h-40">
+                      <PreviewBox variant="gray" className="!p-4 h-40">
                         <ResizablePanelGroup orientation="horizontal" className="rounded-xl overflow-hidden border border-border">
                           <ResizablePanel><DemoPanel>Panel A</DemoPanel></ResizablePanel>
                           <ResizableHandle variant="margin" />
                           <ResizablePanel><DemoPanel>Panel B</DemoPanel></ResizablePanel>
                         </ResizablePanelGroup>
-                      </div>
+                      </PreviewBox>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-2">세로형 (Vertical) — cursor: row-resize</p>
-                      <div className="rounded-lg bg-ac-gray-20 p-4 h-40">
+                      <PreviewBox variant="gray" className="!p-4 h-40">
                         <ResizablePanelGroup orientation="vertical" className="rounded-xl overflow-hidden border border-border">
                           <ResizablePanel><DemoPanel>Panel A</DemoPanel></ResizablePanel>
                           <ResizableHandle variant="margin" />
                           <ResizablePanel><DemoPanel>Panel B</DemoPanel></ResizablePanel>
                         </ResizablePanelGroup>
-                      </div>
+                      </PreviewBox>
                     </div>
                   </div>
                 </div>
@@ -114,23 +111,23 @@ export default function ResizablePage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <p className="text-xs text-muted-foreground mb-2">가로형 (Horizontal) — cursor: col-resize</p>
-                      <div className="rounded-lg bg-ac-gray-20 p-4 h-40">
+                      <PreviewBox variant="gray" className="!p-4 h-40">
                         <ResizablePanelGroup orientation="horizontal" className="rounded-xl overflow-hidden border border-border">
                           <ResizablePanel><DemoPanel>Panel A</DemoPanel></ResizablePanel>
                           <ResizableHandle variant="line" />
                           <ResizablePanel><DemoPanel>Panel B</DemoPanel></ResizablePanel>
                         </ResizablePanelGroup>
-                      </div>
+                      </PreviewBox>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-2">세로형 (Vertical) — cursor: row-resize</p>
-                      <div className="rounded-lg bg-ac-gray-20 p-4 h-40">
+                      <PreviewBox variant="gray" className="!p-4 h-40">
                         <ResizablePanelGroup orientation="vertical" className="rounded-xl overflow-hidden border border-border">
                           <ResizablePanel><DemoPanel>Panel A</DemoPanel></ResizablePanel>
                           <ResizableHandle variant="line" />
                           <ResizablePanel><DemoPanel>Panel B</DemoPanel></ResizablePanel>
                         </ResizablePanelGroup>
-                      </div>
+                      </PreviewBox>
                     </div>
                   </div>
                 </div>

@@ -16,6 +16,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /* ── 상수 / 타입 ──────────────────────────────────────────────── */
 
@@ -138,7 +140,7 @@ function StackDemoInner() {
 function TypeSection() {
   const { show } = useToast();
   return (
-    <div className="rounded-lg bg-ac-gray-20 p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <PreviewBox variant="gray" className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {TYPE_ITEMS.map((item) => (
         <div key={item.label} className="flex flex-col items-center justify-between gap-2">
           <span className="text-sm text-foreground font-medium">{item.label}</span>
@@ -148,7 +150,7 @@ function TypeSection() {
           </Button>
         </div>
       ))}
-    </div>
+    </PreviewBox>
   );
 }
 
@@ -191,13 +193,7 @@ export default function ToastPage() {
       <div className="flex w-full">
         <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold text-foreground">Toast</h1>
-            <p className="mt-2 text-sm text-foreground leading-relaxed">
-              토스트(Toast)는 사용자 동작에 대한 간단한 피드백 또는 알림을 화면 위에 일시적으로 표시하는 컴포넌트입니다.
-              모달과 달리 사용자의 작업 흐름을 방해하지 않으며 자동으로 사라집니다.
-            </p>
-          </div>
+          <PageHeader title="Toast" description="토스트(Toast)는 사용자 동작에 대한 간단한 피드백 또는 알림을 화면 위에 일시적으로 표시하는 컴포넌트입니다. 모달과 달리 사용자의 작업 흐름을 방해하지 않으며 자동으로 사라집니다." />
 
           <Tabs defaultValue="docs" onValueChange={setActiveTab}>
             <TabList>
@@ -211,9 +207,9 @@ export default function ToastPage() {
               {/* Anatomy */}
               <section id="anatomy" className="scroll-mt-8">
                 <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-                <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+                <PreviewBox variant="anatomy">
                   <img src="/toast/toast_anatomy.png" alt="toast anatomy" className="max-w-full" />
-                </div>
+                </PreviewBox>
                 <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                   <li>Container : 토스트의 배경 영역</li>
                   <li>아이콘 (선택) : 타입에 따른 아이콘 또는 아바타</li>
@@ -241,14 +237,14 @@ export default function ToastPage() {
                   화면 가장자리로부터 <CodeBadge>16px</CodeBadge> 간격을 유지합니다.
                   모바일 사이즈에서는 토스트 너비가 화면 너비에 맞춰 자동으로 조정됩니다.
                 </p>
-                <div className="rounded-lg border border-border p-6">
+                <PreviewBox className="!p-6">
                   <p className="text-xs text-muted-foreground mb-3">위치를 클릭하면 해당 위치에 토스트가 표시됩니다.</p>
                   <div className="grid grid-cols-3 gap-3 text-sm text-center">
                     {POSITIONS.map((pos) => (
                       <PositionBox key={pos} position={pos} />
                     ))}
                   </div>
-                </div>
+                </PreviewBox>
               </section>
 
               {/* Too many toast */}
@@ -259,16 +255,16 @@ export default function ToastPage() {
                   최대 <CodeBadge>maxCount</CodeBadge>개(기본 5개)까지 표시되며, 초과 시 가장 오래된 토스트부터 사라집니다.
                 </p>
                 <div className="flex flex-col md:flex-row gap-4">
-                  <div className="rounded-lg border border-border p-6 flex flex-col gap-3 flex-1 items-center">
+                  <PreviewBox className="!p-6 flex flex-col gap-3 flex-1 items-center">
                     <span className="text-sm font-semibold text-foreground">List</span>
                     <p className="text-xs text-foreground">토스트를 세로로 나열합니다. (기본값)</p>
                     <StackDemo stackMode="list" />
-                  </div>
-                  <div className="rounded-lg border border-border p-6 flex flex-col gap-3 flex-1 items-center">
+                  </PreviewBox>
+                  <PreviewBox className="!p-6 flex flex-col gap-3 flex-1 items-center">
                     <span className="text-sm font-semibold text-foreground">Nesting</span>
                     <p className="text-xs text-muted-foreground">토스트를 카드 스택처럼 겹쳐 표시합니다. 스택에 마우스를 올리면 전체 목록이 펼쳐집니다.</p>
                     <StackDemo stackMode="nesting" />
-                  </div>
+                  </PreviewBox>
                 </div>
               </section>
 

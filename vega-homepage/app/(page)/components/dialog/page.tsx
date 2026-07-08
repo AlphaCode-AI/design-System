@@ -24,6 +24,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -40,13 +42,7 @@ export default function DialogPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Dialog</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            다이얼로그(Dialog)는 기본 페이지 위에 오버레이 되어 뜨는 모달로, 사용자의 특정 동작에 대한 중요한 피드백을 제공하거나
-            사용자 확인을 받는 데 사용되는 구성 요소입니다.
-          </p>
-        </div>
+        <PageHeader title="Dialog" description="다이얼로그(Dialog)는 기본 페이지 위에 오버레이 되어 뜨는 모달로, 사용자의 특정 동작에 대한 중요한 피드백을 제공하거나 사용자 확인을 받는 데 사용되는 구성 요소입니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -101,9 +97,9 @@ export default function DialogPage() {
                 다이얼로그는 Header, Body, Footer 영역으로 구성됩니다. Footer는 선택 사항으로,
                 단순 내용 전달 모달에는 상단 닫기 버튼만 사용합니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <img src="/dialog/dialog_anatomy.png" alt="dialog anatomy img" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>Header — 제목(필수), 서브 제목(선택)</li>
                 <li>닫기 버튼</li>

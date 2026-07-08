@@ -35,6 +35,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /* ─────────────────────────────────────────
    TOC
@@ -88,14 +90,7 @@ export default function CardPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* Page title */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Cards</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            카드는 관련 콘텐츠를 하나의 컨테이너로 묶어 정보를 시각적으로 구조화합니다.
-            이미지, 텍스트, 링크 등 다양한 유형의 미디어를 함께 표시할 수 있으며,
-            Header / Content / Footer 세 영역을 독립적으로 조합해서 활용합니다.
-          </p>
-        </div>
+        <PageHeader title="Cards" description="카드는 관련 콘텐츠를 하나의 컨테이너로 묶어 정보를 시각적으로 구조화합니다. 이미지, 텍스트, 링크 등 다양한 유형의 미디어를 함께 표시할 수 있으며, Header / Content / Footer 세 영역을 독립적으로 조합해서 활용합니다." />
 
         {/* Docs / Code Tabs */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -122,10 +117,10 @@ export default function CardPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 {(["background", "line", "shadow"] as const).map((v) => (
-                  <div key={v} className="flex flex-col items-center gap-3 p-8 bg-ac-gray-20 rounded-lg">
+                  <PreviewBox key={v} variant="gray" className="flex flex-col items-center gap-3">
                     <p className="text-xs text-muted-foreground font-mono">{v}</p>
                     <SampleCard variant={v} className={v === "background" ? "bg-ac-gray-30" : ""} />
-                  </div>
+                  </PreviewBox>
                 ))}
               </div>
             </section>
@@ -137,9 +132,9 @@ export default function CardPage() {
                 카드는 Header, Content, Footer 세 영역으로 구성되며, 세 영역 모두 선택 사항입니다.
                 필요한 영역만 골라 자유롭게 조합해 활용할 수 있습니다. 다양한 조합 예시는 아래 <a href="#variants" className="text-ac-primary-50 underline underline-offset-2">Variants</a> 섹션을 참고하세요.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <img src="/card/card_anatomy.png" alt="card anatomy img" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>헤더 : 카드의 헤더 영역</li>
                 <li>컨텐츠 : 카드의 콘텐츠 영역</li>

@@ -13,6 +13,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -29,12 +31,7 @@ export default function TextareaPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Textarea</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            텍스트 영역(textarea)은 한 줄 이상, 즉 여러 줄 텍스트를 입력하기 위한 컴포넌트입니다. 텍스트양이 넘을 경우 줄 바꿈되어, 높이는 고정되고 커서가 필드 최하단에 도착 시 고정 높이에서 스크롤 됩니다.
-          </p>
-        </div>
+        <PageHeader title="Textarea" description="텍스트 영역(textarea)은 한 줄 이상, 즉 여러 줄 텍스트를 입력하기 위한 컴포넌트입니다. 텍스트양이 넘을 경우 줄 바꿈되어, 높이는 고정되고 커서가 필드 최하단에 도착 시 고정 높이에서 스크롤 됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -48,9 +45,9 @@ export default function TextareaPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/input/textarea/textarea_anatomy.png" alt="textarea anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Label <span className="text-muted-foreground">(선택)</span></li>
                 <li>Value (or Placeholder)</li>
@@ -67,7 +64,7 @@ export default function TextareaPage() {
                 Textarea 상태는 Default / Complete / Focus / Error / Disable 5가지로 사용합니다.<br />
                 Focus 상태일 때, border color는 해당 솔루션의 primary color를 사용합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <PreviewBox variant="gray">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                   <div className="flex flex-col gap-3">
                     <Textarea label="textarea label" placeholder="placeholder" helperText="helper text here" />
@@ -90,7 +87,7 @@ export default function TextareaPage() {
                     <span className="text-xs text-foreground text-center">Disable</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -100,7 +97,7 @@ export default function TextareaPage() {
                 Textarea은 height를 사용자가 유동적으로 resize할 수 있으므로 min / max height를 정해놓습니다. min-height는 30px이며, max-height는 적용되는 영역에 맞춰 유동적으로 정합니다.<br />
                 Default height는 적용되는 영역에 맞추어 지정합니다. 예를 들면 Textarea에 들어갈 내용을 예상하여 height를 정하거나 주변 input/select의 2.5배 정도로 적용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-start gap-8">
                   <div className="flex flex-col gap-3 w-full">
                     <Textarea
@@ -121,7 +118,7 @@ export default function TextareaPage() {
                     <span className="text-xs text-foreground text-center">max-height : 유동적</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

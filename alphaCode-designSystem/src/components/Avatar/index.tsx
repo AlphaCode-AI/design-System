@@ -7,7 +7,7 @@ import { User } from "lucide-react";
 
 /* ── Variants ──────────────────────────────────────────────── */
 const avatarVariants = cva(
-  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 text-foreground font-bold select-none",
+  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 font-bold select-none",
   {
     variants: {
       shape: {

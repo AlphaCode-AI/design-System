@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Tabs,
   TabList,
@@ -14,6 +14,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",        label: "Anatomy" },
@@ -26,42 +28,31 @@ const toc: TocItem[] = [
 const COMPLETE_DATE = new Date("2024-12-31");
 const COMPLETE_RANGE = { from: new Date("2024-12-31"), to: new Date("2025-01-05") };
 
-// 2026년 대한민국 공휴일 (공공데이터 API 또는 라이브러리로 대체 가능)
-const HOLIDAYS_2026: Date[] = [
-  new Date("2026-01-01"), // 신정
-  new Date("2026-02-16"), // 설날 연휴
-  new Date("2026-02-17"), // 설날
-  new Date("2026-02-18"), // 설날 연휴
-  new Date("2026-03-01"), // 삼일절
-  new Date("2026-03-02"), // 삼일절 대체공휴일
-  new Date("2026-05-05"), // 어린이날
-  new Date("2026-05-24"), // 부처님오신날
-  new Date("2026-05-25"), // 부처님오신날 대체공휴일
-  new Date("2026-06-06"), // 현충일
-  new Date("2026-08-15"), // 광복절
-  new Date("2026-09-23"), // 추석 연휴
-  new Date("2026-09-24"), // 추석
-  new Date("2026-09-25"), // 추석 연휴
-  new Date("2026-10-03"), // 개천절
-  new Date("2026-10-05"), // 개천절 대체공휴일
-  new Date("2026-10-09"), // 한글날
-  new Date("2026-12-25"), // 크리스마스
-];
 
 
 export default function DatePickerPage() {
   const [activeTab, setActiveTab] = useState("docs");
+  const [holidays, setHolidays] = useState<Date[]>([]);
+  const [holidayYear, setHolidayYear] = useState(2026);
+
+  useEffect(() => {
+    const year = new Date().getFullYear();
+    fetch(`/api/holidays?year=${year}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data.dates) && data.dates.length > 0) {
+          setHolidays(data.dates.map((d: string) => new Date(d)));
+          setHolidayYear(year);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Date Picker</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            날짜 선택(date picker)은 날짜와 관련된 정보와 기능을 제공하는데 사용됩니다.
-          </p>
-        </div>
+        <PageHeader title="Date Picker" description="날짜 선택(date picker)은 날짜와 관련된 정보와 기능을 제공하는데 사용됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -75,9 +66,9 @@ export default function DatePickerPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/input/date-picker/datepicker_anatomy.png" alt="date picker anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>날짜 입력
                   <ol className="mt-1 ml-6 space-y-1 list-[lower-alpha] text-muted-foreground">
@@ -140,7 +131,7 @@ export default function DatePickerPage() {
                 {/* 기본 */}
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기본</h3>
-                  <div className="rounded-lg bg-ac-gray-20 p-8">
+                  <PreviewBox variant="gray">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="flex flex-col gap-3">
                         <DatePicker
@@ -182,13 +173,13 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">Disable</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 {/* 기간 선택 */}
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기간 선택</h3>
-                  <div className="rounded-lg bg-ac-gray-20 p-8">
+                  <PreviewBox variant="gray">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="flex flex-col gap-3">
                         <DateRangePicker
@@ -226,7 +217,7 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">Disable</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>
@@ -241,7 +232,7 @@ export default function DatePickerPage() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기본</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker size="lg" label="날짜 선택" placeholder="날짜를 선택해주세요" helperText="현재일 기준 180일 이내 선택 가능합니다." dateFormat="yyyy-MM-dd" />
@@ -256,12 +247,12 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">sm (30px)</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기간 선택</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DateRangePicker size="lg" label="날짜 선택" helperText="최대 선택 가능 기간은 180일입니다." />
@@ -276,7 +267,7 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">sm (30px)</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>
@@ -290,7 +281,7 @@ export default function DatePickerPage() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">offsetMonths (현재 기준 ±2개월)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -309,11 +300,11 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">minDate / maxDate (직접 지정)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -334,34 +325,34 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">disabledDates (특정 날짜 선택 불가)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
                           label="날짜 선택"
                           placeholder="날짜를 선택해주세요"
                           dateFormat="yyyy-MM-dd"
-                          disabledDates={HOLIDAYS_2026}
-                          helperText="2026년 공휴일은 선택할 수 없습니다."
+                          disabledDates={holidays}
+                          helperText={`${holidayYear}년 공휴일은 선택할 수 없습니다.`}
                         />
                       </div>
                       <div className="flex flex-col gap-3 flex-1">
                         <DateRangePicker
                           label="날짜 선택"
-                          disabledDates={HOLIDAYS_2026}
-                          helperText="2026년 공휴일은 선택할 수 없습니다."
+                          disabledDates={holidays}
+                          helperText={`${holidayYear}년 공휴일은 선택할 수 없습니다.`}
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">weekendColor (주말 색상)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -380,7 +371,7 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>
@@ -499,19 +490,58 @@ export default function DatePickerPage() {
               <div className="mb-10">
                 <h3 className="text-lg font-semibold text-foreground mb-2">5. 특정 날짜 선택 불가</h3>
                 <p className="text-sm text-foreground mb-4">
-                  <CodeBadge>disabledDates</CodeBadge>에 <CodeBadge>Date[]</CodeBadge>를 전달하면 해당 날짜들을 선택 불가 처리합니다. 공공데이터 API나 <CodeBadge>holidays-kr</CodeBadge> 같은 라이브러리로 공휴일 목록을 가져와 전달하면 됩니다.
+                  <CodeBadge>disabledDates</CodeBadge>에 <CodeBadge>Date[]</CodeBadge>를 전달하면 해당 날짜들을 선택 불가 처리합니다.
+                  대체공휴일을 포함한 공휴일 목록은 <strong>공공데이터포털 한국천문연구원_특일 정보 API</strong>를 사용하면 매년 자동으로 반영됩니다.
                 </p>
-                <CodeBlock code={`// 공휴일 등 특정 날짜 선택 불가
-const holidays = [
-  new Date("2025-01-01"), // 신정
-  new Date("2025-03-01"), // 삼일절
-  // ... 공공데이터 API 또는 라이브러리로 대체 가능
+                <CodeBlock code={`// app/api/holidays/route.ts — 서버에서 공공데이터포털 API 호출
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest) {
+  const year = new URL(req.url).searchParams.get("year") ?? String(new Date().getFullYear());
+  const apiKey = process.env.HOLIDAY_API_KEY; // .env.local에 저장
+  const dates: string[] = [];
+
+  for (let month = 1; month <= 12; month++) {
+    const qs = \`ServiceKey=\${apiKey}&solYear=\${year}&solMonth=\${String(month).padStart(2, "0")}&numOfRows=50\`;
+    const url = \`https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?\${qs}\`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) continue;
+
+    const xml = await res.text();
+    const items = xml.match(/<item>([\\s\\S]*?)<\\/item>/g) ?? [];
+    for (const item of items) {
+      const isHoliday = item.match(/<isHoliday>(.*?)<\\/isHoliday>/)?.[1];
+      const locdate = item.match(/<locdate>(\\d+)<\\/locdate>/)?.[1];
+      if (isHoliday === "Y" && locdate)
+        dates.push(\`\${locdate.slice(0,4)}-\${locdate.slice(4,6)}-\${locdate.slice(6,8)}\`);
+    }
+  }
+  return NextResponse.json({ dates });
+}`} />
+                <p className="text-sm text-foreground mt-4 mb-4">
+                  클라이언트에서 API 라우트를 호출해 <CodeBadge>disabledDates</CodeBadge>에 전달합니다. API 응답 실패 시 정적 fallback 데이터로 동작합니다.
+                </p>
+                <CodeBlock code={`// 공휴일 API 연동 예시
+const FALLBACK_HOLIDAYS = [
+  new Date("2026-01-01"), // 신정
+  // ...
 ];
 
-// 단일 날짜 선택
-<DatePicker disabledDates={holidays} />
+const [holidays, setHolidays] = useState<Date[]>(FALLBACK_HOLIDAYS);
 
-// 기간 선택
+useEffect(() => {
+  const year = new Date().getFullYear();
+  fetch(\`/api/holidays?year=\${year}\`)
+    .then((r) => r.json())
+    .then((data) => {
+      if (Array.isArray(data.dates) && data.dates.length > 0)
+        setHolidays(data.dates.map((d: string) => new Date(d)));
+    })
+    .catch(() => {}); // 실패 시 fallback 유지
+}, []);
+
+// 대체공휴일 포함 공휴일이 자동으로 비활성화됨
+<DatePicker disabledDates={holidays} />
 <DateRangePicker disabledDates={holidays} />`} />
               </div>
 

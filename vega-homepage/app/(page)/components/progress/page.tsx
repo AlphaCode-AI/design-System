@@ -13,6 +13,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -28,13 +30,7 @@ export default function ProgressPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Progress Indicator</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            작업률 표시기(Progress Indicator)는 사용자에게 작업 완료까지 남은 진행률을 표시해주는 컴포넌트입니다.
-            또는 작업이 진행 중임을 사용자에게 표출하는 로딩 요소로 사용될 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="Progress Indicator" description="작업률 표시기(Progress Indicator)는 사용자에게 작업 완료까지 남은 진행률을 표시해주는 컴포넌트입니다. 또는 작업이 진행 중임을 사용자에게 표출하는 로딩 요소로 사용될 수 있습니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -102,9 +98,9 @@ export default function ProgressPage() {
               <p className="text-sm text-foreground mb-4">
                 Progress Indicator는 현재 진행률과 전체 작업량으로 구성됩니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <img src="/progress/progress_anatomy.png" alt="progress indicator anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>현재 진행률 — 작업이 완료된 비율을 나타냅니다.</li>
                 <li>전체 작업량 — 진행 바의 전체 트랙으로, 작업 전체 범위를 나타냅니다.</li>

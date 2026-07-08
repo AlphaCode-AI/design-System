@@ -20,6 +20,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /**
  * Table of Contents 데이터
@@ -41,12 +43,7 @@ export default function AvatarPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Avatar</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            아바타(avatar)는 프로필 사진 또는 대체 이미지를 통해 사용자를 표현하는 요소입니다.
-          </p>
-        </div>
+        <PageHeader title="Avatar" description="아바타(avatar)는 프로필 사진 또는 대체 이미지를 통해 사용자를 표현하는 요소입니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -61,7 +58,7 @@ export default function AvatarPage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-center md:items-end justify-center gap-16">
                   {/* Shape */}
                   <div className="flex flex-col items-center gap-4">
@@ -94,13 +91,13 @@ export default function AvatarPage() {
                         <span className="text-xs text-muted-foreground">Icon</span>
                       </div>
                       <div className="flex flex-col items-center gap-2">
-                        <Avatar size="xl" name="MJ" className="bg-ac-orange-40 text-white" />
+                        <Avatar size="xl" name="MJ" className="bg-ac-orange-40 text-ac-white" />
                         <span className="text-xs text-muted-foreground">Text</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -109,7 +106,7 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
                 사이즈는 xs / sm / md / lg / xl / 2xl 6개의 사이즈를 사용합니다. Default는 md 입니다. 중요도와 시각적 균형에 맞게 사이즈를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-4 md:p-8">
+              <PreviewBox className="!p-4 md:!p-8">
                 <div className="flex flex-col gap-4 md:gap-6 md:items-center">
                   {(["xs", "sm", "md", "lg", "xl", "2xl"] as const).map((size) => {
                     const px = { xs: 16, sm: 20, md: 24, lg: 32, xl: 48, "2xl": 64 }[size];
@@ -123,14 +120,14 @@ export default function AvatarPage() {
                           <Avatar size={size} src="/avatar/img_5.jpg" />
                           <Avatar size={size} shape="square" className="bg-ac-gray-80" icon={<Landmark className="w-1/2 h-1/2 text-ac-white" />} />
                           <Avatar size={size} className="bg-ac-gray-80" icon={<Landmark className="w-1/2 h-1/2 text-ac-white" />} />
-                          <Avatar size={size} name="K" className="bg-ac-blue-40 text-white" />
-                          <Avatar size={size} name="HC" className="bg-ac-green-40 text-white" />
+                          <Avatar size={size} name="K" className="bg-ac-blue-40 text-ac-white" />
+                          <Avatar size={size} name="HC" className="bg-ac-green-40 text-ac-white" />
                         </div>
                       </div>
                     );
                   })}
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Icon */}
@@ -139,7 +136,7 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
               아바타의 아이콘 타입은 사용자를 표현하는 아이콘으로 많이 사용됩니다. 사용자를 표현하는 아이콘으로 사용할 때 사용자를 표현하는 목적과 다른 아이콘의 사용을 지양합니다.<br/> 아이콘은 lucide-react 아이콘을 사용하며, <CodeBadge>lucide-react</CodeBadge>에서 직접 import하지 않고 반드시 <CodeBadge>@alphacode-ai/design-system</CodeBadge>에서 import하여 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-4 md:p-8">
+              <PreviewBox className="!p-4 md:!p-8">
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-10">
                   {[
                     { icon: <User className="w-1/2 h-1/2" />, label: "사용자" },
@@ -154,7 +151,7 @@ export default function AvatarPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Image */}
@@ -163,7 +160,7 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
                 아바타의 이미지 타입은 사용자가 지정한 이미지 또는 회사의 로고 이미지를 사용합니다. 기계의 이미지 또는 회사 전경 같은 이미지 사용은 지양합니다.
               </p>
-              <div className="rounded-lg border border-border p-4 md:p-8">
+              <PreviewBox className="!p-4 md:!p-8">
                 <div className="flex items-center justify-center gap-4 md:gap-10">
                   {[
                     { src: "/avatar/img_symbol.png", label: "심볼" },
@@ -177,7 +174,7 @@ export default function AvatarPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Text */}
@@ -186,18 +183,18 @@ export default function AvatarPage() {
               <p className="text-sm text-foreground mb-4">
               아바타의 텍스트 타입은 사용자의 아이디 또는 닉네임의 영문 또는 숫자의 앞글자를 대문자로 변환해 생성합니다. xs-md 사이즈에서는 한글자만 표출하며 그 이후 사이즈에선 두글자를 표출합니다. 한글은 사용하지 않습니다. 색상 값은 아래와 같은 값을 먼저 사용하며 다른 색상 적용도 가능하나 가독성을 고려하여 지정하도록 합니다.
               </p>
-              <div className="rounded-lg border border-border p-4 md:p-8">
+              <PreviewBox className="!p-4 md:!p-8">
                 <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
-                  <Avatar size="xs" name="S" />
-                  <Avatar size="xs" name="S" className="bg-ac-blue-gray-30" />
-                  <Avatar size="sm" name="Q" className="bg-ac-primary-30" />
-                  <Avatar size="sm" name="Q" className="bg-ac-purple-30" />
-                  <Avatar size="md" name="O" className="bg-ac-green-30" />
-                  <Avatar size="lg" name="P1" className="bg-ac-blue-30" />
-                  <Avatar size="xl" name="34" className="bg-ac-red-30" />
-                  <Avatar size="2xl" name="WD" className="bg-ac-orange-50 text-white" />
+                  <Avatar size="xs" name="S" className="text-foreground" />
+                  <Avatar size="xs" name="S" className="bg-ac-blue-gray-30 dark:bg-ac-blue-gray-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="sm" name="Q" className="bg-ac-primary-30 dark:bg-ac-primary-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="sm" name="Q" className="bg-ac-purple-30 dark:bg-ac-purple-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="md" name="O" className="bg-ac-green-30 dark:bg-ac-green-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="lg" name="P1" className="bg-ac-blue-30 dark:bg-ac-blue-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="xl" name="34" className="bg-ac-red-30 dark:bg-ac-red-70 text-ac-gray-90 dark:text-ac-white" />
+                  <Avatar size="2xl" name="WD" className="bg-ac-orange-50 text-ac-white" />
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}
@@ -281,12 +278,17 @@ export default function AvatarPage() {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">4. 배경색 지정</h3>
                 <p className="text-sm text-foreground mb-4">
-                  <CodeBadge>className</CodeBadge>으로 배경색을 지정합니다. 텍스트 가독성을 위해 <CodeBadge>text-white</CodeBadge>를 함께 사용합니다.
+                  <CodeBadge>className</CodeBadge>으로 배경색과 텍스트 색상을 함께 지정합니다. 다크모드를 고려해 <CodeBadge>text-ac-white</CodeBadge>를 사용하고, 밝은 배경에는 <CodeBadge>dark:</CodeBadge> 접두사로 어두운 배경 색상을 추가합니다.
                 </p>
-                <CodeBlock code={`<Avatar name="KS" className="bg-ac-blue-50 text-white" />
-<Avatar name="HC" className="bg-ac-green-50 text-white" />
-<Avatar name="WD" className="bg-ac-orange-40 text-white" />
-<Avatar icon={<User className="w-1/2 h-1/2 text-white" />} className="bg-ac-gray-80" />`} />
+                <CodeBlock code={`// 포화도 높은 배경 (-50 계열) — text-ac-white
+<Avatar name="KS" className="bg-ac-blue-50 text-ac-white" />
+<Avatar name="HC" className="bg-ac-green-50 text-ac-white" />
+
+// 밝은 배경 (-30 계열) — 다크모드 배경 교체 필요
+<Avatar name="WD" className="bg-ac-orange-30 dark:bg-ac-orange-70 text-ac-gray-90 dark:text-ac-white" />
+
+// 아이콘 타입
+<Avatar icon={<User className="w-1/2 h-1/2 text-ac-white" />} className="bg-ac-gray-80" />`} />
               </div>
             </section>
 

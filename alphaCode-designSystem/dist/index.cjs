@@ -741,7 +741,7 @@ Switch.displayName = "Switch";
 var _lucidereact = require('lucide-react'); _createStarExport(_lucidereact);
 
 var avatarVariants = _classvarianceauthority.cva.call(void 0, 
-  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 text-foreground font-bold select-none",
+  "inline-flex items-center justify-center shrink-0 overflow-hidden bg-ac-gray-20 font-bold select-none",
   {
     variants: {
       shape: {
@@ -1274,14 +1274,14 @@ function getDayPickerClassNames(mode = "single") {
     return {
       ...BASE_DAY_CLASSNAMES,
       selected: "",
-      range_start: "[&>button]:!bg-ac-black [&>button]:!text-white [&>button]:!font-bold",
-      range_end: "[&>button]:!bg-ac-black [&>button]:!text-white [&>button]:!font-bold",
-      range_middle: "[&>button]:!bg-ac-gray-20 [&>button]:!rounded-none [&>button]:!text-ac-black"
+      range_start: "[&>button]:!bg-ac-black dark:[&>button]:!bg-ac-white [&>button]:!text-white dark:[&>button]:!text-ac-black [&>button]:!font-bold",
+      range_end: "[&>button]:!bg-ac-black dark:[&>button]:!bg-ac-white [&>button]:!text-white dark:[&>button]:!text-ac-black [&>button]:!font-bold",
+      range_middle: "[&>button]:!bg-ac-gray-20 [&>button]:!rounded-none [&>button]:!text-ac-black dark:[&>button]:!text-foreground"
     };
   }
   return {
     ...BASE_DAY_CLASSNAMES,
-    selected: "[&>button]:!bg-ac-black [&>button]:!text-white [&>button]:!font-bold",
+    selected: "[&>button]:!bg-ac-black dark:[&>button]:!bg-ac-white [&>button]:!text-white dark:[&>button]:!text-ac-black [&>button]:!font-bold",
     range_start: "",
     range_end: "",
     range_middle: ""
@@ -2371,7 +2371,7 @@ function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, 
     if (ctx.activeClassName) {
       buttonClass = cn("bg-background font-medium", ctx.activeClassName);
     } else if (ctx.variant === "primary") {
-      buttonClass = "bg-background border border-ac-primary-50 text-ac-primary-50 font-medium";
+      buttonClass = "bg-ac-primary-50 text-white font-medium";
     } else {
       buttonClass = "bg-background text-ac-gray-90 font-medium";
     }

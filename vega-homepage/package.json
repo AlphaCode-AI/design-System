@@ -11,11 +11,8 @@
   "dependencies": {
     "@alphacode-ai/design-system": "file:../alphaCode-designSystem",
     "@tailwindcss/postcss": "^4.0.0",
-    "date-fns": "^4.4.0",
-    "lucide-react": "^1.21.0",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-day-picker": "9",
     "react-dom": "19.2.3",
     "tailwindcss": "^4.3.1"
   },
@@ -26,7 +23,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "postcss": "^8.5.15",
-    "postcss-preset-env": "^11.2.0",
     "typescript": "^5"
   },
   "engines": {

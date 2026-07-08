@@ -15,6 +15,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -33,12 +35,7 @@ export default function ToggleGroupPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Toggle Group</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            토글 그룹(Toggle Group)은 서로 관련된 옵션들을 그룹으로 묶어 하나의 선택지를 선택하거나 해제할 수 있는 컴포넌트입니다. 뷰 전환, 정렬 방식 선택 등에 활용됩니다.
-          </p>
-        </div>
+        <PageHeader title="Toggle Group" description="토글 그룹(Toggle Group)은 서로 관련된 옵션들을 그룹으로 묶어 하나의 선택지를 선택하거나 해제할 수 있는 컴포넌트입니다. 뷰 전환, 정렬 방식 선택 등에 활용됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -52,9 +49,9 @@ export default function ToggleGroupPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/toggle-group/toggle_anatomy.png" alt="toggle group anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>컨테이너 : 토글 그룹 전체를 감싸는 영역</li>
                 <li>토글 그룹 아이템 : 개별 선택 가능한 버튼 요소</li>
@@ -94,17 +91,17 @@ export default function ToggleGroupPage() {
                 <div className="flex flex-col gap-4 items-center bg-ac-gray-20 rounded-lg p-6">
                   <span className="text-xs font-semibold text-muted-foreground">Icon + Label / Style: Default</span>
                   <ToggleGroup defaultValue="bold" variant="default">
-                    <ToggleGroupItem value="bold" icon={<Bold className="w-4 h-4" />}>Bold</ToggleGroupItem>
-                    <ToggleGroupItem value="italic" icon={<Italic className="w-4 h-4" />}>Italic</ToggleGroupItem>
-                    <ToggleGroupItem value="underline" icon={<Underline className="w-4 h-4" />}>Underline</ToggleGroupItem>
+                    <ToggleGroupItem value="bold" icon={<Bold />}>Bold</ToggleGroupItem>
+                    <ToggleGroupItem value="italic" icon={<Italic />}>Italic</ToggleGroupItem>
+                    <ToggleGroupItem value="underline" icon={<Underline />}>Underline</ToggleGroupItem>
                   </ToggleGroup>
                 </div>
                 <div className="flex flex-col gap-4 items-center bg-ac-gray-20 rounded-lg p-6">
                   <span className="text-xs font-semibold text-muted-foreground">Icon + Label / Style: Primary</span>
                   <ToggleGroup defaultValue="bold" variant="primary">
-                    <ToggleGroupItem value="bold" icon={<Bold className="w-4 h-4" />}>Bold</ToggleGroupItem>
-                    <ToggleGroupItem value="italic" icon={<Italic className="w-4 h-4" />}>Italic</ToggleGroupItem>
-                    <ToggleGroupItem value="underline" icon={<Underline className="w-4 h-4" />}>Underline</ToggleGroupItem>
+                    <ToggleGroupItem value="bold" icon={<Bold />}>Bold</ToggleGroupItem>
+                    <ToggleGroupItem value="italic" icon={<Italic />}>Italic</ToggleGroupItem>
+                    <ToggleGroupItem value="underline" icon={<Underline />}>Underline</ToggleGroupItem>
                   </ToggleGroup>
                 </div>
               </div>
@@ -116,7 +113,7 @@ export default function ToggleGroupPage() {
               <p className="text-sm text-foreground mb-6">
                 토글 그룹 아이템의 각 상태를 나타냅니다.
               </p>
-              <div className="rounded-lg border border-border p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-center">
+              <PreviewBox className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-center">
                 {(["default", "primary"] as const).map((variant) => (
                   <div key={variant}>
                     <span className="text-xs font-semibold text-muted-foreground mb-4 block">
@@ -154,19 +151,19 @@ export default function ToggleGroupPage() {
                           <div className="flex flex-col gap-2 items-start">
                             <span className="text-xs text-muted-foreground">Default</span>
                             <ToggleGroup value="" variant={variant} iconOnly>
-                              <ToggleGroupItem value="x" icon={<Bold className="w-4 h-4" />} tooltip="Bold" />
+                              <ToggleGroupItem value="x" icon={<Bold />} tooltip="Bold" />
                             </ToggleGroup>
                           </div>
                           <div className="flex flex-col gap-2 items-start">
                             <span className="text-xs text-muted-foreground">Active</span>
                             <ToggleGroup value="active" variant={variant} iconOnly>
-                              <ToggleGroupItem value="active" icon={<Bold className="w-4 h-4" />} tooltip="Bold" />
+                              <ToggleGroupItem value="active" icon={<Bold />} tooltip="Bold" />
                             </ToggleGroup>
                           </div>
                           <div className="flex flex-col gap-2 items-start">
                             <span className="text-xs text-muted-foreground">Disabled</span>
                             <ToggleGroup value="" variant={variant} iconOnly>
-                              <ToggleGroupItem value="x" icon={<Bold className="w-4 h-4" />} tooltip="Bold" disabled />
+                              <ToggleGroupItem value="x" icon={<Bold />} tooltip="Bold" disabled />
                             </ToggleGroup>
                           </div>
                         </div>
@@ -174,7 +171,7 @@ export default function ToggleGroupPage() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -183,7 +180,7 @@ export default function ToggleGroupPage() {
               <p className="text-sm text-foreground mb-6">
                 토글 그룹의 사이즈는 <CodeBadge>sm</CodeBadge> / <CodeBadge>md</CodeBadge> / <CodeBadge>lg</CodeBadge> 3가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8 flex flex-col gap-6 items-center">
+              <PreviewBox className="flex flex-col gap-6 items-center">
                 {(["sm", "md", "lg"] as const).map((size) => (
                   <div key={size} className="flex flex-col gap-2">
                     <span className="text-xs text-muted-foreground text-center">{size}{size === "md" ? " (기본)" : ""}</span>
@@ -199,21 +196,21 @@ export default function ToggleGroupPage() {
                         <ToggleGroupItem value="option3">Option 3</ToggleGroupItem>
                       </ToggleGroup>
                       <ToggleGroup defaultValue="left" variant="default" size={size} iconOnly>
-                        <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                        <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                        <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                        <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                        <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                        <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                        <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                        <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                       </ToggleGroup>
                       <ToggleGroup defaultValue="left" variant="primary" size={size} iconOnly>
-                        <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                        <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                        <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                        <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                        <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                        <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                        <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                        <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                       </ToggleGroup>
                     </div>
                   </div>
                 ))}
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Icon only */}
@@ -222,26 +219,26 @@ export default function ToggleGroupPage() {
               <p className="text-sm text-foreground mb-6">
                 <CodeBadge>iconOnly</CodeBadge> prop을 사용하면 아이콘만으로 구성된 토글 그룹을 만들 수 있습니다. 각 아이템에 <CodeBadge>tooltip</CodeBadge>을 설정하면 hover 시 레이블이 표출됩니다.
               </p>
-              <div className="rounded-lg border border-border p-8 grid grid-cols-2 gap-8 items-start justify-items-center">
+              <PreviewBox className="grid grid-cols-2 gap-8 items-start justify-items-center">
                 <div className="flex flex-col gap-2 items-center">
                   <span className="text-xs text-muted-foreground">Style: Default</span>
                   <ToggleGroup defaultValue="left" iconOnly variant="default">
-                    <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                    <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                    <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                    <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                    <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                    <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                    <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                    <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                   </ToggleGroup>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
                   <span className="text-xs text-muted-foreground">Style: Primary</span>
                   <ToggleGroup defaultValue="left" iconOnly variant="primary">
-                    <ToggleGroupItem value="left" icon={<AlignLeft className="w-4 h-4" />} tooltip="왼쪽 정렬" />
-                    <ToggleGroupItem value="center" icon={<AlignCenter className="w-4 h-4" />} tooltip="가운데 정렬" />
-                    <ToggleGroupItem value="right" icon={<AlignRight className="w-4 h-4" />} tooltip="오른쪽 정렬" />
-                    <ToggleGroupItem value="justify" icon={<AlignJustify className="w-4 h-4" />} tooltip="양쪽 정렬" />
+                    <ToggleGroupItem value="left" icon={<AlignLeft />} tooltip="왼쪽 정렬" />
+                    <ToggleGroupItem value="center" icon={<AlignCenter />} tooltip="가운데 정렬" />
+                    <ToggleGroupItem value="right" icon={<AlignRight />} tooltip="오른쪽 정렬" />
+                    <ToggleGroupItem value="justify" icon={<AlignJustify />} tooltip="양쪽 정렬" />
                   </ToggleGroup>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}
@@ -350,9 +347,9 @@ export default function ToggleGroupPage() {
                 <CodeBlock code={`import { ToggleGroup, ToggleGroupItem, Bold, Italic, Underline } from "@alphacode-ai/design-system";
 
 <ToggleGroup defaultValue="bold">
-  <ToggleGroupItem value="bold" icon={<Bold className="w-4 h-4" />}>Bold</ToggleGroupItem>
-  <ToggleGroupItem value="italic" icon={<Italic className="w-4 h-4" />}>Italic</ToggleGroupItem>
-  <ToggleGroupItem value="underline" icon={<Underline className="w-4 h-4" />}>Underline</ToggleGroupItem>
+  <ToggleGroupItem value="bold" icon={<Bold />}>Bold</ToggleGroupItem>
+  <ToggleGroupItem value="italic" icon={<Italic />}>Italic</ToggleGroupItem>
+  <ToggleGroupItem value="underline" icon={<Underline />}>Underline</ToggleGroupItem>
 </ToggleGroup>`} />
               </div>
 

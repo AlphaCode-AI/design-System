@@ -15,6 +15,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",          label: "Type" },
@@ -33,12 +35,7 @@ export default function TextInputPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Text input</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            텍스트 입력(text input)은 한 줄의 짧은 텍스트를 입력하는 경우에 사용되는 요소입니다.
-          </p>
-        </div>
+        <PageHeader title="Text input" description="텍스트 입력(text input)은 한 줄의 짧은 텍스트를 입력하는 경우에 사용되는 요소입니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -53,15 +50,15 @@ export default function TextInputPage() {
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
               <div className="flex flex-col md:flex-row items-stretch justify-around gap-4">
-                <div className="flex flex-col items-center gap-4 flex-1 p-8 bg-ac-gray-20 rounded-lg">
+                <PreviewBox variant="gray" className="flex flex-col items-center gap-4 flex-1">
                   <TextInput
                     label="input label"
                     placeholder="placeholder"
                     helperText="helper text here"
                   />
                   <span className="text-sm text-foreground">Default</span>
-                </div>
-                <div className="flex flex-col items-center gap-4 flex-1 p-8 bg-ac-gray-20 rounded-lg justify-center">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col items-center gap-4 flex-1 justify-center">
                   <TextInput
                     label="label to the left"
                     labelLeft
@@ -69,8 +66,8 @@ export default function TextInputPage() {
                     helperText="helper text here"
                   />
                   <span className="text-sm text-foreground">Label Left</span>
-                </div>
-                <div className="flex flex-col items-center gap-4 flex-1 p-8 bg-ac-gray-20 rounded-lg">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col items-center gap-4 flex-1">
                   <TextInput
                     label="input label"
                     placeholder="placeholder"
@@ -78,16 +75,16 @@ export default function TextInputPage() {
                     buttonLabel="Submit"
                   />
                   <span className="text-sm text-foreground">With Button</span>
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/input/text-input/text_anatomy.png" alt="text input anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Label <span className="text-muted-foreground">(선택)</span></li>
                 <li>Value (or Placeholder)</li>
@@ -104,7 +101,7 @@ export default function TextInputPage() {
               <p className="text-sm text-foreground mb-6">
                 Text input 상태는 Default / Complete / Focus / Error / Disable 5가지로 사용합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <PreviewBox variant="gray">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                   <div className="flex flex-col gap-3">
                     <TextInput placeholder="placeholder" helperText="helper text here" />
@@ -127,7 +124,7 @@ export default function TextInputPage() {
                     <span className="text-xs text-foreground text-center">Disable</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -136,7 +133,7 @@ export default function TextInputPage() {
               <p className="text-sm text-foreground mb-6">
                 사이즈는 높이를 기준으로 sm / md / lg 3가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   <div className="flex flex-col gap-3 w-full">
                     <TextInput size="lg" placeholder="placeholder" helperText="helper text here" />
@@ -151,7 +148,7 @@ export default function TextInputPage() {
                     <span className="text-xs text-foreground text-center">sm (30px)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Prefix / Suffix */}
@@ -160,7 +157,7 @@ export default function TextInputPage() {
               <p className="text-sm text-foreground mb-6">
                 Prefix와 Suffix에는 텍스트와 버튼을 사용할 수 있습니다. 입력하는 내용과 컨텍스트에 따라 올바른 맥락으로 사용해야 합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   <div className="flex flex-col gap-3 w-full">
                     <TextInput
@@ -179,7 +176,7 @@ export default function TextInputPage() {
                     />
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

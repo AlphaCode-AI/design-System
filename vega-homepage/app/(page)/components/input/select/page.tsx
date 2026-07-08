@@ -13,6 +13,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -54,12 +56,7 @@ export default function SelectPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Select</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            셀렉트(select)는 사용자에게 여러개의 옵션 목록을 팝업으로 제공하여 그 중 한 개의 값을 선택할 수 있도록 하는 경우에 사용합니다.
-          </p>
-        </div>
+        <PageHeader title="Select" description="셀렉트(select)는 사용자에게 여러개의 옵션 목록을 팝업으로 제공하여 그 중 한 개의 값을 선택할 수 있도록 하는 경우에 사용합니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -73,9 +70,9 @@ export default function SelectPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/input/select/select_anatomy.png" alt="select anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Container : select와 배경을 구분</li>
                 <li>Placeholder : select 선택을 유도하는 문구</li>
@@ -98,7 +95,7 @@ export default function SelectPage() {
               </p>
 
               <div className="space-y-6">
-                <div className="rounded-lg bg-ac-gray-20 p-8">
+                <PreviewBox variant="gray">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <div className="flex flex-col gap-3">
                       <Select groups={GROUP_OPTIONS} placeholder="Select the option" />
@@ -121,7 +118,7 @@ export default function SelectPage() {
                       <span className="text-xs text-foreground text-center">Disable</span>
                     </div>
                   </div>
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
@@ -131,7 +128,7 @@ export default function SelectPage() {
               <p className="text-sm text-foreground mb-6">
                 사이즈는 높이를 기준으로 sm / md / lg 3가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   <div className="flex flex-col gap-3 w-full">
                     <Select size="lg" options={BASIC_OPTIONS} placeholder="Select the option" />
@@ -146,7 +143,7 @@ export default function SelectPage() {
                     <span className="text-xs text-foreground text-center">sm (30px)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

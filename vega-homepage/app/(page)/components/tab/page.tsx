@@ -11,6 +11,8 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -29,14 +31,7 @@ export default function TabPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Tab</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            탭(tab)은 버튼을 눌러 상호배타적인 여러 개의 콘텐츠 섹션을 전환할 수 있는 컴포넌트입니다.
-            콘텐츠 섹션은 동일한 영역 내에서 전환되기 때문에 정보를 탐색하는 맥락을 유지할 수 있고
-            작은 공간에 많은 양의 콘텐츠를 효과적으로 표현할 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="Tab" description="탭(tab)은 버튼을 눌러 상호배타적인 여러 개의 콘텐츠 섹션을 전환할 수 있는 컴포넌트입니다. 콘텐츠 섹션은 동일한 영역 내에서 전환되기 때문에 정보를 탐색하는 맥락을 유지할 수 있고 작은 공간에 많은 양의 콘텐츠를 효과적으로 표현할 수 있습니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -55,7 +50,7 @@ export default function TabPage() {
               <p className="text-sm text-foreground mb-4">
                 탭의 너비 유형은 Fill과 Full 두 가지입니다.
               </p>
-              <div className="rounded-lg p-8 border border-border flex gap-12 justify-center flex-col items-center">
+              <PreviewBox className="flex gap-12 justify-center flex-col items-center">
 
                 <div className="flex flex-col gap-3 w-full">
                   <p className="text-xs font-medium text-foreground">넓이 Fill</p>
@@ -79,7 +74,7 @@ export default function TabPage() {
                   </Tabs>
                 </div>
 
-              </div>
+              </PreviewBox>
             </section>
 
             {/* ── Anatomy ── */}
@@ -88,9 +83,9 @@ export default function TabPage() {
               <p className="text-sm text-foreground mb-4">
                 탭의 각 구성 요소입니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <img src="/tab/tab_anatomy.png" alt="tab anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>선택된 탭 레이블 — 현재 선택된 탭을 나타냅니다.</li>
                 <li>탭 레이블 — 선택되지 않은 탭의 레이블입니다.</li>

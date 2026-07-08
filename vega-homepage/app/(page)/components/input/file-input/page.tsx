@@ -13,6 +13,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -29,12 +31,7 @@ export default function FileInputPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">File input</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            파일 입력(file input)는 하나 이상의 디바이스의 로컬 파일을 선택하고 첨부하는데 사용하는 입력 컴포넌트입니다.
-          </p>
-        </div>
+        <PageHeader title="File input" description="파일 입력(file input)는 하나 이상의 디바이스의 로컬 파일을 선택하고 첨부하는데 사용하는 입력 컴포넌트입니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -48,9 +45,9 @@ export default function FileInputPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/input/file-input/file_anatomy.png" alt="file input anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Label <span className="text-muted-foreground">(선택)</span></li>
                 <li>Value (or Placeholder)</li>
@@ -67,7 +64,7 @@ export default function FileInputPage() {
               <p className="text-sm text-foreground mb-6">
                 Text upload 상태는 Default / Complete / Error / Disable 4가지로 사용합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <PreviewBox variant="gray">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="flex flex-col gap-3">
                     <FileInput label="file label" helperText="helper text here" />
@@ -86,7 +83,7 @@ export default function FileInputPage() {
                     <span className="text-xs text-foreground text-center">Disable</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -95,7 +92,7 @@ export default function FileInputPage() {
               <p className="text-sm text-foreground mb-6">
                 사이즈는 높이를 기준으로 sm / md / lg 3가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   <div className="flex flex-col items-start gap-3 w-full">
                     <FileInput size="lg" label="file label" helperText="helper text here" />
@@ -110,7 +107,7 @@ export default function FileInputPage() {
                     <span className="text-xs text-foreground text-center">sm (30px)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

@@ -16,7 +16,9 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
+import PageHeader from "@/app/components/PageHeader";
 import PropsTable from "@/app/components/PropsTable";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -48,12 +50,7 @@ export default function FABPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">FAB (Floating Action Button)</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            FAB는 화면 계층 최상위에 고정되어 띠 있는 액션 버튼 컴포넌트입니다. 아이콘 전용(FAB)과 라벨이 포함된 확장형(Extended FAB) 두 가지 형태로 사용할 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="FAB (Floating Action Button)" description="FAB는 화면 계층 최상위에 고정되어 띠 있는 액션 버튼 컴포넌트입니다. 아이콘 전용(FAB)과 라벨이 포함된 확장형(Extended FAB) 두 가지 형태로 사용할 수 있습니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -67,7 +64,7 @@ export default function FABPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-12">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <div className="grid grid-cols-2 gap-12">
                   {/* FAB */}
                   <div className="flex flex-col items-center">
@@ -84,7 +81,7 @@ export default function FABPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>컨테이너 : 컴포넌트를 감싸는 컨테이너 영역</li>
                 <li>아이콘 : 버튼에 대한 정보 전달 아이콘</li>
@@ -96,7 +93,7 @@ export default function FABPage() {
             <section id="component" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-2">Component</h2>
               <p className="text-sm text-foreground mb-4">버튼은 중요도와 쓰임새에 따라 세부 스타일을 분류하여 사용합니다.</p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   {/* FAB */}
                   <div>
@@ -126,7 +123,7 @@ export default function FABPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -135,7 +132,7 @@ export default function FABPage() {
               <p className="text-sm text-foreground mb-4">
                 FAB 사이즈는 높이 기준 md / lg 2가지로 구분됩니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   {/* FAB */}
                   <div className="space-y-6">
@@ -170,7 +167,7 @@ export default function FABPage() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Action */}
@@ -183,7 +180,7 @@ export default function FABPage() {
                 FAB에 hover시 tooltip으로 해당하는 기능을 제공하여 사용자가 정확한 기능을 인지할 수 있도록 합니다.
               </p>
 
-              <div className="rounded-lg border border-border p-8 space-y-8">
+              <PreviewBox className="space-y-8">
                 {/* FAB Actions */}
                 <div>
                   <p className="text-xs font-medium text-ac-gray-60 mb-4">FAB</p>
@@ -208,7 +205,7 @@ export default function FABPage() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* State */}
@@ -218,7 +215,7 @@ export default function FABPage() {
                 상태는 배경 색상 2가지로 구분됩니다. Default / Hover 로 구분되며 각 상태에 따라 적절히 사용됩니다.
                 Semantic Color로 버튼을 생성할 경우, 상태에 따른 색상은 Foundation의 Color부분을 참고합니다.
               </p>
-              <div className="rounded-lg border border-border overflow-x-auto">
+              <PreviewBox className="!p-0 overflow-x-auto">
                 <table className="w-full text-sm min-w-[800px]">
                   <thead>
                     <tr className="border-b border-border bg-ac-gray-10">
@@ -258,7 +255,7 @@ export default function FABPage() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Alignment */}
@@ -270,7 +267,7 @@ export default function FABPage() {
 
               {/* 기본 배치 예시 */}
               <p className="text-sm text-foreground mb-3">FAB</p>
-              <div className="rounded-lg bg-ac-gray-20 mb-6" style={{ height: 100 }}>
+              <PreviewBox variant="gray" className="!p-0 mb-6" style={{ height: 100 }}>
                 <div className="relative w-full h-full">
                   <div className="absolute bottom-6 left-6">
                     <FAB variant="secondary" size="lg" tooltip="Share"><Share2 /></FAB>
@@ -282,9 +279,9 @@ export default function FABPage() {
                     <FAB variant="tertiary" size="lg" tooltip="Send"><Send /></FAB>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
               <p className="text-sm text-foreground mb-3">ExpandFAB</p>
-              <div className="rounded-lg bg-ac-gray-20 mb-6 h-auto md:h-[100px]">
+              <PreviewBox variant="gray" className="!p-0 mb-6 h-auto md:h-[100px]">
                 <div className="flex flex-col items-center gap-4 py-4 md:py-0 md:relative md:w-full md:h-full">
                   <div className="md:absolute md:bottom-6 md:left-6">
                     <FAB variant="secondary" size="lg" label="Share"><Share2 /></FAB>
@@ -296,13 +293,13 @@ export default function FABPage() {
                     <FAB variant="tertiary" size="lg" label="Send"><Send /></FAB>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
 
               {/* expandOnHover 인터랙션 데모 */}
               <p className="text-sm text-foreground mb-3">
                ExpandOnHover: FAB에 마우스를 올리면 라벨이 펼쳐집니다. 배치 위치에 따라 펼침 방향을 선택하세요.
               </p>
-              <div className="rounded-lg bg-ac-gray-20" style={{ height: 100 }}>
+              <PreviewBox variant="gray" className="!p-0" style={{ height: 100 }}>
                 <div className="relative w-full h-full">
                   <div className="absolute bottom-6 left-6">
                     <FAB variant="secondary" size="lg" label="Share" expandOnHover="right">
@@ -320,7 +317,7 @@ export default function FABPage() {
                     </FAB>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
               <p className="mt-2 text-xs text-ac-gray-60">
                 좌측 배치 시 <CodeBadge>expandOnHover="right"</CodeBadge> / 우측 배치 시 <CodeBadge>expandOnHover="left"</CodeBadge> 사용을 권장합니다.
               </p>

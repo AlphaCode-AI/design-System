@@ -10,6 +10,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBadge from "@/app/components/CodeBadge";
 import CodeBlock from "@/app/components/CodeBlock";
+import PageHeader from "@/app/components/PageHeader";
 
 /**
  * Table of Contents 데이터
@@ -54,12 +55,7 @@ export default function RadiusPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Radius</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            시각적으로 보기 좋은 디자인을 위해 Radius는 대부분의 컴포넌트에 적용됩니다. 정해진 값을 사용해 일관성을 유지하기 위해 정의됩니다.
-          </p>
-        </div>
+        <PageHeader title="Radius" description="시각적으로 보기 좋은 디자인을 위해 Radius는 대부분의 컴포넌트에 적용됩니다. 정해진 값을 사용해 일관성을 유지하기 위해 정의됩니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>

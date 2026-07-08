@@ -18,6 +18,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /**
  * Table of Contents 데이터
@@ -37,12 +39,7 @@ export default function BadgePage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Badge</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            배지(badge)는 컴포넌트의 분류 체계, 구조화된 정보, 상태 정보, 기타 메타 데이터를 표시할 수 있으며 사용자의 주의를 끌기 위해 색상을 활용할 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="Badge" description="배지(badge)는 컴포넌트의 분류 체계, 구조화된 정보, 상태 정보, 기타 메타 데이터를 표시할 수 있으며 사용자의 주의를 끌기 위해 색상을 활용할 수 있습니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -57,7 +54,7 @@ export default function BadgePage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex items-center justify-around">
                   {/* 상태 정보 배지 */}
                   <div className="flex flex-col items-center gap-3">
@@ -87,17 +84,17 @@ export default function BadgePage() {
                     <span className="text-sm text-foreground mt-2">기타 메타 데이터</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8">
+              <PreviewBox variant="anatomy">
                 <div className="flex items-center justify-center">
                   <img src="/badge/badge_anatomy.png" alt="badge anatomy" />
                 </div>
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>텍스트 레이블: 배지를 통해 전달하고자 하는 메타 데이터</li>
                 <li>컨테이너 <span className="text-muted-foreground">(선택)</span>: 배지를 배경과 구분하는 윤곽선</li>
@@ -111,7 +108,7 @@ export default function BadgePage() {
               <p className="text-sm text-foreground mb-4">
                 배지 사이즈는 높이 기준 2가지로 구분됩니다.
               </p>
-              <div className="rounded-lg border border-border p-4 md:p-8">
+              <PreviewBox className="!p-4 md:!p-8">
                 <div className="flex flex-wrap items-end justify-center gap-4 md:gap-12">
                   <div className="flex flex-col items-center gap-2">
                     <Badge variant="primary" size="lg">Size : lg</Badge>
@@ -130,7 +127,7 @@ export default function BadgePage() {
                     <span className="text-sm text-foreground">height : 16px</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

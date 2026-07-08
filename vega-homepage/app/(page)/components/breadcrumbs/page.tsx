@@ -14,6 +14,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /**
  * Table of Contents 데이터
@@ -34,12 +36,7 @@ export default function BreadcrumbsPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Breadcrumbs</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            브레드크럼(breadcrumbs)은 탐색 계층 구조를 표시하여 사용자가 현재 위치를 파악하고 계층 구조의 수준을 이동할 수 있게 해줍니다. 브레드크럼을 통해 사용자는 탐색 중인 화면의 상위 수준 화면으로 이동할 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="Breadcrumbs" description="브레드크럼(breadcrumbs)은 탐색 계층 구조를 표시하여 사용자가 현재 위치를 파악하고 계층 구조의 수준을 이동할 수 있게 해줍니다. 브레드크럼을 통해 사용자는 탐색 중인 화면의 상위 수준 화면으로 이동할 수 있습니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -54,7 +51,7 @@ export default function BreadcrumbsPage() {
             {/* Type */}
             <section id="type" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
-              <div className="rounded-lg border border-border p-8 flex flex-col gap-6">
+              <PreviewBox className="flex flex-col gap-6">
                 <Breadcrumbs
                   items={[
                     { label: "Home", href: "#" },
@@ -97,15 +94,15 @@ export default function BreadcrumbsPage() {
                   ]}
                   maxItems={5}
                 />
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex justify-center">
+              <PreviewBox variant="anatomy">
                 <img src="/breadcrumb/breadcrumb_anatomy.png" alt="Breadcrumb anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>홈 : 브레드크럼의 첫번째 항목으로 메인화면으로 이동하는 링크로 작동</li>
                 <li>말줄임표 : 페이지 링크 표시 개수를 초과하거나 영역이 좁은 경우 축약된 경로가 있음을 안내하기 위해 제공. 홈 링크 다음 요소로 사용</li>
@@ -124,7 +121,7 @@ export default function BreadcrumbsPage() {
             <section id="state" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-2">State</h2>
               <p className="text-sm text-foreground mb-4">브레드크럼 아이템의 각 상태를 나타냅니다.</p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   {/* 홈 */}
                   <div className="flex flex-col gap-4">
@@ -178,7 +175,7 @@ export default function BreadcrumbsPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Icon */}
@@ -188,7 +185,7 @@ export default function BreadcrumbsPage() {
                 브레드크럼 아이콘은 항상 일관된 위치에 제공됩니다. 아이콘 변경 가능하나 아래처럼 예시처럼 브레드크럼의 구조를 나타내기에 적절한 아이콘으로 변경합니다.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-lg border border-border p-6">
+                <PreviewBox className="!p-6">
                   <Breadcrumbs
                     separator="slash"
                     items={[
@@ -198,8 +195,8 @@ export default function BreadcrumbsPage() {
                       { label: "Current page" },
                     ]}
                   />
-                </div>
-                <div className="rounded-lg border border-border p-6">
+                </PreviewBox>
+                <PreviewBox className="!p-6">
                   <Breadcrumbs
                     separator="chevron"
                     items={[
@@ -209,7 +206,7 @@ export default function BreadcrumbsPage() {
                       { label: "Current page" },
                     ]}
                   />
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
