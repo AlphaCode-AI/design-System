@@ -13,6 +13,8 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
 
@@ -29,12 +31,7 @@ export default function ButtonGroupPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Button Group</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            버튼 그룹(Button Group)은 다수의 버튼이 필요할 경우를 위해 작성되었습니다.
-          </p>
-        </div>
+        <PageHeader title="Button Group" description="버튼 그룹(Button Group)은 다수의 버튼이 필요할 경우를 위해 작성되었습니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -50,7 +47,7 @@ export default function ButtonGroupPage() {
             <section id="layout" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">배치</h2>
 
-              <div className="rounded-lg border border-border p-8 mb-6">
+              <PreviewBox className="mb-6">
                 <div className="flex flex-row items-start justify-center gap-12">
                   {/* 수평 — 2개 */}
                   <div className="flex gap-4 flex-col">
@@ -93,7 +90,7 @@ export default function ButtonGroupPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
 
               <ul className="space-y-1.5 text-sm text-foreground list-disc list-inside">
                 <li>버튼 그룹을 2개를 동일한 수평 정렬 시 Button 폭은 가변이되, 패딩은 8로 고정하여 사용합니다. Button 2개 이상을 수직 정렬 시 패딩은 12로 고정하여 사용합니다.</li>

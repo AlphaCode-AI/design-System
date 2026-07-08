@@ -37,6 +37,8 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",       label: "Type" },
@@ -71,13 +73,7 @@ export default function DropdownPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Dropdown</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            드롭다운(dropdown)은 선택할 수 있는 옵션이 여러개인 경우 해당 옵션을 묶어 사용자에게
-            표출되는 컴포넌트입니다. 트리거를 클릭하면 드롭다운이 표출됩니다.
-          </p>
-        </div>
+        <PageHeader title="Dropdown" description="드롭다운(dropdown)은 선택할 수 있는 옵션이 여러개인 경우 해당 옵션을 묶어 사용자에게 표출되는 컴포넌트입니다. 트리거를 클릭하면 드롭다운이 표출됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -96,7 +92,7 @@ export default function DropdownPage() {
               <p className="text-sm text-foreground mb-4">
                 드롭다운 아이템은 Default, Checkbox, Radio, Small 4가지 타입을 지원합니다.
               </p>
-              <div className="rounded-lg p-8 bg-ac-gray-20 flex gap-12 flex-wrap justify-center items-start">
+              <PreviewBox variant="gray" className="flex gap-12 flex-wrap justify-center items-start">
 
                 {/* Default */}
                 <div className="flex flex-col gap-2">
@@ -217,7 +213,7 @@ export default function DropdownPage() {
                   </Dropdown>
                 </div>
 
-              </div>
+              </PreviewBox>
             </section>
 
             {/* ── Trigger ── */}

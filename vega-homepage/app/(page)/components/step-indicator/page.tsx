@@ -13,6 +13,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",     label: "Type" },
@@ -52,12 +54,7 @@ export default function StepIndicatorPage() {
   return (
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Step Indicator</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            단계별 진행 상태를 시각적으로 나타내는 컴포넌트입니다. 현재 단계, 완료된 단계, 남은 단계를 구분해 보여줍니다.
-          </p>
-        </div>
+        <PageHeader title="Step Indicator" description="단계별 진행 상태를 시각적으로 나타내는 컴포넌트입니다. 현재 단계, 완료된 단계, 남은 단계를 구분해 보여줍니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -77,41 +74,41 @@ export default function StepIndicatorPage() {
                 <CodeBadge>type</CodeBadge> prop으로 가로(<CodeBadge>horizontal</CodeBadge>)/세로(<CodeBadge>vertical</CodeBadge>) 방향을 선택합니다. <CodeBadge>steps</CodeBadge> 배열에 <CodeBadge>title</CodeBadge>이 있으면 아이콘 아래에 텍스트가 표시되고, <CodeBadge>showStepText</CodeBadge>로 단계 텍스트를 추가로 표시합니다.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">type : Horizontal / style : Default / showStepText</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="horizontal" showStepText />
-                </div>
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">type : Horizontal / style : Default</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="horizontal" />
-                </div>
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">type : Horizontal / style : Simple</p>
                   <StepIndicator steps={STEPS_SIMPLE} current={1} style="simple" />
-                </div>
+                </PreviewBox>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">type : Vertical / style : Default / showStepText</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="vertical" showStepText />
-                </div>
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">type : Vertical / style : Default</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="vertical" />
-                </div>
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">type : Vertical / style : Simple</p>
                   <StepIndicator steps={STEPS_SIMPLE} current={1} type="vertical" />
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
             {/* ── Anatomy ── */}
             <section id="anatomy">
               <h2 className="text-lg font-semibold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center">
+              <PreviewBox variant="anatomy">
                 <img src="/step-indicator/step_anatomy.png" alt="step indicator anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>단계 숫자 (선택) : 단계 레이블 위에 표시되는 작은 텍스트로 각 단계의 번호를 나타냄</li>
                 <li>단계 레이블 (선택) : 각 단계에서 사용자가 수행해야 할 작업을 요약한 텍스트</li>
@@ -155,14 +152,14 @@ export default function StepIndicatorPage() {
                 프로세스를 단계로 구분할 때 불필요한 단계나 사용자의 행동이 포함되지 않았는지 반복적으로 점검하고 논리적, 효율성 측면에서 문제가 없는 과업은 가능한 한 하나의 단계에서 처리될 수 있도록 해야 합니다.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">min : 3 step</p>
                   <StepIndicator steps={STEPS_DEFAULT} current={1} type="vertical" showStepText />
-                </div>
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                </PreviewBox>
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground mb-2">max : 7 step</p>
                   <StepIndicator steps={STEPS_7} current={3} type="vertical" showStepText />
-                </div>
+                </PreviewBox>
               </div>
             </section>
 

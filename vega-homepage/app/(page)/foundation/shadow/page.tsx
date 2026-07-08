@@ -10,6 +10,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBadge from "@/app/components/CodeBadge";
 import CodeBlock from "@/app/components/CodeBlock";
+import PageHeader from "@/app/components/PageHeader";
 
 /**
  * Table of Contents 데이터
@@ -76,12 +77,7 @@ export default function ShadowPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Shadow</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            그림자 효과(shadow)는 요소에 적용하여 깊이와 현실감을 더하는 효과입니다. 현 디자인에선 text-shadow는 사용하지 않습니다.
-          </p>
-        </div>
+        <PageHeader title="Shadow" description="그림자 효과(shadow)는 요소에 적용하여 깊이와 현실감을 더하는 효과입니다. 현 디자인에선 text-shadow는 사용하지 않습니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>

@@ -14,6 +14,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",        label: "Anatomy" },
@@ -50,12 +52,7 @@ export default function DatePickerPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Date Picker</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            날짜 선택(date picker)은 날짜와 관련된 정보와 기능을 제공하는데 사용됩니다.
-          </p>
-        </div>
+        <PageHeader title="Date Picker" description="날짜 선택(date picker)은 날짜와 관련된 정보와 기능을 제공하는데 사용됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -69,9 +66,9 @@ export default function DatePickerPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/input/date-picker/datepicker_anatomy.png" alt="date picker anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>날짜 입력
                   <ol className="mt-1 ml-6 space-y-1 list-[lower-alpha] text-muted-foreground">
@@ -134,7 +131,7 @@ export default function DatePickerPage() {
                 {/* 기본 */}
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기본</h3>
-                  <div className="rounded-lg bg-ac-gray-20 p-8">
+                  <PreviewBox variant="gray">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="flex flex-col gap-3">
                         <DatePicker
@@ -176,13 +173,13 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">Disable</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 {/* 기간 선택 */}
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기간 선택</h3>
-                  <div className="rounded-lg bg-ac-gray-20 p-8">
+                  <PreviewBox variant="gray">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="flex flex-col gap-3">
                         <DateRangePicker
@@ -220,7 +217,7 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">Disable</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>
@@ -235,7 +232,7 @@ export default function DatePickerPage() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기본</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker size="lg" label="날짜 선택" placeholder="날짜를 선택해주세요" helperText="현재일 기준 180일 이내 선택 가능합니다." dateFormat="yyyy-MM-dd" />
@@ -250,12 +247,12 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">sm (30px)</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">기간 선택</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DateRangePicker size="lg" label="날짜 선택" helperText="최대 선택 가능 기간은 180일입니다." />
@@ -270,7 +267,7 @@ export default function DatePickerPage() {
                         <span className="text-xs text-foreground text-center">sm (30px)</span>
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>
@@ -284,7 +281,7 @@ export default function DatePickerPage() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">offsetMonths (현재 기준 ±2개월)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -303,11 +300,11 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">minDate / maxDate (직접 지정)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -328,11 +325,11 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">disabledDates (특정 날짜 선택 불가)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -351,11 +348,11 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">weekendColor (주말 색상)</h3>
-                  <div className="rounded-lg border border-border p-8">
+                  <PreviewBox>
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="flex flex-col gap-3 flex-1">
                         <DatePicker
@@ -374,7 +371,7 @@ export default function DatePickerPage() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>

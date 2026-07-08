@@ -13,6 +13,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -30,12 +32,7 @@ export default function PaginationPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Pagination</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            페이지네이션(Pagination)은 많은 양의 콘텐츠를 탐색하기 쉽도록 여러 화면에 나누고, 분할된 화면을 탐색하는 데 사용되는 요소입니다.
-          </p>
-        </div>
+        <PageHeader title="Pagination" description="페이지네이션(Pagination)은 많은 양의 콘텐츠를 탐색하기 쉽도록 여러 화면에 나누고, 분할된 화면을 탐색하는 데 사용되는 요소입니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -55,14 +52,14 @@ export default function PaginationPage() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">Simple</h3>
-                  <div className="rounded-lg border border-border p-8 flex items-center justify-center">
+                  <PreviewBox className="flex items-center justify-center">
                     <Pagination type="simple" total={10} defaultPage={3} />
-                  </div>
+                  </PreviewBox>
                   <p className="mt-2 text-xs text-muted-foreground">이전/다음 아이콘 버튼과 페이지 입력 필드로 구성됩니다. 좁은 공간이나 모바일 환경에 적합합니다.</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">Default</h3>
-                  <div className="rounded-lg border border-border p-8 flex flex-col items-start gap-6">
+                  <PreviewBox className="flex flex-col items-start gap-6">
                     <div className="flex flex-col gap-2 w-full">
                       <span className="text-xs text-muted-foreground">좁은 영역 (총 10페이지)</span>
                       <Pagination total={10} defaultPage={5} />
@@ -71,12 +68,12 @@ export default function PaginationPage() {
                       <span className="text-xs text-muted-foreground">넓은 영역 (총 120페이지, 말줄임표 포함)</span>
                       <Pagination total={120} defaultPage={5} />
                     </div>
-                  </div>
+                  </PreviewBox>
                   <p className="mt-2 text-xs text-muted-foreground">페이지 번호 목록을 표시합니다. 많은 페이지의 경우 말줄임표(…)로 생략합니다.</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">PageSize / Jumper</h3>
-                  <div className="rounded-lg border border-border p-8 flex flex-col items-start gap-6">
+                  <PreviewBox className="flex flex-col items-start gap-6">
                     <div className="flex flex-col gap-2 w-full">
                       <span className="text-xs text-muted-foreground">PageSize</span>
                       <Pagination total={100} defaultPage={1} showPageSize />
@@ -85,7 +82,7 @@ export default function PaginationPage() {
                       <span className="text-xs text-muted-foreground">PageSize + Jumper</span>
                       <Pagination total={100} defaultPage={1} showPageSize showJumper />
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>
@@ -93,9 +90,9 @@ export default function PaginationPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/pagination/pagination_anatomy.png" alt="pagination anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>이전/다음 버튼 : 목록을 앞/뒤로 탐색하는 버튼</li>
                 <li>화면 목록 : 각 숫자 클릭 시 해당 화면으로 이동
@@ -117,7 +114,7 @@ export default function PaginationPage() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">이전/다음 버튼</h3>
-                  <div className="rounded-lg border border-border p-8 flex flex-col items-start gap-6">
+                  <PreviewBox className="flex flex-col items-start gap-6">
                     <div className="flex flex-col gap-2">
                       <span className="text-xs text-muted-foreground">Default (중간 페이지)</span>
                       <Pagination total={10} defaultPage={5} />
@@ -134,11 +131,11 @@ export default function PaginationPage() {
                       <span className="text-xs text-muted-foreground">Disable (전체 비활성)</span>
                       <Pagination total={10} defaultPage={5} disabled />
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-4">목록 식별자</h3>
-                  <div className="rounded-lg border border-border p-8 flex flex-col items-start gap-6">
+                  <PreviewBox className="flex flex-col items-start gap-6">
                     <div className="flex flex-col gap-2">
                       <span className="text-xs text-muted-foreground">Active (현재 페이지 강조)</span>
                       <Pagination total={10} defaultPage={3} />
@@ -147,7 +144,7 @@ export default function PaginationPage() {
                       <span className="text-xs text-muted-foreground">생략 식별자 포함 (많은 페이지)</span>
                       <Pagination total={50} defaultPage={6} />
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </div>
             </section>

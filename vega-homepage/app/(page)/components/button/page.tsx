@@ -15,6 +15,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -32,12 +34,7 @@ export default function ButtonPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Button</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            버튼(Buttons)은 작업을 수행하는데 사용되는 클릭 가능한 컴포넌트입니다. 사용자가 서비스를 이용하는 과정에서 어떤 행동이 중요한지에 따라 관련된 버튼이 다양한 스타일로 사용됩니다.
-          </p>
-        </div>
+        <PageHeader title="Button" description="버튼(Buttons)은 작업을 수행하는데 사용되는 클릭 가능한 컴포넌트입니다. 사용자가 서비스를 이용하는 과정에서 어떤 행동이 중요한지에 따라 관련된 버튼이 다양한 스타일로 사용됩니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -52,9 +49,9 @@ export default function ButtonPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg p-12 flex items-center justify-center gap-24 bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12 gap-24">
                 <img src="/button/button_anatomy.png" alt="button anatomy img" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>텍스트 레이블: 버튼을 눌렀을 때 실행되는 기능에 대한 단어로 이루어진 설명으로 사용됩니다.</li>
                 <li>컨테이너 <span className="text-muted-foreground">(선택)</span>: 버튼을 배경과 구분하는 시각적인 수단으로 면 또는 선으로 표현하여 사용됩니다.</li>
@@ -67,7 +64,7 @@ export default function ButtonPage() {
               <h2 className="text-xl font-bold text-foreground mb-2">Component</h2>
               <p className="text-sm text-foreground mb-4">버튼은 중요도와 쓰임새에 따라 세부 스타일을 분류하여 사용합니다.</p>
 
-              <div className="rounded-lg border border-border p-8 mb-4">
+              <PreviewBox className="mb-4">
                 <div className="flex flex-row flex-wrap justify-around items-center gap-4">
                   {[
                     { node: <Button variant="primary" size="md">Primary</Button>, label: "Primary button" },
@@ -82,7 +79,7 @@ export default function ButtonPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </PreviewBox>
               <ul className="space-y-1.5 text-sm text-foreground list-disc list-inside">
                 <li>Primary button : 주요 버튼(Primary Button)은 페이지 키 액션에 사용하는 Button으로 한 페이지에 한 번만 사용합니다.</li>
                 <li>Secondary button : 이차 버튼(Secondary Button)은 Primary Button의 보조로 사용됩니다.</li>
@@ -98,7 +95,7 @@ export default function ButtonPage() {
               <p className="text-sm text-foreground mb-4">
                 버튼 사이즈는 높이 기준 5가지로 구분됩니다. 사이즈에 따라 폰트 / 아이콘 / 패딩 값에 대한 차이가 있으므로 유의하여 사용하도록 합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-10">
+              <PreviewBox variant="gray" className="!p-10">
                 <div className="flex flex-col md:flex-row items-center md:items-end justify-center gap-6">
                   {(
                     [
@@ -120,7 +117,7 @@ export default function ButtonPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* State */}
@@ -130,7 +127,7 @@ export default function ButtonPage() {
                 상태는 배경 색상 4가지로 구분됩니다. Default / Hover / Disable / Loading 로 구분되며 각 상태에 따라 적절히 사용됩니다.
                 Semantic Color로 버튼을 생성할 경우, 상태에 따른 색상은 Foundation의 Color부분을 참고합니다.
               </p>
-              <div className="rounded-lg border border-border overflow-x-auto">
+              <PreviewBox className="!p-0 overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border bg-ac-gray-10">
@@ -177,7 +174,7 @@ export default function ButtonPage() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

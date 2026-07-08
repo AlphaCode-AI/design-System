@@ -18,6 +18,8 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -130,13 +132,7 @@ export default function SideNavigationPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Side Navigation</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            사이드 메뉴(Side Navigation)는 화면 내에서의 이동을 위해 사용하는 메뉴입니다.
-            일반적으로 본문 영역의 좌측에 사이드바 형태로 제공됩니다.
-          </p>
-        </div>
+        <PageHeader title="Side Navigation" description="사이드 메뉴(Side Navigation)는 화면 내에서의 이동을 위해 사용하는 메뉴입니다. 일반적으로 본문 영역의 좌측에 사이드바 형태로 제공됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -155,7 +151,7 @@ export default function SideNavigationPage() {
               <p className="text-sm text-foreground mb-4">
                 1Depth, 2Depth, 3Depth 세 가지 계층 구조를 지원하며, 아이콘 유무를 선택할 수 있습니다.
               </p>
-              <div className="rounded-lg p-8 bg-ac-gray-20 flex flex-col gap-8">
+              <PreviewBox variant="gray" className="flex flex-col gap-8">
 
                 {/* 아이콘 없음 */}
                 <div className="flex flex-col gap-3">
@@ -233,7 +229,7 @@ export default function SideNavigationPage() {
                   </div>
                 </div>
 
-              </div>
+              </PreviewBox>
             </section>
 
             {/* ── Anatomy ── */}
@@ -242,9 +238,9 @@ export default function SideNavigationPage() {
               <p className="text-sm text-foreground mb-4">
                 사이드 메뉴의 각 구성 요소입니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <img src="/side-navigation/side_anatomy.png" alt="side navigation anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>제목 — 메뉴 목록의 상위 수준 정보 구조를 알려줍니다.</li>
                 <li>아이콘(선택) — 목록 아이템의 아이콘입니다.</li>
@@ -263,7 +259,7 @@ export default function SideNavigationPage() {
                 <code className="mx-1 px-1 py-0.5 bg-ac-gray-20 rounded text-xs font-mono">expandIcon</code> prop으로
                 열림/닫힘 상태를 반영하는 아이콘으로 변경할 수 있습니다.
               </p>
-              <div className="rounded-lg p-8 bg-ac-gray-20 flex gap-8 justify-center flex-wrap">
+              <PreviewBox variant="gray" className="flex gap-8 justify-center flex-wrap">
 
                 <div className="flex flex-col gap-3">
                   <p className="text-xs font-medium text-foreground">Chevron (기본)</p>
@@ -301,7 +297,7 @@ export default function SideNavigationPage() {
                   </div>
                 </div>
 
-              </div>
+              </PreviewBox>
             </section>
 
             {/* ── 사용 가이드 ── */}

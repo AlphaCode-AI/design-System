@@ -15,6 +15,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",    label: "Type" },
@@ -32,13 +34,7 @@ export default function RadioPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Radio</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            라디오(Radio)은 여러 항목 중에서 단일선택을 해야하는 곳에 사용합니다.
-            한 번에 하나만 선택할 수 있으며 사용자가 새 항목을 선택하면 이전 선택 항목이 자동으로 선택 취소됩니다.
-          </p>
-        </div>
+        <PageHeader title="Radio" description="라디오(Radio)은 여러 항목 중에서 단일선택을 해야하는 곳에 사용합니다. 한 번에 하나만 선택할 수 있으며 사용자가 새 항목을 선택하면 이전 선택 항목이 자동으로 선택 취소됩니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -54,15 +50,15 @@ export default function RadioPage() {
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
               <div className="flex flex-col md:flex-row justify-around gap-4">
                 {/* Single */}
-                <div className="flex flex-col items-center gap-4 bg-ac-gray-20 rounded-lg flex-1 justify-center p-6">
+                <PreviewBox variant="gray" className="!p-6 flex flex-col items-center gap-4 flex-1 justify-center">
                   <div className="flex items-center justify-center">
                     <Radio />
                   </div>
                   <span className="text-sm text-foreground">Single</span>
-                </div>
+                </PreviewBox>
 
                 {/* Group */}
-                <div className="flex flex-col items-center gap-1 bg-ac-gray-20 rounded-lg flex-1 p-6">
+                <PreviewBox variant="gray" className="!p-6 flex flex-col items-center gap-1 flex-1">
                   <div className="flex items-start justify-center mb-4">
                     <RadioGroup title="Group title">
                       <Radio
@@ -89,16 +85,16 @@ export default function RadioPage() {
                     </RadioGroup>
                   </div>
                   <span className="text-sm text-foreground">Group</span>
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center">
+              <PreviewBox variant="anatomy">
                 <img src="/input/radio/radio_anatomy.png" alt="radio anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Radio</li>
                 <li>Label <span className="text-muted-foreground">(선택)</span></li>
@@ -113,7 +109,7 @@ export default function RadioPage() {
                 상태는 Default / Check / Disable 3가지로 사용합니다.
                 Check 상태일 때, Radio color는 해당 솔루션의 primary color를 사용합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <PreviewBox variant="gray">
                 <div className="flex items-center justify-around">
                   <div className="flex flex-col items-center gap-3">
                     <Radio />
@@ -128,7 +124,7 @@ export default function RadioPage() {
                     <span className="text-sm text-foreground">Disable</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -137,7 +133,7 @@ export default function RadioPage() {
               <p className="text-sm text-foreground mb-6">
                 사이즈는 md / lg / xl 3가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex items-end justify-around">
                   {/* xl */}
                   <div className="flex flex-col items-center gap-4">
@@ -169,7 +165,7 @@ export default function RadioPage() {
                     <span className="text-sm text-foreground">md (12px)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

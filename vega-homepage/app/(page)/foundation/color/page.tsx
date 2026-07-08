@@ -11,6 +11,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
+import PageHeader from "@/app/components/PageHeader";
 
 const toc: TocItem[] = [
   { id: "primary-color", label: "Primary Color" },
@@ -93,13 +94,7 @@ export default function ColorPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
         
         {/* 헤더 섹션 */}
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Color</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            디자인시스템에서 사용되는 컬러는 정보 전달과 브랜드 정체성을 구축하는 요소입니다. 
-            지속적인 동일 색상의 사용은 브랜드 아이덴티티에 중요한 역할을 하므로 반드시 색상 활용 기준을 준수해야 합니다.
-          </p>
-        </header>
+        <PageHeader title="Color" description="디자인시스템에서 사용되는 컬러는 정보 전달과 브랜드 정체성을 구축하는 요소입니다. 지속적인 동일 색상의 사용은 브랜드 아이덴티티에 중요한 역할을 하므로 반드시 색상 활용 기준을 준수해야 합니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList className="border-b border-border">

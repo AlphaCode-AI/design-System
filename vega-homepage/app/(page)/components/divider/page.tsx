@@ -14,6 +14,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import { UsageCard } from "@/app/components/UsageCard";
 import CodeBadge from "@/app/components/CodeBadge";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /* ─────────────────────────────────────────
    TOC
@@ -35,12 +37,7 @@ export default function DividerPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* Page title */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Divider</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            구분선(divider)은 목록이나 컨테이너의 콘텐츠를 그룹화 하는 얇은 가로 또는 세로선 입니다.
-          </p>
-        </div>
+        <PageHeader title="Divider" description="구분선(divider)은 목록이나 컨테이너의 콘텐츠를 그룹화 하는 얇은 가로 또는 세로선 입니다." />
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabList>
@@ -116,7 +113,7 @@ export default function DividerPage() {
             <section id="style">
               <h2 className="text-lg font-semibold text-foreground mb-4">Style</h2>
 
-              <div className="bg-ac-gray-20 rounded-lg overflow-hidden">
+              <PreviewBox variant="gray" className="!p-0 overflow-hidden">
                 <div className="px-8 py-7 flex flex-col items-center gap-2">
                   <p className="text-xs text-foreground self-center">Solid</p>
                   <Divider variant="solid" />
@@ -125,7 +122,7 @@ export default function DividerPage() {
                   <p className="text-xs text-foreground self-center">Dashed</p>
                   <Divider variant="dashed" />
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* ── 사용 가이드 ── */}

@@ -19,6 +19,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -68,12 +70,7 @@ export default function SnackbarPage() {
       <div className="flex w-full">
         <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold text-foreground">Snackbar</h1>
-            <p className="mt-2 text-sm text-foreground leading-relaxed">
-              스낵바(Snackbar)는 본문 외 정보 또는 주의, 강조형 정보로 필요 시 사용합니다. 모달에 비해 주의가 덜 필요한 피드백으로도 사용됩니다.
-            </p>
-          </div>
+          <PageHeader title="Snackbar" description="스낵바(Snackbar)는 본문 외 정보 또는 주의, 강조형 정보로 필요 시 사용합니다. 모달에 비해 주의가 덜 필요한 피드백으로도 사용됩니다." />
 
           <Tabs defaultValue="docs" onValueChange={setActiveTab}>
             <TabList>
@@ -87,9 +84,9 @@ export default function SnackbarPage() {
               {/* Anatomy */}
               <section id="anatomy" className="scroll-mt-8">
                 <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-                <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+                <PreviewBox variant="anatomy">
                   <img src="/snackbar/snackbar_anatomy.png" alt="snackbar anatomy" className="max-w-full" />
-                </div>
+                </PreviewBox>
                 <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                   <li>Left item (선택) : 아이콘, 아바타, 이미지 등</li>
                   <li>텍스트 레이블 : 스낵바에 표시할 메시지</li>
@@ -104,7 +101,7 @@ export default function SnackbarPage() {
                 <p className="text-sm text-foreground mb-6">
                   컨테이너는 보여지는 정보에 따라 색상을 변경하여 사용할 수 있습니다.
                 </p>
-                <div className="rounded-lg border border-border p-8 flex flex-col items-center">
+                <PreviewBox className="flex flex-col items-center">
                   <div className="w-full md:w-[480px] flex gap-4 flex-col">
                     <div className="flex flex-col gap-1">
                       <span className="text-xs text-muted-foreground mb-1">Default</span>
@@ -127,7 +124,7 @@ export default function SnackbarPage() {
                       <Snackbar variant="warning" message="주의가 필요한 항목이 있습니다." leftItem={<AlertCircle className="w-5 h-5" />} />
                     </div>
                   </div>
-                </div>
+                </PreviewBox>
               </section>
 
               {/* Size */}
@@ -136,7 +133,7 @@ export default function SnackbarPage() {
                 <p className="text-sm text-foreground mb-6">
                   <CodeBadge>size</CodeBadge> prop으로 스낵바의 크기를 조절합니다. 기본값은 <CodeBadge>md</CodeBadge>입니다.
                 </p>
-                <div className="rounded-lg border border-border p-8 flex flex-col md:flex-row gap-4 items-start md:items-end justify-center">
+                <PreviewBox className="flex flex-col md:flex-row gap-4 items-start md:items-end justify-center">
                   <div className="flex flex-col gap-1 w-full">
                     <span className="text-xs text-muted-foreground mb-2">sm</span>
                     <Snackbar className="w-full" size="sm" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
@@ -149,7 +146,7 @@ export default function SnackbarPage() {
                     <span className="text-xs text-muted-foreground mb-2">lg</span>
                     <Snackbar className="w-full" size="lg" variant="info" message="확인이 필요한 정보가 있습니다." leftItem={<Info className="w-5 h-5" />} />
                   </div>
-                </div>
+                </PreviewBox>
               </section>
 
               {/* Items */}
@@ -161,7 +158,7 @@ export default function SnackbarPage() {
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-foreground mb-4">Left item</h3>
-                    <div className="rounded-lg border border-border p-8 flex flex-col gap-4">
+                    <PreviewBox className="flex flex-col gap-4">
                       <div className="flex flex-col gap-1">
                         <span className="text-xs text-muted-foreground mb-2">아이콘</span>
                         <Snackbar
@@ -185,12 +182,12 @@ export default function SnackbarPage() {
                           message="시스템 업데이트가 완료되어 정상적으로 서비스 이용 가능합니다."
                         />
                       </div>
-                    </div>
+                    </PreviewBox>
                   </div>
 
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-foreground mb-4">Right item</h3>
-                    <div className="rounded-lg border border-border p-8 flex flex-col gap-4">
+                    <PreviewBox className="flex flex-col gap-4">
                       <div className="flex flex-col gap-1">
                         <span className="text-xs text-muted-foreground mb-2">이동 (chevron)</span>
                         <Snackbar variant="default" message="지금 바로 확인해보세요!" rightItem="chevron" />
@@ -207,7 +204,7 @@ export default function SnackbarPage() {
                           rightItem={<Button size="xs" variant="link">수정하기</Button>}
                         />
                       </div>
-                    </div>
+                    </PreviewBox>
                   </div>
                 </div>
 
@@ -216,7 +213,7 @@ export default function SnackbarPage() {
                   <p className="text-xs text-muted-foreground mb-4">
                     <CodeBadge>rightItem=&quot;close&quot;</CodeBadge>일 때 <CodeBadge>closeMode</CodeBadge>로 닫기 동작을 지정합니다.
                   </p>
-                  <div className="rounded-lg border border-border p-8 flex flex-col items-center">
+                  <PreviewBox className="flex flex-col items-center">
                     <div className="flex w-full md:w-[480px] items-start flex-col gap-4 justify-center">
                       <div className="flex flex-col gap-1 w-full">
                         <span className="text-xs text-muted-foreground mb-2">dismiss — 스낵바 전체 사라짐 (기본값)</span>
@@ -239,7 +236,7 @@ export default function SnackbarPage() {
                           />
                       </div>
                     </div>
-                  </div>
+                  </PreviewBox>
                 </div>
               </section>
 
@@ -407,10 +404,10 @@ function MyComponent() {
     </button>
   );
 }`} />
-                  <div className="mt-4 rounded-lg border border-border p-6">
+                  <PreviewBox className="mt-4 !p-6">
                     <p className="text-xs text-muted-foreground mb-3">라이브 예시 — 버튼 클릭 시 스낵바 호출</p>
                     <SnackbarDemo />
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 <div className="mb-10">

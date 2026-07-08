@@ -14,6 +14,8 @@ import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",  label: "Type" },
@@ -30,12 +32,7 @@ export default function SliderPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Slider</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            슬라이더(Slider)는 사용자가 주어진 범위 내에서 값을 드래그하여 직접 선택하는 컴포넌트입니다.
-          </p>
-        </div>
+        <PageHeader title="Slider" description="슬라이더(Slider)는 사용자가 주어진 범위 내에서 값을 드래그하여 직접 선택하는 컴포넌트입니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -57,19 +54,19 @@ export default function SliderPage() {
               <div className="bg-card flex flex-col gap-4">
                 {/* default + input */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                  <PreviewBox variant="gray" className="flex flex-col gap-2">
                     <p className="text-xs font-medium text-foreground">Default</p>
                     <Slider type="default" showMinMax defaultValue={40} />
-                  </div>
-                  <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                  </PreviewBox>
+                  <PreviewBox variant="gray" className="flex flex-col gap-2">
                     <p className="text-xs font-medium text-foreground">Input</p>
                     <Slider type="input" defaultValue={60} />
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 {/* with-icon + range */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                  <PreviewBox variant="gray" className="flex flex-col gap-2">
                     <p className="text-xs font-medium text-foreground">With Icon</p>
                     <Slider
                       type="with-icon"
@@ -77,18 +74,18 @@ export default function SliderPage() {
                       leftIcon={<VolumeX width={12} height={12} />}
                       rightIcon={<Volume2 width={24} height={24} />}
                     />
-                  </div>
-                  <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                  </PreviewBox>
+                  <PreviewBox variant="gray" className="flex flex-col gap-2">
                     <p className="text-xs font-medium text-foreground">Range</p>
                     <Slider type="range" showMinMax defaultValue={[20, 70]} />
-                  </div>
+                  </PreviewBox>
                 </div>
 
                 {/* range-input: 전체 너비 */}
-                <div className="flex flex-col gap-2 bg-ac-gray-20 p-8 rounded-lg">
+                <PreviewBox variant="gray" className="flex flex-col gap-2">
                   <p className="text-xs font-medium text-foreground">Range Input</p>
                   <Slider type="range-input" defaultValue={[20, 70]} />
-                </div>
+                </PreviewBox>
 
               </div>
             </section>

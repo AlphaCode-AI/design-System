@@ -10,6 +10,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBadge from "@/app/components/CodeBadge";
 import CodeBlock from "@/app/components/CodeBlock";
+import PageHeader from "@/app/components/PageHeader";
 
 /**
  * Table of Contents 데이터
@@ -66,13 +67,7 @@ export default function SpacingPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Spacing</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            간격(Spacing)은 알파코드 서비스 전반에 걸쳐 일관성을 유지하고 사용자 경험을 향상시키기 위해 정의됩니다.<br />
-            4단위 기반의 배수를 사용하여 설계 및 개발 과정에서 효율성을 높이고, 일관된 레이아웃을 통해 사용자에게 보다 직관적이고 편리한 인터페이스를 제공합니다.
-          </p>
-        </div>
+        <PageHeader title="Spacing" description="간격(Spacing)은 알파코드 서비스 전반에 걸쳐 일관성을 유지하고 사용자 경험을 향상시키기 위해 정의됩니다. 4단위 기반의 배수를 사용하여 설계 및 개발 과정에서 효율성을 높이고, 일관된 레이아웃을 통해 사용자에게 보다 직관적이고 편리한 인터페이스를 제공합니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>

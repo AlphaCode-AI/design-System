@@ -15,6 +15,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "type",     label: "Type" },
@@ -33,13 +35,7 @@ export default function CheckboxPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Checkbox</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            체크박스(Checkbox)는 사용자가 여러 개의 옵션 중 한 개 이상의 값을 선택할 수 있도록 하는 경우에 사용합니다.
-            즉, 체크박스의 선택은 상호 독립적이므로 한 개의 옵션을 선택하는 것은 다른 옵션의 선택에 영향을 미치지 않습니다.
-          </p>
-        </div>
+        <PageHeader title="Checkbox" description="체크박스(Checkbox)는 사용자가 여러 개의 옵션 중 한 개 이상의 값을 선택할 수 있도록 하는 경우에 사용합니다. 즉, 체크박스의 선택은 상호 독립적이므로 한 개의 옵션을 선택하는 것은 다른 옵션의 선택에 영향을 미치지 않습니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -55,15 +51,15 @@ export default function CheckboxPage() {
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
               <div className="flex flex-col md:flex-row justify-around gap-4">
                 {/* Single */}
-                <div className="flex flex-col items-center gap-4 bg-ac-gray-20 rounded-lg flex-1 justify-center p-6">
+                <PreviewBox variant="gray" className="!p-6 flex flex-col items-center gap-4 flex-1 justify-center">
                   <div className="flex items-center justify-center ">
                     <Checkbox />
                   </div>
                   <span className="text-sm text-foreground">Single</span>
-                </div>
+                </PreviewBox>
 
                 {/* Group */}
-                <div className="flex flex-col items-center gap-1 bg-ac-gray-20 rounded-lg flex-1 p-6">
+                <PreviewBox variant="gray" className="!p-6 flex flex-col items-center gap-1 flex-1">
                   <div className="flex items-start justify-center mb-4">
                     <CheckboxGroup title="Group title">
                       <Checkbox
@@ -91,16 +87,16 @@ export default function CheckboxPage() {
                     </CheckboxGroup>
                   </div>
                   <span className="text-sm text-foreground">Group</span>
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center">
+              <PreviewBox variant="anatomy">
                 <img src="/input/checkbox/checkbox_anatomy.png" alt="checkbox anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Checkbox</li>
                 <li>Label <span className="text-muted-foreground">(선택)</span></li>
@@ -115,7 +111,7 @@ export default function CheckboxPage() {
                 상태는 Default / Check / Disable / Indeterminate 4가지로 사용합니다. Indeterminate는 하위 체크박스 요소가 Default와 Check 상태가 혼용되었을때 사용됩니다.
                 Check 상태일 때, Checkbox BG color는 해당 솔루션의 primary color를 사용합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <PreviewBox variant="gray">
                 <div className="flex items-center justify-around">
                   <div className="flex flex-col items-center gap-3">
                     <Checkbox />
@@ -134,7 +130,7 @@ export default function CheckboxPage() {
                     <span className="text-sm text-foreground">Indeterminate</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -143,7 +139,7 @@ export default function CheckboxPage() {
               <p className="text-sm text-foreground mb-6">
                 사이즈는 md / lg / xl 3가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex items-end justify-around">
                   {/* xl */}
                   <div className="flex flex-col items-center gap-4">
@@ -172,7 +168,7 @@ export default function CheckboxPage() {
                     <span className="text-sm text-foreground">md (12px)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

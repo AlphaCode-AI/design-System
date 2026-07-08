@@ -14,6 +14,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy", label: "Anatomy" },
@@ -30,13 +32,7 @@ export default function SwitchPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Switch</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            스위치(switch)는 특정 옵션을 켜고 끌 수 있는 컨트롤로 사용자가 단일 항목을 설정 또는 해제해야 하는 경우 이 선택 컨트롤을 사용합니다.
-            사용자는 Switch의 상태를 보고 옵션의 설정 여부를 파악할 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="Switch" description="스위치(switch)는 특정 옵션을 켜고 끌 수 있는 컨트롤로 사용자가 단일 항목을 설정 또는 해제해야 하는 경우 이 선택 컨트롤을 사용합니다. 사용자는 Switch의 상태를 보고 옵션의 설정 여부를 파악할 수 있습니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -50,9 +46,9 @@ export default function SwitchPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center">
+              <PreviewBox variant="anatomy">
                 <img src="/input/switch/switch_anatomy.png" alt="switch anatomy" />
-              </div>
+              </PreviewBox>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>Track : On / Off 상태 표시</li>
                 <li>Thumb : Circle이 좌측에 있는 경우 Off, 우측에 있는 경우 On</li>
@@ -66,7 +62,7 @@ export default function SwitchPage() {
                 상태는 On / Off에 따라 Default, Active, Disabled로 분류됩니다.
                 Active 상태일 때, Circle color는 해당 솔루션의 primary color를 사용합니다.
               </p>
-              <div className="rounded-lg bg-ac-gray-20 p-8">
+              <PreviewBox variant="gray">
                 <div className="flex items-center justify-around">
                   <div className="flex flex-col items-center gap-3">
                     <Switch />
@@ -85,7 +81,7 @@ export default function SwitchPage() {
                     <span className="text-sm text-foreground">Disable (On)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* Size */}
@@ -94,7 +90,7 @@ export default function SwitchPage() {
               <p className="text-sm text-foreground mb-6">
                 사이즈는 md / lg 2가지를 사용합니다.
               </p>
-              <div className="rounded-lg border border-border p-8">
+              <PreviewBox>
                 <div className="flex flex-col md:flex-row items-center justify-around gap-4">
                   {/* lg */}
                   <div className="flex flex-col items-center gap-4">
@@ -116,7 +112,7 @@ export default function SwitchPage() {
                     <span className="text-sm text-foreground">md (30 × 16px)</span>
                   </div>
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

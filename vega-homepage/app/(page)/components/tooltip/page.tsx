@@ -14,6 +14,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",   label: "Anatomy" },
@@ -34,12 +36,7 @@ export default function TooltipPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Tooltip</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-          툴팁(Tooltip)은 사용자 인터페이스 요소 또는 기능을 설명하는 데 사용됩니다. 직접적으로 인지하기 어려운 기능 또는 해당 페이지의 설명을 사용자에게 노출하여 도움을 주는 역할을 합니다.
-          </p>
-        </div>
+        <PageHeader title="Tooltip" description="툴팁(Tooltip)은 사용자 인터페이스 요소 또는 기능을 설명하는 데 사용됩니다. 직접적으로 인지하기 어려운 기능 또는 해당 페이지의 설명을 사용자에게 노출하여 도움을 주는 역할을 합니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -53,9 +50,9 @@ export default function TooltipPage() {
             {/* Anatomy */}
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
-              <div className="rounded-lg bg-[#F7F7F7] anatomy-bg p-8 flex items-center justify-center min-h-[160px]">
+              <PreviewBox variant="anatomy">
                 <img src="/tooltip/tooltip_anatomy.png" alt="tooltip anatomy" className="max-w-full" />
-              </div>
+              </PreviewBox>
               <ul className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>툴팁 버튼 : 툴팁을 트리거하는 요소</li>
                 <li>툴팁 본문 : 설명 텍스트가 표시되는 말풍선 영역</li>
@@ -68,7 +65,7 @@ export default function TooltipPage() {
               <p className="text-sm text-foreground mb-6">
                 툴팁 버튼이 있는 위치와 화면에 맞춰 툴팁 본문을 표출합니다. <CodeBadge>placement</CodeBadge> prop으로 위치를 지정하며 기본값은 <CodeBadge>top-center</CodeBadge>입니다.
               </p>
-              <div className="rounded-lg border border-border p-12">
+              <PreviewBox className="!p-12">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 place-items-center">
                   {PLACEMENTS.map((p) => (
                     <div key={p} className="flex flex-col items-center gap-3">
@@ -79,7 +76,7 @@ export default function TooltipPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </PreviewBox>
             </section>
 
             {/* 사용 가이드 */}

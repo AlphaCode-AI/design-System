@@ -17,6 +17,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 /**
  * Table of Contents 데이터
@@ -46,13 +48,7 @@ export default function AccordionPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Accordion</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            아코디언(Accordion)은 한 페이지에서 관련 있는 여러 콘텐츠 섹션을 확인할 수 있도록 하는 컴포넌트로 콘텐츠 섹션의 헤더 목록을 수직으로 쌓여 있는 형태로 표현합니다.<br />
-            일반적으로 헤더 목록은 컨트롤 요소로 활용되는 사용자는 필요에 따라 헤더를 선택하여 하위 콘텐츠 섹션을 표시하거나 숨길 수 있다.
-          </p>
-        </div>
+        <PageHeader title="Accordion" description="아코디언(Accordion)은 한 페이지에서 관련 있는 여러 콘텐츠 섹션을 확인할 수 있도록 하는 컴포넌트로 콘텐츠 섹션의 헤더 목록을 수직으로 쌓여 있는 형태로 표현합니다. 일반적으로 헤더 목록은 컨트롤 요소로 활용되는 사용자는 필요에 따라 헤더를 선택하여 하위 콘텐츠 섹션을 표시하거나 숨길 수 있다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
@@ -69,7 +65,7 @@ export default function AccordionPage() {
               <h2 className="text-xl font-bold text-foreground mb-4">Type</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* 배경 색상이 있는 경우 */}
-                <div className="rounded-lg border border-border p-6">
+                <PreviewBox className="!p-6">
                   <Accordion type="single" variant="filled" backgroundColor={bgColor}>
                     <AccordionItem value="item-1">
                       <AccordionTrigger>source-page-1</AccordionTrigger>
@@ -102,9 +98,9 @@ export default function AccordionPage() {
                       ))}
                     </div>
                   </div>
-                </div>
+                </PreviewBox>
                 {/* 배경 색상이 없는 경우 (Default) */}
-                <div className="rounded-lg border border-border p-6">
+                <PreviewBox className="!p-6">
                   <Accordion type="single" variant="default" contentClassName="bg-ac-gray-20">
                     <AccordionItem value="item-1">
                       <AccordionTrigger>source-page-1</AccordionTrigger>
@@ -120,7 +116,7 @@ export default function AccordionPage() {
                     </AccordionItem>
                   </Accordion>
                   <p className="mt-4 text-xs text-muted-foreground text-center">배경 색상이 없는 경우 (Default)</p>
-                </div>
+                </PreviewBox>
               </div>
             </section>
 
@@ -128,38 +124,38 @@ export default function AccordionPage() {
             <section id="anatomy" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-4">Anatomy</h2>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6">
+                <PreviewBox variant="anatomy" className="flex-col !p-6">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 닫힘</p>
                   <img
                     src="/accordion/anatomy-closed.png"
                     alt="아코디언 닫힘"
                     className="w-[340px]"
                   />
-                </div>
-                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6 gap-4">
+                </PreviewBox>
+                <PreviewBox variant="anatomy" className="flex-col !p-6 gap-4">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 닫힘(last)</p>
                   <img
                     src="/accordion/anatomy-closed-last.png"
                     alt="아코디언 닫힘(last)"
                     className="w-[340px]"
                   />
-                </div>
-                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6 gap-4">
+                </PreviewBox>
+                <PreviewBox variant="anatomy" className="flex-col !p-6 gap-4">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 열림</p>
                   <img
                     src="/accordion/anatomy-open.png"
                     alt="아코디언 열림"
                     className="w-[340px]"
                   />
-                </div>
-                <div className="flex items-center flex-col justify-center bg-[#F7F7F7] anatomy-bg rounded-lg p-6 gap-4">
+                </PreviewBox>
+                <PreviewBox variant="anatomy" className="flex-col !p-6 gap-4">
                   <p className="text-sm font-semibold text-foreground mb-2">아코디언 열림(last)</p>
                   <img
                     src="/accordion/anatomy-open-last.png"
                     alt="아코디언 열림(last)"
                     className="w-[340px]"
                   />
-                </div>
+                </PreviewBox>
               </div>
               <ol className="mt-6 space-y-1 text-sm text-foreground list-decimal list-inside">
                 <li>아코디언 헤더 제목</li>
@@ -181,7 +177,7 @@ export default function AccordionPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Plus/Minus (Default) */}
-                <div className="rounded-lg p-6 bg-ac-gray-20">
+                <PreviewBox variant="gray" className="!p-6">
                     <Accordion
                         type="multiple"
                         variant="filled"
@@ -202,9 +198,9 @@ export default function AccordionPage() {
                         </AccordionItem>
                     </Accordion>
                     <p className="mt-4 text-xs text-muted-foreground text-center">Plus / Minus (Default)</p>
-                </div>
+                </PreviewBox>
                 {/* Chevron */}
-                <div className="rounded-lg p-6 bg-ac-gray-20">
+                <PreviewBox variant="gray" className="!p-6">
                     <Accordion
                         type="multiple"
                         variant="filled"
@@ -225,7 +221,7 @@ export default function AccordionPage() {
                     </AccordionItem>
                   </Accordion>
                   <p className="mt-4 text-xs text-muted-foreground text-center">Chevron</p>
-                </div>
+                </PreviewBox>
               </div>
             </section>
 

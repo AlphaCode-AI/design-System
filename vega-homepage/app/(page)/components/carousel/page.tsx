@@ -19,6 +19,8 @@ import CodeBlock from "@/app/components/CodeBlock";
 import CodeBadge from "@/app/components/CodeBadge";
 import { UsageCard } from "@/app/components/UsageCard";
 import PropsTable from "@/app/components/PropsTable";
+import PageHeader from "@/app/components/PageHeader";
+import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
   { id: "anatomy",    label: "Anatomy" },
@@ -51,13 +53,7 @@ export default function CarouselPage() {
     <div className="flex w-full">
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Carousel</h1>
-          <p className="text-sm text-foreground leading-relaxed">
-            하나의 콘텐츠 영역 내에 여러 개의 콘텐츠를 표시할 수 있는 컴포넌트입니다.
-            탐색 버튼 클릭, 인디케이터 클릭, 드래그/스와이프(40px 이상)로 슬라이드를 전환할 수 있습니다.
-          </p>
-        </div>
+        <PageHeader title="Carousel" description="하나의 콘텐츠 영역 내에 여러 개의 콘텐츠를 표시할 수 있는 컴포넌트입니다. 탐색 버튼 클릭, 인디케이터 클릭, 드래그/스와이프(40px 이상)로 슬라이드를 전환할 수 있습니다." />
 
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>
           <TabList>
@@ -76,9 +72,9 @@ export default function CarouselPage() {
               <p className="text-sm text-foreground mb-4">
                 캐러셀은 컨테이너, 탐색 버튼, 항목 탐색 식별자, 현재 항목, 가려진 항목으로 구성됩니다.
               </p>
-              <div className="rounded-lg p-12 flex items-center justify-center bg-[#F7F7F7] anatomy-bg">
+              <PreviewBox variant="anatomy" className="!p-12">
                 <img src="/carousel/carousel_anatomy.png" alt="carousel anatomy img" />
-              </div>
+              </PreviewBox>
               <ul className="mt-6 space-y-2 text-sm text-foreground list-decimal list-inside">
                 <li>컨테이너 : 캐러셀 항목과 관련 컨트롤이 시각적으로 표시되는 영역</li>
                 <li>탐색 버튼 : 캐러셀 항목의 이전/다음 요소를 탐색하는데 사용되는 버튼</li>

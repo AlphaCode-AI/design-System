@@ -11,6 +11,7 @@ import {
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBadge from "@/app/components/CodeBadge";
 import CodeBlock from "@/app/components/CodeBlock";
+import PageHeader from "@/app/components/PageHeader";
 
 /**
  * Table of Contents 데이터
@@ -40,12 +41,7 @@ export default function BreakpointsPage() {
       <div className="flex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
 
         {/* 페이지 헤더 */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-foreground">Breakpoints</h1>
-          <p className="mt-2 text-sm text-foreground leading-relaxed">
-            알파코드 디자인 시스템의 브레이크포인트는 다양한 디바이스 환경에서 최적화된 화면을 제공하기 위한 규격입니다. 모든 반응형 스타일은 시스템에서 정의한 브레이크포인트를 준수하여 구현되어야 합니다.
-          </p>
-        </div>
+        <PageHeader title="Breakpoints" description="알파코드 디자인 시스템의 브레이크포인트는 다양한 디바이스 환경에서 최적화된 화면을 제공하기 위한 규격입니다. 모든 반응형 스타일은 시스템에서 정의한 브레이크포인트를 준수하여 구현되어야 합니다." />
 
         {/* 탭 시스템 */}
         <Tabs defaultValue="docs" onValueChange={setActiveTab}>

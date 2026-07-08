@@ -3,6 +3,7 @@
 import { UsageCard } from "@/app/components/UsageCard";
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import { Download, Button } from "@alphacode-ai/design-system";
+import PageHeader from "@/app/components/PageHeader";
 
 const toc: TocItem[] = [
   { id: "primary-logo", label: "Primary Logo" },
@@ -15,25 +16,16 @@ export default function LogoPage() {
     <div className="flex w-full">
       <div className="lex-1 min-w-0 px-4 py-6 md:px-10 md:py-8">
         
-        {/* ── Header ── */}
-        <header className="mb-12 border-b border-border pb-8 flex flex-col md:flex-row justify-between items-end">
-          <div className="flex flex-col gap-3">
-            <h1 className="text-2xl font-bold text-foreground">Logo</h1>
-            <p className="text-sm text-foreground leading-relaxed">
-              Alpha Code의 대표 로고 가이드입니다. 로고를 사용할 때는 반드시 해당 규정을 숙지하고 사용해 주세요.
-            </p>
-          </div>
-          <Button
-            asChild
-            variant="primary"
-            size="md"
-            rightIcon={<Download size={16} />}
-          >
-            <a href="/logo/Alphacode_logo_all.zip" download>
-              Download Logo.zip
-            </a>
-          </Button>
-        </header>
+        <PageHeader
+          title="Logo"
+          description="Alpha Code의 대표 로고 가이드입니다. 로고를 사용할 때는 반드시 해당 규정을 숙지하고 사용해 주세요."
+          border
+          action={
+            <Button asChild variant="primary" size="md" rightIcon={<Download size={16} />}>
+              <a href="/logo/Alphacode_logo_all.zip" download>Download Logo.zip</a>
+            </Button>
+          }
+        />
 
         {/* ── 1. Primary Logo ── */}
         <section id="primary-logo" className="scroll-mt-10 mb-20">
