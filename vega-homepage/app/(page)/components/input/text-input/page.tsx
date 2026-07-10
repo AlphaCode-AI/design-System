@@ -19,12 +19,13 @@ import PageHeader from "@/app/components/PageHeader";
 import PreviewBox from "@/app/components/PreviewBox";
 
 const toc: TocItem[] = [
-  { id: "type",          label: "Type" },
-  { id: "anatomy",       label: "Anatomy" },
-  { id: "state",         label: "State" },
-  { id: "size",          label: "Size" },
-  { id: "prefix-suffix", label: "Prefix / Suffix" },
-  { id: "usage",         label: "사용 가이드" },
+  { id: "type",           label: "Type" },
+  { id: "anatomy",        label: "Anatomy" },
+  { id: "state",          label: "State" },
+  { id: "size",           label: "Size" },
+  { id: "button-variant", label: "Button Variant" },
+  { id: "prefix-suffix",  label: "Prefix / Suffix" },
+  { id: "usage",          label: "사용 가이드" },
 ];
 
 
@@ -151,6 +152,34 @@ export default function TextInputPage() {
               </PreviewBox>
             </section>
 
+            {/* Button Variant */}
+            <section id="button-variant" className="scroll-mt-8">
+              <h2 className="text-xl font-bold text-foreground mb-2">Button Variant</h2>
+              <p className="text-sm text-foreground mb-6">
+                <CodeBadge>buttonVariant</CodeBadge>로 인풋 우측 버튼의 유형을 변경합니다. 기본값은 <CodeBadge>tertiary</CodeBadge>입니다.
+              </p>
+              <PreviewBox>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <TextInput placeholder="placeholder" buttonLabel="tertiary" buttonClassName="w-20" />
+                    <span className="text-xs text-muted-foreground text-center">tertiary (기본)</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <TextInput placeholder="placeholder" buttonLabel="primary" buttonVariant="primary" buttonClassName="w-20" />
+                    <span className="text-xs text-muted-foreground text-center">primary</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <TextInput placeholder="placeholder" buttonLabel="secondary" buttonVariant="secondary" buttonClassName="w-20" />
+                    <span className="text-xs text-muted-foreground text-center">secondary</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <TextInput placeholder="placeholder" buttonLabel="link" buttonVariant="link" buttonClassName="w-20" />
+                    <span className="text-xs text-muted-foreground text-center">link</span>
+                  </div>
+                </div>
+              </PreviewBox>
+            </section>
+
             {/* Prefix / Suffix */}
             <section id="prefix-suffix" className="scroll-mt-8">
               <h2 className="text-xl font-bold text-foreground mb-2">Prefix / Suffix</h2>
@@ -245,12 +274,29 @@ export default function TextInputPage() {
                 <h3 className="text-lg font-semibold text-foreground mb-2">2. 버튼</h3>
                 <p className="text-sm text-foreground mb-4">
                   <CodeBadge>buttonLabel</CodeBadge>로 인풋 우측에 버튼을 추가합니다. <CodeBadge>onButtonClick</CodeBadge>으로 클릭 이벤트를 처리합니다.
+                  <CodeBadge>buttonVariant</CodeBadge>로 버튼 유형을 변경할 수 있으며 기본값은 <CodeBadge>tertiary</CodeBadge>입니다.
                 </p>
                 <CodeBlock code={`// 버튼 추가
 <TextInput
   label="주소"
   placeholder="회사 주소"
   buttonLabel="Submit"
+  onButtonClick={() => console.log("clicked")}
+/>
+
+// 버튼 유형 변경
+<TextInput
+  placeholder="우편번호"
+  buttonLabel="주소 찾기"
+  buttonVariant="primary"
+  onButtonClick={() => console.log("clicked")}
+/>
+
+// 버튼 너비 고정
+<TextInput
+  placeholder="우편번호"
+  buttonLabel="주소 찾기"
+  buttonClassName="w-24"
   onButtonClick={() => console.log("clicked")}
 />
 
@@ -305,8 +351,10 @@ export default function TextInputPage() {
                 ["placeholder",    "string",                                                  "-",         "플레이스홀더 텍스트"],
                 ["helperText",     "string",                                                  "-",         "하단 도움말 텍스트"],
                 ["errorMessage",   "string",                                                  "-",         "에러 메시지 (전달 시 자동으로 error 상태)"],
-                ["buttonLabel",    "string",                                                  "-",         "인풋 우측 버튼 텍스트 (선택)"],
-                ["onButtonClick",  "MouseEventHandler",                                       "-",         "버튼 클릭 핸들러"],
+                ["buttonLabel",     "string",                                                  "-",              "인풋 우측 버튼 텍스트 (선택)"],
+                ["buttonVariant",   '"primary" | "secondary" | "tertiary" | "link"',          '"tertiary"',     "버튼 유형"],
+                ["buttonClassName", "string",                                                  "-",              "버튼에 적용할 Tailwind 클래스 (너비 고정 등)"],
+                ["onButtonClick",   "MouseEventHandler",                                       "-",              "버튼 클릭 핸들러"],
                 ["prefix",         "React.ReactNode",                                         "-",         "인풋 좌측 요소 (텍스트, 아이콘 등)"],
                 ["suffix",         "React.ReactNode",                                         "-",         "인풋 우측 요소 (아이콘 등)"],
                 ["disabled",       "boolean",                                                 "false",     "비활성 상태 (버튼도 함께 비활성)"],

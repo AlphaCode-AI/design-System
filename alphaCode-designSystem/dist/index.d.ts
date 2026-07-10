@@ -350,6 +350,8 @@ interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
     buttonLabel?: string;
+    buttonVariant?: "primary" | "secondary" | "tertiary" | "link";
+    buttonClassName?: string;
     onButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 declare const TextInput: React.ForwardRefExoticComponent<TextInputProps & React.RefAttributes<HTMLInputElement>>;

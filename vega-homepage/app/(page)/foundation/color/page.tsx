@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Tabs, 
-  TabList, 
-  TabTrigger, 
-  TabContent, 
-  colors 
+import {
+  Tabs,
+  TabList,
+  TabTrigger,
+  TabContent,
+  colors,
+  Check,
+  Copy,
+  cn,
 } from "@alphacode-ai/design-system";
 import TableOfContents, { TocItem } from "@/app/components/TableOfContents";
 import CodeBlock from "@/app/components/CodeBlock";
@@ -28,11 +31,22 @@ const blackWhiteTokens = {
  * 이미지의 상세 테이블 구조 재현
  */
 function ColorTable({ prefix, colorTokens }: { prefix: string; colorTokens: Record<string, string> }) {
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const entries = Object.entries(colorTokens);
   const gridStyle = { gridTemplateColumns: `100px repeat(${entries.length}, 1fr)` };
   const headerClass = "px-4 py-3 font-bold text-foreground border-r border-border flex items-center text-xs bg-ac-gray-10";
   const cellClass = "px-2 py-3 font-mono text-foreground flex items-center text-xs border-r border-border last:border-r-0 truncate";
   const keyColors = ["primary", "green", "orange", "blue", "red", "purple", "blue-gray"];
+
+  const getTokenName = (key: string) =>
+    prefix === "black-white" ? `ac-${key}` : `ac-${prefix}-${key}`;
+
+  const handleCopy = (key: string) => {
+    const name = getTokenName(key);
+    navigator.clipboard?.writeText(name);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 1500);
+  };
 
   const getUseLabel = (key: string) => {
     if (prefix === "black-white") {
@@ -56,8 +70,17 @@ function ColorTable({ prefix, colorTokens }: { prefix: string; colorTokens: Reco
       <div className="grid border-b border-border bg-ac-gray-10" style={gridStyle}>
         <div className={headerClass}>Name</div>
         {entries.map(([key]) => (
-          <div key={key} className={cellClass}>
-            {prefix === "black-white" ? `ac-${key}` : `ac-${prefix}-${key}`}
+          <div
+            key={key}
+            className={cn(cellClass, "cursor-pointer hover:bg-ac-gray-20 group gap-1")}
+            onClick={() => handleCopy(key)}
+            title="클릭하여 복사"
+          >
+            <span className="truncate">{getTokenName(key)}</span>
+            {copiedKey === key
+              ? <Check className="w-3 h-3 shrink-0 text-ac-green-50" />
+              : <Copy className="w-3 h-3 shrink-0 opacity-0 group-hover:opacity-60 transition-opacity" />
+            }
           </div>
         ))}
       </div>

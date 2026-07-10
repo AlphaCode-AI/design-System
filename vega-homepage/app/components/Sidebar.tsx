@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { SideNavigation, SideNavItem, cn, X } from "@alphacode-ai/design-system";
+import { getGnbSection } from "@/app/components/Gnb";
 
 const vegaUiItems: SideNavItem[] = [
   { id: "overview", label: "Overview", href: "/" },
@@ -16,6 +17,15 @@ const foundationItems: SideNavItem[] = [
   { id: "radius",      label: "Radius",      href: "/foundation/radius" },
   { id: "shadow",      label: "Shadow",      href: "/foundation/shadow" },
   { id: "spacing",     label: "Spacing",     href: "/foundation/spacing" },
+];
+
+const templateItems: SideNavItem[] = [
+  { id: "login",     label: "로그인",     href: "/templates/login" },
+  { id: "signup",    label: "회원가입",   href: "/templates/signup" },
+  { id: "payment",   label: "결제",       href: "/templates/payment" },
+  { id: "card-list",  label: "카드 리스트", href: "/templates/card-list" },
+  { id: "side-shell",     label: "사이드 쉘",   href: "/templates/side-shell" },
+  { id: "product-detail", label: "상품 상세",   href: "/templates/product-detail" },
 ];
 
 const componentItems: SideNavItem[] = [
@@ -75,7 +85,7 @@ function findActiveId(items: SideNavItem[], pathname: string): string | undefine
   }
 }
 
-const allItems = [...vegaUiItems, ...foundationItems, ...componentItems];
+const allItems = [...vegaUiItems, ...foundationItems, ...componentItems, ...templateItems];
 
 function getActiveId(pathname: string): string {
   return findActiveId(allItems, pathname) ?? "overview";
@@ -94,6 +104,7 @@ interface SidebarProps {
 export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const activeId = useMemo(() => getActiveId(pathname), [pathname]);
+  const section = getGnbSection(pathname);
 
   const openParentIds = useMemo(
     () => componentItems.filter(item => isParentOfActive(item, pathname)).map(item => item.id),
@@ -127,25 +138,39 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
       {/* 스크롤 영역 */}
       <div className="flex-1 overflow-y-auto py-6 pl-4 pr-2 flex flex-col gap-6">
-        <SideNavigation
-          title="Vega UI"
-          items={vegaUiItems}
-          activeId={activeId}
-          renderLink={renderLink}
-        />
-        <SideNavigation
-          title="Foundation"
-          items={foundationItems}
-          activeId={activeId}
-          renderLink={renderLink}
-        />
-        <SideNavigation
-          title="Component"
-          items={componentItems}
-          activeId={activeId}
-          defaultOpenIds={openParentIds}
-          renderLink={renderLink}
-        />
+        {section === "docs" && (
+          <>
+            <SideNavigation
+              title="Vega UI"
+              items={vegaUiItems}
+              activeId={activeId}
+              renderLink={renderLink}
+            />
+            <SideNavigation
+              title="Foundation"
+              items={foundationItems}
+              activeId={activeId}
+              renderLink={renderLink}
+            />
+          </>
+        )}
+        {section === "components" && (
+          <SideNavigation
+            title="Component"
+            items={componentItems}
+            activeId={activeId}
+            defaultOpenIds={openParentIds}
+            renderLink={renderLink}
+          />
+        )}
+        {section === "templates" && (
+          <SideNavigation
+            title="Templates"
+            items={templateItems}
+            activeId={activeId}
+            renderLink={renderLink}
+          />
+        )}
       </div>
     </aside>
   );

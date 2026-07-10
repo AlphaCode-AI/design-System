@@ -1,11 +1,15 @@
 "use client";
 
-import { cn } from "@alphacode-ai/design-system";
+import { useState } from "react";
+import { cn, Check, Copy } from "@alphacode-ai/design-system";
 
 interface CodeBlockProps {
   code?: string;
   children?: React.ReactNode;
   className?: string;
+  label?: string;
+  lang?: string;
+  copyText?: string;
 }
 
 type Token = { type: "comment" | "tag" | "attr" | "string" | "brace" | "plain"; value: string };
@@ -64,40 +68,75 @@ const tokenColor: Record<Token["type"], string> = {
   plain:   "#abb2bf",
 };
 
-export default function CodeBlock({ code, children, className }: CodeBlockProps) {
+export default function CodeBlock({ code, children, className, label, lang, copyText }: CodeBlockProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    const text = copyText ?? code ?? "";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    } else {
+      const el = document.createElement("textarea");
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const hasTopBar = lang || copyText;
+
   return (
-    <div
-      className={cn(
-        "rounded-lg border border-[#333] bg-[#1e1e1e] px-5 py-4 font-mono text-sm leading-relaxed overflow-x-auto",
-        className
-      )}
-    >
-      {code ? (
-        <pre>
-        {code.split("\n").map((line, i) => {
-          // 1. 현재 줄을 토큰화합니다.
-          const tokens = tokenize(line);
-          
-          return (
-            <div key={i}>
-              {/* 2. 토큰이 있다면(내용이 있다면) 기존처럼 렌더링하고, 
-                     없다면(빈 줄이라면) <br />을 넣어 높이를 유지합니다. */}
-              {tokens.length > 0 ? (
-                tokens.map((tok, j) => (
-                  <span key={j} style={{ color: tokenColor[tok.type] }}>
-                    {tok.value}
-                  </span>
-                ))
-              ) : (
-                <br />
-              )}
-            </div>
-          );
-        })}
-      </pre>
-      ) : (
-        <pre className="text-[#abb2bf]">{children}</pre>
-      )}
+    <div className="space-y-1.5">
+      {label && <p className="text-xs text-muted-foreground">{label}</p>}
+      <div
+        className={cn(
+          "relative rounded-lg border border-[#333] bg-[#1e1e1e] font-mono text-sm leading-relaxed overflow-x-auto",
+          hasTopBar ? "pt-9 px-5 pb-4" : "px-5 py-4",
+          className
+        )}
+      >
+        {lang && (
+          <span className="absolute top-3 left-5 text-xs text-[#666]">{lang}</span>
+        )}
+        {copyText !== undefined && (
+          <button
+            onClick={handleCopy}
+            className="absolute top-2 right-2 p-1.5 rounded-md text-[#666] hover:text-[#aaa] hover:bg-white/10 transition-colors"
+            aria-label="복사"
+          >
+            {copied
+              ? <Check className="w-4 h-4 text-ac-green-50" />
+              : <Copy className="w-4 h-4" />
+            }
+          </button>
+        )}
+        {code ? (
+          <pre>
+            {code.split("\n").map((line, i) => {
+              const tokens = tokenize(line);
+              return (
+                <div key={i}>
+                  {tokens.length > 0 ? (
+                    tokens.map((tok, j) => (
+                      <span key={j} style={{ color: tokenColor[tok.type] }}>
+                        {tok.value}
+                      </span>
+                    ))
+                  ) : (
+                    <br />
+                  )}
+                </div>
+              );
+            })}
+          </pre>
+        ) : (
+          <pre className="text-[#abb2bf]">{children}</pre>
+        )}
+      </div>
     </div>
   );
 }

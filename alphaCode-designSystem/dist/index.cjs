@@ -1888,16 +1888,16 @@ function InputHelperText({ id, helperText, errorMessage, isError }) {
 
 var textInputVariants = _classvarianceauthority.cva.call(void 0, 
   [
-    "flex items-center rounded-md border bg-background transition-colors duration-150",
+    "flex items-center rounded-md border bg-background overflow-hidden transition-colors duration-150",
     "focus-within:border-ac-gray-80",
     "has-[:disabled]:bg-ac-gray-20 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-60"
   ],
   {
     variants: {
       size: {
-        lg: "h-10 px-3 text-sm gap-2",
-        md: "h-9 px-3 text-sm gap-2",
-        sm: "h-[30px] px-2.5 text-xs gap-1.5"
+        lg: "h-10 text-sm gap-2",
+        md: "h-9 text-sm gap-2",
+        sm: "h-[30px] text-xs gap-1.5"
       },
       state: {
         default: "border-border",
@@ -1911,6 +1911,11 @@ var textInputVariants = _classvarianceauthority.cva.call(void 0,
   }
 );
 var buttonSizeMap = { lg: "md", md: "sm", sm: "xs" };
+var inputPxMap = {
+  lg: { px: "px-3", pl: "pl-3", pr: "pr-3" },
+  md: { px: "px-3", pl: "pl-3", pr: "pr-3" },
+  sm: { px: "px-2.5", pl: "pl-2.5", pr: "pr-2.5" }
+};
 var TextInput = React13.forwardRef(
   ({
     className,
@@ -1923,6 +1928,8 @@ var TextInput = React13.forwardRef(
     prefix,
     suffix,
     buttonLabel,
+    buttonVariant = "tertiary",
+    buttonClassName,
     onButtonClick,
     id,
     disabled,
@@ -1931,6 +1938,7 @@ var TextInput = React13.forwardRef(
     const inputId = _nullishCoalesce(id, () => ( React13.useId()));
     const isError = state === "error" || !!errorMessage;
     const resolvedState = isError ? "error" : state;
+    const px = inputPxMap[_nullishCoalesce(size, () => ( "md"))];
     const inputContainer = /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, 
       "div",
       {
@@ -1940,7 +1948,7 @@ var TextInput = React13.forwardRef(
           className
         ),
         children: [
-          prefix && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: "shrink-0 text-muted-foreground", children: prefix }),
+          prefix && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: cn("shrink-0 text-muted-foreground", px.pl), children: prefix }),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
             "input",
             {
@@ -1949,11 +1957,15 @@ var TextInput = React13.forwardRef(
               disabled,
               "aria-invalid": isError,
               "aria-describedby": helperText || errorMessage ? `${inputId}-helper` : void 0,
-              className: "flex-1 bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed min-w-0",
+              className: cn(
+                "flex-1 h-full bg-background outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed min-w-0",
+                !prefix && px.pl,
+                !suffix && px.pr
+              ),
               ...props
             }
           ),
-          suffix && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: "shrink-0 text-muted-foreground", children: suffix })
+          suffix && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: cn("shrink-0 text-muted-foreground", px.pr), children: suffix })
         ]
       }
     );
@@ -1963,10 +1975,11 @@ var TextInput = React13.forwardRef(
         Button,
         {
           type: "button",
+          variant: buttonVariant,
           size: buttonSizeMap[_nullishCoalesce(size, () => ( "md"))],
           onClick: onButtonClick,
           disabled,
-          className: "shrink-0",
+          className: cn("shrink-0", buttonClassName),
           children: buttonLabel
         }
       )

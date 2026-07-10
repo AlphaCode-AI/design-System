@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Badge, Menu, Sun, Moon, ToggleGroup, ToggleGroupItem } from "@alphacode-ai/design-system";
 import Sidebar from "@/app/components/Sidebar";
+import Gnb from "@/app/components/Gnb";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
@@ -23,11 +26,15 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
     localStorage.setItem("theme", next);
   };
 
+  if (pathname.startsWith("/popup")) {
+    return <div className="bg-background text-foreground font-sans min-h-screen">{children}</div>;
+  }
+
   return (
     <div className="flex h-screen flex-col bg-background font-sans text-foreground overflow-hidden">
 
       {/* ── Header ── */}
-      <header className="flex h-16 shrink-0 items-center justify-between border-b border-border px-4 md:px-6">
+      <header className="grid grid-cols-3 h-16 shrink-0 items-center border-b border-border px-4 md:px-6">
         <div className="flex items-center gap-3">
           <button
             className="flex md:hidden items-center justify-center w-8 h-8 rounded-md hover:bg-ac-gray-10 transition-colors"
@@ -40,7 +47,11 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
           <Badge variant="primary" size="sm">v0.3.0</Badge>
         </div>
 
-        <div className="flex gap-1">
+        <div className="hidden md:flex justify-center">
+          <Gnb />
+        </div>
+
+        <div className="flex justify-end gap-1">
           <ToggleGroup
             value={theme}
             variant="primary"

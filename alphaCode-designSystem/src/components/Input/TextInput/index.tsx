@@ -9,16 +9,16 @@ import { Button } from "@/components/Button";
 /* ── Container Variants ────────────────────────────────────── */
 const textInputVariants = cva(
   [
-    "flex items-center rounded-md border bg-background transition-colors duration-150",
+    "flex items-center rounded-md border bg-background overflow-hidden transition-colors duration-150",
     "focus-within:border-ac-gray-80",
     "has-[:disabled]:bg-ac-gray-20 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-60",
   ],
   {
     variants: {
       size: {
-        lg: "h-10 px-3 text-sm gap-2",
-        md: "h-9 px-3 text-sm gap-2",
-        sm: "h-[30px] px-2.5 text-xs gap-1.5",
+        lg: "h-10 text-sm gap-2",
+        md: "h-9 text-sm gap-2",
+        sm: "h-[30px] text-xs gap-1.5",
       },
       state: {
         default:  "border-border",
@@ -34,6 +34,12 @@ const textInputVariants = cva(
 
 const buttonSizeMap = { lg: "md", md: "sm", sm: "xs" } as const;
 
+const inputPxMap = {
+  lg: { px: "px-3", pl: "pl-3", pr: "pr-3" },
+  md: { px: "px-3", pl: "pl-3", pr: "pr-3" },
+  sm: { px: "px-2.5", pl: "pl-2.5", pr: "pr-2.5" },
+} as const;
+
 /* ── Props ─────────────────────────────────────────────────── */
 export interface TextInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
@@ -46,6 +52,8 @@ export interface TextInputProps
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   buttonLabel?: string;
+  buttonVariant?: "primary" | "secondary" | "tertiary" | "link";
+  buttonClassName?: string;
   onButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -57,7 +65,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       label, labelLeft = false,
       helperText, errorMessage,
       prefix, suffix,
-      buttonLabel, onButtonClick,
+      buttonLabel, buttonVariant = "tertiary", buttonClassName, onButtonClick,
       id, disabled, ...props
     },
     ref
@@ -65,6 +73,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     const inputId = id ?? React.useId();
     const isError = state === "error" || !!errorMessage;
     const resolvedState = isError ? "error" : state;
+    const px = inputPxMap[size ?? "md"];
 
     const inputContainer = (
       <div
@@ -74,17 +83,21 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           className
         )}
       >
-        {prefix && <span className="shrink-0 text-muted-foreground">{prefix}</span>}
+        {prefix && <span className={cn("shrink-0 text-muted-foreground", px.pl)}>{prefix}</span>}
         <input
           ref={ref}
           id={inputId}
           disabled={disabled}
           aria-invalid={isError}
           aria-describedby={helperText || errorMessage ? `${inputId}-helper` : undefined}
-          className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed min-w-0"
+          className={cn(
+            "flex-1 h-full bg-background outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed min-w-0",
+            !prefix && px.pl,
+            !suffix && px.pr,
+          )}
           {...props}
         />
-        {suffix && <span className="shrink-0 text-muted-foreground">{suffix}</span>}
+        {suffix && <span className={cn("shrink-0 text-muted-foreground", px.pr)}>{suffix}</span>}
       </div>
     );
 
@@ -93,10 +106,11 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         {inputContainer}
         <Button
           type="button"
+          variant={buttonVariant}
           size={buttonSizeMap[size ?? "md"]}
           onClick={onButtonClick}
           disabled={disabled}
-          className="shrink-0"
+          className={cn("shrink-0", buttonClassName)}
         >
           {buttonLabel}
         </Button>
