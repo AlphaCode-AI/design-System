@@ -3522,6 +3522,40 @@ var Pagination = React23.forwardRef(
 );
 Pagination.displayName = "Pagination";
 
+// src/components/Skeleton/index.tsx
+
+var RADIUS_MAP = {
+  none: "rounded-none",
+  0: "rounded-none",
+  1: "rounded-sm",
+  2: "rounded",
+  3: "rounded-md",
+  4: "rounded-lg",
+  rounded: "rounded-full"
+};
+var STAGGER_MS = 80;
+var DELAY_MS = 100;
+function Skeleton({
+  width = "100%",
+  height = "100%",
+  radius = 3,
+  index = 0,
+  className
+}) {
+  const style = {
+    width: typeof width === "number" ? `${width}px` : width,
+    height: typeof height === "number" ? `${height}px` : height,
+    animationDelay: `${DELAY_MS + STAGGER_MS * index}ms`
+  };
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "div",
+    {
+      className: cn("animate-pulse bg-ac-gray-30", RADIUS_MAP[radius], className),
+      style
+    }
+  );
+}
+
 // src/components/Dropdown/index.tsx
 
 
@@ -5308,5 +5342,6 @@ ResizableHandle.displayName = "ResizableHandle";
 
 
 
-exports.Accordion = Accordion; exports.AccordionContent = AccordionContent; exports.AccordionItem = AccordionItem; exports.AccordionTrigger = AccordionTrigger; exports.Avatar = Avatar; exports.Badge = Badge; exports.Breadcrumbs = Breadcrumbs; exports.Button = Button; exports.ButtonGroup = ButtonGroup; exports.Card = Card; exports.CardContent = CardContent; exports.CardDescription = CardDescription; exports.CardFooter = CardFooter; exports.CardFooterButtons = CardFooterButtons; exports.CardFooterInfo = CardFooterInfo; exports.CardFooterUser = CardFooterUser; exports.CardHeader = CardHeader; exports.CardMenu = CardMenu; exports.CardTitle = CardTitle; exports.Carousel = Carousel; exports.CarouselContent = CarouselContent; exports.CarouselCounter = CarouselCounter; exports.CarouselDots = CarouselDots; exports.CarouselItem = CarouselItem; exports.CarouselNext = CarouselNext; exports.CarouselPrevious = CarouselPrevious; exports.Checkbox = Checkbox; exports.CheckboxGroup = CheckboxGroup; exports.DatePicker = DatePicker; exports.DateRangePicker = DateRangePicker; exports.Dialog = Dialog; exports.DialogBody = DialogBody; exports.DialogClose = DialogClose; exports.DialogContent = DialogContent; exports.DialogDescription = DialogDescription; exports.DialogFooter = DialogFooter; exports.DialogHeader = DialogHeader; exports.DialogTitle = DialogTitle; exports.DialogTrigger = DialogTrigger; exports.Divider = Divider; exports.Dropdown = Dropdown; exports.DropdownAvatarHeader = DropdownAvatarHeader; exports.DropdownAvatarItem = DropdownAvatarItem; exports.DropdownCheckboxItem = DropdownCheckboxItem; exports.DropdownContent = DropdownContent; exports.DropdownItem = DropdownItem; exports.DropdownLabel = DropdownLabel; exports.DropdownRadioGroup = DropdownRadioGroup; exports.DropdownRadioItem = DropdownRadioItem; exports.DropdownSeparator = DropdownSeparator; exports.DropdownSubMenu = DropdownSubMenu; exports.DropdownTrigger = DropdownTrigger; exports.FAB = FAB; exports.FileInput = FileInput; exports.IconWrapper = IconWrapper; exports.InputHelperText = InputHelperText; exports.Pagination = Pagination; exports.ProgressIndicator = ProgressIndicator; exports.Radio = Radio; exports.RadioGroup = RadioGroup; exports.ResizableHandle = ResizableHandle; exports.ResizablePanel = ResizablePanel; exports.ResizablePanelGroup = ResizablePanelGroup; exports.Select = Select; exports.SideNavigation = SideNavigation; exports.Slider = Slider; exports.Snackbar = Snackbar; exports.SnackbarProvider = SnackbarProvider; exports.StepIndicator = StepIndicator; exports.Switch = Switch; exports.TabContent = TabContent; exports.TabList = TabList; exports.TabTrigger = TabTrigger; exports.Tabs = Tabs; exports.TextInput = TextInput; exports.Textarea = Textarea; exports.Toast = Toast; exports.ToastProvider = ToastProvider; exports.ToggleGroup = ToggleGroup; exports.ToggleGroupItem = ToggleGroupItem; exports.Tooltip = Tooltip; exports.avatarVariants = avatarVariants; exports.badgeVariants = badgeVariants; exports.borderRadius = _chunkYTZJTG25cjs.borderRadius; exports.breakpoints = _chunkYTZJTG25cjs.breakpoints; exports.buttonGroupVariants = buttonGroupVariants; exports.buttonVariants = buttonVariants; exports.cardVariants = cardVariants; exports.checkboxVariants = checkboxVariants; exports.cloneIconWithSize = cloneIconWithSize; exports.cn = cn; exports.colors = _chunkYTZJTG25cjs.colors; exports.dividerVariants = dividerVariants; exports.fabVariants = fabVariants; exports.fileInputVariants = fileInputVariants; exports.fontSize = _chunkYTZJTG25cjs.fontSize; exports.fontWeight = _chunkYTZJTG25cjs.fontWeight; exports.lineHeight = _chunkYTZJTG25cjs.lineHeight; exports.radioVariants = radioVariants; exports.spacing = _chunkYTZJTG25cjs.spacing; exports.textInputVariants = textInputVariants; exports.useSnackbar = useSnackbar; exports.useToast = useToast; exports.zIndex = _chunkYTZJTG25cjs.zIndex;
+
+exports.Accordion = Accordion; exports.AccordionContent = AccordionContent; exports.AccordionItem = AccordionItem; exports.AccordionTrigger = AccordionTrigger; exports.Avatar = Avatar; exports.Badge = Badge; exports.Breadcrumbs = Breadcrumbs; exports.Button = Button; exports.ButtonGroup = ButtonGroup; exports.Card = Card; exports.CardContent = CardContent; exports.CardDescription = CardDescription; exports.CardFooter = CardFooter; exports.CardFooterButtons = CardFooterButtons; exports.CardFooterInfo = CardFooterInfo; exports.CardFooterUser = CardFooterUser; exports.CardHeader = CardHeader; exports.CardMenu = CardMenu; exports.CardTitle = CardTitle; exports.Carousel = Carousel; exports.CarouselContent = CarouselContent; exports.CarouselCounter = CarouselCounter; exports.CarouselDots = CarouselDots; exports.CarouselItem = CarouselItem; exports.CarouselNext = CarouselNext; exports.CarouselPrevious = CarouselPrevious; exports.Checkbox = Checkbox; exports.CheckboxGroup = CheckboxGroup; exports.DatePicker = DatePicker; exports.DateRangePicker = DateRangePicker; exports.Dialog = Dialog; exports.DialogBody = DialogBody; exports.DialogClose = DialogClose; exports.DialogContent = DialogContent; exports.DialogDescription = DialogDescription; exports.DialogFooter = DialogFooter; exports.DialogHeader = DialogHeader; exports.DialogTitle = DialogTitle; exports.DialogTrigger = DialogTrigger; exports.Divider = Divider; exports.Dropdown = Dropdown; exports.DropdownAvatarHeader = DropdownAvatarHeader; exports.DropdownAvatarItem = DropdownAvatarItem; exports.DropdownCheckboxItem = DropdownCheckboxItem; exports.DropdownContent = DropdownContent; exports.DropdownItem = DropdownItem; exports.DropdownLabel = DropdownLabel; exports.DropdownRadioGroup = DropdownRadioGroup; exports.DropdownRadioItem = DropdownRadioItem; exports.DropdownSeparator = DropdownSeparator; exports.DropdownSubMenu = DropdownSubMenu; exports.DropdownTrigger = DropdownTrigger; exports.FAB = FAB; exports.FileInput = FileInput; exports.IconWrapper = IconWrapper; exports.InputHelperText = InputHelperText; exports.Pagination = Pagination; exports.ProgressIndicator = ProgressIndicator; exports.Radio = Radio; exports.RadioGroup = RadioGroup; exports.ResizableHandle = ResizableHandle; exports.ResizablePanel = ResizablePanel; exports.ResizablePanelGroup = ResizablePanelGroup; exports.Select = Select; exports.SideNavigation = SideNavigation; exports.Skeleton = Skeleton; exports.Slider = Slider; exports.Snackbar = Snackbar; exports.SnackbarProvider = SnackbarProvider; exports.StepIndicator = StepIndicator; exports.Switch = Switch; exports.TabContent = TabContent; exports.TabList = TabList; exports.TabTrigger = TabTrigger; exports.Tabs = Tabs; exports.TextInput = TextInput; exports.Textarea = Textarea; exports.Toast = Toast; exports.ToastProvider = ToastProvider; exports.ToggleGroup = ToggleGroup; exports.ToggleGroupItem = ToggleGroupItem; exports.Tooltip = Tooltip; exports.avatarVariants = avatarVariants; exports.badgeVariants = badgeVariants; exports.borderRadius = _chunkYTZJTG25cjs.borderRadius; exports.breakpoints = _chunkYTZJTG25cjs.breakpoints; exports.buttonGroupVariants = buttonGroupVariants; exports.buttonVariants = buttonVariants; exports.cardVariants = cardVariants; exports.checkboxVariants = checkboxVariants; exports.cloneIconWithSize = cloneIconWithSize; exports.cn = cn; exports.colors = _chunkYTZJTG25cjs.colors; exports.dividerVariants = dividerVariants; exports.fabVariants = fabVariants; exports.fileInputVariants = fileInputVariants; exports.fontSize = _chunkYTZJTG25cjs.fontSize; exports.fontWeight = _chunkYTZJTG25cjs.fontWeight; exports.lineHeight = _chunkYTZJTG25cjs.lineHeight; exports.radioVariants = radioVariants; exports.spacing = _chunkYTZJTG25cjs.spacing; exports.textInputVariants = textInputVariants; exports.useSnackbar = useSnackbar; exports.useToast = useToast; exports.zIndex = _chunkYTZJTG25cjs.zIndex;
 //# sourceMappingURL=index.cjs.map

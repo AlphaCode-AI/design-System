@@ -150,13 +150,13 @@ export default function CardListTemplatePage() {
                     <span className="text-muted-foreground">태스크 진행률</span>
                     <span className="font-medium text-foreground">{member.completedTasks} / {member.tasks}</span>
                   </div>
-                  <ProgressIndicator value={pct} linearSize="sm" />
+                  <ProgressIndicator value={pct} linearSize="sm" color="ac-gray-50" />
                 </div>
 
                 {/* 버튼 */}
                 <div className="flex gap-2">
                   <Button variant="tertiary" size="sm" className="flex-1">메시지</Button>
-                  <Button variant="primary" size="sm" className="flex-1">프로필 보기</Button>
+                  <Button variant="secondary" size="sm" className="flex-1">프로필 보기</Button>
                 </div>
               </Card>
             );

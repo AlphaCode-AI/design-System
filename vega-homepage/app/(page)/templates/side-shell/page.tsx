@@ -3,21 +3,15 @@
 import { useState } from "react";
 import {
   Avatar,
-  Badge,
-  Button,
-  Card,
-  CardTitle,
-  CardDescription,
-  Divider,
-  ProgressIndicator,
-  SideNavigation,
   Bell,
+  Button,
   CheckCircle2,
   FolderOpen,
   LayoutDashboard,
-  Plus,
   Settings,
   Shield,
+  SideNavigation,
+  Skeleton,
   User,
   Users,
 } from "@alphacode-ai/design-system";
@@ -43,18 +37,6 @@ const NAV_ITEMS: SideNavItem[] = [
   { id: "settings", label: "설정", icon: <Settings size={16} />, divider: true },
 ];
 
-const STATS = [
-  { label: "전체 멤버",     value: "24명",  sub: "이번 달 +3",   pct: 72 },
-  { label: "진행 중 프로젝트", value: "8개",   sub: "마감 임박 2개", pct: 45 },
-  { label: "완료된 태스크",  value: "134건", sub: "목표 대비 89%", pct: 89 },
-];
-
-const RECENT: { name: string; action: string; time: string; avatar: string }[] = [
-  { name: "김민준", action: "프로젝트 VEGA UI 태스크 완료", time: "5분 전",   avatar: "김" },
-  { name: "이서연", action: "디자인 리뷰 코멘트 추가",      time: "23분 전",  avatar: "이" },
-  { name: "박지호", action: "API 서버 배포 완료",            time: "1시간 전", avatar: "박" },
-  { name: "송민서", action: "디자인 토큰 업데이트",          time: "3시간 전", avatar: "송" },
-];
 
 const PAGE_TITLE: Record<string, string> = {
   dashboard: "대시보드",
@@ -74,7 +56,7 @@ export default function SideShellTemplatePage() {
     <div className="flex-1 min-w-0 px-4 py-8 md:px-10 md:py-10 max-w-[900px] mx-auto">
       <PageHeader
         title="사이드 쉘"
-        description="SideNavigation, Avatar, Badge, Card, ProgressIndicator를 조합한 앱 레이아웃 예시입니다."
+        description="SideNavigation, Avatar를 조합한 사이드바 기반 앱 레이아웃 예시입니다."
         border
       />
 
@@ -104,7 +86,7 @@ export default function SideShellTemplatePage() {
           {/* 하단 유저 정보 */}
           <div className="shrink-0 border-t border-border px-3 py-3">
             <div className="flex items-center gap-2.5">
-              <Avatar size="sm" fallback="홍" />
+              <Avatar size="lg" fallback="홍" />
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-semibold text-foreground truncate">홍길동</p>
                 <p className="text-xs text-muted-foreground truncate">Admin</p>
@@ -119,107 +101,53 @@ export default function SideShellTemplatePage() {
           {/* 헤더 */}
           <header className="h-14 shrink-0 border-b border-border flex items-center justify-between px-5">
             <h1 className="text-sm font-bold text-foreground">{title}</h1>
-            <div className="flex items-center gap-2">
-              <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-ac-gray-10 transition-colors text-muted-foreground">
+            <div className="relative">
+              <Button variant="tertiary" size="sm" className="w-8 h-8 !p-0">
                 <Bell size={16} />
-                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-ac-primary-50" />
-              </button>
-              <Avatar size="sm" fallback="홍" />
+              </Button>
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-ac-primary-50 pointer-events-none" />
             </div>
           </header>
 
           {/* 콘텐츠 */}
           <main className="flex-1 overflow-y-auto p-5 space-y-5">
 
-            {activeId === "dashboard" && (
-              <>
-                {/* 스탯 카드 */}
-                <div className="grid grid-cols-3 gap-3">
-                  {STATS.map((s) => (
-                    <Card key={s.label} variant="background" className="p-4 space-y-3 bg-ac-gray-20">
-                      <div>
-                        <CardDescription className="text-xs text-muted-foreground">{s.label}</CardDescription>
-                        <CardTitle className="text-xl font-bold text-foreground mt-0.5">{s.value}</CardTitle>
-                        <p className="text-xs text-muted-foreground mt-0.5">{s.sub}</p>
-                      </div>
-                      <ProgressIndicator value={s.pct} linearSize="sm" />
-                    </Card>
-                  ))}
-                </div>
-
-                <Divider />
-
-                {/* 최근 활동 */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold text-foreground">최근 활동</p>
-                    <Button variant="tertiary" size="sm">전체 보기</Button>
+            {/* 스탯 카드 스켈레톤 */}
+            <div className="grid grid-cols-3 gap-3">
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="rounded-xl bg-ac-gray-10 p-4 space-y-3">
+                  <div className="space-y-1.5">
+                    <Skeleton width={64} height={12} radius={3} index={i} />
+                    <Skeleton width={48} height={24} radius={3} index={i} />
+                    <Skeleton width={80} height={10} radius={3} index={i} />
                   </div>
-                  <Card variant="line" className="bg-card divide-y divide-border">
-                    {RECENT.map((r) => (
-                      <div key={r.name + r.time} className="flex items-center gap-3 px-4 py-3">
-                        <Avatar size="sm" fallback={r.avatar} />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-semibold text-foreground">{r.name}</p>
-                          <p className="text-xs text-muted-foreground truncate">{r.action}</p>
-                        </div>
-                        <span className="text-xs text-muted-foreground shrink-0">{r.time}</span>
-                      </div>
-                    ))}
-                  </Card>
+                  <Skeleton height={6} radius={3} index={i} />
                 </div>
-              </>
-            )}
+              ))}
+            </div>
 
-            {activeId === "members" && (
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold text-foreground">멤버 목록</p>
-                  <Button variant="primary" size="sm">
-                    <Plus size={14} />
-                    멤버 초대
-                  </Button>
+            {/* 구분선 */}
+            <Skeleton height={1} radius="none" index={3} />
+
+            {/* 리스트 헤더 스켈레톤 */}
+            <div className="flex items-center justify-between">
+              <Skeleton width={80} height={16} radius={3} index={4} />
+              <Skeleton width={64} height={28} radius={3} index={4} />
+            </div>
+
+            {/* 행 스켈레톤 */}
+            <div className="rounded-xl border border-border divide-y divide-border overflow-hidden">
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="flex items-center gap-3 px-4 py-3">
+                  <Skeleton width={28} height={28} radius="rounded" index={i + 5} />
+                  <div className="flex-1 space-y-1.5">
+                    <Skeleton width={96} height={12} radius={3} index={i + 5} />
+                    <Skeleton width={160} height={10} radius={3} index={i + 5} />
+                  </div>
+                  <Skeleton width={48} height={12} radius={3} index={i + 5} />
                 </div>
-                <Card variant="line" className="bg-card divide-y divide-border">
-                  {RECENT.map((r) => (
-                    <div key={r.name} className="flex items-center gap-3 px-4 py-3">
-                      <Avatar size="sm" fallback={r.avatar} />
-                      <div className="flex-1">
-                        <p className="text-xs font-semibold text-foreground">{r.name}</p>
-                      </div>
-                      <Badge variant="success" size="sm">활성</Badge>
-                    </div>
-                  ))}
-                </Card>
-              </div>
-            )}
-
-            {(activeId === "active" || activeId === "completed") && (
-              <div className="space-y-3">
-                <p className="text-sm font-semibold text-foreground">
-                  {activeId === "active" ? "진행 중인 프로젝트" : "완료된 프로젝트"}
-                </p>
-                <div className="grid grid-cols-2 gap-3">
-                  {["VEGA UI", "디자인 시스템", "API 서버", "모바일 앱"].map((name, i) => (
-                    <Card key={name} variant="line" className="p-4 space-y-3 bg-card">
-                      <div className="flex items-start justify-between">
-                        <CardTitle className="text-sm font-semibold text-foreground">{name}</CardTitle>
-                        <Badge variant={activeId === "completed" ? "success" : "warning"} size="sm">
-                          {activeId === "completed" ? "완료" : "진행 중"}
-                        </Badge>
-                      </div>
-                      <ProgressIndicator value={activeId === "completed" ? 100 : [60, 45, 80, 30][i]} linearSize="sm" />
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {(activeId === "roles" || activeId === "settings" || activeId === "team" || activeId === "projects") && (
-              <div className="flex flex-col items-center justify-center h-40 text-muted-foreground text-sm">
-                <p>준비 중입니다.</p>
-              </div>
-            )}
+              ))}
+            </div>
 
           </main>
         </div>

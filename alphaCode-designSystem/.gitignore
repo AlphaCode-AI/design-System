@@ -7,3 +7,6 @@ node_modules/
 
 # OS
 .DS_Store
+
+# 소스맵
+dist/*.map

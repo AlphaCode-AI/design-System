@@ -104,6 +104,10 @@ export type { PaginationProps, PaginationType } from "@/components/Pagination";
 export { ProgressIndicator } from "@/components/ProgressIndicator";
 export type { ProgressIndicatorProps, ProgressType, ProgressLinearSize, ProgressCircularSize } from "@/components/ProgressIndicator";
 
+// ── Skeleton
+export { Skeleton } from "@/components/Skeleton";
+export type { SkeletonProps, SkeletonRadius } from "@/components/Skeleton";
+
 // ── Dropdown
 export { Dropdown, DropdownTrigger, DropdownContent, DropdownLabel, DropdownSeparator, DropdownItem, DropdownCheckboxItem, DropdownRadioGroup, DropdownRadioItem, DropdownAvatarHeader, DropdownAvatarItem, DropdownSubMenu } from "@/components/Dropdown";
 export type { DropdownProps, DropdownTriggerProps, DropdownContentProps, DropdownItemProps, DropdownCheckboxItemProps, DropdownRadioGroupProps, DropdownRadioItemProps, DropdownAvatarHeaderProps, DropdownAvatarItemProps, DropdownSubMenuProps, DropdownAlign, DropdownSide } from "@/components/Dropdown";
