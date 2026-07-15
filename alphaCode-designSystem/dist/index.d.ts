@@ -1,5 +1,5 @@
 import * as class_variance_authority_types from 'class-variance-authority/types';
-import * as React from 'react';
+import * as React$1 from 'react';
 import { VariantProps } from 'class-variance-authority';
 import { DateRange } from 'react-day-picker';
 export { DateRange } from 'react-day-picker';
@@ -11,11 +11,11 @@ declare const buttonVariants: (props?: ({
     variant?: "link" | "primary" | "secondary" | "tertiary" | "icon" | null | undefined;
     size?: "xl" | "lg" | "md" | "sm" | "xs" | "icon-xl" | "icon-lg" | "icon-md" | "icon-sm" | "icon-xs" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+interface ButtonProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
     asChild?: boolean;
     loading?: boolean;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: React$1.ReactNode;
+    rightIcon?: React$1.ReactNode;
     /**
      * variant별 색상을 override할 Tailwind 클래스
      * @example "bg-blue-500 text-white hover:bg-blue-600"
@@ -24,24 +24,24 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Var
     /** true면 부모 너비에 맞게 100% 확장 */
     fullWidth?: boolean;
 }
-declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+declare const Button: React$1.ForwardRefExoticComponent<ButtonProps & React$1.RefAttributes<HTMLButtonElement>>;
 
 declare const buttonGroupVariants: (props?: ({
     direction?: "horizontal" | "vertical" | null | undefined;
     gap?: "md" | "sm" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof buttonGroupVariants> {
+interface ButtonGroupProps extends React$1.HTMLAttributes<HTMLDivElement>, VariantProps<typeof buttonGroupVariants> {
     direction?: "horizontal" | "vertical";
 }
-declare function ButtonGroup({ className, direction, children, ...props }: ButtonGroupProps): React.JSX.Element;
+declare function ButtonGroup({ className, direction, children, ...props }: ButtonGroupProps): React$1.JSX.Element;
 
 declare const fabVariants: (props?: ({
     variant?: "primary" | "secondary" | "tertiary" | null | undefined;
     size?: "lg" | "md" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface FABProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof fabVariants> {
+interface FABProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof fabVariants> {
     /** 아이콘 (필수) — children으로 전달 */
-    children: React.ReactNode;
+    children: React$1.ReactNode;
     /**
      * 레이블 텍스트
      * - expandOnHover 없이 사용: 항상 라벨 표시 (Extended FAB)
@@ -77,23 +77,23 @@ interface FABProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Varian
      */
     colorClassName?: string;
 }
-declare const FAB: React.ForwardRefExoticComponent<FABProps & React.RefAttributes<HTMLButtonElement>>;
+declare const FAB: React$1.ForwardRefExoticComponent<FABProps & React$1.RefAttributes<HTMLButtonElement>>;
 
 declare const badgeVariants: (props?: ({
     variant?: "primary" | "complete" | "success" | "warning" | "fail" | "default" | null | undefined;
     size?: "lg" | "md" | "sm" | "xs" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
+interface BadgeProps extends React$1.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
     /** 좌측 아이콘 (선택) */
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
 }
-declare function Badge({ className, variant, size, icon, children, ...props }: BadgeProps): React.JSX.Element;
+declare function Badge({ className, variant, size, icon, children, ...props }: BadgeProps): React$1.JSX.Element;
 
 declare const avatarVariants: (props?: ({
     shape?: "circle" | "square" | null | undefined;
     size?: "xl" | "lg" | "md" | "sm" | "xs" | "2xl" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface AvatarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">, VariantProps<typeof avatarVariants> {
+interface AvatarProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "children">, VariantProps<typeof avatarVariants> {
     /** 이미지 URL */
     src?: string;
     /** 이미지 alt (접근성: 스크린 리더용) */
@@ -101,11 +101,11 @@ interface AvatarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "childr
     /** 이름 — Text 타입 이니셜 생성 및 접근성에 사용 */
     name?: string;
     /** 아이콘 — Icon 타입에 사용 */
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
     /** 이미지 로드 실패 시 fallback (기본: 이니셜 또는 아이콘) */
-    fallback?: React.ReactNode;
+    fallback?: React$1.ReactNode;
 }
-declare const Avatar: React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLDivElement>>;
+declare const Avatar: React$1.ForwardRefExoticComponent<AvatarProps & React$1.RefAttributes<HTMLDivElement>>;
 
 declare const cardVariants: (props?: ({
     variant?: "background" | "line" | "shadow" | null | undefined;
@@ -120,13 +120,13 @@ declare const shadowSizeMap: {
     readonly "2xl": "shadow-2xl";
 };
 type CardShadowSize = keyof typeof shadowSizeMap;
-interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
+interface CardProps extends React$1.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
     shadowSize?: CardShadowSize;
 }
-declare const Card: React.ForwardRefExoticComponent<CardProps & React.RefAttributes<HTMLDivElement>>;
-interface CardMenuProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+declare const Card: React$1.ForwardRefExoticComponent<CardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface CardMenuProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement> {
 }
-declare const CardMenu: React.ForwardRefExoticComponent<CardMenuProps & React.RefAttributes<HTMLButtonElement>>;
+declare const CardMenu: React$1.ForwardRefExoticComponent<CardMenuProps & React$1.RefAttributes<HTMLButtonElement>>;
 /** 우측 상단 컨트롤 공통 props */
 type CardHeaderControl = {
     control?: "none";
@@ -141,7 +141,7 @@ type CardHeaderControl = {
 } | {
     control: "radio";
     checked?: boolean;
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    onChange?: React$1.ChangeEventHandler<HTMLInputElement>;
     name?: string;
     value?: string;
 } | {
@@ -150,51 +150,51 @@ type CardHeaderControl = {
     defaultChecked?: boolean;
     onCheckedChange?: (checked: boolean) => void;
 };
-type CardHeaderProps = Omit<React.HTMLAttributes<HTMLDivElement>, "title"> & CardHeaderControl & {
+type CardHeaderProps = Omit<React$1.HTMLAttributes<HTMLDivElement>, "title"> & CardHeaderControl & {
     /** 이미지 URL — image 타입 */
     imageSrc?: string;
     imageAlt?: string;
     /** 아바타 영역 콘텐츠 — Avatar 컴포넌트 또는 커스텀 ReactNode */
-    avatar?: React.ReactNode;
+    avatar?: React$1.ReactNode;
     /** 제목 */
-    title?: React.ReactNode;
+    title?: React$1.ReactNode;
     /** 부제목 / 설명 */
-    subtitle?: React.ReactNode;
+    subtitle?: React$1.ReactNode;
     /** 우측 뱃지/상태 요소 (control과 별개로 이미지 헤더에서 사용) */
-    badge?: React.ReactNode;
+    badge?: React$1.ReactNode;
 };
-declare const CardHeader: React.ForwardRefExoticComponent<CardHeaderProps & React.RefAttributes<HTMLDivElement>>;
-declare const CardTitle: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
-interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const CardHeader: React$1.ForwardRefExoticComponent<CardHeaderProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const CardTitle: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLHeadingElement> & React$1.RefAttributes<HTMLHeadingElement>>;
+interface CardContentProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /**
      * true이면 children 항목 사이에 <Divider />를 자동으로 삽입합니다.
      * @default false
      */
     divider?: boolean;
 }
-declare const CardContent: React.ForwardRefExoticComponent<CardContentProps & React.RefAttributes<HTMLDivElement>>;
-declare const CardDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
-interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const CardContent: React$1.ForwardRefExoticComponent<CardContentProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const CardDescription: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLParagraphElement> & React$1.RefAttributes<HTMLParagraphElement>>;
+interface CardFooterProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /** 구분선 표시 여부 */
     divider?: boolean;
 }
-declare const CardFooter: React.ForwardRefExoticComponent<CardFooterProps & React.RefAttributes<HTMLDivElement>>;
-interface CardFooterUserProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const CardFooter: React$1.ForwardRefExoticComponent<CardFooterProps & React$1.RefAttributes<HTMLDivElement>>;
+interface CardFooterUserProps extends React$1.HTMLAttributes<HTMLDivElement> {
     avatar?: Pick<AvatarProps, "src" | "name" | "fallback" | "size" | "shape">;
     name?: string;
     sub?: string;
-    action?: React.ReactNode;
+    action?: React$1.ReactNode;
 }
-declare const CardFooterUser: React.ForwardRefExoticComponent<CardFooterUserProps & React.RefAttributes<HTMLDivElement>>;
-interface CardFooterInfoProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const CardFooterUser: React$1.ForwardRefExoticComponent<CardFooterUserProps & React$1.RefAttributes<HTMLDivElement>>;
+interface CardFooterInfoProps extends React$1.HTMLAttributes<HTMLDivElement> {
     items?: Array<{
-        icon?: React.ReactNode;
+        icon?: React$1.ReactNode;
         label: string;
     }>;
-    action?: React.ReactNode;
+    action?: React$1.ReactNode;
 }
-declare const CardFooterInfo: React.ForwardRefExoticComponent<CardFooterInfoProps & React.RefAttributes<HTMLDivElement>>;
-interface CardFooterButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const CardFooterInfo: React$1.ForwardRefExoticComponent<CardFooterInfoProps & React$1.RefAttributes<HTMLDivElement>>;
+interface CardFooterButtonsProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /** 버튼 배치 방향 */
     direction?: "horizontal" | "vertical";
     /** 주요 액션 버튼 텍스트 */
@@ -208,21 +208,21 @@ interface CardFooterButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
     /** 구분선 표시 여부 */
     divider?: boolean;
 }
-declare const CardFooterButtons: React.ForwardRefExoticComponent<CardFooterButtonsProps & React.RefAttributes<HTMLDivElement>>;
+declare const CardFooterButtons: React$1.ForwardRefExoticComponent<CardFooterButtonsProps & React$1.RefAttributes<HTMLDivElement>>;
 
 declare const dividerVariants: (props?: ({
     orientation?: "horizontal" | "vertical" | null | undefined;
     variant?: "solid" | "dashed" | null | undefined;
     inset?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface DividerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof dividerVariants> {
+interface DividerProps extends React$1.HTMLAttributes<HTMLDivElement>, VariantProps<typeof dividerVariants> {
 }
-declare function Divider({ className, orientation, variant, inset, ...props }: DividerProps): React.JSX.Element;
+declare function Divider({ className, orientation, variant, inset, ...props }: DividerProps): React$1.JSX.Element;
 
 declare const checkboxVariants: (props?: ({
     size?: "xl" | "lg" | "md" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">, VariantProps<typeof checkboxVariants> {
+interface CheckboxProps extends Omit<React$1.InputHTMLAttributes<HTMLInputElement>, "size" | "type">, VariantProps<typeof checkboxVariants> {
     label?: string;
     description?: string;
     indeterminate?: boolean;
@@ -232,18 +232,18 @@ interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>
      */
     activeColor?: string;
 }
-declare const Checkbox: React.ForwardRefExoticComponent<CheckboxProps & React.RefAttributes<HTMLInputElement>>;
+declare const Checkbox: React$1.ForwardRefExoticComponent<CheckboxProps & React$1.RefAttributes<HTMLInputElement>>;
 
-interface CheckboxGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {
+interface CheckboxGroupProps extends React$1.HTMLAttributes<HTMLFieldSetElement> {
     title?: string;
     direction?: "vertical" | "horizontal";
 }
-declare function CheckboxGroup({ title, direction, className, children, ...props }: CheckboxGroupProps): React.JSX.Element;
+declare function CheckboxGroup({ title, direction, className, children, ...props }: CheckboxGroupProps): React$1.JSX.Element;
 
 declare const radioVariants: (props?: ({
     size?: "xl" | "lg" | "md" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">, VariantProps<typeof radioVariants> {
+interface RadioProps extends Omit<React$1.InputHTMLAttributes<HTMLInputElement>, "size" | "type">, VariantProps<typeof radioVariants> {
     label?: string;
     description?: string;
     /**
@@ -252,12 +252,12 @@ interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "
      */
     activeColor?: string;
 }
-declare const Radio: React.ForwardRefExoticComponent<RadioProps & React.RefAttributes<HTMLInputElement>>;
-interface RadioGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {
+declare const Radio: React$1.ForwardRefExoticComponent<RadioProps & React$1.RefAttributes<HTMLInputElement>>;
+interface RadioGroupProps extends React$1.HTMLAttributes<HTMLFieldSetElement> {
     title?: string;
     direction?: "vertical" | "horizontal";
 }
-declare function RadioGroup({ title, direction, className, children, ...props }: RadioGroupProps): React.JSX.Element;
+declare function RadioGroup({ title, direction, className, children, ...props }: RadioGroupProps): React$1.JSX.Element;
 
 interface BreadcrumbItem {
     /** 표시할 레이블 */
@@ -267,7 +267,7 @@ interface BreadcrumbItem {
     /** 클릭 핸들러 */
     onClick?: () => void;
 }
-interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
+interface BreadcrumbsProps extends React$1.HTMLAttributes<HTMLElement> {
     /** 브레드크럼 아이템 목록 */
     items: BreadcrumbItem[];
     /**
@@ -285,7 +285,7 @@ interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
     /** 홈 아이콘 표시 여부 (기본: true) */
     showHomeIcon?: boolean;
 }
-declare function Breadcrumbs({ className, items, separator, maxItems, showHomeIcon, ...props }: BreadcrumbsProps): React.JSX.Element | null;
+declare function Breadcrumbs({ className, items, separator, maxItems, showHomeIcon, ...props }: BreadcrumbsProps): React$1.JSX.Element | null;
 
 type DatePickerMode = "single" | "range";
 type DatePickerSize = "sm" | "md" | "lg";
@@ -311,7 +311,7 @@ interface DatePickerProps {
     className?: string;
     id?: string;
 }
-declare function DatePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, placeholder, dateFormat, disabled, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DatePickerProps): React.JSX.Element;
+declare function DatePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, placeholder, dateFormat, disabled, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DatePickerProps): React$1.JSX.Element;
 interface DateRangePickerProps {
     value?: DateRange;
     defaultValue?: DateRange;
@@ -334,35 +334,35 @@ interface DateRangePickerProps {
     className?: string;
     id?: string;
 }
-declare function DateRangePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, startPlaceholder, endPlaceholder, dateFormat, disabled, twoMonths, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DateRangePickerProps): React.JSX.Element;
+declare function DateRangePicker({ value, defaultValue, onChange, size, state, label, helperText, errorMessage, startPlaceholder, endPlaceholder, dateFormat, disabled, twoMonths, minDate, maxDate, offsetMonths, disabledDates, weekendColor, className, id, }: DateRangePickerProps): React$1.JSX.Element;
 
 declare const textInputVariants: (props?: ({
     size?: "lg" | "md" | "sm" | null | undefined;
     state?: "complete" | "default" | "error" | "disable" | "focus" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
+interface TextInputProps extends Omit<React$1.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
     size?: "sm" | "md" | "lg";
     state?: "default" | "complete" | "focus" | "error" | "disable";
     label?: string;
     labelLeft?: boolean;
     helperText?: string;
     errorMessage?: string;
-    prefix?: React.ReactNode;
-    suffix?: React.ReactNode;
+    prefix?: React$1.ReactNode;
+    suffix?: React$1.ReactNode;
     buttonLabel?: string;
     buttonVariant?: "primary" | "secondary" | "tertiary" | "link";
     buttonClassName?: string;
-    onButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
+    onButtonClick?: React$1.MouseEventHandler<HTMLButtonElement>;
 }
-declare const TextInput: React.ForwardRefExoticComponent<TextInputProps & React.RefAttributes<HTMLInputElement>>;
+declare const TextInput: React$1.ForwardRefExoticComponent<TextInputProps & React$1.RefAttributes<HTMLInputElement>>;
 
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextareaProps extends React$1.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label?: string;
     helperText?: string;
     errorMessage?: string;
     state?: "default" | "complete" | "focus" | "error" | "disable";
 }
-declare const Textarea: React.ForwardRefExoticComponent<TextareaProps & React.RefAttributes<HTMLTextAreaElement>>;
+declare const Textarea: React$1.ForwardRefExoticComponent<TextareaProps & React$1.RefAttributes<HTMLTextAreaElement>>;
 
 interface SelectOption {
     label: string;
@@ -391,24 +391,24 @@ interface SelectProps extends VariantProps<typeof selectVariants> {
     className?: string;
     id?: string;
 }
-declare function Select({ size, state, options, groups, placeholder, value, defaultValue, onValueChange, disabled, label, helperText, errorMessage, className, id, }: SelectProps): React.JSX.Element;
+declare function Select({ size, state, options, groups, placeholder, value, defaultValue, onValueChange, disabled, label, helperText, errorMessage, className, id, }: SelectProps): React$1.JSX.Element;
 
 declare const fileInputVariants: (props?: ({
     size?: "lg" | "md" | "sm" | null | undefined;
     state?: "complete" | "default" | "error" | "disable" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">, VariantProps<typeof fileInputVariants> {
+interface FileInputProps extends Omit<React$1.InputHTMLAttributes<HTMLInputElement>, "size" | "type">, VariantProps<typeof fileInputVariants> {
     label?: string;
     helperText?: string;
     errorMessage?: string;
     triggerLabel?: string;
 }
-declare const FileInput: React.ForwardRefExoticComponent<FileInputProps & React.RefAttributes<HTMLInputElement>>;
+declare const FileInput: React$1.ForwardRefExoticComponent<FileInputProps & React$1.RefAttributes<HTMLInputElement>>;
 
 declare const switchTrackVariants: (props?: ({
     size?: "lg" | "md" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-interface SwitchProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange">, VariantProps<typeof switchTrackVariants> {
+interface SwitchProps extends Omit<React$1.ButtonHTMLAttributes<HTMLButtonElement>, "onChange">, VariantProps<typeof switchTrackVariants> {
     checked?: boolean;
     defaultChecked?: boolean;
     onCheckedChange?: (checked: boolean) => void;
@@ -416,9 +416,9 @@ interface SwitchProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
     activeColor?: string;
     label?: string;
 }
-declare const Switch: React.ForwardRefExoticComponent<SwitchProps & React.RefAttributes<HTMLButtonElement>>;
+declare const Switch: React$1.ForwardRefExoticComponent<SwitchProps & React$1.RefAttributes<HTMLButtonElement>>;
 
-interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ToggleGroupProps extends React$1.HTMLAttributes<HTMLDivElement> {
     value?: string;
     defaultValue?: string;
     onValueChange?: (value: string) => void;
@@ -429,35 +429,35 @@ interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     /** active 아이템에 적용할 Tailwind 클래스 (variant의 active 색상을 override) */
     activeClassName?: string;
 }
-declare function ToggleGroup({ value, defaultValue, onValueChange, variant, size, iconOnly, activeClassName, className, children, ...props }: ToggleGroupProps): React.JSX.Element;
-interface ToggleGroupItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+declare function ToggleGroup({ value, defaultValue, onValueChange, variant, size, iconOnly, activeClassName, className, children, ...props }: ToggleGroupProps): React$1.JSX.Element;
+interface ToggleGroupItemProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement> {
     value: string;
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
     tooltip?: string;
 }
-declare function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, ...props }: ToggleGroupItemProps): React.JSX.Element;
+declare function ToggleGroupItem({ value, icon, tooltip, children, className, disabled, ...props }: ToggleGroupItemProps): React$1.JSX.Element;
 
 type TooltipPlacement = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
 interface TooltipProps {
     /** 툴팁 본문 */
-    content: React.ReactNode;
+    content: React$1.ReactNode;
     /** 툴팁 위치 */
     placement?: TooltipPlacement;
     /** 트리거 요소 */
-    children: React.ReactNode;
+    children: React$1.ReactNode;
     /** 툴팁 박스 Tailwind 클래스 override */
     className?: string;
     /** 화살표 Tailwind border 클래스 override (예: "border-t-ac-blue-90") */
     arrowClassName?: string;
 }
-declare function Tooltip({ content, placement, children, className, arrowClassName }: TooltipProps): React.JSX.Element;
+declare function Tooltip({ content, placement, children, className, arrowClassName }: TooltipProps): React$1.JSX.Element;
 
 type ExpandIconType = "chevron" | "plusMinus" | "arrow";
 interface SideNavItem {
     id: string;
     label: string;
     href?: string;
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
     children?: SideNavItem[];
     divider?: boolean;
 }
@@ -468,9 +468,9 @@ interface SideNavContextValue {
     toggleOpen: (id: string) => void;
     activeClassName: string;
     expandIcon: ExpandIconType;
-    renderLink?: (item: SideNavItem, children: React.ReactNode, className: string) => React.ReactNode;
+    renderLink?: (item: SideNavItem, children: React$1.ReactNode, className: string) => React$1.ReactNode;
 }
-interface SideNavigationProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+interface SideNavigationProps extends Omit<React$1.HTMLAttributes<HTMLElement>, "title"> {
     items: SideNavItem[];
     activeId?: string;
     defaultActiveId?: string;
@@ -496,11 +496,11 @@ interface SideNavigationProps extends Omit<React.HTMLAttributes<HTMLElement>, "t
      */
     renderLink?: SideNavContextValue["renderLink"];
 }
-declare const SideNavigation: React.ForwardRefExoticComponent<SideNavigationProps & React.RefAttributes<HTMLElement>>;
+declare const SideNavigation: React$1.ForwardRefExoticComponent<SideNavigationProps & React$1.RefAttributes<HTMLElement>>;
 
 type TabSize = "sm" | "md" | "lg";
 type TabVariant = "fill" | "full";
-interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+interface TabsProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "onChange"> {
     value?: string;
     defaultValue?: string;
     onValueChange?: (value: string) => void;
@@ -514,28 +514,28 @@ interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange
      */
     activeColor?: string;
 }
-declare const Tabs: React.ForwardRefExoticComponent<TabsProps & React.RefAttributes<HTMLDivElement>>;
-declare const TabList: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-interface TabTriggerProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
+declare const Tabs: React$1.ForwardRefExoticComponent<TabsProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const TabList: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
+interface TabTriggerProps extends Omit<React$1.ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
     value: string;
 }
-declare const TabTrigger: React.ForwardRefExoticComponent<TabTriggerProps & React.RefAttributes<HTMLButtonElement>>;
-interface TabContentProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const TabTrigger: React$1.ForwardRefExoticComponent<TabTriggerProps & React$1.RefAttributes<HTMLButtonElement>>;
+interface TabContentProps extends React$1.HTMLAttributes<HTMLDivElement> {
     value: string;
 }
-declare const TabContent: React.ForwardRefExoticComponent<TabContentProps & React.RefAttributes<HTMLDivElement>>;
+declare const TabContent: React$1.ForwardRefExoticComponent<TabContentProps & React$1.RefAttributes<HTMLDivElement>>;
 
 type SnackbarVariant = "default" | "error" | "success" | "info" | "warning";
 type SnackbarPosition = "top" | "bottom";
 type SnackbarSize = "sm" | "md" | "lg";
 interface SnackbarItem {
     id: string;
-    message: React.ReactNode;
+    message: React$1.ReactNode;
     variant?: SnackbarVariant;
     /** 좌측 아이콘 또는 아바타 */
-    leftItem?: React.ReactNode;
+    leftItem?: React$1.ReactNode;
     /** 우측: close / chevron / check / ReactNode (Button 등) */
-    rightItem?: "close" | "chevron" | "check" | React.ReactNode;
+    rightItem?: "close" | "chevron" | "check" | React$1.ReactNode;
     /** 아이콘 색상 override — Tailwind text 클래스. 미지정 시 variant 기본색 적용 */
     iconColorClass?: string;
     /** 배경색 override — Tailwind bg 클래스 (예: "bg-ac-blue-10") */
@@ -552,19 +552,19 @@ interface SnackbarContextValue {
 }
 declare function useSnackbar(): SnackbarContextValue;
 interface SnackbarProviderProps {
-    children: React.ReactNode;
+    children: React$1.ReactNode;
     position?: SnackbarPosition;
     maxCount?: number;
     defaultDuration?: number;
 }
-declare function SnackbarProvider({ children, position, maxCount, defaultDuration, }: SnackbarProviderProps): React.JSX.Element;
-interface SnackbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color"> {
-    message: React.ReactNode;
+declare function SnackbarProvider({ children, position, maxCount, defaultDuration, }: SnackbarProviderProps): React$1.JSX.Element;
+interface SnackbarProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "color"> {
+    message: React$1.ReactNode;
     variant?: SnackbarVariant;
     /** 좌측 아이콘 또는 아바타 */
-    leftItem?: React.ReactNode;
+    leftItem?: React$1.ReactNode;
     /** 우측: close / chevron / check / ReactNode (Button 등) */
-    rightItem?: "close" | "chevron" | "check" | React.ReactNode;
+    rightItem?: "close" | "chevron" | "check" | React$1.ReactNode;
     /** 아이콘 색상 override — Tailwind text 클래스. 미지정 시 variant 기본색 적용 */
     iconColorClass?: string;
     /** 배경색 override — Tailwind bg 클래스 (예: "bg-ac-blue-10") */
@@ -582,7 +582,7 @@ interface SnackbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "colo
     onClose?: () => void;
     onAction?: () => void;
 }
-declare const Snackbar: React.ForwardRefExoticComponent<SnackbarProps & React.RefAttributes<HTMLDivElement>>;
+declare const Snackbar: React$1.ForwardRefExoticComponent<SnackbarProps & React$1.RefAttributes<HTMLDivElement>>;
 
 type ToastStyle = "default" | "full" | "uploading" | "uploading-success" | "message";
 type ToastPosition = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
@@ -614,7 +614,7 @@ interface ToastProps extends Omit<ToastItem, "id"> {
     className?: string;
 }
 interface ToastProviderProps {
-    children: React.ReactNode;
+    children: React$1.ReactNode;
     position?: ToastPosition;
     maxCount?: number;
     defaultDuration?: number;
@@ -627,11 +627,11 @@ interface ToastContextValue {
     dismissAll: () => void;
 }
 declare function useToast(): ToastContextValue;
-declare function ToastProvider({ children, position, maxCount, defaultDuration, stackMode, }: ToastProviderProps): React.JSX.Element;
-declare const Toast: React.ForwardRefExoticComponent<ToastProps & React.RefAttributes<HTMLDivElement>>;
+declare function ToastProvider({ children, position, maxCount, defaultDuration, stackMode, }: ToastProviderProps): React$1.JSX.Element;
+declare const Toast: React$1.ForwardRefExoticComponent<ToastProps & React$1.RefAttributes<HTMLDivElement>>;
 
 type PaginationType = "simple" | "default";
-interface PaginationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+interface PaginationProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "onChange"> {
     /** 전체 페이지 수 */
     total: number;
     /** 현재 페이지 (controlled) */
@@ -653,12 +653,12 @@ interface PaginationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "on
     /** Go to 페이지 점프 입력 표시 */
     showJumper?: boolean;
 }
-declare const Pagination: React.ForwardRefExoticComponent<PaginationProps & React.RefAttributes<HTMLDivElement>>;
+declare const Pagination: React$1.ForwardRefExoticComponent<PaginationProps & React$1.RefAttributes<HTMLDivElement>>;
 
 type ProgressType = "linear" | "circular";
 type ProgressLinearSize = "sm" | "md" | "lg" | "xl";
 type ProgressCircularSize = "xs" | "sm" | "md" | "lg" | "xl";
-interface ProgressIndicatorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color"> {
+interface ProgressIndicatorProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "color"> {
     /** 선형 / 원형 */
     type?: ProgressType;
     /** 0 ~ 100 */
@@ -680,7 +680,7 @@ interface ProgressIndicatorProps extends Omit<React.HTMLAttributes<HTMLDivElemen
     /** indeterminate (로딩 상태) */
     indeterminate?: boolean;
 }
-declare const ProgressIndicator: React.ForwardRefExoticComponent<ProgressIndicatorProps & React.RefAttributes<HTMLDivElement>>;
+declare const ProgressIndicator: React$1.ForwardRefExoticComponent<ProgressIndicatorProps & React$1.RefAttributes<HTMLDivElement>>;
 
 declare const RADIUS_MAP: {
     readonly none: "rounded-none";
@@ -699,7 +699,25 @@ interface SkeletonProps {
     index?: number;
     className?: string;
 }
-declare function Skeleton({ width, height, radius, index, className, }: SkeletonProps): React.JSX.Element;
+declare function Skeleton({ width, height, radius, index, className, }: SkeletonProps): React$1.JSX.Element;
+
+interface TreeListItemData {
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    children?: TreeListItemData[];
+    isExpanded?: boolean;
+}
+type TreeListDensity = "compact" | "balanced" | "spacious";
+interface TreeListProps {
+    items: TreeListItemData[];
+    density?: TreeListDensity;
+    header?: React.ReactNode;
+    selectedId?: string;
+    onSelect?: (id: string) => void;
+    className?: string;
+}
+declare function TreeList({ items, density, header, selectedId, onSelect, className, }: TreeListProps): React$1.JSX.Element;
 
 type DropdownAlign = "start" | "center" | "end";
 type DropdownSide = "top" | "bottom" | "left" | "right";
@@ -711,29 +729,29 @@ interface DropdownProps {
     align?: DropdownAlign;
     /** 드롭다운 열림 방식: 클릭, 호버, 또는 우클릭 @default "click" */
     trigger?: "click" | "hover" | "contextmenu";
-    children: React.ReactNode;
+    children: React$1.ReactNode;
 }
-declare function Dropdown({ open: controlledOpen, defaultOpen, onOpenChange, side, align, trigger, children, }: DropdownProps): React.JSX.Element;
+declare function Dropdown({ open: controlledOpen, defaultOpen, onOpenChange, side, align, trigger, children, }: DropdownProps): React$1.JSX.Element;
 declare namespace Dropdown {
     var displayName: string;
 }
-interface DropdownTriggerProps extends React.HTMLAttributes<HTMLElement> {
+interface DropdownTriggerProps extends React$1.HTMLAttributes<HTMLElement> {
     asChild?: boolean;
     disabled?: boolean;
 }
-declare function DropdownTrigger({ children, asChild, disabled, onClick, ...props }: DropdownTriggerProps): React.JSX.Element;
+declare function DropdownTrigger({ children, asChild, disabled, onClick, ...props }: DropdownTriggerProps): React$1.JSX.Element;
 declare namespace DropdownTrigger {
     var displayName: string;
 }
-interface DropdownContentProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+interface DropdownContentProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "title"> {
     minWidth?: number | string;
 }
-declare const DropdownContent: React.ForwardRefExoticComponent<DropdownContentProps & React.RefAttributes<HTMLDivElement>>;
-declare const DropdownLabel: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-declare const DropdownSeparator: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-interface DropdownItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+declare const DropdownContent: React$1.ForwardRefExoticComponent<DropdownContentProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const DropdownLabel: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
+declare const DropdownSeparator: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
+interface DropdownItemProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "title"> {
     /** 좌측 아이콘 */
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
     /** 우측 단축키 힌트 */
     shortcut?: string;
     /** 외부 링크 아이콘 표시 */
@@ -745,31 +763,31 @@ interface DropdownItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "
     small?: boolean;
     onSelect?: () => void;
 }
-declare const DropdownItem: React.ForwardRefExoticComponent<DropdownItemProps & React.RefAttributes<HTMLDivElement>>;
-interface DropdownCheckboxItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+declare const DropdownItem: React$1.ForwardRefExoticComponent<DropdownItemProps & React$1.RefAttributes<HTMLDivElement>>;
+interface DropdownCheckboxItemProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "title"> {
     checked?: boolean;
     defaultChecked?: boolean;
     onCheckedChange?: (checked: boolean) => void;
     disabled?: boolean;
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
 }
-declare const DropdownCheckboxItem: React.ForwardRefExoticComponent<DropdownCheckboxItemProps & React.RefAttributes<HTMLDivElement>>;
-interface DropdownRadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const DropdownCheckboxItem: React$1.ForwardRefExoticComponent<DropdownCheckboxItemProps & React$1.RefAttributes<HTMLDivElement>>;
+interface DropdownRadioGroupProps extends React$1.HTMLAttributes<HTMLDivElement> {
     value?: string;
     defaultValue?: string;
     onValueChange?: (value: string) => void;
 }
-declare function DropdownRadioGroup({ value: controlledValue, defaultValue, onValueChange, children, ...props }: DropdownRadioGroupProps): React.JSX.Element;
+declare function DropdownRadioGroup({ value: controlledValue, defaultValue, onValueChange, children, ...props }: DropdownRadioGroupProps): React$1.JSX.Element;
 declare namespace DropdownRadioGroup {
     var displayName: string;
 }
-interface DropdownRadioItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+interface DropdownRadioItemProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "title"> {
     value: string;
     disabled?: boolean;
-    icon?: React.ReactNode;
+    icon?: React$1.ReactNode;
 }
-declare const DropdownRadioItem: React.ForwardRefExoticComponent<DropdownRadioItemProps & React.RefAttributes<HTMLDivElement>>;
-interface DropdownAvatarHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const DropdownRadioItem: React$1.ForwardRefExoticComponent<DropdownRadioItemProps & React$1.RefAttributes<HTMLDivElement>>;
+interface DropdownAvatarHeaderProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /** 아바타 이미지 URL */
     src?: string;
     /** 이름 (이니셜 생성에 사용) */
@@ -779,8 +797,8 @@ interface DropdownAvatarHeaderProps extends React.HTMLAttributes<HTMLDivElement>
     /** 부 텍스트 (이메일 등) */
     description?: string;
 }
-declare const DropdownAvatarHeader: React.ForwardRefExoticComponent<DropdownAvatarHeaderProps & React.RefAttributes<HTMLDivElement>>;
-interface DropdownAvatarItemProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const DropdownAvatarHeader: React$1.ForwardRefExoticComponent<DropdownAvatarHeaderProps & React$1.RefAttributes<HTMLDivElement>>;
+interface DropdownAvatarItemProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /** 아바타 이미지 URL */
     src?: string;
     /** 이름 (이니셜 생성에 사용) */
@@ -792,14 +810,14 @@ interface DropdownAvatarItemProps extends React.HTMLAttributes<HTMLDivElement> {
     disabled?: boolean;
     onSelect?: () => void;
 }
-declare const DropdownAvatarItem: React.ForwardRefExoticComponent<DropdownAvatarItemProps & React.RefAttributes<HTMLDivElement>>;
+declare const DropdownAvatarItem: React$1.ForwardRefExoticComponent<DropdownAvatarItemProps & React$1.RefAttributes<HTMLDivElement>>;
 interface DropdownSubMenuProps {
     id: string;
-    trigger: React.ReactNode;
-    children: React.ReactNode;
+    trigger: React$1.ReactNode;
+    children: React$1.ReactNode;
     disabled?: boolean;
 }
-declare function DropdownSubMenu({ id, trigger, children, disabled }: DropdownSubMenuProps): React.JSX.Element;
+declare function DropdownSubMenu({ id, trigger, children, disabled }: DropdownSubMenuProps): React$1.JSX.Element;
 declare namespace DropdownSubMenu {
     var displayName: string;
 }
@@ -816,47 +834,47 @@ interface DialogProps {
     closeOnScrim?: boolean;
     /** ESC 키로 닫기 (기본 true) */
     closeOnEsc?: boolean;
-    children?: React.ReactNode;
+    children?: React$1.ReactNode;
 }
-declare function Dialog({ open: controlledOpen, defaultOpen, onOpenChange, size, closeOnScrim, closeOnEsc, children, }: DialogProps): React.JSX.Element;
+declare function Dialog({ open: controlledOpen, defaultOpen, onOpenChange, size, closeOnScrim, closeOnEsc, children, }: DialogProps): React$1.JSX.Element;
 declare namespace Dialog {
     var displayName: string;
 }
-interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
+interface DialogTriggerProps extends React$1.HTMLAttributes<HTMLElement> {
     asChild?: boolean;
 }
-declare function DialogTrigger({ children, asChild, onClick, ...props }: DialogTriggerProps): React.JSX.Element;
+declare function DialogTrigger({ children, asChild, onClick, ...props }: DialogTriggerProps): React$1.JSX.Element;
 declare namespace DialogTrigger {
     var displayName: string;
 }
-interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DialogContentProps extends React$1.HTMLAttributes<HTMLDivElement> {
     closeOnScrim?: boolean;
 }
-declare const DialogContent: React.ForwardRefExoticComponent<DialogContentProps & React.RefAttributes<HTMLDivElement>>;
-interface DialogHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
-    title?: React.ReactNode;
-    subtitle?: React.ReactNode;
+declare const DialogContent: React$1.ForwardRefExoticComponent<DialogContentProps & React$1.RefAttributes<HTMLDivElement>>;
+interface DialogHeaderProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "title"> {
+    title?: React$1.ReactNode;
+    subtitle?: React$1.ReactNode;
     showClose?: boolean;
     divider?: boolean;
 }
-declare const DialogHeader: React.ForwardRefExoticComponent<DialogHeaderProps & React.RefAttributes<HTMLDivElement>>;
-declare const DialogBody: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const DialogHeader: React$1.ForwardRefExoticComponent<DialogHeaderProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const DialogBody: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
+interface DialogFooterProps extends React$1.HTMLAttributes<HTMLDivElement> {
     divider?: boolean;
 }
-declare const DialogFooter: React.ForwardRefExoticComponent<DialogFooterProps & React.RefAttributes<HTMLDivElement>>;
-declare const DialogTitle: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
-declare const DialogDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
-interface DialogCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+declare const DialogFooter: React$1.ForwardRefExoticComponent<DialogFooterProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const DialogTitle: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLHeadingElement> & React$1.RefAttributes<HTMLHeadingElement>>;
+declare const DialogDescription: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLParagraphElement> & React$1.RefAttributes<HTMLParagraphElement>>;
+interface DialogCloseProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement> {
     asChild?: boolean;
 }
-declare function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps): React.JSX.Element;
+declare function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps): React$1.JSX.Element;
 declare namespace DialogClose {
     var displayName: string;
 }
 
 type AccordionType = "single" | "multiple";
-interface AccordionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+interface AccordionProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "onChange"> {
     type?: AccordionType;
     /** default: 배경 없음 / filled: 배경색 있음 */
     variant?: "default" | "filled";
@@ -868,22 +886,22 @@ interface AccordionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onC
     defaultValue?: string[];
     onValueChange?: (value: string[]) => void;
 }
-declare const Accordion: React.ForwardRefExoticComponent<AccordionProps & React.RefAttributes<HTMLDivElement>>;
-interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const Accordion: React$1.ForwardRefExoticComponent<AccordionProps & React$1.RefAttributes<HTMLDivElement>>;
+interface AccordionItemProps extends React$1.HTMLAttributes<HTMLDivElement> {
     value: string;
 }
-declare const AccordionItem: React.ForwardRefExoticComponent<AccordionItemProps & React.RefAttributes<HTMLDivElement>>;
-interface AccordionTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+declare const AccordionItem: React$1.ForwardRefExoticComponent<AccordionItemProps & React$1.RefAttributes<HTMLDivElement>>;
+interface AccordionTriggerProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement> {
     /** plus: +/- 토글 아이콘 (Default) / chevron: 화살표 아이콘 */
     iconType?: "plus" | "chevron";
 }
-declare const AccordionTrigger: React.ForwardRefExoticComponent<AccordionTriggerProps & React.RefAttributes<HTMLButtonElement>>;
-declare const AccordionContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const AccordionTrigger: React$1.ForwardRefExoticComponent<AccordionTriggerProps & React$1.RefAttributes<HTMLButtonElement>>;
+declare const AccordionContent: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
 
 type CarouselOrientation = "horizontal" | "vertical";
 type CarouselNavStyle = "default" | "line" | "border" | "text";
 type CarouselDotsType = "rounded" | "line" | "border";
-interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CarouselProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /** 슬라이드 방향 */
     orientation?: CarouselOrientation;
     /** 무한 루프 여부 */
@@ -896,22 +914,22 @@ interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
     /** 한 번에 보이는 아이템 수 — Multi Carousel */
     itemsPerView?: number;
 }
-declare const Carousel: React.ForwardRefExoticComponent<CarouselProps & React.RefAttributes<HTMLDivElement>>;
-interface CarouselContentProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const Carousel: React$1.ForwardRefExoticComponent<CarouselProps & React$1.RefAttributes<HTMLDivElement>>;
+interface CarouselContentProps extends React$1.HTMLAttributes<HTMLDivElement> {
 }
-declare const CarouselContent: React.ForwardRefExoticComponent<CarouselContentProps & React.RefAttributes<HTMLDivElement>>;
-declare const CarouselItem: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-interface CarouselNavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+declare const CarouselContent: React$1.ForwardRefExoticComponent<CarouselContentProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const CarouselItem: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
+interface CarouselNavButtonProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement> {
     navStyle?: CarouselNavStyle;
 }
-declare const CarouselPrevious: React.ForwardRefExoticComponent<CarouselNavButtonProps & React.RefAttributes<HTMLButtonElement>>;
-declare const CarouselNext: React.ForwardRefExoticComponent<CarouselNavButtonProps & React.RefAttributes<HTMLButtonElement>>;
-interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> {
+declare const CarouselPrevious: React$1.ForwardRefExoticComponent<CarouselNavButtonProps & React$1.RefAttributes<HTMLButtonElement>>;
+declare const CarouselNext: React$1.ForwardRefExoticComponent<CarouselNavButtonProps & React$1.RefAttributes<HTMLButtonElement>>;
+interface CarouselDotsProps extends React$1.HTMLAttributes<HTMLDivElement> {
     activeColor?: string;
     type?: CarouselDotsType;
 }
-declare const CarouselDots: React.ForwardRefExoticComponent<CarouselDotsProps & React.RefAttributes<HTMLDivElement>>;
-declare const CarouselCounter: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const CarouselDots: React$1.ForwardRefExoticComponent<CarouselDotsProps & React$1.RefAttributes<HTMLDivElement>>;
+declare const CarouselCounter: React$1.ForwardRefExoticComponent<React$1.HTMLAttributes<HTMLDivElement> & React$1.RefAttributes<HTMLDivElement>>;
 
 type SliderType = "default" | "input" | "with-icon" | "range" | "range-input";
 interface SliderProps {
@@ -928,11 +946,11 @@ interface SliderProps {
     disabled?: boolean;
     /** default / range 타입에서 min/max 레이블 표시 */
     showMinMax?: boolean;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: React$1.ReactNode;
+    rightIcon?: React$1.ReactNode;
     className?: string;
 }
-declare function Slider({ type, colorClassName, min, max, step, value: controlledValue, defaultValue, onValueChange, disabled, showMinMax, leftIcon, rightIcon, className, }: SliderProps): React.JSX.Element;
+declare function Slider({ type, colorClassName, min, max, step, value: controlledValue, defaultValue, onValueChange, disabled, showMinMax, leftIcon, rightIcon, className, }: SliderProps): React$1.JSX.Element;
 declare namespace Slider {
     var displayName: string;
 }
@@ -962,39 +980,39 @@ interface StepIndicatorProps {
     colorClassName?: string;
     className?: string;
 }
-declare function StepIndicator({ steps, current, type, style, size, showStepText, colorClassName, className, }: StepIndicatorProps): React.JSX.Element;
+declare function StepIndicator({ steps, current, type, style, size, showStepText, colorClassName, className, }: StepIndicatorProps): React$1.JSX.Element;
 declare namespace StepIndicator {
     var displayName: string;
 }
 
 type ResizableOrientation = "horizontal" | "vertical";
 type ResizableHandleVariant = "margin" | "line";
-interface ResizablePanelGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+interface ResizablePanelGroupProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "children"> {
     /** 크기 조절 방향. 기본값: horizontal */
     orientation?: ResizableOrientation;
     /** 초기 패널 크기 (%, 합산 100). 생략 시 균등 분할 */
     defaultSizes?: number[];
-    children: React.ReactNode;
+    children: React$1.ReactNode;
 }
-declare function ResizablePanelGroup({ orientation, defaultSizes, className, children, ...props }: ResizablePanelGroupProps): React.JSX.Element;
+declare function ResizablePanelGroup({ orientation, defaultSizes, className, children, ...props }: ResizablePanelGroupProps): React$1.JSX.Element;
 declare namespace ResizablePanelGroup {
     var displayName: string;
 }
-interface ResizablePanelProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ResizablePanelProps extends React$1.HTMLAttributes<HTMLDivElement> {
     /** ResizablePanelGroup이 자동으로 주입합니다 */
     _index?: number;
 }
-declare function ResizablePanel({ className, _index, style, ...props }: ResizablePanelProps): React.JSX.Element;
+declare function ResizablePanel({ className, _index, style, ...props }: ResizablePanelProps): React$1.JSX.Element;
 declare namespace ResizablePanel {
     var displayName: string;
 }
-interface ResizableHandleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+interface ResizableHandleProps extends Omit<React$1.HTMLAttributes<HTMLDivElement>, "children"> {
     /** margin: 여백 구분 (기본) | line: 1px 선 구분 */
     variant?: ResizableHandleVariant;
     /** ResizablePanelGroup이 자동으로 주입합니다 */
     _index?: number;
 }
-declare function ResizableHandle({ variant, className, _index, ...props }: ResizableHandleProps): React.JSX.Element;
+declare function ResizableHandle({ variant, className, _index, ...props }: ResizableHandleProps): React$1.JSX.Element;
 declare namespace ResizableHandle {
     var displayName: string;
 }
@@ -1008,8 +1026,8 @@ declare namespace ResizableHandle {
  */
 declare function cn(...inputs: ClassValue[]): string;
 
-declare function IconWrapper({ children, className, ...props }: React.HTMLAttributes<HTMLSpanElement>): React.JSX.Element;
-declare function cloneIconWithSize(icon: React.ReactNode, sizeClass: string): React.ReactNode;
+declare function IconWrapper({ children, className, ...props }: React$1.HTMLAttributes<HTMLSpanElement>): React$1.JSX.Element;
+declare function cloneIconWithSize(icon: React$1.ReactNode, sizeClass: string): React$1.ReactNode;
 
 interface InputHelperTextProps {
     id?: string;
@@ -1017,6 +1035,6 @@ interface InputHelperTextProps {
     errorMessage?: string;
     isError: boolean;
 }
-declare function InputHelperText({ id, helperText, errorMessage, isError }: InputHelperTextProps): React.JSX.Element | null;
+declare function InputHelperText({ id, helperText, errorMessage, isError }: InputHelperTextProps): React$1.JSX.Element | null;
 
-export { Accordion, AccordionContent, AccordionItem, type AccordionItemProps, type AccordionProps, AccordionTrigger, type AccordionTriggerProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BreadcrumbItem, Breadcrumbs, type BreadcrumbsProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardContent, CardDescription, CardFooter, CardFooterButtons, CardFooterInfo, type CardFooterInfoProps, type CardFooterProps, CardFooterUser, type CardFooterUserProps, CardHeader, type CardHeaderProps, CardMenu, type CardMenuProps, type CardProps, CardTitle, Carousel, CarouselContent, type CarouselContentProps, CarouselCounter, CarouselDots, type CarouselDotsProps, CarouselItem, type CarouselNavButtonProps, type CarouselNavStyle, CarouselNext, type CarouselOrientation, CarouselPrevious, type CarouselProps, Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps, DatePicker, type DatePickerMode, type DatePickerProps, type DatePickerSize, type DatePickerState, DateRangePicker, type DateRangePickerProps, Dialog, DialogBody, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, type DialogHeaderProps, type DialogProps, type DialogSize, DialogTitle, DialogTrigger, type DialogTriggerProps, Divider, type DividerProps, Dropdown, type DropdownAlign, DropdownAvatarHeader, type DropdownAvatarHeaderProps, DropdownAvatarItem, type DropdownAvatarItemProps, DropdownCheckboxItem, type DropdownCheckboxItemProps, DropdownContent, type DropdownContentProps, DropdownItem, type DropdownItemProps, DropdownLabel, type DropdownProps, DropdownRadioGroup, type DropdownRadioGroupProps, DropdownRadioItem, type DropdownRadioItemProps, DropdownSeparator, type DropdownSide, DropdownSubMenu, type DropdownSubMenuProps, DropdownTrigger, type DropdownTriggerProps, FAB, type FABProps, FileInput, type FileInputProps, IconWrapper, InputHelperText, Pagination, type PaginationProps, type PaginationType, type ProgressCircularSize, ProgressIndicator, type ProgressIndicatorProps, type ProgressLinearSize, type ProgressType, Radio, RadioGroup, type RadioGroupProps, type RadioProps, ResizableHandle, type ResizableHandleProps, type ResizableHandleVariant, ResizablePanel, ResizablePanelGroup, type ResizablePanelGroupProps, Select, type SelectOption, type SelectOptionGroup, type SelectProps, type SideNavItem, SideNavigation, type SideNavigationProps, Skeleton, type SkeletonProps, type SkeletonRadius, Slider, type SliderProps, type SliderType, Snackbar, type SnackbarItem, type SnackbarPosition, type SnackbarProps, SnackbarProvider, type SnackbarProviderProps, type SnackbarVariant, StepIndicator, type StepIndicatorProps, type StepIndicatorSize, type StepIndicatorStyle, type StepIndicatorType, type StepItem, Switch, type SwitchProps, TabContent, type TabContentProps, TabList, type TabSize, TabTrigger, type TabTriggerProps, type TabVariant, Tabs, type TabsProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Toast, type ToastItem, type ToastPosition, type ToastProps, ToastProvider, type ToastProviderProps, type ToastStyle, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, Tooltip, type TooltipProps, avatarVariants, badgeVariants, buttonGroupVariants, buttonVariants, cardVariants, checkboxVariants, cloneIconWithSize, cn, dividerVariants, fabVariants, fileInputVariants, radioVariants, textInputVariants, useSnackbar, useToast };
+export { Accordion, AccordionContent, AccordionItem, type AccordionItemProps, type AccordionProps, AccordionTrigger, type AccordionTriggerProps, Avatar, type AvatarProps, Badge, type BadgeProps, type BreadcrumbItem, Breadcrumbs, type BreadcrumbsProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardContent, CardDescription, CardFooter, CardFooterButtons, CardFooterInfo, type CardFooterInfoProps, type CardFooterProps, CardFooterUser, type CardFooterUserProps, CardHeader, type CardHeaderProps, CardMenu, type CardMenuProps, type CardProps, CardTitle, Carousel, CarouselContent, type CarouselContentProps, CarouselCounter, CarouselDots, type CarouselDotsProps, CarouselItem, type CarouselNavButtonProps, type CarouselNavStyle, CarouselNext, type CarouselOrientation, CarouselPrevious, type CarouselProps, Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps, DatePicker, type DatePickerMode, type DatePickerProps, type DatePickerSize, type DatePickerState, DateRangePicker, type DateRangePickerProps, Dialog, DialogBody, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, type DialogHeaderProps, type DialogProps, type DialogSize, DialogTitle, DialogTrigger, type DialogTriggerProps, Divider, type DividerProps, Dropdown, type DropdownAlign, DropdownAvatarHeader, type DropdownAvatarHeaderProps, DropdownAvatarItem, type DropdownAvatarItemProps, DropdownCheckboxItem, type DropdownCheckboxItemProps, DropdownContent, type DropdownContentProps, DropdownItem, type DropdownItemProps, DropdownLabel, type DropdownProps, DropdownRadioGroup, type DropdownRadioGroupProps, DropdownRadioItem, type DropdownRadioItemProps, DropdownSeparator, type DropdownSide, DropdownSubMenu, type DropdownSubMenuProps, DropdownTrigger, type DropdownTriggerProps, FAB, type FABProps, FileInput, type FileInputProps, IconWrapper, InputHelperText, Pagination, type PaginationProps, type PaginationType, type ProgressCircularSize, ProgressIndicator, type ProgressIndicatorProps, type ProgressLinearSize, type ProgressType, Radio, RadioGroup, type RadioGroupProps, type RadioProps, ResizableHandle, type ResizableHandleProps, type ResizableHandleVariant, ResizablePanel, ResizablePanelGroup, type ResizablePanelGroupProps, Select, type SelectOption, type SelectOptionGroup, type SelectProps, type SideNavItem, SideNavigation, type SideNavigationProps, Skeleton, type SkeletonProps, type SkeletonRadius, Slider, type SliderProps, type SliderType, Snackbar, type SnackbarItem, type SnackbarPosition, type SnackbarProps, SnackbarProvider, type SnackbarProviderProps, type SnackbarVariant, StepIndicator, type StepIndicatorProps, type StepIndicatorSize, type StepIndicatorStyle, type StepIndicatorType, type StepItem, Switch, type SwitchProps, TabContent, type TabContentProps, TabList, type TabSize, TabTrigger, type TabTriggerProps, type TabVariant, Tabs, type TabsProps, TextInput, type TextInputProps, Textarea, type TextareaProps, Toast, type ToastItem, type ToastPosition, type ToastProps, ToastProvider, type ToastProviderProps, type ToastStyle, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, Tooltip, type TooltipProps, TreeList, type TreeListDensity, type TreeListItemData, type TreeListProps, avatarVariants, badgeVariants, buttonGroupVariants, buttonVariants, cardVariants, checkboxVariants, cloneIconWithSize, cn, dividerVariants, fabVariants, fileInputVariants, radioVariants, textInputVariants, useSnackbar, useToast };

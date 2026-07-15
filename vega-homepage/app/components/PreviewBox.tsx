@@ -11,7 +11,7 @@ export default function PreviewBox({ variant = "border", className, children, ..
       className={cn(
         "rounded-lg p-8",
         variant === "border" && "border border-border",
-        variant === "gray" && "bg-ac-gray-20",
+        variant === "gray" && "bg-ac-gray-10",
         variant === "anatomy" && "bg-[#F7F7F7] anatomy-bg flex items-center justify-center min-h-[160px]",
         className
       )}

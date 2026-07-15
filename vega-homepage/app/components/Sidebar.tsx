@@ -26,6 +26,9 @@ const templateItems: SideNavItem[] = [
   { id: "card-list",  label: "카드 리스트", href: "/templates/card-list" },
   { id: "side-shell",     label: "사이드 쉘",   href: "/templates/side-shell" },
   { id: "product-detail", label: "상품 상세",   href: "/templates/product-detail" },
+  { id: "ai-chat",          label: "AI Chat",       href: "/templates/ai-chat" },
+  { id: "upload-progress", label: "업로드 진행",  href: "/templates/upload-progress" },
+  { id: "ide",             label: "IDE",           href: "/templates/ide" },
 ];
 
 const componentItems: SideNavItem[] = [
@@ -73,6 +76,7 @@ const componentItems: SideNavItem[] = [
   { id: "toast",       label: "Toast",              href: "/components/toast" },
   { id: "toggle-group", label: "Toggle Group",      href: "/components/toggle-group" },
   { id: "tooltip",     label: "Tooltip",            href: "/components/tooltip" },
+  { id: "tree-list",   label: "Tree List",          href: "/components/tree-list" },
 ];
 
 // children까지 재귀 탐색해서 pathname에 맞는 id 반환
