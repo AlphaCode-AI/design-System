@@ -1,0 +1,11 @@
+/* 이 파일은 배포용이 아니라, 빌드 시점에 컴포넌트가 실제로 사용하는
+   Tailwind 유틸리티 클래스를 미리 컴파일해 dist/styles.css에 합치기 위한
+   전용 엔트리다. (scripts/build-css.mjs 참고)
+
+   소비 앱은 프리컴파일된 JS(dist/index.js)만 받기 때문에, 앱의 Tailwind가
+   node_modules까지 스캔하지 않으면 컴포넌트 내부 클래스(bg-ac-primary-50,
+   h-[48px] 등)가 CSS로 생성되지 않는다. 그 클래스들을 여기서 미리 생성해
+   dist/styles.css에 정적 CSS로 포함시키면, 소비 앱은 별도 설정 없이
+   `@alphacode-ai/design-system/styles.css`만 import해도 정상 동작한다. */
+@import "./tailwind-preset.css";
+@source "./components/**/*.{ts,tsx}";

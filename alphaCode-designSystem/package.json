@@ -1,6 +1,6 @@
 {
   "name": "@alphacode-ai/design-system",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "AlphaCode Design System — Tailwind preset, design tokens, and UI components",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -42,7 +42,7 @@
   ],
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup && cp src/styles.css dist/styles.css && cp src/tailwind-preset.css dist/tailwind-preset.css",
+    "build": "tsup && cp src/styles.css dist/styles.css && cp src/tailwind-preset.css dist/tailwind-preset.css && node scripts/build-css.mjs",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
